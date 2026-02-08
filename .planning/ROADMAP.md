@@ -12,7 +12,7 @@ Migrate the existing Vite/React SPA landing page for 404 Tech Found to Next.js 1
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Foundation** - Project scaffolding, i18n routing, Tailwind v4, database, and developer tooling
+- [x] **Phase 1: Foundation** - Project scaffolding, i18n routing, Tailwind v4, database, and developer tooling
 - [ ] **Phase 2: Static Content Migration** - All landing page sections as Server Components with bilingual content
 - [ ] **Phase 3: Interactive Components** - Client Components for navbar, form, animations, and scroll behaviors
 - [ ] **Phase 4: SEO & Metadata** - Structured data, OG images, sitemap, robots.txt, and meta tags
@@ -34,9 +34,9 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans**: 3 plans
 
 Plans:
-- [ ] 01-01-PLAN.md -- Project initialization, all dependencies, TypeScript, Next.js config, developer tooling (Biome, Lefthook, commitlint, Knip, bunfig)
-- [ ] 01-02-PLAN.md -- Tailwind v4 cyberpunk theme, shadcn/ui RSC init, next-intl routing, locale layouts, test landing page
-- [ ] 01-03-PLAN.md -- @t3-oss/env-nextjs type-safe env vars, Drizzle ORM + Neon Postgres, intent_submissions schema, migration
+- [x] 01-01-PLAN.md -- Project initialization, all dependencies, TypeScript, Next.js config, developer tooling (Biome, Lefthook, commitlint, Knip, bunfig)
+- [x] 01-02-PLAN.md -- Tailwind v4 cyberpunk theme, shadcn/ui RSC init, next-intl routing, locale layouts, test landing page
+- [x] 01-03-PLAN.md -- @t3-oss/env-nextjs type-safe env vars, Drizzle ORM + Neon Postgres, intent_submissions schema, migration
 
 ### Phase 2: Static Content Migration
 **Goal**: The complete landing page is visible with all 11 sections rendered as Server Components, displaying bilingual content (ES/EN) from next-intl message files, preserving the existing cyberpunk design system

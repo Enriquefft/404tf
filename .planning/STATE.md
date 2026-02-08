@@ -10,28 +10,28 @@ See: .planning/PROJECT.md (updated 2026-02-08)
 ## Current Position
 
 Phase: 1 of 5 (Foundation)
-Plan: 2 of 3 in current phase
-Status: In progress
-Last activity: 2026-02-08 -- Completed 01-02-PLAN.md (Styling + i18n)
+Plan: 3 of 3 in current phase
+Status: Phase complete
+Last activity: 2026-02-08 -- Completed 01-03-PLAN.md (Data Layer)
 
-Progress: [██........] 17% (2/12 plans)
+Progress: [███.......] 25% (3/12 plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 2
-- Average duration: 3.5 minutes
-- Total execution time: 0.11 hours
+- Total plans completed: 3
+- Average duration: 4.3 minutes
+- Total execution time: 0.22 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| 1-Foundation | 2/3 | 6.7m | 3.4m |
+| 1-Foundation | 3/3 | 12.1m | 4.0m |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (4.7m), 01-02 (2m)
-- Trend: Accelerating (2m vs 4.7m)
+- Last 5 plans: 01-01 (4.7m), 01-02 (2m), 01-03 (5.4m)
+- Trend: Stable (~4m average)
 
 *Updated after each plan completion*
 
@@ -53,6 +53,9 @@ Recent decisions affecting current work:
 | house-color-system | 01-02 | Define house colors as first-class CSS variables | AI pink, Biotech green, Hardware orange throughout site |
 | nextjs16-proxy-naming | 01-02 | Use src/app/proxy.ts for middleware | Next.js 16 App Router convention |
 | font-css-variables | 01-02 | Load fonts via next/font/google with CSS vars | Optimal performance, automatic optimization |
+| use-t3-env | 01-03 | Use @t3-oss/env-nextjs for runtime env validation | Type-safe env with Zod schemas, helpful startup errors |
+| module-level-db-singleton | 01-03 | Export db directly as module-level singleton | Optimal performance in serverless (Drizzle best practice) |
+| landing-prefix-enums | 01-03 | Prefix enums with landing_ to avoid collisions | Database has many existing enums from other tables |
 
 Earlier decisions:
 - [Roadmap]: 5 phases in linear dependency chain, foundation-first to front-load risk
@@ -64,16 +67,17 @@ None yet.
 
 ### Blockers/Concerns
 
-- [01-01]: Expected TypeScript error about missing src/env/client.js until Plan 01-03 completes -- this is normal
-- [01-01]: Lefthook pre-commit hooks temporarily skipped for tooling setup commits due to expected TS errors
-- [01-02]: `bun dev` may fail due to above TypeScript error (expected, documented)
 - [Research]: TanStack Forms + Server Actions integration is POC-level maturity -- may need useActionState fallback in Phase 3
+- [01-03]: Neon database contains tables from other projects (17+ enums detected during schema introspection) -- used landing_ prefix to avoid collisions
+- [Resolved]: TypeScript error about missing src/env/client.js resolved in Plan 01-03
+- [Resolved]: Lefthook pre-commit hooks now working after Plan 01-03 completion
+- [Resolved]: `bun dev` now works after Plan 01-03 env setup
 - [Resolved]: Tailwind v4.1.18 Turbopack bug avoided by using v4.0.17 (pinned to ~4.0.0)
 - [Resolved]: next-intl + Next.js 16 proxy.ts integration verified in Plan 01-02 -- works correctly with src/app/proxy.ts
 
 ## Session Continuity
 
-Last session: 2026-02-08 22:48:54 UTC
-Stopped at: Completed 01-02-PLAN.md (Styling + i18n with 2 task commits)
+Last session: 2026-02-08 18:27:46 UTC
+Stopped at: Completed 01-03-PLAN.md (Data Layer with 2 task commits)
 Resume file: None
-Next up: Plan 01-03 (Data Layer)
+Next up: Phase 2 -- Landing Page (plan 02-01)
