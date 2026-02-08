@@ -14,16 +14,17 @@
 		"db:studio": "drizzle-kit studio"
 	},
 	"dependencies": {
-		"next": "latest",
-		"react": "latest",
-		"react-dom": "latest",
-		"next-intl": "latest",
-		"drizzle-orm": "latest",
 		"@neondatabase/serverless": "latest",
 		"@t3-oss/env-nextjs": "latest",
-		"zod": "latest",
 		"clsx": "latest",
-		"tailwind-merge": "latest"
+		"dotenv": "^17.2.4",
+		"drizzle-orm": "latest",
+		"next": "latest",
+		"next-intl": "latest",
+		"react": "latest",
+		"react-dom": "latest",
+		"tailwind-merge": "latest",
+		"zod": "latest"
 	},
 	"devDependencies": {
 		"typescript": "latest",
