@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+@layer base {
+	:root {
+		--background: 0 0% 7%;
+		--foreground: 0 0% 98%;
+		--card: 0 0% 10%;
+		--card-foreground: 0 0% 98%;
+		--popover: 0 0% 10%;
+		--popover-foreground: 0 0% 98%;
+		--primary: 262 85% 50%;
+		--primary-foreground: 0 0% 98%;
+		--secondary: 262 100% 66%;
+		--secondary-foreground: 0 0% 98%;
+		--muted: 0 0% 15%;
+		--muted-foreground: 0 0% 64%;
+		--accent: 262 100% 66%;
+		--accent-foreground: 0 0% 98%;
+		--destructive: 0 84% 60%;
+		--destructive-foreground: 0 0% 98%;
+		--border: 0 0% 18%;
+		--input: 0 0% 18%;
+		--ring: 262 85% 50%;
+		--radius: 0.75rem;
+		--house-ai: 330 100% 70%;
+		--house-biotech: 153 100% 37%;
+		--house-hardware: 42 100% 50%;
+	}
+}
+
+@layer base {
+	* {
+		@apply border-border;
+	}
+	body {
+		@apply bg-background text-foreground;
+		font-family: "Inter", sans-serif;
+	}
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-family: "Orbitron", sans-serif;
+	}
+}
+
+@layer utilities {
+	.font-orbitron {
+		font-family: "Orbitron", sans-serif;
+	}
+	.text-glow-purple {
+		text-shadow:
+			0 0 20px hsl(262 85% 50% / 0.5),
+			0 0 40px hsl(262 85% 50% / 0.3);
+	}
+	.gradient-purple {
+		background: linear-gradient(135deg, hsl(262 85% 50%), hsl(262 100% 66%));
+	}
+	.glow-border-ai {
+		box-shadow:
+			0 0 15px hsl(330 100% 70% / 0.3),
+			inset 0 0 15px hsl(330 100% 70% / 0.05);
+	}
+	.glow-border-biotech {
+		box-shadow:
+			0 0 15px hsl(153 100% 37% / 0.3),
+			inset 0 0 15px hsl(153 100% 37% / 0.05);
+	}
+	.glow-border-hardware {
+		box-shadow:
+			0 0 15px hsl(42 100% 50% / 0.3),
+			inset 0 0 15px hsl(42 100% 50% / 0.05);
+	}
+}
