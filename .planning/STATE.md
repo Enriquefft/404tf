@@ -5,14 +5,14 @@
 See: .planning/PROJECT.md (updated 2026-02-08)
 
 **Core value:** Landing page that communicates what 404 Tech Found is and converts visitors into leads (founders, collaborators, connectors) -- across human search engines and AI systems.
-**Current focus:** Phase 1 -- Foundation
+**Current focus:** Phase 2 -- Static Content Migration
 
 ## Current Position
 
-Phase: 1 of 5 (Foundation)
-Plan: 3 of 3 in current phase
-Status: Phase complete
-Last activity: 2026-02-08 -- Completed 01-03-PLAN.md (Data Layer)
+Phase: 2 of 5 (Static Content Migration)
+Plan: 0 of 2 in current phase
+Status: Ready to plan
+Last activity: 2026-02-08 -- Phase 1 complete (verified + fixed)
 
 Progress: [███.......] 25% (3/12 plans)
 
@@ -74,10 +74,12 @@ None yet.
 - [Resolved]: `bun dev` now works after Plan 01-03 env setup
 - [Resolved]: Tailwind v4.1.18 Turbopack bug avoided by using v4.0.17 (pinned to ~4.0.0)
 - [Resolved]: next-intl + Next.js 16 proxy.ts integration verified in Plan 01-02 -- works correctly with src/app/proxy.ts
+- [Resolved]: next.config.ts top-level await caused ERR_REQUIRE_ASYNC_MODULE -- moved env import to locale layout
+- [Resolved]: Tailwind v4 @apply border-border failed -- rewrote globals.css with @theme declarations and direct CSS
 
 ## Session Continuity
 
-Last session: 2026-02-08 18:27:46 UTC
-Stopped at: Completed 01-03-PLAN.md (Data Layer with 2 task commits)
+Last session: 2026-02-08
+Stopped at: Phase 1 complete -- all 3 plans executed, verified, 2 gaps fixed
 Resume file: None
-Next up: Phase 2 -- Landing Page (plan 02-01)
+Next up: Phase 2 -- Static Content Migration (needs planning first)
