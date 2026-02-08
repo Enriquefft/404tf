@@ -31,12 +31,12 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Database connection succeeds: `intent_submissions` table exists in Neon Postgres and can be queried via Drizzle ORM
   4. Environment variables are type-safe: missing or invalid `DATABASE_URL` causes a build-time error, not a runtime crash
   5. `bun run check` (Biome) passes with zero errors on the codebase
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 01-01: Project initialization and build system (Next.js 16, Bun, Turbopack, Biome, Lefthook, commitlint, Knip)
-- [ ] 01-02: Styling and i18n foundation (Tailwind v4, shadcn/ui, next-intl, locale routing, layouts)
-- [ ] 01-03: Data layer (Drizzle ORM, Neon connection, schema, @t3-oss/env-nextjs)
+- [ ] 01-01-PLAN.md -- Project initialization, all dependencies, TypeScript, Next.js config, developer tooling (Biome, Lefthook, commitlint, Knip, bunfig)
+- [ ] 01-02-PLAN.md -- Tailwind v4 cyberpunk theme, shadcn/ui RSC init, next-intl routing, locale layouts, test landing page
+- [ ] 01-03-PLAN.md -- @t3-oss/env-nextjs type-safe env vars, Drizzle ORM + Neon Postgres, intent_submissions schema, migration
 
 ### Phase 2: Static Content Migration
 **Goal**: The complete landing page is visible with all 11 sections rendered as Server Components, displaying bilingual content (ES/EN) from next-intl message files, preserving the existing cyberpunk design system
@@ -159,7 +159,7 @@ All 42 v1 requirements mapped. No orphans. No duplicates.
 
 | Phase | Plans Complete | Status | Completed |
 |-------|---------------|--------|-----------|
-| 1. Foundation | 0/3 | Not started | - |
+| 1. Foundation | 0/3 | Planned | - |
 | 2. Static Content Migration | 0/2 | Not started | - |
 | 3. Interactive Components | 0/3 | Not started | - |
 | 4. SEO & Metadata | 0/2 | Not started | - |
