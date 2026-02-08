@@ -1,5 +1,5 @@
-import createNextIntlPlugin from "next-intl/plugin";
 import type { NextConfig } from "next";
+import createNextIntlPlugin from "next-intl/plugin";
 
 // Validate environment variables at build time
 // NOTE: env files created in Plan 01-03. This import is safe --
