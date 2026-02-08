@@ -1,4 +1,5 @@
 import "@/styles/globals.css";
+import "@/env/client";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
