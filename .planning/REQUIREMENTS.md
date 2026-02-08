@@ -1,0 +1,147 @@
+# Requirements -- 404 Tech Found Landing Page
+
+**Source:** PROJECT.md + Research (STACK.md, FEATURES.md, ARCHITECTURE.md, PITFALLS.md)
+**Generated:** 2026-02-08
+
+## Category: Foundation (FOUND)
+
+| ID | Requirement | Priority | Phase |
+|----|-------------|----------|-------|
+| FOUND-01 | Initialize Next.js 16 project with Bun, App Router, and Turbopack | Must | 1 |
+| FOUND-02 | Configure @t3-oss/env-nextjs with type-safe environment variables (DATABASE_URL, NEXT_PUBLIC_POSTHOG_KEY, NEXT_PUBLIC_POSTHOG_HOST) | Must | 1 |
+| FOUND-03 | Set up Tailwind CSS v4 with custom theme: cyberpunk purple gradients, house colors (AI blue, Biotech green, Hardware orange), glow effects, Orbitron font | Must | 1 |
+| FOUND-04 | Initialize shadcn/ui in RSC mode with neutral base color | Must | 1 |
+| FOUND-05 | Configure next-intl v4 with `[locale]` routing (ES default, EN secondary), proxy.ts, message files, navigation helpers | Must | 1 |
+| FOUND-06 | Create root layout (app/layout.tsx) and locale layout (app/[locale]/layout.tsx) with fonts, metadata, providers | Must | 1 |
+| FOUND-07 | Set up Drizzle ORM with Neon serverless Postgres (neon-http driver, module-level singleton) | Must | 1 |
+| FOUND-08 | Create database schema: intent_submissions table (id, intent, name, email, locale, created_at) | Must | 1 |
+| FOUND-09 | Configure Biome for linting and formatting (replacing ESLint/Prettier) | Must | 1 |
+| FOUND-10 | Set up Lefthook + commitlint for git hooks and conventional commits | Should | 1 |
+| FOUND-11 | Configure Knip for dead code detection | Should | 1 |
+| FOUND-12 | Create bunfig.toml with test configuration | Should | 1 |
+
+## Category: Static Content Migration (STATIC)
+
+| ID | Requirement | Priority | Phase |
+|----|-------------|----------|-------|
+| STATIC-01 | Migrate Hero section as Server Component with Tardi mascot, Orbitron headline, purple glow gradient, bilingual content via getTranslations | Must | 2 |
+| STATIC-02 | Migrate Houses section (AI/Biotech/Hardware) as Server Component with house colors, icons (Cpu/Dna/Cog), bilingual descriptions | Must | 2 |
+| STATIC-03 | Migrate Programs section (Pre-Incubation 12wk, Fellowship 6mo) as Server Component with status badges, benefits lists | Must | 2 |
+| STATIC-04 | Migrate Events section as Server Component: SpecHack featured (Jun 19-28 2026), Deeptech Summit, Demo Day | Must | 2 |
+| STATIC-05 | Migrate Community section as Server Component with fellow profiles (Maria Chen, Carlos Medina, Ana Torres), house badges | Must | 2 |
+| STATIC-06 | Migrate Partners section as Server Component with grayscale partner logo grid | Must | 2 |
+| STATIC-07 | Migrate Footer as Server Component with logo, nav links, contact (hola@404techfound.com), social links (LinkedIn, X, Instagram, Discord) | Must | 2 |
+| STATIC-08 | Create ES and EN message files with all ~140 translation keys from existing LanguageContext | Must | 2 |
+| STATIC-09 | Landing page entry point (app/[locale]/page.tsx) composing all sections | Must | 2 |
+| STATIC-10 | Preserve mobile-responsive design across all sections | Must | 2 |
+
+## Category: Interactive Components (INTER)
+
+| ID | Requirement | Priority | Phase |
+|----|-------------|----------|-------|
+| INTER-01 | Migrate Navbar as Client Component with scroll detection, mobile hamburger menu, language switcher (URL-based via next-intl Link), nav links, SpecHack "NEW" badge | Must | 3 |
+| INTER-02 | Migrate AnnouncementBanner as Client Component with dismiss state (localStorage) for SpecHack registration | Must | 3 |
+| INTER-03 | Migrate TractionBar as Client Component with IntersectionObserver count-up animation (400+ community, 250+ attendees, 92+ applicants, 15 fellows) | Must | 3 |
+| INTER-04 | Rebuild IntentCTA form as Client Component with TanStack Forms + Zod: 3 intent cards (Build/Collaborate/Connect), name + email fields, animated card selection | Must | 3 |
+| INTER-05 | Create Server Action for intent form submission: validate with Zod, insert into Neon via Drizzle, return success/error | Must | 3 |
+| INTER-06 | Create Framer Motion wrapper components ("use client") for scroll-triggered animations, hero mascot float, section fade-ins | Must | 3 |
+| INTER-07 | Preserve gradient purple background on IntentCTA section | Must | 3 |
+
+## Category: SEO & Metadata (SEO)
+
+| ID | Requirement | Priority | Phase |
+|----|-------------|----------|-------|
+| SEO-01 | Implement generateMetadata with per-locale titles, descriptions, canonical URLs, and hreflang alternates | Must | 4 |
+| SEO-02 | Add JSON-LD Organization schema (name, url, logo, description, sameAs social links) | Must | 4 |
+| SEO-03 | Add JSON-LD Event schema for SpecHack (name, startDate, endDate, location, description) | Should | 4 |
+| SEO-04 | Add JSON-LD FAQPage schema with common questions about 404 Tech Found | Should | 4 |
+| SEO-05 | Generate dynamic OpenGraph images per locale via next/og (ImageResponse) | Must | 4 |
+| SEO-06 | Generate sitemap.xml with all locale variants via app/sitemap.ts | Must | 4 |
+| SEO-07 | Generate robots.txt via app/robots.ts allowing all crawlers, linking sitemap | Must | 4 |
+| SEO-08 | Add Open Graph and Twitter Card meta tags for social sharing | Must | 4 |
+
+## Category: Analytics & GEO (GEO)
+
+| ID | Requirement | Priority | Phase |
+|----|-------------|----------|-------|
+| GEO-01 | Integrate PostHog analytics with App Router provider pattern (Client Component wrapping Server children) | Must | 5 |
+| GEO-02 | Create llms.txt at public/llms.txt following the llms-txt standard | Must | 5 |
+| GEO-03 | Create llms-full.txt with extended organization details | Should | 5 |
+| GEO-04 | Verify Core Web Vitals targets: LCP <2.5s, INP <200ms, CLS <0.1 | Must | 5 |
+| GEO-05 | Production readiness check: error states, loading states, 404 page | Should | 5 |
+
+## Traceability
+
+| Requirement | Phase | Status |
+|-------------|-------|--------|
+| FOUND-01 | Phase 1 | Pending |
+| FOUND-02 | Phase 1 | Pending |
+| FOUND-03 | Phase 1 | Pending |
+| FOUND-04 | Phase 1 | Pending |
+| FOUND-05 | Phase 1 | Pending |
+| FOUND-06 | Phase 1 | Pending |
+| FOUND-07 | Phase 1 | Pending |
+| FOUND-08 | Phase 1 | Pending |
+| FOUND-09 | Phase 1 | Pending |
+| FOUND-10 | Phase 1 | Pending |
+| FOUND-11 | Phase 1 | Pending |
+| FOUND-12 | Phase 1 | Pending |
+| STATIC-01 | Phase 2 | Pending |
+| STATIC-02 | Phase 2 | Pending |
+| STATIC-03 | Phase 2 | Pending |
+| STATIC-04 | Phase 2 | Pending |
+| STATIC-05 | Phase 2 | Pending |
+| STATIC-06 | Phase 2 | Pending |
+| STATIC-07 | Phase 2 | Pending |
+| STATIC-08 | Phase 2 | Pending |
+| STATIC-09 | Phase 2 | Pending |
+| STATIC-10 | Phase 2 | Pending |
+| INTER-01 | Phase 3 | Pending |
+| INTER-02 | Phase 3 | Pending |
+| INTER-03 | Phase 3 | Pending |
+| INTER-04 | Phase 3 | Pending |
+| INTER-05 | Phase 3 | Pending |
+| INTER-06 | Phase 3 | Pending |
+| INTER-07 | Phase 3 | Pending |
+| SEO-01 | Phase 4 | Pending |
+| SEO-02 | Phase 4 | Pending |
+| SEO-03 | Phase 4 | Pending |
+| SEO-04 | Phase 4 | Pending |
+| SEO-05 | Phase 4 | Pending |
+| SEO-06 | Phase 4 | Pending |
+| SEO-07 | Phase 4 | Pending |
+| SEO-08 | Phase 4 | Pending |
+| GEO-01 | Phase 5 | Pending |
+| GEO-02 | Phase 5 | Pending |
+| GEO-03 | Phase 5 | Pending |
+| GEO-04 | Phase 5 | Pending |
+| GEO-05 | Phase 5 | Pending |
+
+## Traceability Matrix
+
+| Phase | Must | Should | Total |
+|-------|------|--------|-------|
+| 1 -- Foundation | 9 | 3 | 12 |
+| 2 -- Static Content | 10 | 0 | 10 |
+| 3 -- Interactive | 7 | 0 | 7 |
+| 4 -- SEO & Metadata | 6 | 2 | 8 |
+| 5 -- Analytics & GEO | 3 | 2 | 5 |
+| **Total** | **35** | **7** | **42** |
+
+## Anti-Requirements (Explicitly Out of Scope)
+
+- No authentication or user accounts
+- No payments or Polar SDK
+- No file uploads or UploadThing
+- No Google Maps integration
+- No WhatsApp Cloud API
+- No blog or CMS
+- No multi-page routing beyond locale
+- No auto-play video/audio
+- No chatbot on landing page
+- No pop-ups on entry
+- No multiple competing CTAs
+
+---
+*Generated from PROJECT.md and research on 2026-02-08*
+*Traceability updated: 2026-02-08*
