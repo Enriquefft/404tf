@@ -1,13 +1,22 @@
-import { getTranslations } from "next-intl/server";
+"use client";
 
-export async function TractionBar() {
-	const t = await getTranslations("landing.traction");
+import CountUp from "react-countup";
 
+type TractionBarProps = {
+	translations: {
+		community: string;
+		summit: string;
+		applicants: string;
+		fellows: string;
+	};
+};
+
+export function TractionBar({ translations }: TractionBarProps) {
 	const stats = [
-		{ value: "400+", label: t("community") },
-		{ value: "250+", label: t("summit") },
-		{ value: "92+", label: t("applicants") },
-		{ value: "15", label: t("fellows") },
+		{ value: 400, suffix: "+", label: translations.community },
+		{ value: 250, suffix: "+", label: translations.summit },
+		{ value: 92, suffix: "+", label: translations.applicants },
+		{ value: 15, suffix: "", label: translations.fellows },
 	];
 
 	return (
@@ -17,7 +26,13 @@ export async function TractionBar() {
 					{stats.map((stat) => (
 						<div key={stat.label} className="text-center">
 							<p className="font-orbitron text-4xl md:text-5xl font-bold text-primary text-glow-purple">
-								{stat.value}
+								<CountUp
+									end={stat.value}
+									duration={2}
+									enableScrollSpy
+									scrollSpyOnce
+									suffix={stat.suffix}
+								/>
 							</p>
 							<p className="text-sm text-muted-foreground mt-2">{stat.label}</p>
 						</div>

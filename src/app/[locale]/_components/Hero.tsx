@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import mascotImage from "@/assets/mascot.png";
+import { FloatingMascot } from "./animations/FloatingMascot";
 
 export async function Hero() {
 	const t = await getTranslations("landing.hero");
@@ -50,14 +51,16 @@ export async function Hero() {
 
 					{/* Mascot */}
 					<div className="flex-shrink-0">
-						<Image
-							src={mascotImage}
-							alt="Tardi, the 404 Tech Found mascot — a cyberpunk tardigrade in a lab coat"
-							width={384}
-							height={384}
-							priority
-							className="w-64 md:w-80 lg:w-96 drop-shadow-[0_0_30px_hsl(262_85%_50%/0.4)]"
-						/>
+						<FloatingMascot>
+							<Image
+								src={mascotImage}
+								alt="Tardi, the 404 Tech Found mascot — a cyberpunk tardigrade in a lab coat"
+								width={384}
+								height={384}
+								priority
+								className="w-64 md:w-80 lg:w-96 drop-shadow-[0_0_30px_hsl(262_85%_50%/0.4)]"
+							/>
+						</FloatingMascot>
 					</div>
 				</div>
 			</div>

@@ -1,5 +1,6 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { AnnouncementBanner } from "./_components/AnnouncementBanner";
+import { FadeInSection } from "./_components/animations/FadeInSection";
 import { Community } from "./_components/Community";
 import { Events } from "./_components/Events";
 import { Footer } from "./_components/Footer";
@@ -22,6 +23,7 @@ export default async function HomePage({ params }: Props) {
 	// Fetch translations for Client Components
 	const navT = await getTranslations("landing.nav");
 	const bannerT = await getTranslations("landing.banner");
+	const tractionT = await getTranslations("landing.traction");
 
 	return (
 		<main className="min-h-screen bg-background text-foreground">
@@ -42,12 +44,31 @@ export default async function HomePage({ params }: Props) {
 				}}
 			/>
 			<Hero />
-			<TractionBar />
-			<Houses />
-			<Programs />
-			<Events />
-			<Community />
-			<Partners />
+			<FadeInSection>
+				<TractionBar
+					translations={{
+						community: tractionT("community"),
+						summit: tractionT("summit"),
+						applicants: tractionT("applicants"),
+						fellows: tractionT("fellows"),
+					}}
+				/>
+			</FadeInSection>
+			<FadeInSection>
+				<Houses />
+			</FadeInSection>
+			<FadeInSection>
+				<Programs />
+			</FadeInSection>
+			<FadeInSection>
+				<Events />
+			</FadeInSection>
+			<FadeInSection>
+				<Community />
+			</FadeInSection>
+			<FadeInSection>
+				<Partners />
+			</FadeInSection>
 			<IntentCTA />
 			<Footer />
 		</main>
