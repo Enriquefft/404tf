@@ -67,12 +67,12 @@ Plans:
   3. TractionBar numbers animate from 0 to their target values (400+, 250+, 92+, 15) when scrolled into view
   4. Intent form accepts selection of one of 3 intent cards (Build/Collaborate/Connect), validates name and email with Zod, submits via Server Action, and the submission appears in the `intent_submissions` database table
   5. Framer Motion animations work without hydration errors: hero mascot floats, sections fade in on scroll, intent cards animate on selection
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 03-01: Navigation and banners (Navbar, AnnouncementBanner, language switcher)
-- [ ] 03-02: Animations (Framer Motion wrappers, TractionBar count-up, section transitions)
-- [ ] 03-03: Intent form (TanStack Forms + Zod, Server Action, database persistence, IntentCTA section)
+- [ ] 03-01-PLAN.md -- Install deps, custom hooks (useScrollDirection, useLocalStorage), convert Navbar + AnnouncementBanner to Client Components
+- [ ] 03-02-PLAN.md -- Framer Motion animation wrappers (FadeInSection, FloatingMascot), TractionBar count-up, Hero mascot float, section fade-ins
+- [ ] 03-03-PLAN.md -- Server Action with Zod validation, IntentCTA Client Component with useActionState, card selection, form fields, database persistence
 
 ### Phase 4: SEO & Metadata
 **Goal**: The landing page has complete SEO infrastructure: per-locale metadata, structured data for search engines, dynamic social sharing images, and a sitemap/robots.txt that enable indexing
