@@ -49,11 +49,12 @@ Plans:
   3. All ~140 translation keys from the existing LanguageContext are ported to next-intl message files (ES and EN)
   4. The page is mobile-responsive: all sections display correctly on 375px, 768px, and 1440px viewports
   5. Zero `'use client'` directives exist in Phase 2 section components (all are Server Components)
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 02-01: Translation files and page entry point (message files, page.tsx, section composition)
-- [ ] 02-02: Content sections (Hero, Houses, Programs, Events, Community, Partners, Footer)
+- [ ] 02-01-PLAN.md -- Install lucide-react, copy assets, complete translation files (es.json + en.json with all keys), page.tsx entry point
+- [ ] 02-02-PLAN.md -- Primary content sections: Hero, Houses, Programs, Events as async Server Components
+- [ ] 02-03-PLAN.md -- Secondary sections + placeholders: Community, Partners, Footer, Navbar, AnnouncementBanner, TractionBar, IntentCTA
 
 ### Phase 3: Interactive Components
 **Goal**: The landing page is fully interactive with a working navbar (scroll detection, mobile menu, language switcher), animated traction bar, dismissible announcement banner, Framer Motion animations across all sections, and a functional intent form that persists submissions to the database
@@ -160,7 +161,7 @@ All 42 v1 requirements mapped. No orphans. No duplicates.
 | Phase | Plans Complete | Status | Completed |
 |-------|---------------|--------|-----------|
 | 1. Foundation | 3/3 | Complete | 2026-02-08 |
-| 2. Static Content Migration | 0/2 | Not started | - |
+| 2. Static Content Migration | 0/3 | Not started | - |
 | 3. Interactive Components | 0/3 | Not started | - |
 | 4. SEO & Metadata | 0/2 | Not started | - |
 | 5. Analytics & GEO | 0/2 | Not started | - |
