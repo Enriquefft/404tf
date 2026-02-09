@@ -13,7 +13,7 @@ Migrate the existing Vite/React SPA landing page for 404 Tech Found to Next.js 1
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Foundation** - Project scaffolding, i18n routing, Tailwind v4, database, and developer tooling
-- [ ] **Phase 2: Static Content Migration** - All landing page sections as Server Components with bilingual content
+- [x] **Phase 2: Static Content Migration** - All landing page sections as Server Components with bilingual content
 - [ ] **Phase 3: Interactive Components** - Client Components for navbar, form, animations, and scroll behaviors
 - [ ] **Phase 4: SEO & Metadata** - Structured data, OG images, sitemap, robots.txt, and meta tags
 - [ ] **Phase 5: Analytics & GEO** - PostHog integration, llms.txt, Core Web Vitals, and production readiness
@@ -52,9 +52,9 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 02-01-PLAN.md -- Install lucide-react, copy assets, complete translation files (es.json + en.json with all keys), page.tsx entry point
-- [ ] 02-02-PLAN.md -- Primary content sections: Hero, Houses, Programs, Events as async Server Components
-- [ ] 02-03-PLAN.md -- Secondary sections + placeholders: Community, Partners, Footer, Navbar, AnnouncementBanner, TractionBar, IntentCTA
+- [x] 02-01-PLAN.md -- Install lucide-react, copy assets, complete translation files (es.json + en.json with all keys), page.tsx entry point (completed 2026-02-09)
+- [x] 02-02-PLAN.md -- Primary content sections: Hero, Houses, Programs, Events as async Server Components (completed 2026-02-09)
+- [x] 02-03-PLAN.md -- Secondary sections + placeholders: Community, Partners, Footer, Navbar, AnnouncementBanner, TractionBar, IntentCTA (completed 2026-02-09)
 
 ### Phase 3: Interactive Components
 **Goal**: The landing page is fully interactive with a working navbar (scroll detection, mobile menu, language switcher), animated traction bar, dismissible announcement banner, Framer Motion animations across all sections, and a functional intent form that persists submissions to the database
