@@ -10,29 +10,29 @@ See: .planning/PROJECT.md (updated 2026-02-08)
 ## Current Position
 
 Phase: 2 of 5 (Static Content Migration)
-Plan: 1 of 2 in current phase
+Plan: 2 of 2 in current phase
 Status: In progress
-Last activity: 2026-02-09 -- Completed 02-01-PLAN.md
+Last activity: 2026-02-09 -- Completed 02-02-PLAN.md
 
-Progress: [███░......] 33% (4/12 plans)
+Progress: [████░.....] 42% (5/12 plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 4
-- Average duration: 4.1 minutes
-- Total execution time: 0.28 hours
+- Total plans completed: 5
+- Average duration: 3.8 minutes
+- Total execution time: 0.32 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 1-Foundation | 3/3 | 12.1m | 4.0m |
-| 2-Static Content | 1/2 | 4.0m | 4.0m |
+| 2-Static Content | 2/2 | 7.0m | 3.5m |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (4.7m), 01-02 (2m), 01-03 (5.4m), 02-01 (4m)
-- Trend: Stable (~4m average)
+- Last 5 plans: 01-02 (2m), 01-03 (5.4m), 02-01 (4m), 02-02 (3m)
+- Trend: Improving efficiency (~3.6m average for last 5)
 
 *Updated after each plan completion*
 
@@ -59,6 +59,8 @@ Recent decisions affecting current work:
 | landing-prefix-enums | 01-03 | Prefix enums with landing_ to avoid collisions | Database has many existing enums from other tables |
 | intent-key-restructure | 02-01 | Flatten intent.* keys to avoid JSON conflicts | buildSubmit, collaborateSubmit, connectSubmit instead of nested objects |
 | component-stub-pattern | 02-01 | Create component stubs for TypeScript safety | Unblocks type checks during incremental implementation |
+| disable-useUniqueElementIds | 02-02 | Disable Biome's useUniqueElementIds rule | False positive for navigation anchor IDs in Server Components |
+| content-as-react-keys | 02-02 | Use benefit text/event names as React keys | More stable than array indices, better React reconciliation |
 
 Earlier decisions:
 - [Roadmap]: 5 phases in linear dependency chain, foundation-first to front-load risk
@@ -83,6 +85,6 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-09
-Stopped at: Completed 02-01-PLAN.md (translation infrastructure and landing page composition)
+Stopped at: Completed 02-02-PLAN.md (Hero, Houses, Programs, Events Server Components)
 Resume file: None
-Next up: Plan 02-02 (Navigation and Hero sections)
+Next up: Plan 02-03 (Wave 3 components - executing in parallel) or Phase 3 (Interactive Forms)
