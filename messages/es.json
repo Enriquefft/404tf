@@ -93,7 +93,12 @@
 			"collaborateHelper": "Te enviaremos nuestro deck de partnerships.",
 			"connectHelper": "Noticias, eventos y oportunidades. Sin spam.",
 			"success": "¡Gracias! Te contactaremos pronto.",
-			"questions": "¿Preguntas?"
+			"questions": "¿Preguntas?",
+			"errorName": "El nombre debe tener al menos 2 caracteres",
+			"errorEmail": "Email inválido",
+			"errorIntent": "Selecciona una opción",
+			"errorGeneric": "Error al enviar. Intenta de nuevo.",
+			"submitting": "Enviando..."
 		},
 		"footer": {
 			"tagline": "Built by founders, for founders.",

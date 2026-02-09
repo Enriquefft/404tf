@@ -93,7 +93,12 @@
 			"collaborateHelper": "We'll send you our partnerships deck.",
 			"connectHelper": "News, events, and opportunities. No spam.",
 			"success": "Thank you! We'll be in touch soon.",
-			"questions": "Questions?"
+			"questions": "Questions?",
+			"errorName": "Name must be at least 2 characters",
+			"errorEmail": "Invalid email address",
+			"errorIntent": "Please select an option",
+			"errorGeneric": "Submission failed. Please try again.",
+			"submitting": "Submitting..."
 		},
 		"footer": {
 			"tagline": "Built by founders, for founders.",
