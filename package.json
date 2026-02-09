@@ -19,6 +19,7 @@
 		"clsx": "latest",
 		"dotenv": "^17.2.4",
 		"drizzle-orm": "latest",
+		"lucide-react": "^0.563.0",
 		"next": "latest",
 		"next-intl": "latest",
 		"react": "latest",

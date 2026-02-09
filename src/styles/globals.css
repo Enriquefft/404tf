@@ -78,6 +78,12 @@
 	.font-orbitron {
 		font-family: var(--font-orbitron, "Orbitron"), sans-serif;
 	}
+	.font-mono-accent {
+		font-family:
+			ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
+			monospace;
+		letter-spacing: 0.05em;
+	}
 	.text-glow-purple {
 		text-shadow:
 			0 0 20px hsl(262 85% 50% / 0.5),
