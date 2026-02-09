@@ -1,11 +1,7 @@
-import "@/styles/globals.css";
-import "@/env/client";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
-import { cn } from "@/lib/utils";
-import { inter, orbitron } from "@/styles/fonts";
 
 type Props = {
 	children: React.ReactNode;
@@ -25,17 +21,5 @@ export default async function LocaleLayout({ children, params }: Props) {
 
 	setRequestLocale(locale);
 
-	return (
-		<html lang={locale} suppressHydrationWarning>
-			<body
-				className={cn(
-					"min-h-screen bg-background font-sans antialiased",
-					inter.variable,
-					orbitron.variable,
-				)}
-			>
-				<NextIntlClientProvider>{children}</NextIntlClientProvider>
-			</body>
-		</html>
-	);
+	return <NextIntlClientProvider>{children}</NextIntlClientProvider>;
 }
