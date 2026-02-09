@@ -161,7 +161,7 @@ All 42 v1 requirements mapped. No orphans. No duplicates.
 | Phase | Plans Complete | Status | Completed |
 |-------|---------------|--------|-----------|
 | 1. Foundation | 3/3 | Complete | 2026-02-08 |
-| 2. Static Content Migration | 0/3 | Not started | - |
+| 2. Static Content Migration | 3/3 | Complete | 2026-02-09 |
 | 3. Interactive Components | 0/3 | Not started | - |
 | 4. SEO & Metadata | 0/2 | Not started | - |
 | 5. Analytics & GEO | 0/2 | Not started | - |
