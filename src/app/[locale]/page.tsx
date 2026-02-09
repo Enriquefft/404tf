@@ -1,4 +1,4 @@
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { AnnouncementBanner } from "./_components/AnnouncementBanner";
 import { Community } from "./_components/Community";
 import { Events } from "./_components/Events";
@@ -19,10 +19,28 @@ export default async function HomePage({ params }: Props) {
 	const { locale } = await params;
 	setRequestLocale(locale);
 
+	// Fetch translations for Client Components
+	const navT = await getTranslations("landing.nav");
+	const bannerT = await getTranslations("landing.banner");
+
 	return (
 		<main className="min-h-screen bg-background text-foreground">
-			<AnnouncementBanner />
-			<Navbar />
+			<AnnouncementBanner
+				translations={{
+					text: bannerT("text"),
+					link: bannerT("link"),
+				}}
+			/>
+			<Navbar
+				locale={locale as "es" | "en"}
+				translations={{
+					about: navT("about"),
+					programs: navT("programs"),
+					community: navT("community"),
+					events: navT("events"),
+					cta: navT("cta"),
+				}}
+			/>
 			<Hero />
 			<TractionBar />
 			<Houses />
