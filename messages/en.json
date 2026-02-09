@@ -1,11 +1,105 @@
 {
 	"landing": {
-		"hero": {
-			"title": "404 Tech Found",
-			"subtitle": "Deeptech Innovation Lab"
+		"banner": {
+			"text": "🚀 404 SpecHack — 10-day global hackathon. Jun 19-28, 2026.",
+			"link": "Register →"
 		},
-		"phase1": {
-			"status": "Phase 1 Foundation Complete"
+		"nav": {
+			"about": "About",
+			"programs": "Programs",
+			"community": "Community",
+			"events": "Events",
+			"cta": "Get Involved"
+		},
+		"hero": {
+			"eyebrow": "DEEP-TECH PRE-INCUBATOR",
+			"headline": "Building the 404 deep-tech startups of LATAM",
+			"subtitle": "Turning breakthrough science into venture-grade companies. Built by founders, for founders.",
+			"cta1": "Start Here",
+			"cta2": "Learn More"
+		},
+		"traction": {
+			"community": "Community",
+			"summit": "Summit Attendees",
+			"applicants": "Applicants",
+			"fellows": "Fellows"
+		},
+		"houses": {
+			"title": "Our Houses",
+			"subtitle": "Three verticals where science becomes startups.",
+			"ai": {
+				"desc": "Language models, computer vision, and autonomous agents applied to real LATAM problems."
+			},
+			"biotech": {
+				"desc": "Synthetic biology, molecular diagnostics, and precision agriculture for a continent with unique biodiversity."
+			},
+			"hardware": {
+				"desc": "Robotics, industrial IoT, and medical devices — from prototype to manufacturing."
+			}
+		},
+		"programs": {
+			"title": "Programs",
+			"subtitle": "Your path from idea to product.",
+			"preincubation": {
+				"badge": "OPEN",
+				"duration": "12 weeks",
+				"b1": "1-on-1 Mentorship",
+				"b2": "Expert network access",
+				"b3": "Technical & business workshops",
+				"b4": "Demo Day with investors",
+				"cta": "Apply Now"
+			},
+			"fellowship": {
+				"badge": "COMING SOON",
+				"duration": "6 months",
+				"b1": "Equity-free funding",
+				"b2": "Lab &amp; workspace access",
+				"b3": "Investor introductions",
+				"b4": "International network",
+				"cta": "Notify Me"
+			}
+		},
+		"events": {
+			"title": "Events",
+			"subtitle": "Where the deep-tech community meets.",
+			"spechack": {
+				"tagline": "\"The hackathon where the spec is the product.\"",
+				"desc": "10 days. Write the spec first, build with AI second. The antidote to \"vibe coding.\" In-person hubs + virtual track.",
+				"register": "Register",
+				"ambassador": "Become Ambassador"
+			}
+		},
+		"community": {
+			"title": "Community",
+			"subtitle": "Meet those building the future.",
+			"link": "See full community →"
+		},
+		"partners": {
+			"title": "Partners"
+		},
+		"intent": {
+			"headline": "What do you want to do?",
+			"subtitle": "There's a place for you, no matter where you start.",
+			"build": "I want to build",
+			"collaborate": "I want to collaborate",
+			"connect": "I want to connect",
+			"name": "Name",
+			"email": "Email",
+			"workEmail": "Work Email",
+			"buildSubmit": "Get Started",
+			"collaborateSubmit": "Let's Talk",
+			"connectSubmit": "Subscribe",
+			"buildHelper": "We'll reach out about our programs within 48h.",
+			"collaborateHelper": "We'll send you our partnerships deck.",
+			"connectHelper": "News, events, and opportunities. No spam.",
+			"success": "Thank you! We'll be in touch soon.",
+			"questions": "Questions?"
+		},
+		"footer": {
+			"tagline": "Built by founders, for founders.",
+			"email": "hola@404techfound.com",
+			"location": "🇵🇪 Lima, Peru",
+			"rights": "© 2025 404 Tech Found"
 		}
 	}
 }
