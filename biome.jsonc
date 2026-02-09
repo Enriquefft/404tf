@@ -40,6 +40,9 @@
 			"recommended": true,
 			"complexity": {
 				"useLiteralKeys": "off"
+			},
+			"correctness": {
+				"useUniqueElementIds": "off"
 			}
 		}
 	},
