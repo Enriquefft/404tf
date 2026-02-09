@@ -10,27 +10,28 @@ See: .planning/PROJECT.md (updated 2026-02-08)
 ## Current Position
 
 Phase: 2 of 5 (Static Content Migration)
-Plan: 0 of 2 in current phase
-Status: Ready to plan
-Last activity: 2026-02-08 -- Phase 1 complete (verified + fixed)
+Plan: 1 of 2 in current phase
+Status: In progress
+Last activity: 2026-02-09 -- Completed 02-01-PLAN.md
 
-Progress: [███.......] 25% (3/12 plans)
+Progress: [███░......] 33% (4/12 plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 3
-- Average duration: 4.3 minutes
-- Total execution time: 0.22 hours
+- Total plans completed: 4
+- Average duration: 4.1 minutes
+- Total execution time: 0.28 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 1-Foundation | 3/3 | 12.1m | 4.0m |
+| 2-Static Content | 1/2 | 4.0m | 4.0m |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (4.7m), 01-02 (2m), 01-03 (5.4m)
+- Last 5 plans: 01-01 (4.7m), 01-02 (2m), 01-03 (5.4m), 02-01 (4m)
 - Trend: Stable (~4m average)
 
 *Updated after each plan completion*
@@ -56,6 +57,8 @@ Recent decisions affecting current work:
 | use-t3-env | 01-03 | Use @t3-oss/env-nextjs for runtime env validation | Type-safe env with Zod schemas, helpful startup errors |
 | module-level-db-singleton | 01-03 | Export db directly as module-level singleton | Optimal performance in serverless (Drizzle best practice) |
 | landing-prefix-enums | 01-03 | Prefix enums with landing_ to avoid collisions | Database has many existing enums from other tables |
+| intent-key-restructure | 02-01 | Flatten intent.* keys to avoid JSON conflicts | buildSubmit, collaborateSubmit, connectSubmit instead of nested objects |
+| component-stub-pattern | 02-01 | Create component stubs for TypeScript safety | Unblocks type checks during incremental implementation |
 
 Earlier decisions:
 - [Roadmap]: 5 phases in linear dependency chain, foundation-first to front-load risk
@@ -79,7 +82,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-02-08
-Stopped at: Phase 1 complete -- all 3 plans executed, verified, 2 gaps fixed
+Last session: 2026-02-09
+Stopped at: Completed 02-01-PLAN.md (translation infrastructure and landing page composition)
 Resume file: None
-Next up: Phase 2 -- Static Content Migration (needs planning first)
+Next up: Plan 02-02 (Navigation and Hero sections)
