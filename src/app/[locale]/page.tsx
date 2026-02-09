@@ -24,6 +24,7 @@ export default async function HomePage({ params }: Props) {
 	const navT = await getTranslations("landing.nav");
 	const bannerT = await getTranslations("landing.banner");
 	const tractionT = await getTranslations("landing.traction");
+	const intentT = await getTranslations("landing.intent");
 
 	return (
 		<main className="min-h-screen bg-background text-foreground">
@@ -69,7 +70,33 @@ export default async function HomePage({ params }: Props) {
 			<FadeInSection>
 				<Partners />
 			</FadeInSection>
-			<IntentCTA />
+			<FadeInSection>
+				<IntentCTA
+					locale={locale as "es" | "en"}
+					translations={{
+						headline: intentT("headline"),
+						subtitle: intentT("subtitle"),
+						build: intentT("build"),
+						collaborate: intentT("collaborate"),
+						connect: intentT("connect"),
+						name: intentT("name"),
+						email: intentT("email"),
+						buildSubmit: intentT("buildSubmit"),
+						collaborateSubmit: intentT("collaborateSubmit"),
+						connectSubmit: intentT("connectSubmit"),
+						buildHelper: intentT("buildHelper"),
+						collaborateHelper: intentT("collaborateHelper"),
+						connectHelper: intentT("connectHelper"),
+						success: intentT("success"),
+						questions: intentT("questions"),
+						errorName: intentT("errorName"),
+						errorEmail: intentT("errorEmail"),
+						errorIntent: intentT("errorIntent"),
+						errorGeneric: intentT("errorGeneric"),
+						submitting: intentT("submitting"),
+					}}
+				/>
+			</FadeInSection>
 			<Footer />
 		</main>
 	);
