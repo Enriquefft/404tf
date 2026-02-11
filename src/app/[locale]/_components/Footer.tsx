@@ -1,6 +1,5 @@
-import Image from "next/image";
 import { getTranslations } from "next-intl/server";
-import logoWhite from "@/assets/logo-white.png";
+import { Logo } from "./Logo";
 
 export async function Footer() {
 	const t = await getTranslations("landing.footer");
@@ -18,13 +17,7 @@ export async function Footer() {
 			<div className="container mx-auto px-4">
 				<div className="flex flex-col md:flex-row items-start justify-between gap-10">
 					<div>
-						<Image
-							src={logoWhite}
-							alt="404 Tech Found"
-							className="h-8 mb-3"
-							width={128}
-							height={32}
-						/>
+						<Logo className="text-lg mb-3" />
 						<p className="text-sm text-muted-foreground font-mono-accent">{t("tagline")}</p>
 					</div>
 
