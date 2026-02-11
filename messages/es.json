@@ -1,4 +1,20 @@
 {
+	"metadata": {
+		"title": "404 Tech Found — Pre-incubadora Deep-Tech LATAM",
+		"description": "Convertimos ciencia de frontera en empresas escalables. Programas de pre-incubación, fellowship, y eventos para fundadores deep-tech en IA, Biotech, y Hardware.",
+		"ogImageAlt": "404 Tech Found — Construyendo las 404 startups deep-tech de LATAM",
+		"tagline": "Construyendo las 404 startups deep-tech de LATAM"
+	},
+	"faq": {
+		"q1": "¿Qué es 404 Tech Found?",
+		"a1": "404 Tech Found es una pre-incubadora deep-tech enfocada en LATAM que ayuda a fundadores a convertir ciencia de frontera en startups escalables a través de tres casas: IA, Biotech, y Hardware.",
+		"q2": "¿Qué programas ofrecen?",
+		"a2": "Ofrecemos un programa de pre-incubación de 12 semanas (abierto), un fellowship de 6 meses con financiamiento sin equity (próximamente), y organizamos eventos como SpecHack, nuestro hackathon global de 10 días.",
+		"q3": "¿Quién puede aplicar?",
+		"a3": "Fundadores, investigadores, y equipos técnicos de LATAM trabajando en proyectos deep-tech en IA, biotecnología, o hardware. Buscamos equipos con expertise técnico fuerte y potencial de impacto escalable.",
+		"q4": "¿Dónde están ubicados?",
+		"a4": "Estamos basados en Lima, Perú, pero apoyamos equipos de toda Latinoamérica. Nuestros programas son remotos con opciones presenciales en Lima."
+	},
 	"landing": {
 		"banner": {
 			"text": "🚀 404 SpecHack — Hackathon global de 10 días. Jun 19-28, 2026.",
