@@ -10,18 +10,18 @@ See: .planning/PROJECT.md (updated 2026-02-08)
 ## Current Position
 
 Phase: 4 of 5 (SEO & Metadata)
-Plan: 1 of 2 in current phase
-Status: In progress
-Last activity: 2026-02-11 -- Completed 04-01-PLAN.md
+Plan: 2 of 2 in current phase
+Status: Phase complete
+Last activity: 2026-02-11 -- Completed 04-02-PLAN.md
 
-Progress: [████████..] 83% (10/12 plans)
+Progress: [█████████.] 92% (11/12 plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 10
-- Average duration: 3.6 minutes
-- Total execution time: 0.60 hours
+- Total plans completed: 11
+- Average duration: 3.5 minutes
+- Total execution time: 0.64 hours
 
 **By Phase:**
 
@@ -30,11 +30,11 @@ Progress: [████████..] 83% (10/12 plans)
 | 1-Foundation | 3/3 | 12.1m | 4.0m |
 | 2-Static Content | 3/3 | 11.1m | 3.7m |
 | 3-Interactive | 3/3 | 9.9m | 3.3m |
-| 4-SEO & Metadata | 1/2 | 4.3m | 4.3m |
+| 4-SEO & Metadata | 2/2 | 7.2m | 3.6m |
 
 **Recent Trend:**
-- Last 5 plans: 03-01 (4.0m), 03-02 (2.9m), 03-03 (3.0m), 04-01 (4.3m)
-- Trend: Consistent efficiency (3.7m average for last 5)
+- Last 5 plans: 03-02 (2.9m), 03-03 (3.0m), 04-01 (4.3m), 04-02 (2.9m)
+- Trend: Consistent high efficiency (3.3m average for last 5)
 
 *Updated after each plan completion*
 
@@ -79,6 +79,10 @@ Recent decisions affecting current work:
 | central-seo-config | 04-01 | Single seo-config.ts module for all SEO constants | Single source of truth for SITE_URL, SITE_NAME, SOCIAL_LINKS |
 | self-referencing-canonical | 04-01 | Each locale's canonical points to itself (ES→/es, EN→/en) | Standard SEO practice for multilingual sites, hreflang links alternates |
 | json-ld-in-page | 04-01 | Render JSON-LD schemas at top of page component (not layout) | Schemas describe page-specific content, ensures markup matches visible content |
+| root-level-discovery-files | 04-02 | Place sitemap.ts and robots.ts at src/app root (not inside [locale]) | Discovery files are site-wide, Next.js convention is root-level placement |
+| google-fonts-fetch-in-og | 04-02 | Fetch Google Fonts via URL at runtime in ImageResponse | next/font not available in edge runtime, must fetch as ArrayBuffer |
+| satori-flexbox-requirement | 04-02 | Every div in ImageResponse has display: "flex" | Satori requires explicit flexbox layout, missing display causes failures |
+| house-colors-in-og | 04-02 | Include house color bar at bottom of OpenGraph image | Visual branding consistency, shows AI/Biotech/Hardware focus at a glance |
 
 Earlier decisions:
 - [Roadmap]: 5 phases in linear dependency chain, foundation-first to front-load risk
@@ -103,6 +107,6 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-11
-Stopped at: Completed 04-01-PLAN.md (SEO config and metadata) -- Phase 4 in progress
+Stopped at: Completed 04-02-PLAN.md (OpenGraph images and discovery files) -- Phase 4 complete
 Resume file: None
-Next up: 04-02 (OpenGraph images and discovery files)
+Next up: Phase 5 (Analytics & GEO) - 05-01, 05-02
