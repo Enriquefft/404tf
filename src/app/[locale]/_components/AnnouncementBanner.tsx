@@ -19,7 +19,10 @@ export function AnnouncementBanner({ translations }: AnnouncementBannerProps) {
 	if (isDismissed) return null;
 
 	return (
-		<div className="gradient-purple text-primary-foreground py-2.5 px-4 text-center text-sm font-medium relative z-50">
+		<div
+			id="announcement-banner"
+			className="gradient-purple text-primary-foreground py-2.5 px-4 text-center text-sm font-medium relative z-50"
+		>
 			<span>{translations.text} </span>
 			<a
 				href="https://spechack.404tf.com"
