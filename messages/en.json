@@ -57,6 +57,15 @@
 				"b3": "Investor introductions",
 				"b4": "International network",
 				"cta": "Notify Me"
+			},
+			"bootcamp": {
+				"badge": "CLOSED",
+				"duration": "8 weeks",
+				"b1": "Patents and Technology Transfer",
+				"b2": "Venture Capital insights",
+				"b3": "International Network access",
+				"b4": "Expert Mentorship",
+				"cta": "Applications Closed"
 			}
 		},
 		"events": {
