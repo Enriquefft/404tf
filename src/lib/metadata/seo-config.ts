@@ -3,8 +3,7 @@
  * Single source of truth for site metadata, URLs, and social links
  */
 
-export const SITE_URL =
-	process.env.NEXT_PUBLIC_SITE_URL || "https://404techfound.org";
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://404techfound.org";
 export const SITE_NAME = "404 Tech Found";
 export const CONTACT_EMAIL = "hola@404techfound.com";
 

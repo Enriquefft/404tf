@@ -1,4 +1,7 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { EventSchema } from "@/lib/metadata/json-ld/event";
+import { FAQPageSchema } from "@/lib/metadata/json-ld/faq";
+import { OrganizationSchema } from "@/lib/metadata/json-ld/organization";
 import { AnnouncementBanner } from "./_components/AnnouncementBanner";
 import { FadeInSection } from "./_components/animations/FadeInSection";
 import { Community } from "./_components/Community";
@@ -28,6 +31,9 @@ export default async function HomePage({ params }: Props) {
 
 	return (
 		<main className="min-h-screen bg-background text-foreground">
+			<OrganizationSchema />
+			<EventSchema locale={locale} />
+			<FAQPageSchema locale={locale} />
 			<AnnouncementBanner
 				translations={{
 					text: bannerT("text"),
