@@ -85,11 +85,11 @@ Plans:
   3. Visiting `/es/opengraph-image` and `/en/opengraph-image` returns locale-specific PNG images (1200x630) with the 404 Tech Found branding
   4. `/sitemap.xml` lists all locale variants (`/es`, `/en`) and `/robots.txt` allows all crawlers and links to the sitemap
   5. Sharing the URL on social platforms (or testing via opengraph.xyz) shows correct title, description, and OG image per locale
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 04-01: Metadata and structured data (generateMetadata, JSON-LD schemas, OG/Twitter meta tags)
-- [ ] 04-02: Discovery files and OG images (sitemap.ts, robots.ts, dynamic OpenGraph image generation)
+- [ ] 04-01-PLAN.md -- SEO config, env vars, metadata translations, generateMetadata with per-locale titles/descriptions/canonical/hreflang/OG/Twitter, JSON-LD schemas (Organization, Event, FAQ)
+- [ ] 04-02-PLAN.md -- Discovery files (sitemap.ts, robots.ts) and dynamic OpenGraph image generation per locale
 
 ### Phase 5: Analytics & GEO
 **Goal**: The landing page tracks visitor behavior via PostHog, is discoverable by AI systems via llms.txt, meets Core Web Vitals thresholds, and handles error/loading states gracefully
@@ -163,7 +163,7 @@ All 42 v1 requirements mapped. No orphans. No duplicates.
 | 1. Foundation | 3/3 | Complete | 2026-02-08 |
 | 2. Static Content Migration | 3/3 | Complete | 2026-02-09 |
 | 3. Interactive Components | 3/3 | Complete | 2026-02-09 |
-| 4. SEO & Metadata | 0/2 | Not started | - |
+| 4. SEO & Metadata | 0/2 | Planned | - |
 | 5. Analytics & GEO | 0/2 | Not started | - |
 
 ---
