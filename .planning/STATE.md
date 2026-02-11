@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-08)
 
 **Core value:** Landing page that communicates what 404 Tech Found is and converts visitors into leads (founders, collaborators, connectors) -- across human search engines and AI systems.
-**Current focus:** Phase 3 -- Interactive Components
+**Current focus:** Phase 4 -- SEO & Metadata
 
 ## Current Position
 
-Phase: 3 of 5 (Interactive Components)
-Plan: 3 of 3 in current phase
-Status: Phase complete
-Last activity: 2026-02-09 -- Completed 03-03-PLAN.md
+Phase: 4 of 5 (SEO & Metadata)
+Plan: 1 of 2 in current phase
+Status: In progress
+Last activity: 2026-02-11 -- Completed 04-01-PLAN.md
 
-Progress: [███████▓..] 75% (9/12 plans)
+Progress: [████████..] 83% (10/12 plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 9
-- Average duration: 3.5 minutes
-- Total execution time: 0.54 hours
+- Total plans completed: 10
+- Average duration: 3.6 minutes
+- Total execution time: 0.60 hours
 
 **By Phase:**
 
@@ -30,10 +30,11 @@ Progress: [███████▓..] 75% (9/12 plans)
 | 1-Foundation | 3/3 | 12.1m | 4.0m |
 | 2-Static Content | 3/3 | 11.1m | 3.7m |
 | 3-Interactive | 3/3 | 9.9m | 3.3m |
+| 4-SEO & Metadata | 1/2 | 4.3m | 4.3m |
 
 **Recent Trend:**
-- Last 5 plans: 02-03 (4.1m), 03-01 (4.0m), 03-02 (2.9m), 03-03 (3.0m)
-- Trend: Excellent efficiency (3.5m average for last 5, Phase 3 average 3.3m)
+- Last 5 plans: 03-01 (4.0m), 03-02 (2.9m), 03-03 (3.0m), 04-01 (4.3m)
+- Trend: Consistent efficiency (3.7m average for last 5)
 
 *Updated after each plan completion*
 
@@ -75,6 +76,9 @@ Recent decisions affecting current work:
 | useactionstate-pattern | 03-03 | Use useActionState for Server Action form state management | React 19 + Next.js 16 best practice, simpler than TanStack Forms |
 | intent-dynamic-ui | 03-03 | Dynamic submit text and helper based on selected intent | Better UX than generic "Submit" button |
 | animatepresence-form-reveal | 03-03 | AnimatePresence for form field reveal on intent selection | Smooth transition enhances perceived polish |
+| central-seo-config | 04-01 | Single seo-config.ts module for all SEO constants | Single source of truth for SITE_URL, SITE_NAME, SOCIAL_LINKS |
+| self-referencing-canonical | 04-01 | Each locale's canonical points to itself (ES→/es, EN→/en) | Standard SEO practice for multilingual sites, hreflang links alternates |
+| json-ld-in-page | 04-01 | Render JSON-LD schemas at top of page component (not layout) | Schemas describe page-specific content, ensures markup matches visible content |
 
 Earlier decisions:
 - [Roadmap]: 5 phases in linear dependency chain, foundation-first to front-load risk
@@ -98,7 +102,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-02-09
-Stopped at: Completed 03-03-PLAN.md (IntentCTA interactive form) -- Phase 3 complete
+Last session: 2026-02-11
+Stopped at: Completed 04-01-PLAN.md (SEO config and metadata) -- Phase 4 in progress
 Resume file: None
-Next up: Phase 4 (SEO & Metadata)
+Next up: 04-02 (OpenGraph images and discovery files)
