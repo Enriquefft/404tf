@@ -2,11 +2,10 @@
 
 import { clsx } from "clsx";
 import { Squash as Hamburger } from "hamburger-react";
-import Image from "next/image";
 import { useState } from "react";
-import logoWhite from "@/assets/logo-white.png";
 import { useScrollDirection } from "@/hooks/useScrollDirection";
 import { usePathname, useRouter } from "@/i18n/navigation";
+import { Logo } from "./Logo";
 
 type NavbarProps = {
 	locale: "es" | "en";
@@ -49,7 +48,7 @@ export function Navbar({ locale, translations }: NavbarProps) {
 			)}
 		>
 			<div className="container mx-auto flex items-center justify-between h-16 px-4">
-				<Image src={logoWhite} alt="404 Tech Found" className="h-8" width={128} height={32} />
+				<Logo className="text-base" />
 
 				{/* Desktop nav */}
 				<div className="hidden md:flex items-center gap-6">
