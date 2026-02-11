@@ -3,6 +3,7 @@
 import { clsx } from "clsx";
 import { Squash as Hamburger } from "hamburger-react";
 import { useState } from "react";
+import { useBannerHeight } from "@/hooks/useBannerHeight";
 import { useScrollDirection } from "@/hooks/useScrollDirection";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { Logo } from "./Logo";
@@ -19,6 +20,7 @@ type NavbarProps = {
 };
 
 export function Navbar({ locale, translations }: NavbarProps) {
+	const bannerHeight = useBannerHeight();
 	const scrollDirection = useScrollDirection();
 	const [isOpen, setIsOpen] = useState(false);
 	const router = useRouter();
@@ -41,9 +43,10 @@ export function Navbar({ locale, translations }: NavbarProps) {
 
 	return (
 		<nav
+			style={{ top: `${bannerHeight}px` }}
 			className={clsx(
-				"fixed top-0 left-0 right-0 z-40 bg-background/80 backdrop-blur-xl border-b border-border",
-				"transition-transform duration-300",
+				"fixed left-0 right-0 z-40 bg-background/80 backdrop-blur-xl border-b border-border",
+				"transition-all duration-300",
 				scrollDirection === "down" && "-translate-y-full",
 			)}
 		>
