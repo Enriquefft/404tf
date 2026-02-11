@@ -57,6 +57,15 @@
 				"b3": "Presentaciones a inversores",
 				"b4": "Red internacional",
 				"cta": "Notifícame"
+			},
+			"bootcamp": {
+				"badge": "CERRADO",
+				"duration": "8 semanas",
+				"b1": "Patente y Transferencia tecnológica",
+				"b2": "Insights de Venture Capital",
+				"b3": "Acceso a Red Internacional",
+				"b4": "Mentoría de Expertos",
+				"cta": "Aplicaciones Cerradas"
 			}
 		},
 		"events": {
