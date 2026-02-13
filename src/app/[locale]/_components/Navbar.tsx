@@ -43,11 +43,16 @@ export function Navbar({ locale, translations }: NavbarProps) {
 
 	return (
 		<nav
-			style={{ top: `${bannerHeight}px` }}
+			style={{
+				top: `${bannerHeight}px`,
+				transform:
+					scrollDirection === "down"
+						? `translateY(calc(-100% - ${bannerHeight}px))`
+						: "translateY(0)",
+			}}
 			className={clsx(
 				"fixed left-0 right-0 z-40 bg-background/80 backdrop-blur-xl border-b border-border",
 				"transition-all duration-300",
-				scrollDirection === "down" && "-translate-y-full",
 			)}
 		>
 			<div className="container mx-auto flex items-center justify-between h-16 px-4">
