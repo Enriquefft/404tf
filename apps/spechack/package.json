@@ -1,0 +1,25 @@
+{
+	"name": "@404tf/spechack",
+	"version": "0.0.0",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"dev": "next dev --turbopack --port 3001",
+		"build": "next build",
+		"start": "next start",
+		"lint": "biome check --fix ."
+	},
+	"dependencies": {
+		"@404tf/config": "workspace:*",
+		"@404tf/database": "workspace:*",
+		"next": "^16.1.6",
+		"react": "^19.2.0",
+		"react-dom": "^19.2.0"
+	},
+	"devDependencies": {
+		"@types/node": "^22.5.0",
+		"@types/react": "^19.0.8",
+		"@types/react-dom": "^19.0.3",
+		"typescript": "^5.7.3"
+	}
+}

@@ -8,7 +8,10 @@ pre-commit:
   commands:
     lint:
       glob: "*.{js,ts,jsx,tsx,json,jsonc}"
-      run: bun lint --no-errors-on-unmatched --files-ignore-unknown=true {staged_files}
-    types:
-      glob: "*.{js,ts,jsx,tsx}"
-      run: bunx tsc --noEmit
+      run: bunx biome check --fix . --no-errors-on-unmatched --files-ignore-unknown=true {staged_files}
+    types-landing:
+      glob: "apps/landing/**/*.{ts,tsx}"
+      run: cd apps/landing && bunx tsc --noEmit
+    types-spechack:
+      glob: "apps/spechack/**/*.{ts,tsx}"
+      run: cd apps/spechack && bunx tsc --noEmit

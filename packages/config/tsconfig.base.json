@@ -3,7 +3,7 @@
 		"target": "ESNext",
 		"module": "ESNext",
 		"moduleResolution": "bundler",
-		"jsx": "react-jsx",
+		"jsx": "preserve",
 		"strict": true,
 		"esModuleInterop": true,
 		"skipLibCheck": true,
@@ -13,22 +13,6 @@
 		"resolveJsonModule": true,
 		"isolatedModules": true,
 		"allowJs": true,
-		"lib": ["dom", "dom.iterable", "esnext"],
-		"paths": {
-			"@/*": ["./src/*"]
-		},
-		"plugins": [
-			{
-				"name": "next"
-			}
-		]
-	},
-	"include": [
-		"next-env.d.ts",
-		"**/*.ts",
-		"**/*.tsx",
-		".next/types/**/*.ts",
-		".next/dev/types/**/*.ts"
-	],
-	"exclude": ["node_modules"]
+		"lib": ["dom", "dom.iterable", "esnext"]
+	}
 }

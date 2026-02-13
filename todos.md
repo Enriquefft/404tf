@@ -1,0 +1,2 @@
+The trading card system needs a database to store registrations, assign agent numbers, and power challenge links. This means connecting a backend. Which approach would you prefer?
+For the OG image on challenge links (the card preview when shared on social media), a React SPA can't generate dynamic meta tags. The best approach is a Supabase Edge Function that renders the card as an image. Should we build this now or skip it?

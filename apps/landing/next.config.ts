@@ -7,7 +7,12 @@ const nextConfig: NextConfig = {
 	images: {
 		formats: ["image/avif", "image/webp"],
 	},
-	transpilePackages: ["@t3-oss/env-nextjs", "@t3-oss/env-core"],
+	transpilePackages: [
+		"@404tf/database",
+		"@404tf/config",
+		"@t3-oss/env-nextjs",
+		"@t3-oss/env-core",
+	],
 };
 
 export default withNextIntl(nextConfig);

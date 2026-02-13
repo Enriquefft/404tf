@@ -1,5 +1,4 @@
 import "@/styles/globals.css";
-import "@/env/client";
 import { getLocale } from "next-intl/server";
 import { Suspense } from "react";
 import { PostHogPageView } from "@/lib/analytics/posthog-pageview";

@@ -1,0 +1,26 @@
+{
+	"name": "@404tf/database",
+	"version": "0.0.0",
+	"private": true,
+	"type": "module",
+	"exports": {
+		".": "./src/index.ts",
+		"./env": "./src/env.ts",
+		"./schema": "./src/schema.ts"
+	},
+	"scripts": {
+		"db:generate": "drizzle-kit generate",
+		"db:push": "drizzle-kit push",
+		"db:studio": "drizzle-kit studio"
+	},
+	"dependencies": {
+		"@neondatabase/serverless": "latest",
+		"@t3-oss/env-nextjs": "latest",
+		"dotenv": "^17.2.4",
+		"drizzle-orm": "latest",
+		"zod": "latest"
+	},
+	"devDependencies": {
+		"drizzle-kit": "latest"
+	}
+}

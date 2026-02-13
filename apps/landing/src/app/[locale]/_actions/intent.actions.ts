@@ -1,8 +1,8 @@
 "use server";
 
 import { z } from "zod";
-import { db } from "@/db";
-import { intentSubmissions } from "@/db/schema";
+import { db } from "@404tf/database";
+import { intentSubmissions } from "@404tf/database/schema";
 
 const intentSchema = z.object({
 	intent: z.enum(["build", "collaborate", "connect"]),

@@ -1,0 +1,39 @@
+{
+	"name": "@404tf/landing",
+	"version": "1.0.0",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"dev": "next dev --turbopack",
+		"build": "next build",
+		"start": "next start",
+		"lint": "biome check --fix ."
+	},
+	"dependencies": {
+		"@404tf/config": "workspace:*",
+		"@404tf/database": "workspace:*",
+		"clsx": "latest",
+		"framer-motion": "^12.34.0",
+		"hamburger-react": "^2.5.2",
+		"lucide-react": "^0.563.0",
+		"next": "latest",
+		"next-intl": "latest",
+		"posthog-js": "^1.347.0",
+		"react": "latest",
+		"react-countup": "^6.5.3",
+		"react-dom": "latest",
+		"react-intersection-observer": "^10.0.2",
+		"tailwind-merge": "latest",
+		"zod": "latest"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "latest",
+		"@tailwindcss/postcss": "latest",
+		"@types/node": "latest",
+		"@types/react": "latest",
+		"@types/react-dom": "latest",
+		"postcss": "latest",
+		"tailwindcss": "~4.0.0",
+		"typescript": "latest"
+	}
+}

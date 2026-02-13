@@ -1,0 +1,5 @@
+{
+	"buildCommand": "cd ../.. && bun run build:spechack",
+	"installCommand": "cd ../.. && bun install",
+	"framework": "nextjs"
+}
