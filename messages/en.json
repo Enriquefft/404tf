@@ -5,6 +5,19 @@
 		"ogImageAlt": "404 Tech Found — Building the 404 deep-tech startups of LATAM",
 		"tagline": "Building the 404 deep-tech startups of LATAM"
 	},
+	"NotFound": {
+		"title": "Page Not Found",
+		"description": "The page you're looking for doesn't exist or has been moved.",
+		"backHome": "Back to Home"
+	},
+	"Error": {
+		"title": "Something went wrong",
+		"description": "An unexpected error occurred. Please try again.",
+		"retry": "Try Again"
+	},
+	"Loading": {
+		"text": "Loading..."
+	},
 	"faq": {
 		"q1": "What is 404 Tech Found?",
 		"a1": "404 Tech Found is a LATAM-focused deep-tech pre-incubator that helps founders turn breakthrough science into scalable startups through three houses: AI, Biotech, and Hardware.",

@@ -5,6 +5,19 @@
 		"ogImageAlt": "404 Tech Found — Construyendo las 404 startups deep-tech de LATAM",
 		"tagline": "Construyendo las 404 startups deep-tech de LATAM"
 	},
+	"NotFound": {
+		"title": "Página no encontrada",
+		"description": "La página que buscas no existe o ha sido movida.",
+		"backHome": "Volver al inicio"
+	},
+	"Error": {
+		"title": "Algo salió mal",
+		"description": "Ocurrió un error inesperado. Por favor, intenta de nuevo.",
+		"retry": "Intentar de nuevo"
+	},
+	"Loading": {
+		"text": "Cargando..."
+	},
 	"faq": {
 		"q1": "¿Qué es 404 Tech Found?",
 		"a1": "404 Tech Found es una pre-incubadora deep-tech enfocada en LATAM que ayuda a fundadores a convertir ciencia de frontera en startups escalables a través de tres casas: IA, Biotech, y Hardware.",
