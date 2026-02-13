@@ -1,0 +1,13 @@
+{
+	"home": {
+		"title": "SpecHack 2025",
+		"subtitle": "El hackathon global de 404 Tech Found",
+		"mono": "SPEC // HACK // BUILD",
+		"card": "Sistema de identidad de trading cards para hackers"
+	},
+	"NotFound": {
+		"title": "Página no encontrada",
+		"description": "La página que buscas no existe.",
+		"backHome": "Volver al inicio"
+	}
+}

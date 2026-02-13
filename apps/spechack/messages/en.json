@@ -1,0 +1,13 @@
+{
+	"home": {
+		"title": "SpecHack 2025",
+		"subtitle": "The global hackathon by 404 Tech Found",
+		"mono": "SPEC // HACK // BUILD",
+		"card": "Trading card identity system for hackers"
+	},
+	"NotFound": {
+		"title": "Page not found",
+		"description": "The page you are looking for does not exist.",
+		"backHome": "Back to home"
+	}
+}

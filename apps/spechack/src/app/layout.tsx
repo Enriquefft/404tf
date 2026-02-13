@@ -1,18 +1,27 @@
-import type { Metadata } from "next";
+import "@/styles/globals.css";
+import { inter, jetbrainsMono, orbitron } from "@/styles/fonts";
+import { cn } from "@/lib/utils";
+import { getLocale } from "next-intl/server";
 
-export const metadata: Metadata = {
-	title: "SpecHack - Coming Soon",
-	description: "404 Tech Found hackathon platform",
+type Props = {
+	children: React.ReactNode;
 };
 
-export default function RootLayout({
-	children,
-}: Readonly<{
-	children: React.ReactNode;
-}>) {
+export default async function RootLayout({ children }: Props) {
+	const locale = await getLocale();
+
 	return (
-		<html lang="en">
-			<body>{children}</body>
+		<html
+			lang={locale}
+			className={cn(
+				inter.variable,
+				orbitron.variable,
+				jetbrainsMono.variable,
+			)}
+		>
+			<body className="min-h-screen bg-background font-sans antialiased blueprint-grid">
+				{children}
+			</body>
 		</html>
 	);
 }
