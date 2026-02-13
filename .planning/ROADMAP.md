@@ -15,7 +15,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 1: Foundation** - Project scaffolding, i18n routing, Tailwind v4, database, and developer tooling
 - [x] **Phase 2: Static Content Migration** - All landing page sections as Server Components with bilingual content
 - [x] **Phase 3: Interactive Components** - Client Components for navbar, form, animations, and scroll behaviors
-- [ ] **Phase 4: SEO & Metadata** - Structured data, OG images, sitemap, robots.txt, and meta tags
+- [x] **Phase 4: SEO & Metadata** - Structured data, OG images, sitemap, robots.txt, and meta tags
 - [ ] **Phase 5: Analytics & GEO** - PostHog integration, llms.txt, Core Web Vitals, and production readiness
 
 ## Phase Details
@@ -88,8 +88,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 04-01-PLAN.md -- SEO config, env vars, metadata translations, generateMetadata with per-locale titles/descriptions/canonical/hreflang/OG/Twitter, JSON-LD schemas (Organization, Event, FAQ)
-- [ ] 04-02-PLAN.md -- Discovery files (sitemap.ts, robots.ts) and dynamic OpenGraph image generation per locale
+- [x] 04-01-PLAN.md -- SEO config, env vars, metadata translations, generateMetadata with per-locale titles/descriptions/canonical/hreflang/OG/Twitter, JSON-LD schemas (Organization, Event, FAQ) (completed 2026-02-13)
+- [x] 04-02-PLAN.md -- Discovery files (sitemap.ts, robots.ts) and dynamic OpenGraph image generation per locale (completed 2026-02-13)
 
 ### Phase 5: Analytics & GEO
 **Goal**: The landing page tracks visitor behavior via PostHog, is discoverable by AI systems via llms.txt, meets Core Web Vitals thresholds, and handles error/loading states gracefully
