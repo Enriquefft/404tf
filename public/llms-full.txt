@@ -1,0 +1,193 @@
+# 404 Tech Found
+
+> 404 Tech Found is a LATAM-focused deep-tech pre-incubator turning breakthrough science into venture-grade companies. We support founders in AI, Biotech, and Hardware through pre-incubation programs, fellowships, and events.
+
+## About
+
+404 Tech Found is a deep-tech pre-incubator based in Lima, Peru, serving founders across Latin America. We help technical teams turn breakthrough science into scalable, venture-grade companies through three specialized verticals: AI, Biotech, and Hardware.
+
+**Mission:** Transform LATAM's scientific talent into global deep-tech companies.
+
+**Vision:** Build an ecosystem where scientific innovation from Latin America creates venture-scale impact.
+
+**Community Traction:**
+- 400+ community members
+- 250+ summit attendees
+- 92+ program applicants
+- 15+ fellows supported
+
+**Approach:** Built by founders, for founders. We provide hands-on mentorship, expert networks, and infrastructure support tailored to deep-tech challenges unique to the LATAM ecosystem.
+
+**Languages:** Bilingual platform supporting both Spanish (primary) and English to serve the global deep-tech community.
+
+## Programs
+
+### Pre-Incubation (12 weeks, OPEN)
+
+Our flagship 12-week pre-incubation program helps early-stage deep-tech teams validate technical feasibility and build toward product-market fit.
+
+**What you get:**
+- 1-on-1 mentorship: Matched with experienced founders and domain experts
+- Expert network access: Connect with scientists, engineers, and industry specialists across AI, biotech, and hardware
+- Technical & business workshops: From patents and technology transfer to venture capital insights
+- Demo Day with investors: Pitch your validated product to LATAM and international investors
+
+**Curriculum Focus:**
+- Technical validation and prototype development
+- Intellectual property strategy
+- Business model development for deep-tech
+- Regulatory pathways and compliance
+- Fundraising preparation
+
+**Format:** Remote with optional in-person sessions in Lima, Peru
+
+**Applications:** Open on a rolling basis
+
+### Fellowship (6 months, COMING SOON)
+
+Our fellowship program provides equity-free funding and deep infrastructure support for teams ready to scale their deep-tech products.
+
+**What you get:**
+- Equity-free funding: Financial support to accelerate development without dilution
+- Lab & workspace access: Physical infrastructure in Lima including lab facilities, prototyping equipment, and dedicated workspace
+- Investor introductions: Warm introductions to venture capital firms specializing in deep-tech
+- International network: Access to global partnerships, research institutions, and commercial opportunities
+
+**Timeline:** 6-month intensive support period with ongoing alumni network access
+
+**Funding Terms:** Equity-free grants ranging based on project needs and stage
+
+**Focus Areas:** Teams with validated prototypes ready for pilot deployments or commercial trials
+
+**Applications:** Opening Q3 2026
+
+## Events
+
+### SpecHack — Global Deep-Tech Hackathon
+
+**Dates:** June 19-28, 2026 (10 days)
+
+**Tagline:** "The hackathon where the spec is the product."
+
+**Methodology:** Spec-first development — write comprehensive technical specifications before building with AI assistance. This is the antidote to "vibe coding" and "move fast and break things."
+
+**Format:**
+- In-person hubs in Lima and other LATAM cities
+- Virtual track for global participants
+- Daily workshops on specification writing, technical documentation, and AI-assisted development
+- Expert mentorship from deep-tech founders and engineers
+- Demo Day with prizes for best specs and implementations
+
+**Why Spec-First:** Deep-tech requires precision, safety, and reproducibility. We believe the future of AI-assisted engineering starts with rigorous specification.
+
+**How to Participate:**
+- Register as a participant (individual or team)
+- Become a city ambassador to host a local hub
+- Sponsor or mentor teams
+
+## Houses
+
+### House of AI
+
+The House of AI focuses on language models, computer vision, autonomous agents, and machine learning systems applied to real LATAM problems.
+
+**Focus Areas:**
+- Natural language processing for Spanish and indigenous languages
+- Computer vision for agriculture, healthcare, and industrial inspection
+- Autonomous agents for logistics, customer service, and operations
+- Recommendation systems and personalization for LATAM markets
+- Edge AI and on-device intelligence for low-connectivity regions
+
+**Target Applications:** Fintech, agtech, healthcare diagnostics, supply chain optimization, education technology
+
+### House of Biotech
+
+The House of Biotech supports founders in synthetic biology, molecular diagnostics, precision agriculture, and biotechnology tailored to LATAM's unique biodiversity and health challenges.
+
+**Focus Areas:**
+- Synthetic biology for sustainable materials and chemicals
+- Molecular diagnostics for tropical diseases and cancer detection
+- Precision agriculture leveraging LATAM biodiversity
+- Biomanufacturing and fermentation technologies
+- Gene therapy and personalized medicine approaches
+
+**Target Applications:** Agricultural biotech, diagnostic devices, biomanufacturing platforms, environmental remediation, pharmaceutical development
+
+### House of Hardware
+
+The House of Hardware supports robotics, industrial IoT, medical devices, and physical products from prototype to manufacturing.
+
+**Focus Areas:**
+- Robotics for agriculture, logistics, and industrial automation
+- Industrial IoT and sensor networks for manufacturing and supply chain
+- Medical devices and diagnostic equipment
+- Energy systems and renewable technology
+- Manufacturing process innovation and automation
+
+**Target Applications:** Agricultural robots, industrial monitoring systems, point-of-care diagnostics, renewable energy hardware, factory automation
+
+## Community
+
+**Size:** 400+ members across LATAM
+
+**Engagement Model:**
+- Monthly deep-tech meetups and technical talks
+- Slack community for founders, researchers, and contributors
+- Office hours with domain experts
+- Peer learning circles by vertical (AI, Biotech, Hardware)
+
+**Who's in the Community:**
+- Deep-tech founders building in AI, biotech, and hardware
+- Researchers and PhD candidates exploring commercialization
+- Technical talent interested in joining deep-tech startups
+- Investors and advisors supporting the ecosystem
+- Corporate partners seeking innovation collaborations
+
+## FAQ
+
+**What is 404 Tech Found?**
+404 Tech Found is a LATAM-focused deep-tech pre-incubator that helps founders turn breakthrough science into scalable startups through three houses: AI, Biotech, and Hardware.
+
+**What programs do you offer?**
+We offer a 12-week pre-incubation program (open), a 6-month fellowship with equity-free funding (coming soon), and organize events like SpecHack, our 10-day global hackathon.
+
+**Who can apply?**
+Founders, researchers, and technical teams from LATAM working on deep-tech projects in AI, biotech, or hardware. We look for teams with strong technical expertise and scalable impact potential.
+
+**Where are you located?**
+We are based in Lima, Peru, but support teams across Latin America. Our programs are remote with in-person options in Lima.
+
+## Partners
+
+We collaborate with research institutions, venture capital firms, accelerators, and corporate partners to provide our founders with comprehensive support. Partnership opportunities include:
+
+- Mentorship and expert network contributions
+- Lab and prototyping facility access
+- Co-hosting events and workshops
+- Investment opportunities in portfolio companies
+- Corporate innovation partnerships
+
+Interested in partnering? Contact us at hola@404techfound.com
+
+## Contact
+
+**Website:** https://404techfound.org
+
+**Email:** hola@404techfound.com
+
+**Location:** Lima, Peru 🇵🇪
+
+**Social Media:**
+- Twitter: https://twitter.com/404techfound
+- LinkedIn: https://linkedin.com/company/404techfound
+- Instagram: https://instagram.com/404techfound
+- YouTube: https://youtube.com/@404techfound
+
+## Technical
+
+This website is built with Next.js 16, supports bilingual content (Spanish and English via next-intl), and implements JSON-LD structured data for search engine optimization. The platform uses modern web standards and is optimized for performance and accessibility.
+
+**Stack:** Next.js, React, TypeScript, Tailwind CSS, Drizzle ORM, PostgreSQL
+**Hosting:** Vercel edge network
+**Analytics:** PostHog (privacy-focused)
+**Open Source:** Selected components and utilities available on GitHub

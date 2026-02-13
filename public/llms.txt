@@ -1,0 +1,28 @@
+# 404 Tech Found
+
+> 404 Tech Found is a LATAM-focused deep-tech pre-incubator turning breakthrough science into venture-grade companies. We support founders in AI, Biotech, and Hardware through pre-incubation programs, fellowships, and events.
+
+## About
+- Deep-tech pre-incubator based in Lima, Peru
+- Three specialized houses: AI, Biotech, Hardware
+- Built by founders, for founders
+- Bilingual platform: Spanish (primary) and English
+
+## Programs
+- Pre-Incubation (12 weeks, open): 1-on-1 mentorship, expert network, workshops, Demo Day
+- Fellowship (6 months, coming soon): Equity-free funding, lab access, investor introductions
+
+## Events
+- SpecHack: 10-day global hackathon (Jun 19-28, 2026). "The hackathon where the spec is the product."
+
+## Houses
+- House of AI: Language models, computer vision, and autonomous agents applied to real LATAM problems
+- House of Biotech: Synthetic biology, molecular diagnostics, and precision agriculture for a continent with unique biodiversity
+- House of Hardware: Robotics, industrial IoT, and medical devices — from prototype to manufacturing
+
+## Contact
+- Website: https://404techfound.org
+- Email: hola@404techfound.com
+- Location: Lima, Peru
+- Twitter: https://twitter.com/404techfound
+- LinkedIn: https://linkedin.com/company/404techfound
