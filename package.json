@@ -24,6 +24,7 @@
 		"lucide-react": "^0.563.0",
 		"next": "latest",
 		"next-intl": "latest",
+		"posthog-js": "^1.347.0",
 		"react": "latest",
 		"react-countup": "^6.5.3",
 		"react-dom": "latest",
