@@ -1,6 +1,10 @@
 import "@/styles/globals.css";
 import "@/env/client";
 import { getLocale } from "next-intl/server";
+import { Suspense } from "react";
+import { PostHogPageView } from "@/lib/analytics/posthog-pageview";
+import { PHProvider } from "@/lib/analytics/posthog-provider";
+import { WebVitals } from "@/lib/analytics/web-vitals";
 import { cn } from "@/lib/utils";
 import { inter, orbitron } from "@/styles/fonts";
 
@@ -20,7 +24,13 @@ export default async function RootLayout({ children }: Props) {
 					orbitron.variable,
 				)}
 			>
-				{children}
+				<PHProvider>
+					<Suspense fallback={null}>
+						<PostHogPageView />
+					</Suspense>
+					<WebVitals />
+					{children}
+				</PHProvider>
 			</body>
 		</html>
 	);
