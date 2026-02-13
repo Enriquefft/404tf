@@ -16,7 +16,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 2: Static Content Migration** - All landing page sections as Server Components with bilingual content
 - [x] **Phase 3: Interactive Components** - Client Components for navbar, form, animations, and scroll behaviors
 - [x] **Phase 4: SEO & Metadata** - Structured data, OG images, sitemap, robots.txt, and meta tags
-- [ ] **Phase 5: Analytics & GEO** - PostHog integration, llms.txt, Core Web Vitals, and production readiness
+- [x] **Phase 5: Analytics & GEO** - PostHog integration, llms.txt, Core Web Vitals, and production readiness
 
 ## Phase Details
 
@@ -104,8 +104,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 05-01-PLAN.md — PostHog analytics integration (provider, pageview tracking, Core Web Vitals reporting)
-- [ ] 05-02-PLAN.md — AI discoverability (llms.txt, llms-full.txt) and production readiness (error, loading, 404 pages)
+- [x] 05-01-PLAN.md — PostHog analytics integration (provider, pageview tracking, Core Web Vitals reporting) (completed 2026-02-13)
+- [x] 05-02-PLAN.md — AI discoverability (llms.txt, llms-full.txt) and production readiness (error, loading, 404 pages) (completed 2026-02-13)
 
 ## Phase Dependency Diagram
 
@@ -163,8 +163,8 @@ All 42 v1 requirements mapped. No orphans. No duplicates.
 | 1. Foundation | 3/3 | Complete | 2026-02-08 |
 | 2. Static Content Migration | 3/3 | Complete | 2026-02-09 |
 | 3. Interactive Components | 3/3 | Complete | 2026-02-09 |
-| 4. SEO & Metadata | 0/2 | Planned | - |
-| 5. Analytics & GEO | 0/2 | Not started | - |
+| 4. SEO & Metadata | 2/2 | Complete | 2026-02-13 |
+| 5. Analytics & GEO | 2/2 | Complete | 2026-02-13 |
 
 ---
 *Created: 2026-02-08*

@@ -111,11 +111,11 @@
 | SEO-06 | Phase 4 | Complete |
 | SEO-07 | Phase 4 | Complete |
 | SEO-08 | Phase 4 | Complete |
-| GEO-01 | Phase 5 | Pending |
-| GEO-02 | Phase 5 | Pending |
-| GEO-03 | Phase 5 | Pending |
-| GEO-04 | Phase 5 | Pending |
-| GEO-05 | Phase 5 | Pending |
+| GEO-01 | Phase 5 | Complete |
+| GEO-02 | Phase 5 | Complete |
+| GEO-03 | Phase 5 | Complete |
+| GEO-04 | Phase 5 | Complete |
+| GEO-05 | Phase 5 | Complete |
 
 ## Traceability Matrix
 
