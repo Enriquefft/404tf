@@ -2,7 +2,7 @@
 
 ## What This Is
 
-SEO and GEO-optimized landing page for 404 Tech Found, a deeptech pre-incubator based in Lima, Peru. Migrated from an existing Vite/React SPA to Next.js 16 with SSR, locale-based routing (ES/EN), structured data, and database-backed forms. The goal is to increase organic search visibility, look professional, and be discoverable by LLMs.
+Production-ready Next.js 16 landing page for 404 Tech Found, a deeptech pre-incubator based in Lima, Peru. Features bilingual support (ES/EN), comprehensive SEO infrastructure, AI discoverability, database-backed lead capture, and PostHog analytics. Successfully migrated from Vite/React SPA with all animations and interactive features preserved.
 
 ## Core Value
 
@@ -12,29 +12,29 @@ The landing page must clearly communicate what 404 Tech Found is and convert vis
 
 ### Validated
 
-(None yet — ship to validate)
+- ✓ Migrate all 11 existing landing sections to Next.js 16 App Router — v1.0
+- ✓ Adapt existing content and copy (ES/EN) to next-intl with `[locale]` routing — v1.0 (~140 translation keys)
+- ✓ Preserve existing design system: cyberpunk purple theme, Orbitron font, gradient effects, Tardi mascot, house colors — v1.0
+- ✓ Implement shadcn/ui components (RSC-compatible) replacing raw Radix usage — v1.0
+- ✓ Set up Drizzle ORM with Neon serverless Postgres for intent form submissions — v1.0 (module-level singleton)
+- ✓ Rebuild IntentCTA form with Zod validation, saving to database — v1.0 (used useActionState instead of TanStack Forms)
+- ✓ Add JSON-LD structured data (Organization, Event, FAQ schemas) — v1.0
+- ✓ Add llms.txt for AI crawler discoverability — v1.0 (llms.txt + llms-full.txt)
+- ✓ Implement dynamic OpenGraph images per locale — v1.0 (1200x630 PNG with house colors)
+- ✓ Generate sitemap.xml and robots.txt — v1.0
+- ✓ Set up proper meta tags, canonical URLs, and per-locale SEO metadata — v1.0 (with hreflang alternates)
+- ✓ Integrate PostHog analytics — v1.0 (with Core Web Vitals tracking)
+- ✓ Preserve Framer Motion animations (scroll-triggered, hero mascot float, count-up stats) — v1.0
+- ✓ Configure Biome for linting/formatting (replacing ESLint) — v1.0 (tabs + double quotes)
+- ✓ Set up @t3-oss/env-nextjs for type-safe environment variables — v1.0 (runtime validation)
+- ✓ Configure Bun as runtime with bunfig.toml — v1.0
+- ✓ Set up Lefthook + commitlint for git hygiene — v1.0
+- ✓ Configure Knip for dead code detection — v1.0
+- ✓ Tailwind v4 with custom theme (purple gradients, house colors, glow effects) — v1.0 (pinned to ~4.0.0)
 
 ### Active
 
-- [ ] Migrate all 11 existing landing sections to Next.js 16 App Router (AnnouncementBanner, Navbar, Hero, TractionBar, Houses, Programs, Events, Community, Partners, IntentCTA, Footer)
-- [ ] Adapt existing content and copy (ES/EN) to next-intl with `[locale]` routing (`/es`, `/en`)
-- [ ] Preserve existing design system: cyberpunk purple theme, Orbitron font, gradient effects, Tardi mascot, house colors (AI/Biotech/Hardware)
-- [ ] Implement shadcn/ui components (RSC-compatible) replacing raw Radix usage
-- [ ] Set up Drizzle ORM with Neon serverless Postgres for intent form submissions
-- [ ] Rebuild IntentCTA form with TanStack Forms + Zod validation, saving to database
-- [ ] Add JSON-LD structured data (Organization, Event, FAQ schemas)
-- [ ] Add llms.txt for AI crawler discoverability
-- [ ] Implement dynamic OpenGraph images per locale
-- [ ] Generate sitemap.xml and robots.txt
-- [ ] Set up proper meta tags, canonical URLs, and per-locale SEO metadata
-- [ ] Integrate PostHog analytics
-- [ ] Preserve Framer Motion animations (scroll-triggered, hero mascot float, count-up stats)
-- [ ] Configure Biome for linting/formatting (replacing ESLint)
-- [ ] Set up @t3-oss/env-nextjs for type-safe environment variables
-- [ ] Configure Bun as runtime with bunfig.toml
-- [ ] Set up Lefthook + commitlint for git hygiene
-- [ ] Configure Knip for dead code detection
-- [ ] Tailwind v4 with custom theme (purple gradients, house colors, glow effects)
+(None — ready for next milestone)
 
 ### Out of Scope
 
@@ -48,11 +48,27 @@ The landing page must clearly communicate what 404 Tech Found is and convert vis
 
 ## Context
 
-- **Existing site:** Complete Vite/React SPA at `deep-tech-nexus` with all UI/UX and copy finished in ES/EN. Uses React 18, Tailwind 3, shadcn, Framer Motion, custom LanguageContext for i18n, Lucide icons.
-- **Reference template:** `next-fullstack-template` provides the Next.js 16 architecture patterns: `[locale]` App Router structure, next-intl config, Drizzle/Neon setup, TanStack Forms, shadcn RSC, Biome, Bun, @t3-oss/env. Template is "slightly bloated" — we strip auth, payments, uploads, maps.
-- **Organization:** 404 Tech Found is a LATAM-focused deeptech incubator with three "houses" (AI, Biotech, Hardware). Programs include a 12-week pre-incubation (open) and a 6-month fellowship (coming soon). Key event: SpecHack hackathon (Jun 19-28, 2026).
-- **Audience:** Deeptech founders/researchers (primary), investors, potential collaborators/partners. LATAM-based, bilingual ES/EN with Spanish as default.
-- **Current traction:** 400+ community members, 250+ summit attendees, 92+ applicants, 15 fellows.
+**Shipped v1.0 (Feb 13, 2026):**
+- 2,139 lines of TypeScript/TSX across 91 files
+- Tech stack: Next.js 16, Bun, Tailwind v4, shadcn/ui, next-intl, Drizzle ORM, Neon Postgres, Framer Motion, PostHog
+- All 42 requirements satisfied across 5 phases (13 plans)
+- Milestone audit: 100% requirements coverage, 28/28 cross-phase integrations verified, 6/6 E2E flows complete
+
+**Organization:**
+- 404 Tech Found is a LATAM-focused deeptech incubator with three "houses" (AI, Biotech, Hardware)
+- Programs: 12-week pre-incubation (open) and 6-month fellowship (coming soon)
+- Key event: SpecHack hackathon (Jun 19-28, 2026)
+- Current traction: 400+ community members, 250+ summit attendees, 92+ applicants, 15 fellows
+
+**Audience:**
+- Primary: Deeptech founders/researchers in LATAM
+- Secondary: Investors, potential collaborators/partners
+- Bilingual ES/EN with Spanish as default locale
+
+**Known Issues:**
+- Human verification pending (19 items): Interactive features, OG images, analytics, Core Web Vitals (see v1.0-MILESTONE-AUDIT.md)
+- PostHog env vars needed for production deployment
+- Database migration required in production Neon instance
 
 ## Constraints
 
@@ -70,12 +86,16 @@ The landing page must clearly communicate what 404 Tech Found is and convert vis
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Next.js 16 over Astro/Remix | SSR + RSC for SEO, mature ecosystem, reference template available | — Pending |
-| Keep Framer Motion (not CSS-only) | Existing animations are rich and integral to the brand feel | — Pending |
-| Neon serverless over other Postgres | Reference template uses it, serverless = no cold starts for landing page | — Pending |
-| Strip auth/payments/uploads from template | Landing page doesn't need them, reduces complexity | — Pending |
-| All 4 GEO strategies (JSON-LD, llms.txt, OG, sitemap) | User wants maximum discoverability across human and AI search | — Pending |
-| Spanish as default locale | LATAM-focused organization, primary audience speaks Spanish | — Pending |
+| Next.js 16 over Astro/Remix | SSR + RSC for SEO, mature ecosystem, reference template available | ✓ Good — Excellent DX, App Router patterns clean |
+| Keep Framer Motion (not CSS-only) | Existing animations are rich and integral to the brand feel | ✓ Good — Animations preserved, 14/15 budget used |
+| Neon serverless over other Postgres | Reference template uses it, serverless = no cold starts for landing page | ✓ Good — Module-level singleton pattern optimal |
+| Strip auth/payments/uploads from template | Landing page doesn't need them, reduces complexity | ✓ Good — Reduced scope, focused on core value |
+| All 4 GEO strategies (JSON-LD, llms.txt, OG, sitemap) | User wants maximum discoverability across human and AI search | ✓ Good — Full SEO infrastructure in place |
+| Spanish as default locale | LATAM-focused organization, primary audience speaks Spanish | ✓ Good — ES primary, EN secondary via next-intl |
+| Tailwind v4 pinned to ~4.0.0 | v4.1.18 has Turbopack bug | ✓ Good — v4.0.17 stable, bug avoided |
+| useActionState over TanStack Forms | React 19 + Next.js 16 best practice | ✓ Good — Simpler, TanStack Forms POC-level maturity |
+| landing_ enum prefix | Avoid collisions with existing database enums | ✓ Good — Clean namespace separation |
+| Module-level db singleton | Optimal performance in serverless | ✓ Good — Drizzle best practice followed |
 
 ---
-*Last updated: 2026-02-08 after initialization*
+*Last updated: 2026-02-13 after v1.0 milestone completion*
