@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+@theme {
+	--color-background: hsl(var(--background));
+	--color-foreground: hsl(var(--foreground));
+	--color-primary: hsl(var(--primary));
+	--color-secondary: hsl(var(--secondary));
+	--color-spec-green: hsl(var(--spec-green));
+	--color-card: hsl(var(--card));
+	--color-card-foreground: hsl(var(--card-foreground));
+	--color-muted: hsl(var(--muted));
+	--color-muted-foreground: hsl(var(--muted-foreground));
+	--color-border: hsl(var(--border));
+	--color-input: hsl(var(--input));
+	--color-ring: hsl(var(--ring));
+	--radius-sm: 0.25rem;
+	--radius-md: 0.5rem;
+	--radius-lg: 1rem;
+}
+
+:root {
+	--background: 240 10% 6.7%;
+	--foreground: 0 0% 98%;
+	--primary: 261 85% 50%;
+	--secondary: 199 95% 60%;
+	--spec-green: 142 71% 45%;
+	--card: 240 10% 10%;
+	--card-foreground: 0 0% 98%;
+	--muted: 240 6% 15%;
+	--muted-foreground: 0 0% 64%;
+	--border: 240 6% 20%;
+	--input: 240 6% 20%;
+	--ring: 261 85% 50%;
+	--radius: 0.5rem;
+}
+
+@layer base {
+	* {
+		border-color: hsl(var(--border));
+	}
+
+	body {
+		background-color: hsl(var(--background));
+		color: hsl(var(--foreground));
+		font-family: var(--font-inter), sans-serif;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-family: var(--font-orbitron), sans-serif;
+	}
+}
+
+@layer utilities {
+	.blueprint-grid {
+		background-image: linear-gradient(
+				hsl(var(--primary) / 0.05) 1px,
+				transparent 1px
+			),
+			linear-gradient(
+				90deg,
+				hsl(var(--primary) / 0.05) 1px,
+				transparent 1px
+			);
+		background-size: 40px 40px;
+	}
+
+	.purple-glow {
+		text-shadow: 0 0 20px hsl(var(--primary) / 0.5),
+			0 0 40px hsl(var(--primary) / 0.3);
+	}
+
+	.font-orbitron {
+		font-family: var(--font-orbitron), sans-serif;
+	}
+
+	.font-mono-accent {
+		font-family: var(--font-mono), monospace;
+		letter-spacing: 0.05em;
+	}
+}
