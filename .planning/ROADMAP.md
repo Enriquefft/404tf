@@ -101,11 +101,11 @@ Plans:
   2. `/llms.txt` returns a valid llms-txt-standard document describing 404 Tech Found, and `/llms-full.txt` includes extended details about programs, events, and houses
   3. Lighthouse performance score is 90+ with LCP < 2.5s, INP < 200ms, and CLS < 0.1 on both mobile and desktop
   4. Visiting a non-existent route (e.g., `/es/nonexistent`) shows a styled 404 page, and the intent form displays appropriate error/success states after submission
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 05-01: PostHog analytics (provider setup, pageview tracking, event configuration)
-- [ ] 05-02: GEO and production readiness (llms.txt, llms-full.txt, Core Web Vitals audit, error/loading/404 states)
+- [ ] 05-01-PLAN.md — PostHog analytics integration (provider, pageview tracking, Core Web Vitals reporting)
+- [ ] 05-02-PLAN.md — AI discoverability (llms.txt, llms-full.txt) and production readiness (error, loading, 404 pages)
 
 ## Phase Dependency Diagram
 
