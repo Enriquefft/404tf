@@ -4,11 +4,11 @@
 
 ### Foundation (FOUND)
 
-- [ ] **FOUND-01**: App bootstraps as Next.js 16 with App Router, Tailwind v4 (~4.0.0), and Biome formatting (tabs, double quotes)
-- [ ] **FOUND-02**: next-intl configured with `[locale]` segment, always-prefix routing (`/es/`, `/en/`), and `proxy.ts` at `src/proxy.ts`
-- [ ] **FOUND-03**: Dark theme with purple/cyan accents, blueprint grid background, Orbitron + JetBrains Mono + Inter fonts loaded via CSS
-- [ ] **FOUND-04**: Framer Motion wrappers created as reusable client components (MotionDiv, MotionSection, etc.) to avoid client component cascade
-- [ ] **FOUND-05**: Shared database package (`@404tf/database`) extended with `spechack_` prefixed tables for registrations and ambassador applications
+- [x] **FOUND-01**: App bootstraps as Next.js 16 with App Router, Tailwind v4 (~4.0.0), and Biome formatting (tabs, double quotes)
+- [x] **FOUND-02**: next-intl configured with `[locale]` segment, always-prefix routing (`/es/`, `/en/`), and `proxy.ts` at `src/proxy.ts`
+- [x] **FOUND-03**: Dark theme with purple/cyan accents, blueprint grid background, Orbitron + JetBrains Mono + Inter fonts loaded via CSS
+- [x] **FOUND-04**: Framer Motion wrappers created as reusable client components (MotionDiv, MotionSection, etc.) to avoid client component cascade
+- [x] **FOUND-05**: Shared database package (`@404tf/database`) extended with `spechack_` prefixed tables for registrations and ambassador applications
 
 ### Landing Sections (LAND)
 
@@ -85,11 +85,11 @@
 
 | REQ-ID | Phase | Status |
 |--------|-------|--------|
-| FOUND-01 | Phase 1 | Pending |
-| FOUND-02 | Phase 1 | Pending |
-| FOUND-03 | Phase 1 | Pending |
-| FOUND-04 | Phase 1 | Pending |
-| FOUND-05 | Phase 1 | Pending |
+| FOUND-01 | Phase 1 | Complete |
+| FOUND-02 | Phase 1 | Complete |
+| FOUND-03 | Phase 1 | Complete |
+| FOUND-04 | Phase 1 | Complete |
+| FOUND-05 | Phase 1 | Complete |
 | LAND-01 | Phase 2 | Pending |
 | LAND-02 | Phase 2 | Pending |
 | LAND-03 | Phase 2 | Pending |
@@ -125,4 +125,4 @@
 | SEO-03 | Phase 6 | Pending |
 
 ---
-*Last updated: 2026-02-13 after roadmap creation*
+*Last updated: 2026-02-13 after Phase 1 completion*

@@ -12,7 +12,7 @@ This roadmap guides the migration of SpecHack from a Vite/React SPA prototype to
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Foundation** - Bootstrap Next.js 16 app with correct architectural patterns
+- [x] **Phase 1: Foundation** - Bootstrap Next.js 16 app with correct architectural patterns
 - [ ] **Phase 2: Static Content Migration** - Port existing sections as Server Components
 - [ ] **Phase 3: Animations & Interactivity** - Layer scroll animations and accordion component
 - [ ] **Phase 4: Forms & Database** - Implement registration and ambassador backend
@@ -35,9 +35,9 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans**: 3 plans
 
 Plans:
-- [ ] 01-01-PLAN.md — App bootstrap: deps, Tailwind v4 theme, next-intl routing, fonts, bilingual page structure
-- [ ] 01-02-PLAN.md — Database schema extension: spechack_participants and spechack_ambassadors tables
-- [ ] 01-03-PLAN.md — Framer Motion wrappers: MotionDiv, MotionSection, MotionSpan, FadeInSection
+- [x] 01-01-PLAN.md — App bootstrap: deps, Tailwind v4 theme, next-intl routing, fonts, bilingual page structure
+- [x] 01-02-PLAN.md — Database schema extension: spechack_participants and spechack_ambassadors tables
+- [x] 01-03-PLAN.md — Framer Motion wrappers: MotionDiv, MotionSection, MotionSpan, FadeInSection
 
 ### Phase 2: Static Content Migration
 **Goal**: Port all static landing sections from Vite SPA to Next.js Server Components with bilingual content
@@ -136,7 +136,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 0/3 | Planned | - |
+| 1. Foundation | 3/3 | Complete | 2026-02-13 |
 | 2. Static Content Migration | 0/TBD | Not started | - |
 | 3. Animations & Interactivity | 0/TBD | Not started | - |
 | 4. Forms & Database | 0/TBD | Not started | - |
