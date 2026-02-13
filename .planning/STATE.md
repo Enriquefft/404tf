@@ -10,18 +10,18 @@ See: .planning/PROJECT.md (updated 2026-02-08)
 ## Current Position
 
 Phase: 5 of 5 (Analytics & GEO)
-Plan: 0 of 2 in current phase
-Status: Phase 4 verified and complete
-Last activity: 2026-02-13 -- Verified Phase 4, fixed navbar scroll bug
+Plan: 1 of 2 in current phase
+Status: In progress
+Last activity: 2026-02-13 -- Completed 05-01-PLAN.md (PostHog analytics + Core Web Vitals)
 
-Progress: [█████████.] 92% (11/12 plans)
+Progress: [██████████] 100% (12/12 plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 11
+- Total plans completed: 12
 - Average duration: 3.5 minutes
-- Total execution time: 0.64 hours
+- Total execution time: 0.68 hours
 
 **By Phase:**
 
@@ -31,10 +31,11 @@ Progress: [█████████.] 92% (11/12 plans)
 | 2-Static Content | 3/3 | 11.1m | 3.7m |
 | 3-Interactive | 3/3 | 9.9m | 3.3m |
 | 4-SEO & Metadata | 2/2 | 7.2m | 3.6m |
+| 5-Analytics & GEO | 1/2 | 2.7m | 2.7m |
 
 **Recent Trend:**
-- Last 5 plans: 03-02 (2.9m), 03-03 (3.0m), 04-01 (4.3m), 04-02 (2.9m)
-- Trend: Excellent consistency (3.3m average for last 5, Phase 4 averaged 3.6m)
+- Last 5 plans: 03-03 (3.0m), 04-01 (4.3m), 04-02 (2.9m), 05-01 (2.7m)
+- Trend: Outstanding velocity (3.2m average for last 5, Phase 5 started strong at 2.7m)
 
 *Updated after each plan completion*
 
@@ -83,6 +84,10 @@ Recent decisions affecting current work:
 | google-fonts-fetch-in-og | 04-02 | Fetch Google Fonts via URL at runtime in ImageResponse | next/font not available in edge runtime, must fetch as ArrayBuffer |
 | satori-flexbox-requirement | 04-02 | Every div in ImageResponse has display: "flex" | Satori requires explicit flexbox layout, missing display causes failures |
 | house-colors-in-og | 04-02 | Include house color bar at bottom of OpenGraph image | Visual branding consistency, shows AI/Biotech/Hardware focus at a glance |
+| posthog-manual-pageview | 05-01 | Use manual pageview tracking (capture_pageview: false) | App Router requires manual tracking for accurate client-side navigation |
+| posthog-module-init | 05-01 | Initialize PostHog at module level outside component | Prevents re-initialization on re-renders, maintains session state |
+| posthog-graceful-degradation | 05-01 | PHProvider checks env vars and skips wrapping when missing | Allows dev mode without PostHog credentials, prevents crashes |
+| web-vitals-to-posthog | 05-01 | Send Core Web Vitals to PostHog instead of separate endpoint | Consolidates analytics in single platform, simplifies infrastructure |
 
 Earlier decisions:
 - [Roadmap]: 5 phases in linear dependency chain, foundation-first to front-load risk
@@ -107,6 +112,6 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-13
-Stopped at: Verified Phase 4 complete (all SEO requirements satisfied) -- Ready for Phase 5
+Stopped at: Completed 05-01-PLAN.md (PostHog analytics + Core Web Vitals)
 Resume file: None
-Next up: Phase 5 (Analytics & GEO) - 05-01 (PostHog + Core Web Vitals), 05-02 (llms.txt + error/loading)
+Next up: Phase 5 (Analytics & GEO) - 05-02 (llms.txt + error/loading states) -- final plan
