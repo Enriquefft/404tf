@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { useActionState, useState } from "react";
+import { CONTACT_EMAIL } from "@/lib/metadata/seo-config";
 import type { FormState } from "../_actions/intent.actions";
 import { submitIntent } from "../_actions/intent.actions";
 
@@ -203,10 +204,10 @@ export function IntentCTA({ locale, translations }: IntentCTAProps) {
 					<p className="text-white/50 text-sm">
 						{translations.questions}{" "}
 						<a
-							href="mailto:hola@404techfound.com"
+							href={`mailto:${CONTACT_EMAIL}`}
 							className="text-white underline underline-offset-2 hover:text-white/80"
 						>
-							hola@404techfound.com
+							{CONTACT_EMAIL}
 						</a>
 					</p>
 				</div>

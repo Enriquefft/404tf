@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+import { CONTACT_EMAIL, SOCIAL_LINKS } from "@/lib/metadata/seo-config";
 import { Logo } from "./Logo";
 
 export async function Footer() {
@@ -35,22 +36,46 @@ export async function Footer() {
 
 					<div className="text-sm text-muted-foreground space-y-1">
 						<a
-							href="mailto:hola@404techfound.com"
+							href={`mailto:${CONTACT_EMAIL}`}
 							className="hover:text-foreground transition-colors block"
 						>
-							hola@404techfound.com
+							{CONTACT_EMAIL}
 						</a>
 						<p>{t("location")}</p>
 						{/* Social icons */}
 						<div className="flex gap-3 pt-2">
-							{["LinkedIn", "X", "Instagram", "Discord"].map((s) => (
-								<span
-									key={s}
-									className="text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
-								>
-									{s}
-								</span>
-							))}
+							<a
+								href={SOCIAL_LINKS.linkedin}
+								target="_blank"
+								rel="noopener noreferrer"
+								className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+							>
+								LinkedIn
+							</a>
+							<a
+								href={SOCIAL_LINKS.twitter}
+								target="_blank"
+								rel="noopener noreferrer"
+								className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+							>
+								X
+							</a>
+							<a
+								href={SOCIAL_LINKS.instagram}
+								target="_blank"
+								rel="noopener noreferrer"
+								className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+							>
+								Instagram
+							</a>
+							<a
+								href={SOCIAL_LINKS.youtube}
+								target="_blank"
+								rel="noopener noreferrer"
+								className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+							>
+								YouTube
+							</a>
 						</div>
 					</div>
 				</div>
