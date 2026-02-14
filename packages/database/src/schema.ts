@@ -1,7 +1,12 @@
-import { integer, pgSchema, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import { pgSchema, serial, text, timestamp, uuid } from "drizzle-orm/pg-core";
 
-// Schema name for the 404 Tech Found project
-export const schema = pgSchema("404 Tech Found");
+// Derive schema name from project name env var, slugified to snake_case
+const projectName = process.env.NEXT_PUBLIC_PROJECT_NAME ?? "404 Tech Found";
+const schemaName = projectName
+	.toLowerCase()
+	.replace(/[^a-z0-9]+/g, "_")
+	.replace(/^_|_$/g, "");
+export const schema = pgSchema(schemaName);
 
 export const intentEnum = schema.enum("landing_intent", ["build", "collaborate", "connect"]);
 export const localeEnum = schema.enum("landing_locale", ["es", "en"]);
@@ -21,11 +26,8 @@ export type NewIntentSubmission = typeof intentSubmissions.$inferInsert;
 // SpecHack-specific enums
 export const spechackLocaleEnum = schema.enum("spechack_locale", ["es", "en"]);
 export const spechackTrackEnum = schema.enum("spechack_track", [
-	"web",
-	"mobile",
-	"ai",
-	"iot",
-	"open",
+	"virtual",
+	"hub",
 ]);
 export const ambassadorStatusEnum = schema.enum("spechack_ambassador_status", [
 	"pending",
@@ -36,12 +38,13 @@ export const ambassadorStatusEnum = schema.enum("spechack_ambassador_status", [
 // SpecHack participants table (hackathon registrations)
 export const spechackParticipants = schema.table("spechack_participants", {
 	id: uuid("id").defaultRandom().primaryKey(),
-	agentNumber: integer("agent_number"), // assigned by server action as SPEC-XXXX
+	agentNumber: serial("agent_number").notNull(),
 	name: text("name").notNull(),
 	email: text("email").notNull().unique(),
 	city: text("city").notNull(),
 	track: spechackTrackEnum("track").notNull(),
-	builderClass: text("builder_class"), // assigned deterministically from name hash
+	builderClass: text("builder_class"), // assigned randomly at registration
+	gradientData: text("gradient_data"), // JSON: {"from":"hsl(...)","to":"hsl(...)","angle":180}
 	locale: spechackLocaleEnum("locale").notNull(),
 	createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
 });
@@ -52,8 +55,7 @@ export const spechackAmbassadors = schema.table("spechack_ambassadors", {
 	name: text("name").notNull(),
 	email: text("email").notNull(),
 	city: text("city").notNull(),
-	university: text("university").notNull(),
-	motivation: text("motivation").notNull(),
+	community: text("community").notNull(),
 	status: ambassadorStatusEnum("status").notNull().default("pending"),
 	locale: spechackLocaleEnum("locale").notNull(),
 	createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
