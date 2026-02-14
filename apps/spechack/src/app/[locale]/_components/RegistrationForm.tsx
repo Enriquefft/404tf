@@ -9,7 +9,7 @@ import {
 	saveCardToStorage,
 } from "@/lib/card-utils.client";
 import { submitRegistration } from "../_actions/register.actions";
-import { CardReveal } from "./CardReveal";
+import { CardReveal3D } from "./CardReveal3D";
 import { useToast } from "./Toast";
 
 const fieldSchemas = {
@@ -109,7 +109,7 @@ export function RegistrationForm({
 		// Save to localStorage for returning users
 		saveCardToStorage(cardData);
 		return (
-			<CardReveal
+			<CardReveal3D
 				card={cardData}
 				locale={locale}
 				translations={cardTranslations}
@@ -120,7 +120,7 @@ export function RegistrationForm({
 	// Returning user with saved card
 	if (savedCard) {
 		return (
-			<CardReveal
+			<CardReveal3D
 				card={savedCard}
 				locale={locale}
 				translations={cardTranslations}
