@@ -68,6 +68,9 @@ Recent decisions affecting current work:
 | 04-01 | serial column for agent_number | Auto-increment via PostgreSQL SERIAL, collision-free | ✓ Good |
 | 04-01 | drizzle-orm as direct spechack dep | Needed for eq operator in duplicate email check | ✓ Good |
 | 04-01 | Random builder class, deterministic gradient | Per CARD-04 spec; gradient consistent for same name | ✓ Good |
+| 04-02 | Hidden locale/track fields in forms | Clean server action data flow without importing server modules in client | ✓ Good |
+| 04-02 | useState track toggle + hidden input | Local UI state for toggle, value sent to server via hidden input | ✓ Good |
+| 04-02 | Collapsed CTA default for ambassador form | Preserves original Hubs visual; form appears on demand | ✓ Good |
 | 04-03 | Reference /og-spechack.png without creating file | Phase 6 will implement dynamic OG images | ✓ Good |
 | 04-03 | Follow landing app generateMetadata pattern | Consistent patterns across monorepo apps | ✓ Good |
 
