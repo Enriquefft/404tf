@@ -39,14 +39,14 @@ export function drawCardToCanvas(
 
 	// Agent number (right-aligned, same baseline as logo)
 	ctx.font = "20px JetBrains Mono, monospace";
-	ctx.fillStyle = "hsl(240,5%,50%)";
+	ctx.fillStyle = "hsl(240,5%,64%)";
 	ctx.textAlign = "right";
 	ctx.fillText(`#${card.agentNumber}`, W - 40, 60);
 
 	// "AGENT" label
 	ctx.textAlign = "left";
 	ctx.font = "14px JetBrains Mono, monospace";
-	ctx.fillStyle = "hsl(240,5%,50%)";
+	ctx.fillStyle = "hsl(240,5%,64%)";
 	ctx.fillText("AGENT", 40, 120);
 
 	// Name
@@ -62,7 +62,7 @@ export function drawCardToCanvas(
 
 	// Track badge
 	ctx.font = "14px JetBrains Mono, monospace";
-	ctx.fillStyle = "hsl(240,5%,50%)";
+	ctx.fillStyle = "hsl(240,5%,64%)";
 	ctx.fillText(
 		card.track === "hub" ? "HUB PARTICIPANT" : "VIRTUAL PARTICIPANT",
 		40,
@@ -71,7 +71,7 @@ export function drawCardToCanvas(
 
 	// Builder class label
 	ctx.font = "14px JetBrains Mono, monospace";
-	ctx.fillStyle = "hsl(240,5%,50%)";
+	ctx.fillStyle = "hsl(240,5%,64%)";
 	ctx.fillText("BUILDER CLASS", 40, 340);
 
 	// Builder class name
@@ -86,7 +86,7 @@ export function drawCardToCanvas(
 
 	// Footer text
 	ctx.font = "16px JetBrains Mono, monospace";
-	ctx.fillStyle = "hsl(240,5%,40%)";
+	ctx.fillStyle = "hsl(240,5%,56%)";
 	ctx.fillText("SPECHACK 2026", 40, H - 40);
 
 	return canvas;
@@ -168,12 +168,12 @@ function drawRadarChart(
 
 	// Draw axis labels
 	ctx.globalAlpha = 1;
-	ctx.font = "11px JetBrains Mono, monospace";
-	ctx.fillStyle = "hsl(240,5%,50%)";
+	ctx.font = "13px JetBrains Mono, monospace";
+	ctx.fillStyle = "hsl(240,5%,64%)";
 	ctx.textAlign = "center";
 	for (let i = 0; i < n; i++) {
 		const angle = i * angleStep - Math.PI / 2;
-		const labelR = radius + 18;
+		const labelR = radius + 20;
 		const x = cx + Math.cos(angle) * labelR;
 		const y = cy + Math.sin(angle) * labelR + 4;
 		ctx.fillText(STAT_AXES[i], x, y);
@@ -233,7 +233,7 @@ export function drawCardBackToCanvas(
 
 	// "DOSSIER" label
 	ctx.font = "14px JetBrains Mono, monospace";
-	ctx.fillStyle = "hsl(240,5%,40%)";
+	ctx.fillStyle = "hsl(240,5%,56%)";
 	ctx.fillText(`DOSSIER: ${card.agentNumber}`, 40, 260);
 
 	// Radar chart

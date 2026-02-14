@@ -2,7 +2,6 @@ import { redirect } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { generateDeterministicCard } from "@/lib/card-utils";
 import { RegistrationForm } from "../../_components/RegistrationForm";
-import { TradingCard } from "../../_components/TradingCard";
 
 type Props = {
 	params: Promise<{ locale: string; name: string }>;
@@ -61,11 +60,6 @@ export default async function ChallengePage({ params }: Props) {
 			<div className="max-w-4xl mx-auto space-y-12">
 				{/* Challenger card preview + challenge prompt */}
 				<div className="flex flex-col items-center space-y-6">
-					{/* Trading card preview */}
-					<div className="w-[200px] sm:w-[240px]">
-						<TradingCard card={challengerCard} locale={locale as "es" | "en"} />
-					</div>
-
 					{/* Challenge text */}
 					<div className="text-center space-y-4 max-w-2xl">
 						<h1 className="font-orbitron text-3xl sm:text-5xl font-extrabold text-primary">
