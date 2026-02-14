@@ -1,13 +1,130 @@
 {
-	"home": {
-		"title": "SpecHack 2025",
-		"subtitle": "El hackathon global de 404 Tech Found",
-		"mono": "SPEC // HACK // BUILD",
-		"card": "Sistema de identidad de trading cards para hackers"
+	"navbar": {
+		"challenge": "El Reto",
+		"howItWorks": "Cómo Funciona",
+		"prizes": "Premios",
+		"hubs": "Hubs",
+		"faq": "FAQ",
+		"sponsor": "Patrocinar",
+		"register": "Regístrate"
+	},
+	"hero": {
+		"eyebrow": "PRESENTADO POR 404 TECH FOUND",
+		"headline": "Piensa primero. Construye con IA. Lanza con confianza.",
+		"sub": "10 días. Miles de builders. Un hackathon global como ningún otro.",
+		"date": "Junio 19–28, 2026 · Híbrido · Global",
+		"howLink": "¿Cómo funciona? ↓",
+		"formTitle": "Regístrate",
+		"formName": "Nombre",
+		"formEmail": "Email",
+		"formCity": "Ciudad",
+		"trackVirtual": "Virtual",
+		"trackVirtualHelper": "Participa desde cualquier lugar",
+		"trackHub": "Busco un hub",
+		"trackHubHelper": "Te avisaremos cuando haya uno en tu ciudad",
+		"submit": "Me apunto",
+		"successTitle": "¡Estás dentro! 🎉",
+		"successSub": "Te enviaremos updates pronto.",
+		"discord": "Únete al Discord",
+		"shareX": "Comparte en X",
+		"formNote": "Recibirás templates de planificación y actualizaciones antes del evento."
+	},
+	"manifesto": {
+		"p1": "En este hackathon, {bold}diseñas antes de construir.{/bold} Tres días para planear tu arquitectura. Seis días para construir con cualquier herramienta de IA. Un día para demostrar que pensar primero produce mejores resultados.",
+		"p2": "{bold}¿La diferencia? Aquí, el plan importa tanto como el código.{/bold}",
+		"bridge": "Y así es como lo demostramos:"
+	},
+	"phases": {
+		"title": "Cómo Funciona",
+		"p1Name": "Planifica",
+		"p1Days": "Días 1–3",
+		"p1Desc": "Diseña tu proyecto — arquitectura, funcionalidades, y cómo sabrás que funciona. Sin código todavía.",
+		"p2Name": "Construye",
+		"p2Days": "Días 4–9",
+		"p2Desc": "Construye usando cualquier herramienta de IA. Tu plan está definido — los cambios requieren justificación.",
+		"p3Name": "Presenta",
+		"p3Days": "Día 10",
+		"p3Desc": "Presenta ante jueces globales. Muestra cómo tu plan se convirtió en producto.",
+		"note": "Builders solo y equipos de 2–5. Hub presencial o 100% virtual.",
+		"registerUp": "Regístrate ↑"
+	},
+	"judging": {
+		"title": "Criterios y Premios",
+		"criteria0Label": "Calidad del Diseño",
+		"criteria1Label": "Fidelidad Plan→Código",
+		"criteria2Label": "Ejecución Técnica",
+		"criteria3Label": "Impacto y Utilidad",
+		"criteria4Label": "Presentación",
+		"prize0Emoji": "🏆",
+		"prize0Label": "Gran Premio",
+		"prize0Desc": "Mejor diseño + ejecución",
+		"prize1Emoji": "📋",
+		"prize1Label": "Mejor Diseño",
+		"prize1Desc": "Diseño de mayor calidad",
+		"prize2Emoji": "🧑‍💻",
+		"prize2Label": "Mejor Solo",
+		"prize2Desc": "Mejor envío individual",
+		"prize3Emoji": "❤️",
+		"prize3Label": "Community Choice",
+		"prize3Desc": "Votado por participantes",
+		"prize4Emoji": "🏢",
+		"prize4Label": "Categorías Sponsor",
+		"prize4Desc": "Próximamente",
+		"poolText": "Pool de premios anunciado pronto.",
+		"cta": "Regístrate para Competir"
+	},
+	"hubs": {
+		"title": "Global y Local",
+		"sub": "Únete a un hub presencial o participa 100% virtual.",
+		"traction": "1 hub confirmado · 5 ciudades objetivo · ¿La tuya es la siguiente?",
+		"ambassadorPitch": "¿Quieres traer SpecHack a tu ciudad? Como Embajador, tú organizas la experiencia local — nosotros damos el playbook, marca y soporte.",
+		"applyCta": "Aplica para ser Embajador",
+		"formName": "Nombre",
+		"formEmail": "Email",
+		"formCity": "Ciudad",
+		"formCommunity": "Describe tu acceso a comunidad local",
+		"formSubmit": "Enviar",
+		"formSuccess": "¡Gracias! Te contactaremos pronto."
+	},
+	"sponsors": {
+		"title": "Sé Partner",
+		"sub": "Llega a developers que piensan antes de codear.",
+		"metricDevs": "developers esperados",
+		"metricCities": "ciudades",
+		"metricDays": "días de engagement",
+		"prop0": "Accede a developers senior enfocados en calidad",
+		"prop1": "Asocia tu marca con desarrollo responsable de IA",
+		"prop2": "Cada proyecto documenta cómo los developers usan tus herramientas",
+		"deckCta": "Descargar Sponsor Deck",
+		"callCta": "Agendar Llamada",
+		"ngoNote": "404 Tech Found es una ONG registrada. Las contribuciones pueden calificar como RSE/donación según jurisdicción."
+	},
+	"faq": {
+		"title": "Preguntas Frecuentes",
+		"q0": "¿Es gratis?",
+		"a0": "Sí, 100% gratis para participar.",
+		"q1": "¿Necesito un equipo?",
+		"a1": "No. Puedes participar solo o en equipos de 2–5. Encuentra compañeros en nuestro Discord.",
+		"q2": "¿Qué cuenta como \"spec\"?",
+		"a2": "Arquitectura, interfaces API, modelos de datos, casos de prueba, documentación. Se proporcionarán templates antes del evento.",
+		"q3": "¿Puedo participar desde cualquier lugar?",
+		"a3": "Sí, el track virtual es completamente global."
+	},
+	"footer": {
+		"presented": "Presentado por",
+		"register": "Regístrate",
+		"sponsor": "Patrocinar",
+		"ambassador": "Embajador",
+		"questions": "¿Preguntas?"
 	},
 	"NotFound": {
 		"title": "Página no encontrada",
 		"description": "La página que buscas no existe.",
 		"backHome": "Volver al inicio"
+	},
+	"metadata": {
+		"title": "SpecHack 2026 | Piensa Primero, Construye con IA",
+		"description": "Hackathon global de 10 dias. 3 dias de diseno, 6 de construccion con IA, 1 de presentacion. Junio 19-28, 2026. Gratis, hibrido, global.",
+		"ogImageAlt": "SpecHack 2026 - Hackathon Global"
 	}
 }
