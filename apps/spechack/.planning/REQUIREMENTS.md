@@ -12,17 +12,17 @@
 
 ### Landing Sections (LAND)
 
-- [ ] **LAND-01**: User sees responsive Navbar with bilingual toggle, scroll-aware background, desktop links, and mobile hamburger menu
-- [ ] **LAND-02**: User sees Hero section with headline, sub-headline, event date, and "How it works" anchor link
-- [ ] **LAND-03**: User sees registration form in Hero (name, email, city, track toggle: Virtual/Hub) with submit button
-- [ ] **LAND-04**: User sees Manifesto section with bold-rendered paragraphs, bridge line, and 3 phase cards (Plan → Build → Present)
-- [ ] **LAND-05**: User sees Judging section with 5 criteria progress bars (animated on scroll) and 5 prize categories
-- [ ] **LAND-06**: User sees Hubs section with city map (6 cities, 1 confirmed), ambassador pitch, and expandable application form
-- [ ] **LAND-07**: User sees Sponsors section with 3 metrics, 3 value props, deck download CTA, and book-a-call CTA
-- [ ] **LAND-08**: User sees FAQ section with 4 expandable accordion items (custom component, no shadcn)
-- [ ] **LAND-09**: User sees Footer with SpecHack logo, 404 Tech Found parent logo, nav links, social links, and contact email
+- [x] **LAND-01**: User sees responsive Navbar with bilingual toggle, scroll-aware background, desktop links, and mobile hamburger menu
+- [x] **LAND-02**: User sees Hero section with headline, sub-headline, event date, and "How it works" anchor link
+- [x] **LAND-03**: User sees registration form in Hero (name, email, city, track toggle: Virtual/Hub) with submit button
+- [x] **LAND-04**: User sees Manifesto section with bold-rendered paragraphs, bridge line, and 3 phase cards (Plan → Build → Present)
+- [x] **LAND-05**: User sees Judging section with 5 criteria progress bars (animated on scroll) and 5 prize categories
+- [x] **LAND-06**: User sees Hubs section with city map (6 cities, 1 confirmed), ambassador pitch, and expandable application form
+- [x] **LAND-07**: User sees Sponsors section with 3 metrics, 3 value props, deck download CTA, and book-a-call CTA
+- [x] **LAND-08**: User sees FAQ section with 4 expandable accordion items (custom component, no shadcn)
+- [x] **LAND-09**: User sees Footer with SpecHack logo, 404 Tech Found parent logo, nav links, social links, and contact email
 - [ ] **LAND-10**: User sees sticky "Register" button that appears when scrolled past the hero registration form
-- [ ] **LAND-11**: All section content displayed in the user's selected language (ES or EN) based on URL locale prefix
+- [x] **LAND-11**: All section content displayed in the user's selected language (ES or EN) based on URL locale prefix
 
 ### Trading Cards (CARD)
 
@@ -90,16 +90,16 @@
 | FOUND-03 | Phase 1 | Complete |
 | FOUND-04 | Phase 1 | Complete |
 | FOUND-05 | Phase 1 | Complete |
-| LAND-01 | Phase 2 | Pending |
-| LAND-02 | Phase 2 | Pending |
-| LAND-03 | Phase 2 | Pending |
-| LAND-04 | Phase 2 | Pending |
-| LAND-05 | Phase 2 | Pending |
-| LAND-06 | Phase 2 | Pending |
-| LAND-07 | Phase 2 | Pending |
-| LAND-08 | Phase 2 | Pending |
-| LAND-09 | Phase 2 | Pending |
-| LAND-11 | Phase 2 | Pending |
+| LAND-01 | Phase 2 | Complete |
+| LAND-02 | Phase 2 | Complete |
+| LAND-03 | Phase 2 | Complete |
+| LAND-04 | Phase 2 | Complete |
+| LAND-05 | Phase 2 | Complete |
+| LAND-06 | Phase 2 | Complete |
+| LAND-07 | Phase 2 | Complete |
+| LAND-08 | Phase 2 | Complete |
+| LAND-09 | Phase 2 | Complete |
+| LAND-11 | Phase 2 | Complete |
 | LAND-10 | Phase 3 | Pending |
 | CARD-01 | Phase 5 | Pending |
 | CARD-02 | Phase 5 | Pending |
@@ -125,4 +125,4 @@
 | SEO-03 | Phase 6 | Pending |
 
 ---
-*Last updated: 2026-02-13 after Phase 1 completion*
+*Last updated: 2026-02-14 after Phase 2 completion*

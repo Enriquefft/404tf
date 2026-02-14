@@ -13,7 +13,7 @@ This roadmap guides the migration of SpecHack from a Vite/React SPA prototype to
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Foundation** - Bootstrap Next.js 16 app with correct architectural patterns
-- [ ] **Phase 2: Static Content Migration** - Port existing sections as Server Components
+- [x] **Phase 2: Static Content Migration** - Port existing sections as Server Components
 - [ ] **Phase 3: Animations & Interactivity** - Layer scroll animations and accordion component
 - [ ] **Phase 4: Forms & Database** - Implement registration and ambassador backend
 - [ ] **Phase 5: Trading Cards** - Build deterministic card system with Canvas export
@@ -49,10 +49,13 @@ Plans:
   3. User on mobile can tap hamburger menu icon, see drawer open with navigation links, and close it
   4. User sees all 7 landing sections (Hero, Manifesto, Judging, Hubs, Sponsors, FAQ, Footer) with correct bilingual content matching the locale in the URL
   5. User can click FAQ accordion items and see them expand/collapse with smooth transitions without requiring JavaScript reload
-**Plans**: TBD
+**Plans**: 4 plans
 
 Plans:
-- [ ] 02-01-PLAN.md
+- [x] 02-01-PLAN.md — Bilingual translations, i18n navigation, useScrollDirection hook, scroll CSS
+- [x] 02-02-PLAN.md — Navbar client component, Hero and Manifesto server components
+- [x] 02-03-PLAN.md — Judging, Hubs, and Sponsors server components
+- [x] 02-04-PLAN.md — FAQ, Footer, page composition, and visual verification checkpoint
 
 ### Phase 3: Animations & Interactivity
 **Goal**: Layer scroll-triggered animations and interactive UI elements using motion wrappers from Phase 1
@@ -137,7 +140,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 3/3 | Complete | 2026-02-13 |
-| 2. Static Content Migration | 0/TBD | Not started | - |
+| 2. Static Content Migration | 4/4 | Complete | 2026-02-14 |
 | 3. Animations & Interactivity | 0/TBD | Not started | - |
 | 4. Forms & Database | 0/TBD | Not started | - |
 | 5. Trading Cards | 0/TBD | Not started | - |
