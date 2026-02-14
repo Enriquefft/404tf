@@ -1,14 +1,16 @@
-import { getTranslations } from "next-intl/server";
 import { MapPin } from "lucide-react";
+import { getLocale, getTranslations } from "next-intl/server";
+import { AmbassadorForm } from "./AmbassadorForm";
 
 export async function Hubs() {
 	const t = await getTranslations("hubs");
+	const locale = (await getLocale()) as "es" | "en";
 
 	const cities = [
 		{ name: "Lima", confirmed: true, x: 28, y: 65 },
-		{ name: "São Paulo", confirmed: false, x: 38, y: 70 },
+		{ name: "Sao Paulo", confirmed: false, x: 38, y: 70 },
 		{ name: "Mexico City", confirmed: false, x: 18, y: 48 },
-		{ name: "Bogotá", confirmed: false, x: 26, y: 55 },
+		{ name: "Bogota", confirmed: false, x: 26, y: 55 },
 		{ name: "Buenos Aires", confirmed: false, x: 32, y: 82 },
 		{ name: "Santiago", confirmed: false, x: 27, y: 76 },
 	];
@@ -49,14 +51,19 @@ export async function Hubs() {
 				{t("ambassadorPitch")}
 			</p>
 
-			{/* Apply CTA button */}
-			<button
-				type="button"
-				className="bg-primary text-primary-foreground font-mono px-6 py-3 rounded-md hover:bg-primary/90 transition-colors"
-			>
-				{t("applyCta")}
-				{/* TODO: Phase 3 — expand form, Phase 4 — Server Action */}
-			</button>
+			{/* Ambassador application form */}
+			<AmbassadorForm
+				locale={locale}
+				translations={{
+					applyCta: t("applyCta"),
+					formName: t("formName"),
+					formEmail: t("formEmail"),
+					formCity: t("formCity"),
+					formCommunity: t("formCommunity"),
+					formSubmit: t("formSubmit"),
+					formSuccess: t("formSuccess"),
+				}}
+			/>
 		</div>
 	);
 }
