@@ -136,7 +136,7 @@
 		"challengeWhatsApp": "WhatsApp",
 		"challengeLinkedIn": "LinkedIn",
 		"recruitMore": "Quieres reclutar mas? Comparte tu link.",
-		"tweetTemplate": "Soy {agent} — {cls}. 10 dias, un hackathon global. Te atreves? {link} #SpecHack #404TechFound"
+		"tweetTemplate": "Soy %agent% — %cls%. 10 dias, un hackathon global. Te atreves? %link% #SpecHack #404TechFound"
 	},
 	"errors": {
 		"generic": "Algo salio mal. Intenta de nuevo.",

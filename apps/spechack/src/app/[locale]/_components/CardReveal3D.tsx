@@ -92,9 +92,9 @@ export function CardReveal3D({
 			locale,
 		);
 		const tweetText = translations.tweetTemplate
-			.replace("{agent}", card.agentNumber)
-			.replace("{cls}", card.builderClass.name)
-			.replace("{link}", challengeLink);
+			.replace("%agent%", card.agentNumber)
+			.replace("%cls%", card.builderClass.name)
+			.replace("%link%", challengeLink);
 		window.open(buildTweetUrl(tweetText), "_blank");
 	};
 
