@@ -35,6 +35,11 @@
 }
 
 @layer base {
+	html {
+		scroll-behavior: smooth;
+		scroll-padding-top: 5rem; /* Account for fixed navbar height (4rem) + 1rem breathing room */
+	}
+
 	* {
 		border-color: hsl(var(--border));
 	}
@@ -52,6 +57,14 @@
 	h5,
 	h6 {
 		font-family: var(--font-orbitron), sans-serif;
+	}
+
+	summary::-webkit-details-marker {
+		display: none;
+	}
+
+	summary::marker {
+		display: none;
 	}
 }
 

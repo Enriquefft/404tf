@@ -106,6 +106,6 @@ export async function submitRegistration(
 		};
 	} catch (error) {
 		console.error("Registration error:", error);
-		return { success: false, message: "error" };
+		return { success: false, message: "server_error" };
 	}
 }

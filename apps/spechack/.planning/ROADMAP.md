@@ -14,11 +14,11 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Foundation** - Bootstrap Next.js 16 app with correct architectural patterns
 - [x] **Phase 2: Static Content Migration** - Port existing sections as Server Components
-- [ ] **Phase 3: Animations & Interactivity** - Layer scroll animations and accordion component
-- [ ] **Phase 4: Forms & Database** - Implement registration and ambassador backend
-- [ ] **Phase 5: Trading Cards** - Build deterministic card system with Canvas export
-- [ ] **Phase 6: Challenge System** - Create viral shareable links with dynamic OG images
-- [ ] **Phase 7: Polish & Edge Cases** - Add UX refinements and error handling
+- [x] **Phase 3: Animations & Interactivity** - Layer scroll animations and accordion component
+- [x] **Phase 4: Forms & Database** - Implement registration and ambassador backend
+- [x] **Phase 5: Trading Cards** - Build deterministic card system with Canvas export
+- [x] **Phase 6: Challenge System** - Create viral shareable links with dynamic OG images
+- [x] **Phase 7: Polish & Edge Cases** - Add UX refinements and error handling
 
 ## Phase Details
 
@@ -67,10 +67,12 @@ Plans:
   3. User clicking the sticky register button scrolls smoothly back to the Hero registration form
   4. User sees Judging criteria progress bars animate from 0% to target value when section enters viewport
   5. FAQ accordion items expand/collapse with smooth height transitions and rotate chevron icons
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 03-01-PLAN.md
+- [x] 03-01-PLAN.md — Section fade-in wrappers, Hero stagger entrance, Manifesto card stagger
+- [x] 03-02-PLAN.md — Animated progress bars (Judging), FAQ accordion with smooth height transitions
+- [x] 03-03-PLAN.md — Sticky register button with IntersectionObserver + AnimatePresence
 
 ### Phase 4: Forms & Database
 **Goal**: Implement database-backed registration and ambassador applications with Server Actions and validation
@@ -82,10 +84,12 @@ Plans:
   3. User submitting form with duplicate email sees their existing card data returned without creating a new record
   4. User can fill out ambassador application form in Hubs section, submit, and see success confirmation with data stored in database
   5. Landing page displays correct static metadata (title, description, OG image) when shared on social media in both ES and EN locales
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 04-01-PLAN.md
+- [x] 04-01-PLAN.md — Schema fixes + card-utils + Server Actions (backend foundation)
+- [x] 04-02-PLAN.md — Client form components (RegistrationForm + AmbassadorForm)
+- [x] 04-03-PLAN.md — SEO metadata + translations + verification checkpoint
 
 ### Phase 5: Trading Cards
 **Goal**: Build deterministic trading card generation system with Canvas PNG export and card reveal animation
@@ -98,10 +102,13 @@ Plans:
   4. User can click social share buttons to open pre-filled X tweet, WhatsApp message, or LinkedIn post with their challenge link, or copy link to clipboard
   5. User seeing Hero section before registration views fanned preview of 4 example trading cards with hover tilt animation
   6. User refreshing page or visiting later sees their existing card data loaded from database without re-registration
-**Plans**: TBD
+**Plans**: 4 plans
 
 Plans:
-- [ ] 05-01-PLAN.md
+- [x] 05-01-PLAN.md — Card utilities and types: CardData, CITY_FLAGS, Canvas/download/localStorage functions, share URL builders, translations
+- [x] 05-02-PLAN.md — TradingCard visual component: port blueprint design with Next.js adaptations
+- [x] 05-03-PLAN.md — CardReveal + RegistrationForm integration: animated reveal, action buttons, localStorage persistence
+- [x] 05-04-PLAN.md — TradingCardPreview + Hero integration: fanned card preview in Hero left column
 
 ### Phase 6: Challenge System
 **Goal**: Create shareable challenge routes with deterministic card previews and dynamic OG images for viral growth
@@ -112,10 +119,12 @@ Plans:
   2. Challenge page displays "[Name] challenges you to join SpecHack" header with "Do you accept?" prompt and registration form below
   3. User filling out registration form on challenge page and submitting sees their own card reveal animation (not the challenger's card)
   4. User sharing `/c/[name]` link on X, WhatsApp, or LinkedIn sees dynamic OG image preview showing the challenger's trading card with name, agent number, and builder class rendered via ImageResponse
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 06-01-PLAN.md
+- [x] 06-01-PLAN.md — Deterministic Card Generation & Translations: generateDeterministicCard(), locale-aware challenge URLs, bilingual challenge translations
+- [x] 06-02-PLAN.md — Challenge Page Route: /[locale]/c/[name]/page.tsx with card preview, challenge prompt, registration form, dynamic metadata
+- [x] 06-03-PLAN.md — Dynamic OG Image Route: opengraph-image.tsx with ImageResponse, custom fonts, Satori-compatible layout
 
 ### Phase 7: Polish & Edge Cases
 **Goal**: Add UX refinements, loading states, error boundaries, and edge case handling for production readiness
@@ -127,22 +136,24 @@ Plans:
   3. User submitting form sees disabled button with loading spinner, preventing double submissions
   4. User scrolling the page experiences smooth 60fps animations without jank on mid-range devices
   5. Developer can inspect browser console and see no React hydration warnings or errors in production build
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 07-01-PLAN.md
+- [x] 07-01-PLAN.md — Toast component, challenge page loading skeleton, error boundary, error translations
+- [x] 07-02-PLAN.md — Form UX: submit spinners, on-blur validation, server error toasts, ambassador collapse animation
+- [x] 07-03-PLAN.md — Edge cases: name truncation, invalid challenge URL redirect, build verification
 
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
+Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 3/3 | Complete | 2026-02-13 |
 | 2. Static Content Migration | 4/4 | Complete | 2026-02-14 |
-| 3. Animations & Interactivity | 0/TBD | Not started | - |
-| 4. Forms & Database | 0/TBD | Not started | - |
-| 5. Trading Cards | 0/TBD | Not started | - |
-| 6. Challenge System | 0/TBD | Not started | - |
-| 7. Polish & Edge Cases | 0/TBD | Not started | - |
+| 3. Animations & Interactivity | 3/3 | Complete | 2026-02-14 |
+| 4. Forms & Database | 3/3 | Complete | 2026-02-14 |
+| 5. Trading Cards | 4/4 | Complete | 2026-02-14 |
+| 6. Challenge System | 3/3 | Complete | 2026-02-14 |
+| 7. Polish & Edge Cases | 3/3 | Complete | 2026-02-14 |

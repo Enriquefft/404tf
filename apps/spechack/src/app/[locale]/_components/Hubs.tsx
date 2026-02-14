@@ -4,6 +4,8 @@ import { AmbassadorForm } from "./AmbassadorForm";
 
 export async function Hubs() {
 	const t = await getTranslations("hubs");
+	const errT = await getTranslations("errors");
+	const ambT = await getTranslations("ambassador");
 	const locale = (await getLocale()) as "es" | "en";
 
 	const cities = [
@@ -62,6 +64,8 @@ export async function Hubs() {
 					formCommunity: t("formCommunity"),
 					formSubmit: t("formSubmit"),
 					formSuccess: t("formSuccess"),
+					serverError: errT("ambassador"),
+					submitted: ambT("submitted"),
 				}}
 			/>
 		</div>

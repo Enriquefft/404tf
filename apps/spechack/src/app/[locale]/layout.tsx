@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
-import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
+import {
+	getMessages,
+	getTranslations,
+	setRequestLocale,
+} from "next-intl/server";
+import { ToastProvider } from "@/app/[locale]/_components/Toast";
 import { routing } from "@/i18n/routing";
 import { SITE_NAME, SITE_URL } from "@/lib/metadata/seo-config";
 
@@ -84,7 +89,7 @@ export default async function LocaleLayout({ children, params }: Props) {
 
 	return (
 		<NextIntlClientProvider messages={messages}>
-			{children}
+			<ToastProvider>{children}</ToastProvider>
 		</NextIntlClientProvider>
 	);
 }

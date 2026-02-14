@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+
+# Next.js build output
+.next/
+out/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Claude Code
+.claude/
+
+# Turbo
+.turbo/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store

@@ -126,5 +126,36 @@
 		"title": "SpecHack 2026 | Piensa Primero, Construye con IA",
 		"description": "Hackathon global de 10 dias. 3 dias de diseno, 6 de construccion con IA, 1 de presentacion. Junio 19-28, 2026. Gratis, hibrido, global.",
 		"ogImageAlt": "SpecHack 2026 - Hackathon Global"
+	},
+	"cards": {
+		"previewTagline": "Registrate y obten la tuya",
+		"download": "Descargar Card",
+		"shareX": "Compartir en X",
+		"challenge": "Reta a un amigo",
+		"challengeCopy": "Copiar link",
+		"challengeWhatsApp": "WhatsApp",
+		"challengeLinkedIn": "LinkedIn",
+		"recruitMore": "Quieres reclutar mas? Comparte tu link.",
+		"tweetTemplate": "Soy {agent} — {cls}. 10 dias, un hackathon global. Te atreves? {link} #SpecHack #404TechFound"
+	},
+	"errors": {
+		"generic": "Algo salio mal. Intenta de nuevo.",
+		"network": "Error de conexion. Verifica tu internet.",
+		"registration": "No se pudo completar el registro. Intenta de nuevo.",
+		"ambassador": "No se pudo enviar la solicitud. Intenta de nuevo.",
+		"invalidChallenge": "Enlace de desafio invalido.",
+		"retry": "Reintentar",
+		"goHome": "Ir al inicio",
+		"somethingWentWrong": "Algo salio mal"
+	},
+	"ambassador": {
+		"submitted": "Solicitud enviada!"
+	},
+	"challenge": {
+		"title": "{name} te desafía a unirte a SpecHack",
+		"prompt": "¿Aceptas el desafío? Regístrate y obtén tu propia tarjeta.",
+		"registerCta": "Aceptar Desafío",
+		"metaTitle": "Únete a {name} en SpecHack 2026",
+		"metaDescription": "{name} te desafía a unirte a SpecHack 2026 — 10 días, un hackathon global. Regístrate y obtén tu tarjeta."
 	}
 }

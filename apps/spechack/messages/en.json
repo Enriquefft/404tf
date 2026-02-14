@@ -126,5 +126,36 @@
 		"title": "SpecHack 2026 | Think First, Build with AI",
 		"description": "10-day global hackathon. 3 days of design, 6 days building with AI, 1 day presenting. June 19-28, 2026. Free, hybrid, global.",
 		"ogImageAlt": "SpecHack 2026 - Global Hackathon"
+	},
+	"cards": {
+		"previewTagline": "Register and get yours",
+		"download": "Download Card",
+		"shareX": "Share on X",
+		"challenge": "Challenge a Friend",
+		"challengeCopy": "Copy link",
+		"challengeWhatsApp": "WhatsApp",
+		"challengeLinkedIn": "LinkedIn",
+		"recruitMore": "Want to recruit more? Share your link.",
+		"tweetTemplate": "I'm {agent} — {cls}. 10 days, one global hackathon. You in? {link} #SpecHack #404TechFound"
+	},
+	"errors": {
+		"generic": "Something went wrong. Please try again.",
+		"network": "Connection error. Check your internet.",
+		"registration": "Registration failed. Please try again.",
+		"ambassador": "Application failed. Please try again.",
+		"invalidChallenge": "Invalid challenge link.",
+		"retry": "Retry",
+		"goHome": "Go home",
+		"somethingWentWrong": "Something went wrong"
+	},
+	"ambassador": {
+		"submitted": "Application submitted!"
+	},
+	"challenge": {
+		"title": "{name} challenges you to join SpecHack",
+		"prompt": "Do you accept the challenge? Register and get your own trading card.",
+		"registerCta": "Accept Challenge",
+		"metaTitle": "Join {name} at SpecHack 2026",
+		"metaDescription": "{name} challenges you to join SpecHack 2026 — 10 days, one global hackathon. Register and get your trading card."
 	}
 }

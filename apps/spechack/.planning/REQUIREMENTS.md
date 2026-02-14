@@ -21,7 +21,7 @@
 - [x] **LAND-07**: User sees Sponsors section with 3 metrics, 3 value props, deck download CTA, and book-a-call CTA
 - [x] **LAND-08**: User sees FAQ section with 4 expandable accordion items (custom component, no shadcn)
 - [x] **LAND-09**: User sees Footer with SpecHack logo, 404 Tech Found parent logo, nav links, social links, and contact email
-- [ ] **LAND-10**: User sees sticky "Register" button that appears when scrolled past the hero registration form
+- [x] **LAND-10**: User sees sticky "Register" button that appears when scrolled past the hero registration form
 - [x] **LAND-11**: All section content displayed in the user's selected language (ES or EN) based on URL locale prefix
 
 ### Trading Cards (CARD)
@@ -100,7 +100,7 @@
 | LAND-08 | Phase 2 | Complete |
 | LAND-09 | Phase 2 | Complete |
 | LAND-11 | Phase 2 | Complete |
-| LAND-10 | Phase 3 | Pending |
+| LAND-10 | Phase 3 | Complete |
 | CARD-01 | Phase 5 | Pending |
 | CARD-02 | Phase 5 | Pending |
 | CARD-03 | Phase 5 | Pending |

@@ -1,9 +1,12 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import { HeroContent } from "./HeroContent";
 import { RegistrationForm } from "./RegistrationForm";
+import { TradingCardPreview } from "./TradingCardPreview";
 
 export async function Hero() {
 	const t = await getTranslations("hero");
+	const cardT = await getTranslations("cards");
+	const errT = await getTranslations("errors");
 	const locale = (await getLocale()) as "es" | "en";
 
 	return (
@@ -35,6 +38,14 @@ export async function Hero() {
 						>
 							{t("howLink")}
 						</a>
+
+						{/* TradingCardPreview */}
+						<div className="mt-8">
+							<TradingCardPreview
+								locale={locale}
+								tagline={cardT("previewTagline")}
+							/>
+						</div>
 					</div>
 				}
 				right={
@@ -53,6 +64,17 @@ export async function Hero() {
 							formNote: t("formNote"),
 							successTitle: t("successTitle"),
 							successSub: t("successSub"),
+							serverError: errT("registration"),
+						}}
+						cardTranslations={{
+							download: cardT("download"),
+							shareX: cardT("shareX"),
+							challenge: cardT("challenge"),
+							challengeCopy: cardT("challengeCopy"),
+							challengeWhatsApp: cardT("challengeWhatsApp"),
+							challengeLinkedIn: cardT("challengeLinkedIn"),
+							recruitMore: cardT("recruitMore"),
+							tweetTemplate: cardT("tweetTemplate"),
 						}}
 					/>
 				}

@@ -50,6 +50,6 @@ export async function submitAmbassador(
 		return { success: true, message: "success" };
 	} catch (error) {
 		console.error("Ambassador submission error:", error);
-		return { success: false, message: "error" };
+		return { success: false, message: "server_error" };
 	}
 }
