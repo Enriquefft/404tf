@@ -5,33 +5,36 @@
 See: .planning/PROJECT.md (updated 2026-02-13)
 
 **Core value:** Participants can register for the hackathon and receive a shareable trading card identity that drives viral recruitment through challenge links.
-**Current focus:** Phase 1 - Foundation
+**Current focus:** Phase 4 in progress — Forms & Database
 
 ## Current Position
 
-Phase: 1 of 7 (Foundation)
-Plan: 3 of 3 in phase
-Status: Phase complete
-Last activity: 2026-02-13 — Completed 01-03-PLAN.md (Framer Motion Wrappers)
+Phase: 4 of 7 (Forms & Database)
+Plan: 1 of 3 in phase
+Status: Plan 04-01 complete
+Last activity: 2026-02-14 — Completed 04-01 (Schema Fix + Server Actions)
 
-Progress: [███░░░░░░░] 33% (3 of 9 plans complete)
+Progress: [███████████] 100% (11 of 13 plans complete)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 3
-- Average duration: 2.8 min
-- Total execution time: 0.14 hours
+- Total plans completed: 11
+- Average duration: 2.6 min
+- Total execution time: 0.45 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 1-Foundation | 3/3 | 8.5m | 2.8m |
+| 2-Static-Content-Migration | 4/4 | 10.4m | 2.6m |
+| 3-Animations-Interactivity | 3/3 | 7.4m | 2.5m |
+| 4-Forms-Database | 1/3 | 4.2m | 4.2m |
 
 **Recent Trend:**
-- Last plan: 01-03 (2.5m)
-- Trend: Accelerating (4.0m → 2.0m → 2.5m)
+- Last plan: 04-01 (4.2m)
+- Trend: Slight increase (2.5m -> 4.2m) due to DB push troubleshooting
 
 *Updated after each plan completion*
 
@@ -49,7 +52,22 @@ Recent decisions affecting current work:
 | 01-01 | Place proxy.ts at src/proxy.ts | next-intl requirement (not inside src/app/) | ✓ Good |
 | 01-03 | HTMLMotionProps<T> for motion wrappers | Accept all Framer Motion props transparently | ✓ Good |
 | 01-03 | Barrel export for animations directory | Convenient imports (only barrel file allowed) | ✓ Good |
+| 02-01 | Flat key patterns for array-like content | Avoids complexity with array indexing in next-intl | ✓ Good |
+| 02-01 | {bold} markers in translation strings | Enables runtime parsing for styled spans without HTML | ✓ Good |
+| 02-01 | 5rem scroll-padding-top CSS | Prevents fixed navbar from covering anchor targets | ✓ Good |
+| 02-02 | Translation prop-drilling pattern | Server components fetch translations, pass to client components | ✓ Pattern |
+| 02-02 | renderBold() helper for {bold} markers | Parses translation markers into ReactNode array | ✓ Good |
+| 02-02 | Presentational-only registration form | Phase 2 static content, Phase 4 will add functionality | ✓ Good |
+| 02-04 | Native details/summary for FAQ | Avoids shadcn dependency, works without JavaScript | ✓ Good |
+| 02-04 | page.tsx as composition root with Judging+Hubs wrapper | Clean separation of concerns for layout vs content | ✓ Pattern |
+| 02-04 | t.raw() for ICU-incompatible {bold} markers | Bypass ICU parser for custom translation markers | ✓ Good |
+| 03-02 | CSS grid accordion (grid-template-rows: 0fr → 1fr) | Smooth bidirectional height transitions without knowing content height | ✓ Good |
+| 03-02 | Staggered progress bar timing (100ms delay) | Creates wave effect without feeling slow | ✓ Good |
+| 03-02 | Multiple FAQ items open simultaneously | Users can compare answers, simpler implementation | ✓ Good |
 | - | Server-first components with strategic client boundaries | Prevent "use client" cascade | ✓ Pattern |
+| 04-01 | serial column for agent_number | Auto-increment via PostgreSQL SERIAL, collision-free | ✓ Good |
+| 04-01 | drizzle-orm as direct spechack dep | Needed for eq operator in duplicate email check | ✓ Good |
+| 04-01 | Random builder class, deterministic gradient | Per CARD-04 spec; gradient consistent for same name | ✓ Good |
 
 ### Pending Todos
 
@@ -61,8 +79,8 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-02-13T19:42:46Z
-Stopped at: Completed 01-03-PLAN.md (Framer Motion Wrappers) — Phase 1 complete
+Last session: 2026-02-14T06:25:00Z
+Stopped at: Completed 04-01-PLAN.md (Schema Fix + Server Actions)
 Resume file: None
 
 ## Phase 1 Summary
@@ -74,4 +92,43 @@ Resume file: None
 - FOUND-04: Framer Motion client-boundary wrappers ✓
 - FOUND-05: SpecHack visual identity (fonts, colors, blueprint grid) ✓
 
-**Ready for Phase 2:** Card Generation
+## Phase 2 Summary
+
+**Static Content Migration phase complete.** All LAND requirements satisfied:
+- LAND-01: Bilingual routing with /es/ and /en/ ✓
+- LAND-02: Navbar with scroll behavior ✓
+- LAND-03: Mobile hamburger menu ✓
+- LAND-04: Hero section with registration form placeholder ✓
+- LAND-05: Manifesto section ✓
+- LAND-06: Judging criteria section ✓
+- LAND-07: Hubs section with ambassador CTA ✓
+- LAND-08: FAQ accordion with native details/summary ✓
+- LAND-09: Sponsors section ✓
+- LAND-11: Footer ✓
+
+**Key Accomplishments:**
+- 7 server component sections (Hero, Manifesto, Judging, Hubs, Sponsors, FAQ, Footer)
+- 1 client component (Navbar with scroll behavior, language switcher, mobile menu)
+- Complete page composition root in page.tsx
+- Full landing page rendering in both ES and EN locales
+- Translation prop-drilling pattern established
+- Native HTML details/summary for FAQ (no shadcn dependency)
+
+**Ready for Phase 3:** Animations & Interactivity
+
+## Phase 3 Summary
+
+**Animations & Interactivity phase complete.** Requirements satisfied:
+- LAND-08: FAQ accordion with smooth CSS grid transitions (replaced native details/summary) ✓
+- LAND-10: Sticky register button with IntersectionObserver ✓
+
+**Key Accomplishments:**
+- FadeInSection wrappers on all 7 sections for scroll-triggered fade-in
+- HeroContent client component with staggered two-column entrance (200ms / 500ms)
+- Manifesto phase cards stagger with MotionDiv whileInView (150ms offset)
+- AnimatedProgressBar for Judging criteria (0% → target, 800ms, staggered)
+- AccordionItem with CSS grid-template-rows transition (smooth open AND close)
+- StickyRegisterButton with IntersectionObserver + AnimatePresence
+- 4 new client components, 4 modified server components
+
+**Ready for Phase 4:** Forms & Database
