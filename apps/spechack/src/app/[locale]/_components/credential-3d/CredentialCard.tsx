@@ -1,8 +1,8 @@
+import { useEffect, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import type { RapierRigidBody } from "@react-three/rapier";
 import { RigidBody } from "@react-three/rapier";
-import { useRef } from "react";
-import { DoubleSide, MeshStandardMaterial } from "three";
+import { DoubleSide } from "three";
 import type { CardData } from "@/lib/card-utils";
 import { useCardBackTexture } from "./CardBackTexture";
 import { useCardFaceTexture } from "./CardFaceTexture";
@@ -32,7 +32,6 @@ function parseHSLToHex(hsl: string): number {
 	const h = Number.parseInt(match[1]) / 360;
 	const s = Number.parseInt(match[2]) / 100;
 	const l = Number.parseInt(match[3]) / 100;
-	// HSL to RGB conversion
 	const a = s * Math.min(l, 1 - l);
 	const f = (n: number) => {
 		const k = (n + h * 12) % 12;
@@ -54,26 +53,29 @@ export function CredentialCard({
 	const rigidBodyRef = useRef<RapierRigidBody>(null);
 	const frontTexture = useCardFaceTexture({ card, locale, phase });
 	const backTexture = useCardBackTexture({ card, locale });
-	const { onPointerDown, onPointerMove, onPointerUp, isDragging } =
-		useCardDrag(rigidBodyRef);
+	const { bind, isDragging } = useCardDrag(rigidBodyRef);
 	const { orientation, enabled: gyroEnabled } = useGyroscope();
 
 	const edgeColor = parseHSLToHex(card.gradient.from);
+	const interactive = phase === "interactive";
+
+	// Attach native DOM listeners when interactive
+	useEffect(() => {
+		if (!interactive) return;
+		return bind();
+	}, [interactive, bind]);
 
 	// Apply gyroscope tilt when not dragging
 	useFrame(() => {
 		if (!gyroEnabled || isDragging.current) return;
 		const rb = rigidBodyRef.current;
-		if (!rb || phase !== "interactive") return;
+		if (!rb || !interactive) return;
 
 		const { beta, gamma } = orientation.current;
-		// Gently nudge rotation toward gyro orientation
 		rb.applyTorqueImpulse({ x: beta * 0.01, y: gamma * 0.01, z: 0 }, true);
 	});
 
 	if (!visible) return null;
-
-	const interactive = phase === "interactive";
 
 	return (
 		<RigidBody
@@ -84,11 +86,7 @@ export function CredentialCard({
 			gravityScale={0}
 			position={[0, 0, 0]}
 		>
-			<group
-				onPointerDown={interactive ? onPointerDown : undefined}
-				onPointerMove={interactive ? onPointerMove : undefined}
-				onPointerUp={interactive ? onPointerUp : undefined}
-			>
+			<group>
 				{/* Front face (+Z) */}
 				<mesh position={[0, 0, CARD_DEPTH / 2 + 0.001]}>
 					<planeGeometry args={[CARD_WIDTH, CARD_HEIGHT]} />

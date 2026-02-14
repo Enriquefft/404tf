@@ -1,6 +1,6 @@
 "use client";
 
-import { Environment, Float, PerformanceMonitor } from "@react-three/drei";
+import { Environment, PerformanceMonitor } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Physics } from "@react-three/rapier";
 import { Suspense, useCallback, useState } from "react";
@@ -27,16 +27,14 @@ function SceneContent({
 			<ambientLight intensity={0.4} />
 			<directionalLight position={[5, 5, 5]} intensity={0.6} />
 
-			<Float speed={2} rotationIntensity={0.3} floatIntensity={0.5}>
-				<Physics gravity={[0, 0, 0]}>
-					<RevealSequence
-						card={card}
-						locale={locale}
-						phase={phase}
-						revealProgress={revealProgress}
-					/>
-				</Physics>
-			</Float>
+			<Physics gravity={[0, 0, 0]}>
+				<RevealSequence
+					card={card}
+					locale={locale}
+					phase={phase}
+					revealProgress={revealProgress}
+				/>
+			</Physics>
 
 			<ParticleStream
 				gradientFrom={card.gradient.from}
