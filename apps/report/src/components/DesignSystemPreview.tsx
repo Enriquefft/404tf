@@ -353,16 +353,12 @@ export function DesignSystemPreview() {
 				>
 					{/* Brand mark */}
 					<div className="px-5 pb-4 pt-8">
-						<div className="flex flex-col leading-none">
-							<span
-								style={{
-									fontFamily: "var(--font-display)",
-									fontSize: "1.75rem",
-									color: "var(--text-primary)",
-								}}
-							>
-								404
-							</span>
+						<div className="flex flex-col items-start gap-1.5">
+							<img
+								src="/brand/logo-transparent-ondark.svg"
+								alt="404 Tech Found"
+								style={{ height: "2rem", width: "auto" }}
+							/>
 							<span
 								className="tracking-[0.16em] uppercase"
 								style={{
@@ -370,7 +366,6 @@ export function DesignSystemPreview() {
 									fontSize: "0.625rem",
 									fontWeight: 500,
 									color: "var(--text-tertiary)",
-									marginTop: "2px",
 								}}
 							>
 								Design System

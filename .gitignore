@@ -148,5 +148,8 @@ vite.config.ts.timestamp-*
 # Astro
 .astro/
 
+# Generated brand archives
+*.zip
+
 # Turbo
 .turbo/
