@@ -213,6 +213,20 @@ export function VariantToolbar() {
 		if (variant) applyVars(variant.vars);
 	}
 
+	function applyPreset(bg: string, font: string, accent: string) {
+		applyBg(bg);
+		applyFont(font);
+		applyAccent(accent);
+	}
+
+	const PRESETS = [
+		{ label: "#1 Charcoal + Syne + Copper", bg: "warm-charcoal", font: "syne", accent: "copper" },
+		{ label: "#2 Plum + Bricolage + Purple", bg: "plum", font: "bricolage", accent: "purple" },
+		{ label: "#3 Ink + Bebas + Frost", bg: "ink", font: "bebas", accent: "frost" },
+		{ label: "#4 Olive + Familjen + Emerald", bg: "olive", font: "familjen", accent: "emerald" },
+		{ label: "#5 Charcoal + Bricolage + Gold", bg: "warm-charcoal", font: "bricolage", accent: "gold" },
+	];
+
 	const pill = (
 		isActive: boolean,
 	): React.CSSProperties => ({
@@ -263,6 +277,29 @@ export function VariantToolbar() {
 				maxWidth: "min(480px, 50vw)",
 			}}
 		>
+			<div style={row}>
+				<span style={rowLabel}>Top 5</span>
+				{PRESETS.map((p) => (
+					<button
+						key={p.label}
+						type="button"
+						onClick={() => applyPreset(p.bg, p.font, p.accent)}
+						style={{
+							...pill(activeBg === p.bg && activeFont === p.font && activeAccent === p.accent),
+							fontSize: "0.5625rem",
+						}}
+					>
+						{p.label}
+					</button>
+				))}
+			</div>
+			<div
+				style={{
+					height: "1px",
+					background: "rgba(255,255,255,0.06)",
+					margin: "0.125rem 0",
+				}}
+			/>
 			<div style={row}>
 				<span style={rowLabel}>BG</span>
 				{BG_VARIANTS.map((v) => (
