@@ -5,42 +5,42 @@ import { AltArrowDown, AltArrowUp, Magnifier } from "@solar-icons/react";
 // Data
 // ---------------------------------------------------------------------------
 const BG_SWATCHES = [
-	{ name: "deep", var: "--bg-deep", hex: "#080B16", desc: "Page background" },
-	{ name: "surface", var: "--bg-surface", hex: "#0F1320", desc: "Cards, panels" },
-	{ name: "elevated", var: "--bg-elevated", hex: "#171C2E", desc: "Modals, popovers" },
-	{ name: "overlay", var: "--bg-overlay", hex: "#1E2438", desc: "Hover states" },
+	{ name: "background", var: "--background", hex: "#0A0710", desc: "Page background" },
+	{ name: "card", var: "--card", hex: "#110E18", desc: "Cards, panels" },
+	{ name: "popover", var: "--popover", hex: "#1A1622", desc: "Modals, popovers" },
+	{ name: "muted", var: "--muted", hex: "#231E2D", desc: "Hover states" },
 ] as const;
 
 const TEXT_LEVELS = [
-	{ name: "primary", var: "--text-primary", hex: "#ECEEF4", desc: "Headings, body" },
-	{ name: "secondary", var: "--text-secondary", hex: "#8B92A8", desc: "Labels, captions" },
-	{ name: "tertiary", var: "--text-tertiary", hex: "#5C6378", desc: "Metadata, hints" },
-	{ name: "disabled", var: "--text-disabled", hex: "#3D4356", desc: "Disabled elements" },
+	{ name: "foreground", var: "--foreground", hex: "#ECEEF4", desc: "Headings, body" },
+	{ name: "muted-fg", var: "--muted-foreground", hex: "#928BA8", desc: "Labels, captions" },
+	{ name: "tertiary", var: "--text-tertiary", hex: "#635C78", desc: "Metadata, hints" },
+	{ name: "disabled", var: "--text-disabled", hex: "#433D56", desc: "Disabled elements" },
 ] as const;
 
-const GOLD_SCALE = [
-	{ step: "50", hex: "#FDF8EB" }, { step: "100", hex: "#FAE9C3" },
-	{ step: "200", hex: "#F5D48E" }, { step: "300", hex: "#F0BF5A" },
-	{ step: "400", hex: "#EDAE49" }, { step: "500", hex: "#D49A2A" },
-	{ step: "600", hex: "#B07E1C" }, { step: "700", hex: "#8C6316" },
-	{ step: "800", hex: "#694A11" }, { step: "900", hex: "#45310C" },
-	{ step: "950", hex: "#231808" },
+const PURPLE_SCALE = [
+	{ step: "50", hex: "#F5F3FF" }, { step: "100", hex: "#EDE9FE" },
+	{ step: "200", hex: "#DDD6FE" }, { step: "300", hex: "#C4B5FD" },
+	{ step: "400", hex: "#A78BFA" }, { step: "500", hex: "#8B5CF6" },
+	{ step: "600", hex: "#7C3AED" }, { step: "700", hex: "#6D28D9" },
+	{ step: "800", hex: "#5B21B6" }, { step: "900", hex: "#4C1D95" },
+	{ step: "950", hex: "#2E1065" },
 ] as const;
 
-const STEEL_SCALE = [
-	{ step: "50", hex: "#EFF6FC" }, { step: "100", hex: "#D6EAFA" },
-	{ step: "200", hex: "#ADD4F5" }, { step: "300", hex: "#7ABCE9" },
-	{ step: "400", hex: "#3DA5D9" }, { step: "500", hex: "#2B8CBD" },
-	{ step: "600", hex: "#1F709A" }, { step: "700", hex: "#195A7C" },
-	{ step: "800", hex: "#134560" }, { step: "900", hex: "#0E3044" },
-	{ step: "950", hex: "#091C28" },
+const LAVENDER_SCALE = [
+	{ step: "50", hex: "#F8F6FC" }, { step: "100", hex: "#EDE8F5" },
+	{ step: "200", hex: "#DDD4ED" }, { step: "300", hex: "#C4B5E0" },
+	{ step: "400", hex: "#A893D1" }, { step: "500", hex: "#9B8BCA" },
+	{ step: "600", hex: "#7E6DB5" }, { step: "700", hex: "#6B5A9E" },
+	{ step: "800", hex: "#574885" }, { step: "900", hex: "#3D3366" },
+	{ step: "950", hex: "#1A1530" },
 ] as const;
 
 const SEMANTIC_COLORS = [
 	{ name: "success", color: "#22C55E", muted: "rgba(34,197,94,0.12)" },
 	{ name: "warning", color: "#F59E0B", muted: "rgba(245,158,11,0.12)" },
 	{ name: "error", color: "#EF4444", muted: "rgba(239,68,68,0.12)" },
-	{ name: "info", color: "#3DA5D9", muted: "rgba(61,165,217,0.12)" },
+	{ name: "info", color: "#9B8BCA", muted: "rgba(155,139,202,0.12)" },
 ] as const;
 
 const VERTICALS = [
@@ -103,7 +103,7 @@ function Overline({ children }: { children: ReactNode }) {
 				fontFamily: "var(--font-heading)",
 				fontSize: "0.75rem",
 				fontWeight: 600,
-				color: "var(--accent)",
+				color: "var(--primary)",
 			}}
 		>
 			{children}
@@ -125,7 +125,7 @@ function SectionHeading({ id, overline, title }: { id: string; overline: string;
 					lineHeight: "2.75rem",
 					letterSpacing: "-0.025em",
 					fontWeight: "var(--font-display-weight)" as unknown as number,
-					color: "var(--text-primary)",
+					color: "var(--foreground)",
 				}}
 			>
 				{title}
@@ -134,7 +134,7 @@ function SectionHeading({ id, overline, title }: { id: string; overline: string;
 			<div
 				className="mt-4 h-px w-full"
 				style={{
-					background: "linear-gradient(90deg, var(--accent) 0%, transparent 60%)",
+					background: "linear-gradient(90deg, var(--primary) 0%, transparent 60%)",
 				}}
 			/>
 		</div>
@@ -149,7 +149,7 @@ function SubHeading({ children }: { children: ReactNode }) {
 				fontFamily: "var(--font-heading)",
 				fontSize: "1rem",
 				fontWeight: 600,
-				color: "var(--text-secondary)",
+				color: "var(--muted-foreground)",
 				letterSpacing: "0.02em",
 			}}
 		>
@@ -188,7 +188,7 @@ function ColorSwatch({
 					fontFamily: "var(--font-heading)",
 					fontSize: "0.6875rem",
 					fontWeight: 500,
-					color: "var(--text-secondary)",
+					color: "var(--muted-foreground)",
 				}}
 			>
 				{label}
@@ -294,8 +294,8 @@ export function DesignSystemPreview() {
 			<div
 				className="ds-root ds-grain relative flex min-h-screen"
 				style={{
-					background: "var(--bg-deep)",
-					color: "var(--text-primary)",
+					background: "var(--background)",
+					color: "var(--foreground)",
 					fontFamily: "var(--font-body)",
 					fontSize: "0.9375rem",
 					lineHeight: "1.5rem",
@@ -307,7 +307,7 @@ export function DesignSystemPreview() {
 				<nav
 					className="sticky top-0 hidden h-screen w-56 flex-shrink-0 flex-col border-r lg:flex"
 					style={{
-						background: "var(--bg-surface)",
+						background: "var(--card)",
 						borderColor: "var(--border-subtle)",
 					}}
 				>
@@ -351,8 +351,8 @@ export function DesignSystemPreview() {
 										fontFamily: "var(--font-heading)",
 										fontSize: "0.8125rem",
 										fontWeight: isActive ? 600 : 400,
-										color: isActive ? "var(--accent)" : "var(--text-secondary)",
-										background: isActive ? "var(--accent-8)" : "transparent",
+										color: isActive ? "var(--primary)" : "var(--muted-foreground)",
+										background: isActive ? "var(--primary-8)" : "transparent",
 										borderRadius: "var(--radius-md)",
 										padding: "0.5rem 0.75rem",
 										textDecoration: "none",
@@ -402,7 +402,7 @@ export function DesignSystemPreview() {
 									letterSpacing: "-0.035em",
 									fontWeight: "var(--font-display-weight)" as unknown as number,
 									fontStyle: "var(--font-display-style)" as React.CSSProperties["fontStyle"],
-									color: "var(--text-primary)",
+									color: "var(--foreground)",
 								}}
 							>
 								Design System
@@ -413,7 +413,7 @@ export function DesignSystemPreview() {
 									fontFamily: "var(--font-body)",
 									fontSize: "1.125rem",
 									lineHeight: "1.75rem",
-									color: "var(--text-secondary)",
+									color: "var(--muted-foreground)",
 									letterSpacing: "-0.005em",
 								}}
 							>
@@ -444,7 +444,7 @@ export function DesignSystemPreview() {
 										className="h-10 w-10 flex-shrink-0 rounded-md"
 										style={{
 											background: s.hex,
-											border: "1px solid var(--border-default)",
+											border: "1px solid var(--border)",
 										}}
 									/>
 									<div>
@@ -453,7 +453,7 @@ export function DesignSystemPreview() {
 												fontFamily: "var(--font-heading)",
 												fontSize: "0.8125rem",
 												fontWeight: 500,
-												color: "var(--text-primary)",
+												color: "var(--foreground)",
 											}}
 										>
 											bg.{s.name}
@@ -521,30 +521,30 @@ export function DesignSystemPreview() {
 							))}
 						</div>
 
-						{/* Gold scale */}
-						<SubHeading>Gold — Primary Accent</SubHeading>
+						{/* Purple scale */}
+						<SubHeading>Purple — Primary Scale</SubHeading>
 						<div className="flex flex-wrap gap-2.5">
-							{GOLD_SCALE.map((g) => (
+							{PURPLE_SCALE.map((g) => (
 								<ColorSwatch
 									key={g.step}
 									color={g.hex}
 									label={g.step}
 									hex={g.hex}
-									ring={g.step === "400"}
+									ring={g.step === "600"}
 								/>
 							))}
 						</div>
 
-						{/* Steel scale */}
-						<SubHeading>Steel — Secondary Accent</SubHeading>
+						{/* Lavender scale */}
+						<SubHeading>Lavender — Secondary Scale</SubHeading>
 						<div className="flex flex-wrap gap-2.5">
-							{STEEL_SCALE.map((s) => (
+							{LAVENDER_SCALE.map((s) => (
 								<ColorSwatch
 									key={s.step}
 									color={s.hex}
 									label={s.step}
 									hex={s.hex}
-									ring={s.step === "400"}
+									ring={s.step === "500"}
 								/>
 							))}
 						</div>
@@ -638,8 +638,8 @@ export function DesignSystemPreview() {
 												style={{
 													fontFamily: "var(--font-mono)",
 													fontSize: "0.5625rem",
-													color: "var(--accent)",
-													background: "var(--accent-10)",
+													color: "var(--primary)",
+													background: "var(--primary-10)",
 													padding: "0 4px",
 													borderRadius: "2px",
 												}}
@@ -657,19 +657,19 @@ export function DesignSystemPreview() {
 						{/* ====================================================== */}
 						<SectionHeading id="typography" overline="02" title="Typography" />
 
-						{/* Display — Instrument Serif */}
-						<SubHeading>Display — Instrument Serif</SubHeading>
+						{/* Display — Bricolage Grotesque */}
+						<SubHeading>Display — Bricolage Grotesque</SubHeading>
 						<div
 							className="space-y-4 rounded-xl border p-6"
-							style={{ background: "var(--bg-surface)", borderColor: "var(--border-subtle)" }}
+							style={{ background: "var(--card)", borderColor: "var(--border-subtle)" }}
 						>
-							<div style={{ fontFamily: "var(--font-display)", fontSize: "4.5rem", lineHeight: "5rem", letterSpacing: "-0.04em", color: "var(--text-primary)" }}>
+							<div style={{ fontFamily: "var(--font-display)", fontSize: "4.5rem", lineHeight: "5rem", letterSpacing: "-0.04em", color: "var(--foreground)" }}>
 								100 Startups
 							</div>
-							<div style={{ fontFamily: "var(--font-display)", fontSize: "3.75rem", lineHeight: "4.25rem", letterSpacing: "-0.035em", color: "var(--accent)" }}>
+							<div style={{ fontFamily: "var(--font-display)", fontSize: "3.75rem", lineHeight: "4.25rem", letterSpacing: "-0.035em", color: "var(--primary)" }}>
 								$2.4 Billion
 							</div>
-							<div style={{ fontFamily: "var(--font-display)", fontSize: "2.25rem", lineHeight: "2.75rem", letterSpacing: "-0.025em", fontStyle: "var(--font-display-style)" as React.CSSProperties["fontStyle"], color: "var(--text-secondary)" }}>
+							<div style={{ fontFamily: "var(--font-display)", fontSize: "2.25rem", lineHeight: "2.75rem", letterSpacing: "-0.025em", fontStyle: "var(--font-display-style)" as React.CSSProperties["fontStyle"], color: "var(--muted-foreground)" }}>
 								The Definitive LATAM Deeptech Directory
 							</div>
 						</div>
@@ -686,7 +686,7 @@ export function DesignSystemPreview() {
 							<div style={{ fontFamily: "var(--font-heading)", fontSize: "1.25rem", lineHeight: "1.875rem", fontWeight: 600, letterSpacing: "-0.01em" }}>
 								H3 — Regional Distribution
 							</div>
-							<div style={{ fontFamily: "var(--font-heading)", fontSize: "1.125rem", lineHeight: "1.75rem", fontWeight: 500, letterSpacing: "-0.005em", color: "var(--text-secondary)" }}>
+							<div style={{ fontFamily: "var(--font-heading)", fontSize: "1.125rem", lineHeight: "1.75rem", fontWeight: 500, letterSpacing: "-0.005em", color: "var(--muted-foreground)" }}>
 								H4 — Methodology Notes
 							</div>
 						</div>
@@ -699,7 +699,7 @@ export function DesignSystemPreview() {
 								resistance platforms for tropical agriculture. Founded in 2022, they have
 								raised $12.5M in Series A funding led by ALLVP and Kaszek.
 							</p>
-							<p style={{ fontFamily: "var(--font-body)", fontSize: "0.9375rem", lineHeight: "1.5rem", color: "var(--text-secondary)" }}>
+							<p style={{ fontFamily: "var(--font-body)", fontSize: "0.9375rem", lineHeight: "1.5rem", color: "var(--muted-foreground)" }}>
 								This report profiles 100 deeptech startups across 12 LATAM countries,
 								covering verticals from AI/ML to quantum computing. Data collected between
 								January and March 2026.
@@ -714,7 +714,7 @@ export function DesignSystemPreview() {
 						<SubHeading>Data — JetBrains Mono</SubHeading>
 						<div className="flex flex-wrap items-end gap-8">
 							<div>
-								<div style={{ fontFamily: "var(--font-mono)", fontSize: "3rem", lineHeight: "3.5rem", fontWeight: 500, color: "var(--accent)", letterSpacing: "-0.03em" }}>
+								<div style={{ fontFamily: "var(--font-mono)", fontSize: "3rem", lineHeight: "3.5rem", fontWeight: 500, color: "var(--primary)", letterSpacing: "-0.03em" }}>
 									$2.4B
 								</div>
 								<div style={{ fontFamily: "var(--font-mono)", fontSize: "0.8125rem", color: "var(--text-tertiary)" }}>
@@ -722,7 +722,7 @@ export function DesignSystemPreview() {
 								</div>
 							</div>
 							<div>
-								<div style={{ fontFamily: "var(--font-mono)", fontSize: "0.9375rem", color: "var(--text-primary)" }}>
+								<div style={{ fontFamily: "var(--font-mono)", fontSize: "0.9375rem", color: "var(--foreground)" }}>
 									MXN 240,000,000
 								</div>
 								<div style={{ fontFamily: "var(--font-mono)", fontSize: "0.75rem", color: "var(--text-tertiary)" }}>
@@ -730,7 +730,7 @@ export function DesignSystemPreview() {
 								</div>
 							</div>
 							<div>
-								<div style={{ fontFamily: "var(--font-mono)", fontSize: "0.8125rem", color: "var(--text-secondary)" }}>
+								<div style={{ fontFamily: "var(--font-mono)", fontSize: "0.8125rem", color: "var(--muted-foreground)" }}>
 									ID-NB-2024-0847
 								</div>
 								<div style={{ fontFamily: "var(--font-mono)", fontSize: "0.75rem", color: "var(--text-tertiary)" }}>
@@ -750,7 +750,7 @@ export function DesignSystemPreview() {
 									key={t.name}
 									className="flex items-baseline gap-4 border-b px-4 py-2.5"
 									style={{
-										background: i % 2 === 0 ? "var(--bg-surface)" : "var(--bg-deep)",
+										background: i % 2 === 0 ? "var(--card)" : "var(--background)",
 										borderColor: "var(--border-subtle)",
 									}}
 								>
@@ -759,7 +759,7 @@ export function DesignSystemPreview() {
 										style={{
 											fontFamily: "var(--font-mono)",
 											fontSize: "0.6875rem",
-											color: "var(--accent)",
+											color: "var(--primary)",
 											fontWeight: 500,
 										}}
 									>
@@ -780,7 +780,7 @@ export function DesignSystemPreview() {
 											fontFamily: "var(--font-body)",
 											fontSize: t.size,
 											lineHeight: t.lh,
-											color: "var(--text-primary)",
+											color: "var(--foreground)",
 										}}
 									>
 										LATAM Deeptech
@@ -801,8 +801,8 @@ export function DesignSystemPreview() {
 								<ButtonDemo
 									label="Explore Directory"
 									style={{
-										background: "var(--accent)",
-										color: "var(--bg-deep)",
+										background: "var(--primary)",
+										color: "var(--background)",
 										fontFamily: "var(--font-heading)",
 										fontWeight: 600,
 										fontSize: "0.875rem",
@@ -812,29 +812,29 @@ export function DesignSystemPreview() {
 										cursor: "pointer",
 										transition: "all 150ms ease-out",
 									}}
-									hoverStyle={{ background: "var(--accent-light)" }}
+									hoverStyle={{ background: "var(--primary-light)" }}
 								/>
 								<ButtonDemo
 									label="Explore Directory"
 									sublabel="hover"
 									style={{
-										background: "var(--accent-light)",
-										color: "var(--bg-deep)",
+										background: "var(--primary-light)",
+										color: "var(--background)",
 										fontFamily: "var(--font-heading)",
 										fontWeight: 600,
 										fontSize: "0.875rem",
 										padding: "0.625rem 1.25rem",
 										borderRadius: "var(--radius-md)",
 										border: "none",
-										boxShadow: "var(--glow-accent)",
+										boxShadow: "var(--glow-primary)",
 									}}
 								/>
 								<ButtonDemo
 									label="Explore Directory"
 									sublabel="disabled"
 									style={{
-										background: "var(--accent-darker)",
-										color: "var(--accent-dark)",
+										background: "var(--primary-darker)",
+										color: "var(--primary-dark)",
 										fontFamily: "var(--font-heading)",
 										fontWeight: 600,
 										fontSize: "0.875rem",
@@ -854,30 +854,30 @@ export function DesignSystemPreview() {
 									label="Download Report"
 									style={{
 										background: "transparent",
-										color: "var(--accent)",
+										color: "var(--primary)",
 										fontFamily: "var(--font-heading)",
 										fontWeight: 600,
 										fontSize: "0.875rem",
 										padding: "0.625rem 1.25rem",
 										borderRadius: "var(--radius-md)",
-										border: "1px solid var(--accent-40)",
+										border: "1px solid var(--primary-40)",
 										cursor: "pointer",
 										transition: "all 150ms ease-out",
 									}}
-									hoverStyle={{ background: "var(--accent-8)", borderColor: "var(--accent-60)" }}
+									hoverStyle={{ background: "var(--primary-8)", borderColor: "var(--primary-60)" }}
 								/>
 								<ButtonDemo
 									label="Download Report"
 									sublabel="hover"
 									style={{
-										background: "var(--accent-8)",
-										color: "var(--accent)",
+										background: "var(--primary-8)",
+										color: "var(--primary)",
 										fontFamily: "var(--font-heading)",
 										fontWeight: 600,
 										fontSize: "0.875rem",
 										padding: "0.625rem 1.25rem",
 										borderRadius: "var(--radius-md)",
-										border: "1px solid var(--accent-60)",
+										border: "1px solid var(--primary-60)",
 									}}
 								/>
 								<ButtonDemo
@@ -905,7 +905,7 @@ export function DesignSystemPreview() {
 									label="View All Startups"
 									style={{
 										background: "transparent",
-										color: "var(--text-secondary)",
+										color: "var(--muted-foreground)",
 										fontFamily: "var(--font-heading)",
 										fontWeight: 600,
 										fontSize: "0.875rem",
@@ -915,14 +915,14 @@ export function DesignSystemPreview() {
 										cursor: "pointer",
 										transition: "all 150ms ease-out",
 									}}
-									hoverStyle={{ background: "rgba(255,255,255,0.06)", color: "var(--text-primary)" }}
+									hoverStyle={{ background: "rgba(255,255,255,0.06)", color: "var(--foreground)" }}
 								/>
 								<ButtonDemo
 									label="View All Startups"
 									sublabel="hover"
 									style={{
 										background: "rgba(255,255,255,0.06)",
-										color: "var(--text-primary)",
+										color: "var(--foreground)",
 										fontFamily: "var(--font-heading)",
 										fontWeight: 600,
 										fontSize: "0.875rem",
@@ -947,7 +947,7 @@ export function DesignSystemPreview() {
 										fontFamily: "var(--font-heading)",
 										fontSize: "0.8125rem",
 										fontWeight: 500,
-										color: "var(--text-secondary)",
+										color: "var(--muted-foreground)",
 									}}
 								>
 									Company Name
@@ -957,13 +957,13 @@ export function DesignSystemPreview() {
 									placeholder="e.g. NovaBio"
 									className="block w-full outline-none"
 									style={{
-										background: "var(--bg-deep)",
-										border: "1px solid var(--border-default)",
+										background: "var(--background)",
+										border: "1px solid var(--border)",
 										borderRadius: "var(--radius-md)",
 										padding: "0.625rem 0.875rem",
 										fontFamily: "var(--font-body)",
 										fontSize: "0.9375rem",
-										color: "var(--text-primary)",
+										color: "var(--foreground)",
 									}}
 								/>
 							</div>
@@ -975,7 +975,7 @@ export function DesignSystemPreview() {
 										fontFamily: "var(--font-heading)",
 										fontSize: "0.8125rem",
 										fontWeight: 500,
-										color: "var(--text-secondary)",
+										color: "var(--muted-foreground)",
 									}}
 								>
 									Country
@@ -984,13 +984,13 @@ export function DesignSystemPreview() {
 									<select
 										className="block w-full appearance-none outline-none"
 										style={{
-											background: "var(--bg-deep)",
-											border: "1px solid var(--border-default)",
+											background: "var(--background)",
+											border: "1px solid var(--border)",
 											borderRadius: "var(--radius-md)",
 											padding: "0.625rem 2.5rem 0.625rem 0.875rem",
 											fontFamily: "var(--font-body)",
 											fontSize: "0.9375rem",
-											color: "var(--text-primary)",
+											color: "var(--foreground)",
 										}}
 									>
 										<option>Mexico</option>
@@ -1015,7 +1015,7 @@ export function DesignSystemPreview() {
 										fontFamily: "var(--font-heading)",
 										fontSize: "0.8125rem",
 										fontWeight: 500,
-										color: "var(--text-secondary)",
+										color: "var(--muted-foreground)",
 									}}
 								>
 									Search
@@ -1032,13 +1032,13 @@ export function DesignSystemPreview() {
 										placeholder="Search startups, verticals, countries..."
 										className="block w-full outline-none"
 										style={{
-											background: "var(--bg-deep)",
-											border: "1px solid var(--border-default)",
+											background: "var(--background)",
+											border: "1px solid var(--border)",
 											borderRadius: "var(--radius-md)",
 											padding: "0.625rem 0.875rem 0.625rem 2.25rem",
 											fontFamily: "var(--font-body)",
 											fontSize: "0.9375rem",
-											color: "var(--text-primary)",
+											color: "var(--foreground)",
 										}}
 									/>
 								</div>
@@ -1055,7 +1055,7 @@ export function DesignSystemPreview() {
 							<div
 								className="rounded-lg border transition-colors"
 								style={{
-									background: "var(--bg-surface)",
+									background: "var(--card)",
 									borderColor: "var(--border-subtle)",
 									borderRadius: "var(--radius)",
 									padding: "1.5rem",
@@ -1083,7 +1083,7 @@ export function DesignSystemPreview() {
 													fontFamily: "var(--font-heading)",
 													fontSize: "1.125rem",
 													fontWeight: 600,
-													color: "var(--text-primary)",
+													color: "var(--foreground)",
 												}}
 											>
 												NovaBio
@@ -1096,7 +1096,7 @@ export function DesignSystemPreview() {
 												fontFamily: "var(--font-body)",
 												fontSize: "0.8125rem",
 												lineHeight: "1.25rem",
-												color: "var(--text-secondary)",
+												color: "var(--muted-foreground)",
 											}}
 										>
 											CRISPR-based crop resistance platform for tropical agriculture
@@ -1120,7 +1120,7 @@ export function DesignSystemPreview() {
 											fontFamily: "var(--font-mono)",
 											fontSize: "0.8125rem",
 											fontWeight: 500,
-											color: "var(--accent)",
+											color: "var(--primary)",
 										}}
 									>
 										$12.5M
@@ -1138,11 +1138,11 @@ export function DesignSystemPreview() {
 							<div
 								className="rounded-lg border"
 								style={{
-									background: "var(--bg-surface)",
-									borderColor: "var(--accent-25)",
+									background: "var(--card)",
+									borderColor: "var(--primary-25)",
 									borderRadius: "var(--radius-lg)",
 									padding: "2rem",
-									boxShadow: "0 0 20px var(--accent-8)",
+									boxShadow: "0 0 20px var(--primary-8)",
 								}}
 							>
 								<div className="mb-3 flex items-center gap-2">
@@ -1151,8 +1151,8 @@ export function DesignSystemPreview() {
 											fontFamily: "var(--font-mono)",
 											fontSize: "0.6875rem",
 											fontWeight: 600,
-											color: "var(--accent)",
-											background: "var(--accent-10)",
+											color: "var(--primary)",
+											background: "var(--primary-10)",
 											padding: "0.125rem 0.5rem",
 											borderRadius: "var(--radius-sm)",
 											letterSpacing: "0.04em",
@@ -1183,7 +1183,7 @@ export function DesignSystemPreview() {
 													fontFamily: "var(--font-heading)",
 													fontSize: "1.125rem",
 													fontWeight: 600,
-													color: "var(--text-primary)",
+													color: "var(--foreground)",
 												}}
 											>
 												CósmicaAI
@@ -1196,7 +1196,7 @@ export function DesignSystemPreview() {
 												fontFamily: "var(--font-body)",
 												fontSize: "0.8125rem",
 												lineHeight: "1.25rem",
-												color: "var(--text-secondary)",
+												color: "var(--muted-foreground)",
 											}}
 										>
 											Autonomous quality inspection for manufacturing lines using computer vision
@@ -1207,7 +1207,7 @@ export function DesignSystemPreview() {
 									<span style={{ fontFamily: "var(--font-body)", fontSize: "0.8125rem", color: "var(--text-tertiary)" }}>
 										<span className="mr-1">&#127463;&#127479;</span> S&atilde;o Paulo
 									</span>
-									<span style={{ fontFamily: "var(--font-mono)", fontSize: "0.8125rem", fontWeight: 500, color: "var(--accent)" }}>
+									<span style={{ fontFamily: "var(--font-mono)", fontSize: "0.8125rem", fontWeight: 500, color: "var(--primary)" }}>
 										$3.2M
 									</span>
 								</div>
@@ -1271,11 +1271,11 @@ export function DesignSystemPreview() {
 						<SubHeading>Startups by Vertical</SubHeading>
 						<div
 							className="rounded-xl border p-6"
-							style={{ background: "var(--bg-surface)", borderColor: "var(--border-subtle)" }}
+							style={{ background: "var(--card)", borderColor: "var(--border-subtle)" }}
 						>
 							{/* Y-axis label */}
 							<div className="mb-4 flex items-center justify-between">
-								<span style={{ fontFamily: "var(--font-heading)", fontSize: "0.875rem", fontWeight: 600, color: "var(--text-primary)" }}>
+								<span style={{ fontFamily: "var(--font-heading)", fontSize: "0.875rem", fontWeight: 600, color: "var(--foreground)" }}>
 									Distribution by Vertical
 								</span>
 								<span style={{ fontFamily: "var(--font-mono)", fontSize: "0.75rem", color: "var(--text-tertiary)" }}>
@@ -1353,13 +1353,13 @@ export function DesignSystemPreview() {
 						<SectionHeading id="dividers" overline="09" title="Dividers & Separators" />
 
 						<div className="space-y-12">
-							{/* Gold gradient line */}
+							{/* Primary gradient line */}
 							<div>
-								<SubHeading>Gold Gradient</SubHeading>
+								<SubHeading>Primary Gradient</SubHeading>
 								<div
 									className="h-px w-full"
 									style={{
-										background: "linear-gradient(90deg, transparent 0%, var(--accent) 20%, var(--accent) 80%, transparent 100%)",
+										background: "linear-gradient(90deg, transparent 0%, var(--primary) 20%, var(--primary) 80%, transparent 100%)",
 									}}
 								/>
 							</div>
@@ -1369,7 +1369,7 @@ export function DesignSystemPreview() {
 								<SubHeading>Subtle Border</SubHeading>
 								<div
 									className="h-px w-full"
-									style={{ background: "var(--border-default)" }}
+									style={{ background: "var(--border)" }}
 								/>
 							</div>
 
@@ -1379,21 +1379,21 @@ export function DesignSystemPreview() {
 								<div
 									className="h-16 w-full"
 									style={{
-										background: "linear-gradient(180deg, var(--bg-deep) 0%, transparent 100%)",
+										background: "linear-gradient(180deg, var(--background) 0%, transparent 100%)",
 									}}
 								/>
 							</div>
 
 							{/* Decorative — dotted */}
 							<div>
-								<SubHeading>Gold Dot Pattern</SubHeading>
+								<SubHeading>Primary Dot Pattern</SubHeading>
 								<div className="flex items-center gap-1.5">
 									{Array.from({ length: 40 }).map((_, i) => (
 										<div
 											key={i}
 											className="h-px flex-1"
 											style={{
-												background: i % 2 === 0 ? "var(--accent)" : "transparent",
+												background: i % 2 === 0 ? "var(--primary)" : "transparent",
 												opacity: 0.4,
 											}}
 										/>
@@ -1485,8 +1485,8 @@ function StatBlock({
 		<div
 			className="rounded-xl border p-6"
 			style={{
-				background: gold ? "var(--accent-4)" : "var(--bg-surface)",
-				borderColor: gold ? "var(--accent-15)" : "var(--border-subtle)",
+				background: gold ? "var(--primary-4)" : "var(--card)",
+				borderColor: gold ? "var(--primary-15)" : "var(--border-subtle)",
 			}}
 		>
 			<div
@@ -1495,7 +1495,7 @@ function StatBlock({
 					fontSize: "3rem",
 					lineHeight: "3.5rem",
 					letterSpacing: "-0.03em",
-					color: gold ? "var(--accent)" : "var(--text-primary)",
+					color: gold ? "var(--primary)" : "var(--foreground)",
 				}}
 			>
 				{value}
@@ -1506,7 +1506,7 @@ function StatBlock({
 					fontFamily: "var(--font-heading)",
 					fontSize: "0.875rem",
 					fontWeight: 500,
-					color: "var(--text-secondary)",
+					color: "var(--muted-foreground)",
 				}}
 			>
 				{label}

@@ -1,1 +1,245 @@
 @import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:ital,wght@0,300..700;1,400;1,500&family=Space+Grotesk:wght@300..700&display=swap");
+
+:root {
+	/* ---- shadcn core ---- */
+	--background: #0A0710;
+	--foreground: #ECEEF4;
+	--card: #110E18;
+	--card-foreground: #ECEEF4;
+	--popover: #1A1622;
+	--popover-foreground: #ECEEF4;
+	--primary: #7C3AED;
+	--primary-foreground: #ECEEF4;
+	--secondary: #9B8BCA;
+	--secondary-foreground: #ECEEF4;
+	--muted: #231E2D;
+	--muted-foreground: #928BA8;
+	--accent: #231E2D;
+	--accent-foreground: #ECEEF4;
+	--destructive: #EF4444;
+	--destructive-foreground: #ECEEF4;
+	--border: rgba(255, 255, 255, 0.1);
+	--input: rgba(255, 255, 255, 0.15);
+	--ring: #7C3AED;
+	--radius: 0.5rem;
+
+	/* ---- Extended text levels ---- */
+	--text-tertiary: #635C78;
+	--text-disabled: #433D56;
+
+	/* ---- Extended borders ---- */
+	--border-subtle: rgba(255, 255, 255, 0.06);
+	--border-strong: rgba(255, 255, 255, 0.16);
+
+	/* ---- Primary (purple) shades & opacity scale ---- */
+	--primary-light: #9B5BFF;
+	--primary-dark: #5B21B6;
+	--primary-darker: #2E1065;
+	--primary-4: rgba(124, 58, 237, 0.04);
+	--primary-8: rgba(124, 58, 237, 0.08);
+	--primary-10: rgba(124, 58, 237, 0.10);
+	--primary-15: rgba(124, 58, 237, 0.15);
+	--primary-25: rgba(124, 58, 237, 0.25);
+	--primary-30: rgba(124, 58, 237, 0.30);
+	--primary-40: rgba(124, 58, 237, 0.40);
+	--primary-60: rgba(124, 58, 237, 0.60);
+
+	/* ---- Purple scale (11 steps) ---- */
+	--purple-50: #F5F3FF;
+	--purple-100: #EDE9FE;
+	--purple-200: #DDD6FE;
+	--purple-300: #C4B5FD;
+	--purple-400: #A78BFA;
+	--purple-500: #8B5CF6;
+	--purple-600: #7C3AED;
+	--purple-700: #6D28D9;
+	--purple-800: #5B21B6;
+	--purple-900: #4C1D95;
+	--purple-950: #2E1065;
+
+	/* ---- Lavender scale (11 steps) ---- */
+	--lavender-50: #F8F6FC;
+	--lavender-100: #EDE8F5;
+	--lavender-200: #DDD4ED;
+	--lavender-300: #C4B5E0;
+	--lavender-400: #A893D1;
+	--lavender-500: #9B8BCA;
+	--lavender-600: #7E6DB5;
+	--lavender-700: #6B5A9E;
+	--lavender-800: #574885;
+	--lavender-900: #3D3366;
+	--lavender-950: #1A1530;
+
+	/* ---- Semantic ---- */
+	--success: #22C55E;
+	--success-muted: rgba(34, 197, 94, 0.12);
+	--warning: #F59E0B;
+	--warning-muted: rgba(245, 158, 11, 0.12);
+	--error: #EF4444;
+	--error-muted: rgba(239, 68, 68, 0.12);
+	--info: #9B8BCA;
+	--info-muted: rgba(155, 139, 202, 0.12);
+
+	/* ---- Verticals ---- */
+	--v-ai: #FF66B3;
+	--v-biotech: #00BD68;
+	--v-hardware: #FFB300;
+	--v-cleantech: #2DD4BF;
+	--v-agritech: #A3E635;
+	--v-medtech: #F87171;
+	--v-materials: #A78BFA;
+	--v-aerospace: #38BDF8;
+	--v-quantum: #D946EF;
+	--v-fintech: #6366F1;
+	--v-blockchain: #22D3EE;
+	--v-other: #94A3B8;
+
+	/* ---- Fonts ---- */
+	--font-display: "Bricolage Grotesque", Arial, sans-serif;
+	--font-display-style: normal;
+	--font-display-weight: 600;
+	--font-heading: "Space Grotesk", Arial, sans-serif;
+	--font-body: "Plus Jakarta Sans", "Helvetica Neue", sans-serif;
+	--font-mono: "JetBrains Mono", "SF Mono", Consolas, monospace;
+
+	/* ---- Radii ---- */
+	--radius-sm: 0.25rem;
+	--radius-md: 0.375rem;
+	--radius-lg: 0.75rem;
+	--radius-xl: 1rem;
+	--radius-full: 9999px;
+
+	/* ---- Glows ---- */
+	--glow-primary: 0 0 20px var(--primary-15), 0 0 4px var(--primary-10);
+	--glow-primary-strong: 0 0 32px var(--primary-25), 0 0 8px var(--primary-15);
+}
+
+/* @theme inline — bridges CSS vars to Tailwind utilities */
+@theme inline {
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--color-card: var(--card);
+	--color-card-foreground: var(--card-foreground);
+	--color-popover: var(--popover);
+	--color-popover-foreground: var(--popover-foreground);
+	--color-primary: var(--primary);
+	--color-primary-foreground: var(--primary-foreground);
+	--color-secondary: var(--secondary);
+	--color-secondary-foreground: var(--secondary-foreground);
+	--color-muted: var(--muted);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-accent: var(--accent);
+	--color-accent-foreground: var(--accent-foreground);
+	--color-destructive: var(--destructive);
+	--color-destructive-foreground: var(--destructive-foreground);
+	--color-border: var(--border);
+	--color-input: var(--input);
+	--color-ring: var(--ring);
+}
+
+/* ---- Scoped styles (.ds-root) ---- */
+.ds-root *::selection {
+	background: var(--primary-30);
+	color: var(--foreground);
+}
+
+.ds-root::-webkit-scrollbar {
+	width: 6px;
+}
+.ds-root::-webkit-scrollbar-track {
+	background: var(--background);
+}
+.ds-root::-webkit-scrollbar-thumb {
+	background: var(--muted);
+	border-radius: 3px;
+}
+
+.ds-root *:focus-visible {
+	outline: none;
+	box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--ring);
+}
+
+/* ---- Keyframes ---- */
+@keyframes ds-fadeUp {
+	from {
+		opacity: 0;
+		transform: translateY(12px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes ds-barGrow {
+	from {
+		transform: scaleY(0);
+	}
+	to {
+		transform: scaleY(1);
+	}
+}
+
+@keyframes ds-shimmer {
+	0% {
+		background-position: -200% 0;
+	}
+	100% {
+		background-position: 200% 0;
+	}
+}
+
+@keyframes ds-pulseRing {
+	0% {
+		transform: scale(1);
+		opacity: 0.4;
+	}
+	100% {
+		transform: scale(1.6);
+		opacity: 0;
+	}
+}
+
+@keyframes ds-sectionIn {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.ds-section {
+	animation: ds-sectionIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Grain texture overlay — opt-in via .ds-grain */
+.ds-grain::before {
+	content: "";
+	position: fixed;
+	inset: 0;
+	z-index: 1;
+	pointer-events: none;
+	opacity: 0.03;
+	background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+	background-repeat: repeat;
+	background-size: 256px 256px;
+}
+
+/* Atmospheric glow — opt-in via .ds-glow */
+.ds-glow::after {
+	content: "";
+	position: absolute;
+	top: -120px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 800px;
+	height: 400px;
+	border-radius: 50%;
+	background: radial-gradient(ellipse, var(--primary-15) 0%, transparent 70%);
+	pointer-events: none;
+	z-index: 0;
+}
