@@ -209,9 +209,34 @@ export const ACCENT_VARIANTS = [
 // Top 5 Preset Combinations
 // ---------------------------------------------------------------------------
 export const PRESETS = [
-	{ label: "#1 Charcoal + Syne + Copper", bg: "warm-charcoal", font: "syne", accent: "copper" },
-	{ label: "#2 Plum + Bricolage + Purple ★ CHOSEN", bg: "plum", font: "bricolage", accent: "purple" },
-	{ label: "#3 Ink + Bebas + Frost", bg: "ink", font: "bebas", accent: "frost" },
-	{ label: "#4 Olive + Familjen + Emerald", bg: "olive", font: "familjen", accent: "emerald" },
-	{ label: "#5 Charcoal + Bricolage + Gold", bg: "warm-charcoal", font: "bricolage", accent: "gold" },
+	{
+		label: "#1 Charcoal + Syne + Copper",
+		bg: "warm-charcoal",
+		font: "syne",
+		accent: "copper",
+	},
+	{
+		label: "#2 Plum + Bricolage + Purple ★ CHOSEN",
+		bg: "plum",
+		font: "bricolage",
+		accent: "purple",
+	},
+	{
+		label: "#3 Ink + Bebas + Frost",
+		bg: "ink",
+		font: "bebas",
+		accent: "frost",
+	},
+	{
+		label: "#4 Olive + Familjen + Emerald",
+		bg: "olive",
+		font: "familjen",
+		accent: "emerald",
+	},
+	{
+		label: "#5 Charcoal + Bricolage + Gold",
+		bg: "warm-charcoal",
+		font: "bricolage",
+		accent: "gold",
+	},
 ] as const;

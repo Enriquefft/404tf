@@ -90,10 +90,10 @@
 		// CSS vars: --background, --card, --popover, --muted (shadcn pattern)
 		// --------------------------------------------------------------------------
 		"bg": {
-			"background": "#0A0710",  // Page background. Deep plum. CSS: --background
-			"card": "#110E18",        // Cards, sections. CSS: --card
-			"popover": "#1A1622",     // Modals, popovers, floating panels. CSS: --popover
-			"muted": "#231E2D"        // Hover fills, active states, dropdowns. CSS: --muted
+			"background": "#0A0710", // Page background. Deep plum. CSS: --background
+			"card": "#110E18", // Cards, sections. CSS: --card
+			"popover": "#1A1622", // Modals, popovers, floating panels. CSS: --popover
+			"muted": "#231E2D" // Hover fills, active states, dropdowns. CSS: --muted
 		},
 
 		// --------------------------------------------------------------------------
@@ -103,10 +103,10 @@
 		// CSS vars: --foreground, --muted-foreground, --text-tertiary, --text-disabled
 		// --------------------------------------------------------------------------
 		"text": {
-			"foreground": "#ECEEF4",       // Main content, headings. CSS: --foreground
-			"mutedForeground": "#928BA8",  // Labels, descriptions. CSS: --muted-foreground
-			"tertiary": "#635C78",         // Metadata, timestamps, captions. CSS: --text-tertiary
-			"disabled": "#433D56"          // Disabled states, inactive elements. CSS: --text-disabled
+			"foreground": "#ECEEF4", // Main content, headings. CSS: --foreground
+			"mutedForeground": "#928BA8", // Labels, descriptions. CSS: --muted-foreground
+			"tertiary": "#635C78", // Metadata, timestamps, captions. CSS: --text-tertiary
+			"disabled": "#433D56" // Disabled states, inactive elements. CSS: --text-disabled
 		},
 
 		// --------------------------------------------------------------------------
@@ -128,11 +128,11 @@
 			"300": "#C4B5FD",
 			"400": "#A78BFA",
 			"500": "#8B5CF6",
-			"600": "#7C3AED",  // ★ PRIMARY BRAND PURPLE. CTAs, stats, highlights. CSS: --primary
+			"600": "#7C3AED", // ★ PRIMARY BRAND PURPLE. CTAs, stats, highlights. CSS: --primary
 			"700": "#6D28D9",
-			"800": "#5B21B6",  // Dark purple — CSS: --primary-dark
+			"800": "#5B21B6", // Dark purple — CSS: --primary-dark
 			"900": "#4C1D95",
-			"950": "#2E1065"   // Darkest — CSS: --primary-darker
+			"950": "#2E1065" // Darkest — CSS: --primary-darker
 		},
 
 		// --------------------------------------------------------------------------
@@ -149,7 +149,7 @@
 			"200": "#DDD4ED",
 			"300": "#C4B5E0",
 			"400": "#A893D1",
-			"500": "#9B8BCA",  // ★ PRIMARY LAVENDER. Links, info badges. CSS: --secondary
+			"500": "#9B8BCA", // ★ PRIMARY LAVENDER. Links, info badges. CSS: --secondary
 			"600": "#7E6DB5",
 			"700": "#6B5A9E",
 			"800": "#574885",
@@ -165,11 +165,11 @@
 		// CSS vars: --border, --border-subtle, --border-strong, --ring
 		// --------------------------------------------------------------------------
 		"border": {
-			"subtle": "rgba(255, 255, 255, 0.06)",  // Default card/section borders. CSS: --border-subtle
-			"default": "rgba(255, 255, 255, 0.10)",  // Input borders, dividers. CSS: --border
-			"strong": "rgba(255, 255, 255, 0.16)",   // Hover borders, emphasis. CSS: --border-strong
-			"input": "rgba(255, 255, 255, 0.15)",    // Input borders. CSS: --input
-			"ring": "#7C3AED"                         // Focus rings — purple. CSS: --ring
+			"subtle": "rgba(255, 255, 255, 0.06)", // Default card/section borders. CSS: --border-subtle
+			"default": "rgba(255, 255, 255, 0.10)", // Input borders, dividers. CSS: --border
+			"strong": "rgba(255, 255, 255, 0.16)", // Hover borders, emphasis. CSS: --border-strong
+			"input": "rgba(255, 255, 255, 0.15)", // Input borders. CSS: --input
+			"ring": "#7C3AED" // Focus rings — purple. CSS: --ring
 		},
 
 		// --------------------------------------------------------------------------
@@ -180,9 +180,9 @@
 			"successMuted": "rgba(34, 197, 94, 0.12)",
 			"warning": "#F59E0B",
 			"warningMuted": "rgba(245, 158, 11, 0.12)",
-			"error": "#EF4444",            // CSS: --destructive
+			"error": "#EF4444", // CSS: --destructive
 			"errorMuted": "rgba(239, 68, 68, 0.12)",
-			"info": "#9B8BCA",             // Uses lavender. CSS: --info
+			"info": "#9B8BCA", // Uses lavender. CSS: --info
 			"infoMuted": "rgba(155, 139, 202, 0.12)"
 		},
 
@@ -204,18 +204,66 @@
 		// - Work as fill, stroke, and text
 		// --------------------------------------------------------------------------
 		"verticals": {
-			"ai":         { "base": "#FF66B3", "muted": "rgba(255, 102, 179, 0.15)", "label": "AI / Machine Learning" },
-			"biotech":    { "base": "#00BD68", "muted": "rgba(0, 189, 104, 0.15)",   "label": "Biotech / Synthetic Bio" },
-			"hardware":   { "base": "#FFB300", "muted": "rgba(255, 179, 0, 0.15)",   "label": "Hardware / Robotics / IoT" },
-			"cleantech":  { "base": "#2DD4BF", "muted": "rgba(45, 212, 191, 0.15)",  "label": "Cleantech / Climate" },
-			"agritech":   { "base": "#A3E635", "muted": "rgba(163, 230, 53, 0.15)",  "label": "Agritech / Food Tech" },
-			"medtech":    { "base": "#F87171", "muted": "rgba(248, 113, 113, 0.15)", "label": "Medical Devices / Healthtech" },
-			"materials":  { "base": "#A78BFA", "muted": "rgba(167, 139, 250, 0.15)", "label": "Advanced Materials / Nano" },
-			"aerospace":  { "base": "#38BDF8", "muted": "rgba(56, 189, 248, 0.15)",  "label": "Aerospace / Space Tech" },
-			"quantum":    { "base": "#D946EF", "muted": "rgba(217, 70, 239, 0.15)",  "label": "Quantum Computing" },
-			"fintech":    { "base": "#6366F1", "muted": "rgba(99, 102, 241, 0.15)",  "label": "FinTech" },
-			"blockchain": { "base": "#22D3EE", "muted": "rgba(34, 211, 238, 0.15)",  "label": "Blockchain / Web3" },
-			"other":      { "base": "#94A3B8", "muted": "rgba(148, 163, 184, 0.15)", "label": "Other / Emerging" }
+			"ai": {
+				"base": "#FF66B3",
+				"muted": "rgba(255, 102, 179, 0.15)",
+				"label": "AI / Machine Learning"
+			},
+			"biotech": {
+				"base": "#00BD68",
+				"muted": "rgba(0, 189, 104, 0.15)",
+				"label": "Biotech / Synthetic Bio"
+			},
+			"hardware": {
+				"base": "#FFB300",
+				"muted": "rgba(255, 179, 0, 0.15)",
+				"label": "Hardware / Robotics / IoT"
+			},
+			"cleantech": {
+				"base": "#2DD4BF",
+				"muted": "rgba(45, 212, 191, 0.15)",
+				"label": "Cleantech / Climate"
+			},
+			"agritech": {
+				"base": "#A3E635",
+				"muted": "rgba(163, 230, 53, 0.15)",
+				"label": "Agritech / Food Tech"
+			},
+			"medtech": {
+				"base": "#F87171",
+				"muted": "rgba(248, 113, 113, 0.15)",
+				"label": "Medical Devices / Healthtech"
+			},
+			"materials": {
+				"base": "#A78BFA",
+				"muted": "rgba(167, 139, 250, 0.15)",
+				"label": "Advanced Materials / Nano"
+			},
+			"aerospace": {
+				"base": "#38BDF8",
+				"muted": "rgba(56, 189, 248, 0.15)",
+				"label": "Aerospace / Space Tech"
+			},
+			"quantum": {
+				"base": "#D946EF",
+				"muted": "rgba(217, 70, 239, 0.15)",
+				"label": "Quantum Computing"
+			},
+			"fintech": {
+				"base": "#6366F1",
+				"muted": "rgba(99, 102, 241, 0.15)",
+				"label": "FinTech"
+			},
+			"blockchain": {
+				"base": "#22D3EE",
+				"muted": "rgba(34, 211, 238, 0.15)",
+				"label": "Blockchain / Web3"
+			},
+			"other": {
+				"base": "#94A3B8",
+				"muted": "rgba(148, 163, 184, 0.15)",
+				"label": "Other / Emerging"
+			}
 		},
 
 		// --------------------------------------------------------------------------
@@ -293,11 +341,11 @@
 		// 2a. Font weights
 		// --------------------------------------------------------------------------
 		"weights": {
-			"light": 300,      // Space Grotesk + Plus Jakarta Sans only.
-			"regular": 400,    // All fonts. Default body weight.
-			"medium": 500,     // UI labels, table headers, emphasis.
-			"semibold": 600,   // Subheads, card titles, nav items, display.
-			"bold": 700        // Headings, hero text, strong emphasis.
+			"light": 300, // Space Grotesk + Plus Jakarta Sans only.
+			"regular": 400, // All fonts. Default body weight.
+			"medium": 500, // UI labels, table headers, emphasis.
+			"semibold": 600, // Subheads, card titles, nav items, display.
+			"bold": 700 // Headings, hero text, strong emphasis.
 		},
 
 		// --------------------------------------------------------------------------
@@ -306,18 +354,42 @@
 		// 15px gives better data density while keeping readability.
 		// --------------------------------------------------------------------------
 		"scale": {
-			"xs":   { "size": "0.75rem",    "lineHeight": "1rem",      "tracking": "0.01em"   },
-			"sm":   { "size": "0.8125rem",  "lineHeight": "1.25rem",   "tracking": "0.005em"  },
-			"base": { "size": "0.9375rem",  "lineHeight": "1.5rem",    "tracking": "0"        },
-			"md":   { "size": "1rem",       "lineHeight": "1.625rem",  "tracking": "0"        },
-			"lg":   { "size": "1.125rem",   "lineHeight": "1.75rem",   "tracking": "-0.005em" },
-			"xl":   { "size": "1.25rem",    "lineHeight": "1.875rem",  "tracking": "-0.01em"  },
-			"2xl":  { "size": "1.5rem",     "lineHeight": "2rem",      "tracking": "-0.015em" },
-			"3xl":  { "size": "1.875rem",   "lineHeight": "2.375rem",  "tracking": "-0.02em"  },
-			"4xl":  { "size": "2.25rem",    "lineHeight": "2.75rem",   "tracking": "-0.025em" },
-			"5xl":  { "size": "3rem",       "lineHeight": "3.5rem",    "tracking": "-0.03em"  },
-			"6xl":  { "size": "3.75rem",    "lineHeight": "4.25rem",   "tracking": "-0.035em" },
-			"7xl":  { "size": "4.5rem",     "lineHeight": "5rem",      "tracking": "-0.04em"  }
+			"xs": { "size": "0.75rem", "lineHeight": "1rem", "tracking": "0.01em" },
+			"sm": {
+				"size": "0.8125rem",
+				"lineHeight": "1.25rem",
+				"tracking": "0.005em"
+			},
+			"base": { "size": "0.9375rem", "lineHeight": "1.5rem", "tracking": "0" },
+			"md": { "size": "1rem", "lineHeight": "1.625rem", "tracking": "0" },
+			"lg": {
+				"size": "1.125rem",
+				"lineHeight": "1.75rem",
+				"tracking": "-0.005em"
+			},
+			"xl": {
+				"size": "1.25rem",
+				"lineHeight": "1.875rem",
+				"tracking": "-0.01em"
+			},
+			"2xl": { "size": "1.5rem", "lineHeight": "2rem", "tracking": "-0.015em" },
+			"3xl": {
+				"size": "1.875rem",
+				"lineHeight": "2.375rem",
+				"tracking": "-0.02em"
+			},
+			"4xl": {
+				"size": "2.25rem",
+				"lineHeight": "2.75rem",
+				"tracking": "-0.025em"
+			},
+			"5xl": { "size": "3rem", "lineHeight": "3.5rem", "tracking": "-0.03em" },
+			"6xl": {
+				"size": "3.75rem",
+				"lineHeight": "4.25rem",
+				"tracking": "-0.035em"
+			},
+			"7xl": { "size": "4.5rem", "lineHeight": "5rem", "tracking": "-0.04em" }
 		},
 
 		// --------------------------------------------------------------------------
@@ -325,33 +397,54 @@
 		// --------------------------------------------------------------------------
 		"roles": {
 			// Display — Bricolage Grotesque. Big, editorial, rare.
-			"displayHero":    { "font": "display", "size": "7xl", "weight": "semibold", "style": "normal" },
-			"displayStat":    { "font": "display", "size": "6xl", "weight": "semibold", "style": "normal" },
-			"displaySection": { "font": "display", "size": "4xl", "weight": "semibold", "style": "normal" },
+			"displayHero": {
+				"font": "display",
+				"size": "7xl",
+				"weight": "semibold",
+				"style": "normal"
+			},
+			"displayStat": {
+				"font": "display",
+				"size": "6xl",
+				"weight": "semibold",
+				"style": "normal"
+			},
+			"displaySection": {
+				"font": "display",
+				"size": "4xl",
+				"weight": "semibold",
+				"style": "normal"
+			},
 
 			// Headings — Space Grotesk. Structural, tech-forward.
 			"h1": { "font": "heading", "size": "3xl", "weight": "bold" },
 			"h2": { "font": "heading", "size": "2xl", "weight": "semibold" },
-			"h3": { "font": "heading", "size": "xl",  "weight": "semibold" },
-			"h4": { "font": "heading", "size": "lg",  "weight": "medium" },
+			"h3": { "font": "heading", "size": "xl", "weight": "semibold" },
+			"h4": { "font": "heading", "size": "lg", "weight": "medium" },
 
 			// Body — Plus Jakarta Sans.
-			"bodyLg": { "font": "body", "size": "md",   "weight": "regular" },
-			"body":   { "font": "body", "size": "base", "weight": "regular" },
-			"bodySm": { "font": "body", "size": "sm",   "weight": "regular" },
-			"bodyXs": { "font": "body", "size": "xs",   "weight": "regular" },
+			"bodyLg": { "font": "body", "size": "md", "weight": "regular" },
+			"body": { "font": "body", "size": "base", "weight": "regular" },
+			"bodySm": { "font": "body", "size": "sm", "weight": "regular" },
+			"bodyXs": { "font": "body", "size": "xs", "weight": "regular" },
 
 			// Labels — Space Grotesk at small sizes.
-			"label":    { "font": "heading", "size": "sm", "weight": "medium" },
-			"labelSm":  { "font": "heading", "size": "xs", "weight": "medium" },
-			"overline": { "font": "heading", "size": "xs", "weight": "semibold", "tracking": "0.08em", "transform": "uppercase" },
+			"label": { "font": "heading", "size": "sm", "weight": "medium" },
+			"labelSm": { "font": "heading", "size": "xs", "weight": "medium" },
+			"overline": {
+				"font": "heading",
+				"size": "xs",
+				"weight": "semibold",
+				"tracking": "0.08em",
+				"transform": "uppercase"
+			},
 
 			// Data — JetBrains Mono. Precision, authority.
-			"dataHero": { "font": "mono", "size": "5xl",  "weight": "medium" },
-			"dataLg":   { "font": "mono", "size": "2xl",  "weight": "medium" },
-			"data":     { "font": "mono", "size": "base", "weight": "regular" },
-			"dataSm":   { "font": "mono", "size": "sm",   "weight": "regular" },
-			"dataXs":   { "font": "mono", "size": "xs",   "weight": "regular" }
+			"dataHero": { "font": "mono", "size": "5xl", "weight": "medium" },
+			"dataLg": { "font": "mono", "size": "2xl", "weight": "medium" },
+			"data": { "font": "mono", "size": "base", "weight": "regular" },
+			"dataSm": { "font": "mono", "size": "sm", "weight": "regular" },
+			"dataXs": { "font": "mono", "size": "xs", "weight": "regular" }
 		}
 	},
 
@@ -620,12 +713,22 @@
 		},
 
 		"animates": [
-			"opacity", "transform", "background-color", "border-color",
-			"box-shadow", "clip-path", "stroke-dashoffset", "filter"
+			"opacity",
+			"transform",
+			"background-color",
+			"border-color",
+			"box-shadow",
+			"clip-path",
+			"stroke-dashoffset",
+			"filter"
 		],
 
 		"doesNotAnimate": [
-			"color", "font-size", "width/height", "padding/margin", "grid/flex properties"
+			"color",
+			"font-size",
+			"width/height",
+			"padding/margin",
+			"grid/flex properties"
 		],
 
 		"entrances": {
@@ -766,14 +869,14 @@
 
 		// Default series colors for non-vertical charts.
 		"seriesDefault": [
-			"#7C3AED",  // Primary purple
-			"#9B8BCA",  // Lavender
-			"#00BD68",  // Biotech green (house)
-			"#FF66B3",  // AI pink (house)
-			"#A78BFA",  // Violet
-			"#FFB300",  // Hardware amber (house)
-			"#38BDF8",  // Sky
-			"#A3E635"   // Lime
+			"#7C3AED", // Primary purple
+			"#9B8BCA", // Lavender
+			"#00BD68", // Biotech green (house)
+			"#FF66B3", // AI pink (house)
+			"#A78BFA", // Violet
+			"#FFB300", // Hardware amber (house)
+			"#38BDF8", // Sky
+			"#A3E635" // Lime
 		],
 
 		"bar": {

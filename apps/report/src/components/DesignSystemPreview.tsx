@@ -1,38 +1,78 @@
-import { type CSSProperties, type ReactNode, useState } from "react";
 import { AltArrowDown, AltArrowUp, Magnifier } from "@solar-icons/react";
+import { type CSSProperties, type ReactNode, useState } from "react";
 
 // ---------------------------------------------------------------------------
 // Data
 // ---------------------------------------------------------------------------
 const BG_SWATCHES = [
-	{ name: "background", var: "--background", hex: "#0A0710", desc: "Page background" },
+	{
+		name: "background",
+		var: "--background",
+		hex: "#0A0710",
+		desc: "Page background",
+	},
 	{ name: "card", var: "--card", hex: "#110E18", desc: "Cards, panels" },
-	{ name: "popover", var: "--popover", hex: "#1A1622", desc: "Modals, popovers" },
+	{
+		name: "popover",
+		var: "--popover",
+		hex: "#1A1622",
+		desc: "Modals, popovers",
+	},
 	{ name: "muted", var: "--muted", hex: "#231E2D", desc: "Hover states" },
 ] as const;
 
 const TEXT_LEVELS = [
-	{ name: "foreground", var: "--foreground", hex: "#ECEEF4", desc: "Headings, body" },
-	{ name: "muted-fg", var: "--muted-foreground", hex: "#928BA8", desc: "Labels, captions" },
-	{ name: "tertiary", var: "--text-tertiary", hex: "#635C78", desc: "Metadata, hints" },
-	{ name: "disabled", var: "--text-disabled", hex: "#433D56", desc: "Disabled elements" },
+	{
+		name: "foreground",
+		var: "--foreground",
+		hex: "#ECEEF4",
+		desc: "Headings, body",
+	},
+	{
+		name: "muted-fg",
+		var: "--muted-foreground",
+		hex: "#928BA8",
+		desc: "Labels, captions",
+	},
+	{
+		name: "tertiary",
+		var: "--text-tertiary",
+		hex: "#635C78",
+		desc: "Metadata, hints",
+	},
+	{
+		name: "disabled",
+		var: "--text-disabled",
+		hex: "#433D56",
+		desc: "Disabled elements",
+	},
 ] as const;
 
 const PURPLE_SCALE = [
-	{ step: "50", hex: "#F5F3FF" }, { step: "100", hex: "#EDE9FE" },
-	{ step: "200", hex: "#DDD6FE" }, { step: "300", hex: "#C4B5FD" },
-	{ step: "400", hex: "#A78BFA" }, { step: "500", hex: "#8B5CF6" },
-	{ step: "600", hex: "#7C3AED" }, { step: "700", hex: "#6D28D9" },
-	{ step: "800", hex: "#5B21B6" }, { step: "900", hex: "#4C1D95" },
+	{ step: "50", hex: "#F5F3FF" },
+	{ step: "100", hex: "#EDE9FE" },
+	{ step: "200", hex: "#DDD6FE" },
+	{ step: "300", hex: "#C4B5FD" },
+	{ step: "400", hex: "#A78BFA" },
+	{ step: "500", hex: "#8B5CF6" },
+	{ step: "600", hex: "#7C3AED" },
+	{ step: "700", hex: "#6D28D9" },
+	{ step: "800", hex: "#5B21B6" },
+	{ step: "900", hex: "#4C1D95" },
 	{ step: "950", hex: "#2E1065" },
 ] as const;
 
 const LAVENDER_SCALE = [
-	{ step: "50", hex: "#F8F6FC" }, { step: "100", hex: "#EDE8F5" },
-	{ step: "200", hex: "#DDD4ED" }, { step: "300", hex: "#C4B5E0" },
-	{ step: "400", hex: "#A893D1" }, { step: "500", hex: "#9B8BCA" },
-	{ step: "600", hex: "#7E6DB5" }, { step: "700", hex: "#6B5A9E" },
-	{ step: "800", hex: "#574885" }, { step: "900", hex: "#3D3366" },
+	{ step: "50", hex: "#F8F6FC" },
+	{ step: "100", hex: "#EDE8F5" },
+	{ step: "200", hex: "#DDD4ED" },
+	{ step: "300", hex: "#C4B5E0" },
+	{ step: "400", hex: "#A893D1" },
+	{ step: "500", hex: "#9B8BCA" },
+	{ step: "600", hex: "#7E6DB5" },
+	{ step: "700", hex: "#6B5A9E" },
+	{ step: "800", hex: "#574885" },
+	{ step: "900", hex: "#3D3366" },
 	{ step: "950", hex: "#1A1530" },
 ] as const;
 
@@ -111,9 +151,19 @@ function Overline({ children }: { children: ReactNode }) {
 	);
 }
 
-function SectionHeading({ id, overline, title }: { id: string; overline: string; title: string }) {
+function SectionHeading({
+	id,
+	overline,
+	title,
+}: {
+	id: string;
+	overline: string;
+	title: string;
+}) {
 	return (
-		<div id={id} className="ds-section mb-10 scroll-mt-8 pt-16 first:pt-0"
+		<div
+			id={id}
+			className="ds-section mb-10 scroll-mt-8 pt-16 first:pt-0"
 			style={{ animationDelay: `${Number.parseInt(overline) * 0.08}s` }}
 		>
 			<Overline>{overline}</Overline>
@@ -134,7 +184,8 @@ function SectionHeading({ id, overline, title }: { id: string; overline: string;
 			<div
 				className="mt-4 h-px w-full"
 				style={{
-					background: "linear-gradient(90deg, var(--primary) 0%, transparent 60%)",
+					background:
+						"linear-gradient(90deg, var(--primary) 0%, transparent 60%)",
 				}}
 			/>
 		</div>
@@ -179,7 +230,9 @@ function ColorSwatch({
 				style={{
 					background: color,
 					borderRadius: "var(--radius)",
-					border: ring ? `2px solid ${color}` : "1px solid var(--border-subtle)",
+					border: ring
+						? `2px solid ${color}`
+						: "1px solid var(--border-subtle)",
 				}}
 			/>
 			<span
@@ -238,10 +291,26 @@ function MaturityBadge({
 	variant: "seed" | "seriesA" | "seriesB" | "growth";
 }) {
 	const colors = {
-		seed: { bg: "var(--warning-muted)", text: "var(--warning)", border: "rgba(245,158,11,0.3)" },
-		seriesA: { bg: "var(--info-muted)", text: "var(--info)", border: "rgba(61,165,217,0.3)" },
-		seriesB: { bg: "rgba(167,139,250,0.12)", text: "#A78BFA", border: "rgba(167,139,250,0.3)" },
-		growth: { bg: "var(--success-muted)", text: "var(--success)", border: "rgba(34,197,94,0.3)" },
+		seed: {
+			bg: "var(--warning-muted)",
+			text: "var(--warning)",
+			border: "rgba(245,158,11,0.3)",
+		},
+		seriesA: {
+			bg: "var(--info-muted)",
+			text: "var(--info)",
+			border: "rgba(61,165,217,0.3)",
+		},
+		seriesB: {
+			bg: "rgba(167,139,250,0.12)",
+			text: "#A78BFA",
+			border: "rgba(167,139,250,0.3)",
+		},
+		growth: {
+			bg: "var(--success-muted)",
+			text: "var(--success)",
+			border: "rgba(34,197,94,0.3)",
+		},
 	};
 	const c = colors[variant];
 	return (
@@ -264,7 +333,13 @@ function MaturityBadge({
 	);
 }
 
-function TrendArrow({ direction, value }: { direction: "up" | "down"; value: string }) {
+function TrendArrow({
+	direction,
+	value,
+}: {
+	direction: "up" | "down";
+	value: string;
+}) {
 	const isUp = direction === "up";
 	const Icon = isUp ? AltArrowUp : AltArrowDown;
 	return (
@@ -351,7 +426,9 @@ export function DesignSystemPreview() {
 										fontFamily: "var(--font-heading)",
 										fontSize: "0.8125rem",
 										fontWeight: isActive ? 600 : 400,
-										color: isActive ? "var(--primary)" : "var(--muted-foreground)",
+										color: isActive
+											? "var(--primary)"
+											: "var(--muted-foreground)",
 										background: isActive ? "var(--primary-8)" : "transparent",
 										borderRadius: "var(--radius-md)",
 										padding: "0.5rem 0.75rem",
@@ -386,7 +463,9 @@ export function DesignSystemPreview() {
 						{/* Header */}
 						<header
 							className="mb-4"
-							style={{ animation: "ds-fadeUp 0.5s cubic-bezier(0.16,1,0.3,1) both" }}
+							style={{
+								animation: "ds-fadeUp 0.5s cubic-bezier(0.16,1,0.3,1) both",
+							}}
 						>
 							<img
 								src="/brand/logo-transparent-ondark.svg"
@@ -401,7 +480,8 @@ export function DesignSystemPreview() {
 									lineHeight: "4.25rem",
 									letterSpacing: "-0.035em",
 									fontWeight: "var(--font-display-weight)" as unknown as number,
-									fontStyle: "var(--font-display-style)" as React.CSSProperties["fontStyle"],
+									fontStyle:
+										"var(--font-display-style)" as React.CSSProperties["fontStyle"],
 									color: "var(--foreground)",
 								}}
 							>
@@ -417,8 +497,8 @@ export function DesignSystemPreview() {
 									letterSpacing: "-0.005em",
 								}}
 							>
-								Living style guide for the LATAM Deeptech Report platform.
-								Every token, component, and pattern rendered from the spec.
+								Living style guide for the LATAM Deeptech Report platform. Every
+								token, component, and pattern rendered from the spec.
 							</p>
 						</header>
 
@@ -661,15 +741,44 @@ export function DesignSystemPreview() {
 						<SubHeading>Display — Bricolage Grotesque</SubHeading>
 						<div
 							className="space-y-4 rounded-xl border p-6"
-							style={{ background: "var(--card)", borderColor: "var(--border-subtle)" }}
+							style={{
+								background: "var(--card)",
+								borderColor: "var(--border-subtle)",
+							}}
 						>
-							<div style={{ fontFamily: "var(--font-display)", fontSize: "4.5rem", lineHeight: "5rem", letterSpacing: "-0.04em", color: "var(--foreground)" }}>
+							<div
+								style={{
+									fontFamily: "var(--font-display)",
+									fontSize: "4.5rem",
+									lineHeight: "5rem",
+									letterSpacing: "-0.04em",
+									color: "var(--foreground)",
+								}}
+							>
 								100 Startups
 							</div>
-							<div style={{ fontFamily: "var(--font-display)", fontSize: "3.75rem", lineHeight: "4.25rem", letterSpacing: "-0.035em", color: "var(--primary)" }}>
+							<div
+								style={{
+									fontFamily: "var(--font-display)",
+									fontSize: "3.75rem",
+									lineHeight: "4.25rem",
+									letterSpacing: "-0.035em",
+									color: "var(--primary)",
+								}}
+							>
 								$2.4 Billion
 							</div>
-							<div style={{ fontFamily: "var(--font-display)", fontSize: "2.25rem", lineHeight: "2.75rem", letterSpacing: "-0.025em", fontStyle: "var(--font-display-style)" as React.CSSProperties["fontStyle"], color: "var(--muted-foreground)" }}>
+							<div
+								style={{
+									fontFamily: "var(--font-display)",
+									fontSize: "2.25rem",
+									lineHeight: "2.75rem",
+									letterSpacing: "-0.025em",
+									fontStyle:
+										"var(--font-display-style)" as React.CSSProperties["fontStyle"],
+									color: "var(--muted-foreground)",
+								}}
+							>
 								The Definitive LATAM Deeptech Directory
 							</div>
 						</div>
@@ -677,16 +786,49 @@ export function DesignSystemPreview() {
 						{/* Heading — Space Grotesk */}
 						<SubHeading>Heading — Space Grotesk</SubHeading>
 						<div className="space-y-3">
-							<div style={{ fontFamily: "var(--font-heading)", fontSize: "1.875rem", lineHeight: "2.375rem", fontWeight: 700, letterSpacing: "-0.02em" }}>
+							<div
+								style={{
+									fontFamily: "var(--font-heading)",
+									fontSize: "1.875rem",
+									lineHeight: "2.375rem",
+									fontWeight: 700,
+									letterSpacing: "-0.02em",
+								}}
+							>
 								H1 — Ecosystem Overview
 							</div>
-							<div style={{ fontFamily: "var(--font-heading)", fontSize: "1.5rem", lineHeight: "2rem", fontWeight: 600, letterSpacing: "-0.015em" }}>
+							<div
+								style={{
+									fontFamily: "var(--font-heading)",
+									fontSize: "1.5rem",
+									lineHeight: "2rem",
+									fontWeight: 600,
+									letterSpacing: "-0.015em",
+								}}
+							>
 								H2 — Funding by Vertical
 							</div>
-							<div style={{ fontFamily: "var(--font-heading)", fontSize: "1.25rem", lineHeight: "1.875rem", fontWeight: 600, letterSpacing: "-0.01em" }}>
+							<div
+								style={{
+									fontFamily: "var(--font-heading)",
+									fontSize: "1.25rem",
+									lineHeight: "1.875rem",
+									fontWeight: 600,
+									letterSpacing: "-0.01em",
+								}}
+							>
 								H3 — Regional Distribution
 							</div>
-							<div style={{ fontFamily: "var(--font-heading)", fontSize: "1.125rem", lineHeight: "1.75rem", fontWeight: 500, letterSpacing: "-0.005em", color: "var(--muted-foreground)" }}>
+							<div
+								style={{
+									fontFamily: "var(--font-heading)",
+									fontSize: "1.125rem",
+									lineHeight: "1.75rem",
+									fontWeight: 500,
+									letterSpacing: "-0.005em",
+									color: "var(--muted-foreground)",
+								}}
+							>
 								H4 — Methodology Notes
 							</div>
 						</div>
@@ -694,19 +836,41 @@ export function DesignSystemPreview() {
 						{/* Body — Plus Jakarta Sans */}
 						<SubHeading>Body — Plus Jakarta Sans</SubHeading>
 						<div className="max-w-2xl space-y-3">
-							<p style={{ fontFamily: "var(--font-body)", fontSize: "1rem", lineHeight: "1.625rem" }}>
-								NovaBio is a Mexico City-based biotech startup developing CRISPR-based crop
-								resistance platforms for tropical agriculture. Founded in 2022, they have
-								raised $12.5M in Series A funding led by ALLVP and Kaszek.
+							<p
+								style={{
+									fontFamily: "var(--font-body)",
+									fontSize: "1rem",
+									lineHeight: "1.625rem",
+								}}
+							>
+								NovaBio is a Mexico City-based biotech startup developing
+								CRISPR-based crop resistance platforms for tropical agriculture.
+								Founded in 2022, they have raised $12.5M in Series A funding led
+								by ALLVP and Kaszek.
 							</p>
-							<p style={{ fontFamily: "var(--font-body)", fontSize: "0.9375rem", lineHeight: "1.5rem", color: "var(--muted-foreground)" }}>
-								This report profiles 100 deeptech startups across 12 LATAM countries,
-								covering verticals from AI/ML to quantum computing. Data collected between
-								January and March 2026.
+							<p
+								style={{
+									fontFamily: "var(--font-body)",
+									fontSize: "0.9375rem",
+									lineHeight: "1.5rem",
+									color: "var(--muted-foreground)",
+								}}
+							>
+								This report profiles 100 deeptech startups across 12 LATAM
+								countries, covering verticals from AI/ML to quantum computing.
+								Data collected between January and March 2026.
 							</p>
-							<p style={{ fontFamily: "var(--font-body)", fontSize: "0.8125rem", lineHeight: "1.25rem", color: "var(--text-tertiary)" }}>
-								Methodology: Startups selected based on technology readiness level (TRL 4+),
-								minimum $500K in verifiable funding, and active operations in at least one LATAM country.
+							<p
+								style={{
+									fontFamily: "var(--font-body)",
+									fontSize: "0.8125rem",
+									lineHeight: "1.25rem",
+									color: "var(--text-tertiary)",
+								}}
+							>
+								Methodology: Startups selected based on technology readiness
+								level (TRL 4+), minimum $500K in verifiable funding, and active
+								operations in at least one LATAM country.
 							</p>
 						</div>
 
@@ -714,26 +878,65 @@ export function DesignSystemPreview() {
 						<SubHeading>Data — JetBrains Mono</SubHeading>
 						<div className="flex flex-wrap items-end gap-8">
 							<div>
-								<div style={{ fontFamily: "var(--font-mono)", fontSize: "3rem", lineHeight: "3.5rem", fontWeight: 500, color: "var(--primary)", letterSpacing: "-0.03em" }}>
+								<div
+									style={{
+										fontFamily: "var(--font-mono)",
+										fontSize: "3rem",
+										lineHeight: "3.5rem",
+										fontWeight: 500,
+										color: "var(--primary)",
+										letterSpacing: "-0.03em",
+									}}
+								>
 									$2.4B
 								</div>
-								<div style={{ fontFamily: "var(--font-mono)", fontSize: "0.8125rem", color: "var(--text-tertiary)" }}>
+								<div
+									style={{
+										fontFamily: "var(--font-mono)",
+										fontSize: "0.8125rem",
+										color: "var(--text-tertiary)",
+									}}
+								>
 									dataLg — Total Funding
 								</div>
 							</div>
 							<div>
-								<div style={{ fontFamily: "var(--font-mono)", fontSize: "0.9375rem", color: "var(--foreground)" }}>
+								<div
+									style={{
+										fontFamily: "var(--font-mono)",
+										fontSize: "0.9375rem",
+										color: "var(--foreground)",
+									}}
+								>
 									MXN 240,000,000
 								</div>
-								<div style={{ fontFamily: "var(--font-mono)", fontSize: "0.75rem", color: "var(--text-tertiary)" }}>
+								<div
+									style={{
+										fontFamily: "var(--font-mono)",
+										fontSize: "0.75rem",
+										color: "var(--text-tertiary)",
+									}}
+								>
 									data — Currency Format
 								</div>
 							</div>
 							<div>
-								<div style={{ fontFamily: "var(--font-mono)", fontSize: "0.8125rem", color: "var(--muted-foreground)" }}>
+								<div
+									style={{
+										fontFamily: "var(--font-mono)",
+										fontSize: "0.8125rem",
+										color: "var(--muted-foreground)",
+									}}
+								>
 									ID-NB-2024-0847
 								</div>
-								<div style={{ fontFamily: "var(--font-mono)", fontSize: "0.75rem", color: "var(--text-tertiary)" }}>
+								<div
+									style={{
+										fontFamily: "var(--font-mono)",
+										fontSize: "0.75rem",
+										color: "var(--text-tertiary)",
+									}}
+								>
 									dataSm — Reference Code
 								</div>
 							</div>
@@ -750,7 +953,8 @@ export function DesignSystemPreview() {
 									key={t.name}
 									className="flex items-baseline gap-4 border-b px-4 py-2.5"
 									style={{
-										background: i % 2 === 0 ? "var(--card)" : "var(--background)",
+										background:
+											i % 2 === 0 ? "var(--card)" : "var(--background)",
 										borderColor: "var(--border-subtle)",
 									}}
 								>
@@ -864,7 +1068,10 @@ export function DesignSystemPreview() {
 										cursor: "pointer",
 										transition: "all 150ms ease-out",
 									}}
-									hoverStyle={{ background: "var(--primary-8)", borderColor: "var(--primary-60)" }}
+									hoverStyle={{
+										background: "var(--primary-8)",
+										borderColor: "var(--primary-60)",
+									}}
 								/>
 								<ButtonDemo
 									label="Download Report"
@@ -915,7 +1122,10 @@ export function DesignSystemPreview() {
 										cursor: "pointer",
 										transition: "all 150ms ease-out",
 									}}
-									hoverStyle={{ background: "rgba(255,255,255,0.06)", color: "var(--foreground)" }}
+									hoverStyle={{
+										background: "rgba(255,255,255,0.06)",
+										color: "var(--foreground)",
+									}}
 								/>
 								<ButtonDemo
 									label="View All Startups"
@@ -1099,7 +1309,8 @@ export function DesignSystemPreview() {
 												color: "var(--muted-foreground)",
 											}}
 										>
-											CRISPR-based crop resistance platform for tropical agriculture
+											CRISPR-based crop resistance platform for tropical
+											agriculture
 										</p>
 									</div>
 								</div>
@@ -1199,15 +1410,30 @@ export function DesignSystemPreview() {
 												color: "var(--muted-foreground)",
 											}}
 										>
-											Autonomous quality inspection for manufacturing lines using computer vision
+											Autonomous quality inspection for manufacturing lines
+											using computer vision
 										</p>
 									</div>
 								</div>
 								<div className="mt-4 flex items-center gap-3">
-									<span style={{ fontFamily: "var(--font-body)", fontSize: "0.8125rem", color: "var(--text-tertiary)" }}>
-										<span className="mr-1">&#127463;&#127479;</span> S&atilde;o Paulo
+									<span
+										style={{
+											fontFamily: "var(--font-body)",
+											fontSize: "0.8125rem",
+											color: "var(--text-tertiary)",
+										}}
+									>
+										<span className="mr-1">&#127463;&#127479;</span> S&atilde;o
+										Paulo
 									</span>
-									<span style={{ fontFamily: "var(--font-mono)", fontSize: "0.8125rem", fontWeight: 500, color: "var(--primary)" }}>
+									<span
+										style={{
+											fontFamily: "var(--font-mono)",
+											fontSize: "0.8125rem",
+											fontWeight: 500,
+											color: "var(--primary)",
+										}}
+									>
 										$3.2M
 									</span>
 								</div>
@@ -1256,11 +1482,7 @@ export function DesignSystemPreview() {
 								trend={{ direction: "up", value: "+34% YoY" }}
 								gold
 							/>
-							<StatBlock
-								value="12"
-								label="Countries"
-								sublabel="across LATAM"
-							/>
+							<StatBlock value="12" label="Countries" sublabel="across LATAM" />
 						</div>
 
 						{/* ====================================================== */}
@@ -1271,14 +1493,30 @@ export function DesignSystemPreview() {
 						<SubHeading>Startups by Vertical</SubHeading>
 						<div
 							className="rounded-xl border p-6"
-							style={{ background: "var(--card)", borderColor: "var(--border-subtle)" }}
+							style={{
+								background: "var(--card)",
+								borderColor: "var(--border-subtle)",
+							}}
 						>
 							{/* Y-axis label */}
 							<div className="mb-4 flex items-center justify-between">
-								<span style={{ fontFamily: "var(--font-heading)", fontSize: "0.875rem", fontWeight: 600, color: "var(--foreground)" }}>
+								<span
+									style={{
+										fontFamily: "var(--font-heading)",
+										fontSize: "0.875rem",
+										fontWeight: 600,
+										color: "var(--foreground)",
+									}}
+								>
 									Distribution by Vertical
 								</span>
-								<span style={{ fontFamily: "var(--font-mono)", fontSize: "0.75rem", color: "var(--text-tertiary)" }}>
+								<span
+									style={{
+										fontFamily: "var(--font-mono)",
+										fontSize: "0.75rem",
+										color: "var(--text-tertiary)",
+									}}
+								>
 									n=100
 								</span>
 							</div>
@@ -1289,7 +1527,10 @@ export function DesignSystemPreview() {
 									const maxVal = Math.max(...BAR_DATA.map((b) => b.value));
 									const heightPct = (bar.value / maxVal) * 100;
 									return (
-										<div key={bar.label} className="flex flex-1 flex-col items-center gap-2">
+										<div
+											key={bar.label}
+											className="flex flex-1 flex-col items-center gap-2"
+										>
 											{/* Value label */}
 											<span
 												style={{
@@ -1302,7 +1543,13 @@ export function DesignSystemPreview() {
 												{bar.value}
 											</span>
 											{/* Bar */}
-											<div className="w-full" style={{ height: `${heightPct}%`, position: "relative" }}>
+											<div
+												className="w-full"
+												style={{
+													height: `${heightPct}%`,
+													position: "relative",
+												}}
+											>
 												<div
 													className="absolute inset-0 w-full origin-bottom"
 													style={{
@@ -1338,10 +1585,22 @@ export function DesignSystemPreview() {
 
 							{/* Grid lines overlay — decorative */}
 							<div className="mt-3 flex items-center justify-between">
-								<span style={{ fontFamily: "var(--font-mono)", fontSize: "0.625rem", color: "var(--text-disabled)" }}>
+								<span
+									style={{
+										fontFamily: "var(--font-mono)",
+										fontSize: "0.625rem",
+										color: "var(--text-disabled)",
+									}}
+								>
 									0
 								</span>
-								<span style={{ fontFamily: "var(--font-mono)", fontSize: "0.625rem", color: "var(--text-disabled)" }}>
+								<span
+									style={{
+										fontFamily: "var(--font-mono)",
+										fontSize: "0.625rem",
+										color: "var(--text-disabled)",
+									}}
+								>
 									Source: 404TF Research, Q1 2026
 								</span>
 							</div>
@@ -1350,7 +1609,11 @@ export function DesignSystemPreview() {
 						{/* ====================================================== */}
 						{/* DIVIDERS                                                */}
 						{/* ====================================================== */}
-						<SectionHeading id="dividers" overline="09" title="Dividers & Separators" />
+						<SectionHeading
+							id="dividers"
+							overline="09"
+							title="Dividers & Separators"
+						/>
 
 						<div className="space-y-12">
 							{/* Primary gradient line */}
@@ -1359,7 +1622,8 @@ export function DesignSystemPreview() {
 								<div
 									className="h-px w-full"
 									style={{
-										background: "linear-gradient(90deg, transparent 0%, var(--primary) 20%, var(--primary) 80%, transparent 100%)",
+										background:
+											"linear-gradient(90deg, transparent 0%, var(--primary) 20%, var(--primary) 80%, transparent 100%)",
 									}}
 								/>
 							</div>
@@ -1379,7 +1643,8 @@ export function DesignSystemPreview() {
 								<div
 									className="h-16 w-full"
 									style={{
-										background: "linear-gradient(180deg, var(--background) 0%, transparent 100%)",
+										background:
+											"linear-gradient(180deg, var(--background) 0%, transparent 100%)",
 									}}
 								/>
 							</div>
@@ -1393,7 +1658,8 @@ export function DesignSystemPreview() {
 											key={i}
 											className="h-px flex-1"
 											style={{
-												background: i % 2 === 0 ? "var(--primary)" : "transparent",
+												background:
+													i % 2 === 0 ? "var(--primary)" : "transparent",
 												opacity: 0.4,
 											}}
 										/>
@@ -1405,7 +1671,10 @@ export function DesignSystemPreview() {
 						{/* ====================================================== */}
 						{/* Footer note                                             */}
 						{/* ====================================================== */}
-						<div className="mt-24 border-t pt-8" style={{ borderColor: "var(--border-subtle)" }}>
+						<div
+							className="mt-24 border-t pt-8"
+							style={{ borderColor: "var(--border-subtle)" }}
+						>
 							<p
 								style={{
 									fontFamily: "var(--font-body)",
@@ -1413,7 +1682,8 @@ export function DesignSystemPreview() {
 									color: "var(--text-disabled)",
 								}}
 							>
-								404 Tech Found — LATAM Deeptech Report Platform — Design System v1.0
+								404 Tech Found — LATAM Deeptech Report Platform — Design System
+								v1.0
 							</p>
 						</div>
 					</div>
