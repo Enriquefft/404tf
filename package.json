@@ -10,6 +10,8 @@
 		"build": "bun run --filter='@404tf/*' build",
 		"build:landing": "bun run --filter='@404tf/landing' build",
 		"build:spechack": "bun run --filter='@404tf/spechack' build",
+		"dev:report": "bun run --filter='@404tf/report' dev",
+		"build:report": "bun run --filter='@404tf/report' build",
 		"lint": "biome check --fix .",
 		"check": "biome check .",
 		"check:deps": "knip",

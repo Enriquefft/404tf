@@ -1,0 +1,949 @@
+{
+	// ============================================================================
+	// 404 TECH FOUND — LATAM DEEPTECH REPORT PLATFORM
+	// Design Specification v1.0
+	// ============================================================================
+	//
+	// A product of 404TF — the same NGO behind the landing page at ../landing.
+	// This spec defines the visual system for the bilingual (ES/EN) directory +
+	// analytics platform profiling 100 LATAM deeptech startups.
+	//
+	// Two conversion audiences:
+	// - Corporates seeking deeptech partners
+	// - Startups seeking corporate deals
+	// 404tf sits in the middle as facilitator.
+	//
+	// The aesthetic splits the difference between a research report and a modern
+	// SaaS directory. Think Bloomberg Terminal meets The Economist meets Stripe.
+	// Dark, institutional, data-forward. Numbers are heroes. Charts are content,
+	// not decoration.
+	// ============================================================================
+
+	// ============================================================================
+	// 0. BRAND RELATIONSHIP — "SIMILAR"
+	// ============================================================================
+	//
+	// Decision: SIMILAR to the landing page. Not identical, not contrasting.
+	//
+	// The landing (../landing) is the community hub — Orbitron headings, purple
+	// gradients, glowing mascots, gaming/tech energy. That voice works for
+	// attracting a young LATAM tech community.
+	//
+	// This report is the institutional product. Corporates evaluating deeptech
+	// need research-grade credibility, not community energy. But it must still
+	// feel like a 404TF product — someone navigating from the landing to the
+	// report should sense continuity, not whiplash.
+	//
+	// What's SHARED (brand DNA):
+	// - Dark-on-light-text direction (both are dark-mode-first)
+	// - House colors carry into the vertical palette (AI=pink, Bio=green, HW=amber)
+	// - Glow/shadow language (box-shadow auras, not drop shadows)
+	// - Alpha-based borders (rgba white on dark backgrounds)
+	// - The 404TF logo renders in its existing form
+	//
+	// What EVOLVES (report voice):
+	// - Backgrounds: neutral gray → navy-tinted (signals "analytical product")
+	// - Accent: purple → gold (institutional authority, not community energy)
+	// - Typography: Orbitron/Inter → Instrument Serif/Space Grotesk/Plus Jakarta
+	//   (editorial serif + tech sans, not gaming display)
+	// - Radii: 12px base → 8px base (tighter = more data-professional)
+	// - Motion: spring physics → ease-out curves (nothing bounces here)
+	//
+	// Cross-reference — Landing token → Report token:
+	// ┌──────────────────────────┬───────────────────────────────┐
+	// │ Landing                  │ Report                        │
+	// ├──────────────────────────┼───────────────────────────────┤
+	// │ --background: 0 0% 7%   │ bg.deep: #080B16 (navy tint)  │
+	// │ --card: 0 0% 10%        │ bg.surface: #0F1320           │
+	// │ --foreground: 0 0% 98%  │ text.primary: #ECEEF4         │
+	// │ --primary: 262 85% 50%  │ gold.400: #EDAE49             │
+	// │ --house-ai: 330 100 70  │ verticals.ai: #FF66B3         │
+	// │ --house-bio: 153 100 37 │ verticals.biotech: #00BD68    │
+	// │ --house-hw: 42 100% 50% │ verticals.hardware: #FFB300   │
+	// │ Orbitron (headings)      │ Space Grotesk (headings)      │
+	// │ Inter (body)             │ Plus Jakarta Sans (body)      │
+	// │ —                        │ Instrument Serif (display)    │
+	// │ system mono              │ JetBrains Mono (data)         │
+	// │ --radius: 0.75rem       │ radius.DEFAULT: 0.5rem        │
+	// │ .text-glow-purple        │ shadows.glowGold              │
+	// │ .gradient-purple          │ gradients.goldLine            │
+	// └──────────────────────────┴───────────────────────────────┘
+	// ============================================================================
+
+	// ==========================================================================
+	// 1. COLOR SYSTEM
+	// ==========================================================================
+	"colors": {
+		// --------------------------------------------------------------------------
+		// 1a. Backgrounds — three depth levels + overlay
+		//
+		// The landing uses neutral grays (HSL 0 0% 7/10/15/18%).
+		// The report shifts to navy-tinted darks. This subtle blue undertone
+		// reads as "data" and "analytical" — it's the difference between a
+		// community forum and a Bloomberg terminal. Close enough to feel
+		// related, different enough to signal "you're in the research product."
+		// --------------------------------------------------------------------------
+		"bg": {
+			"deep": "#080B16",     // Page background. Navy-black. Landing equivalent: hsl(0 0% 7%).
+			"surface": "#0F1320",  // Cards, sections. Landing equivalent: --card hsl(0 0% 10%).
+			"elevated": "#171C2E", // Modals, popovers, floating panels.
+			"overlay": "#1E2438"   // Hover fills, active states, dropdowns.
+		},
+
+		// --------------------------------------------------------------------------
+		// 1b. Text — four hierarchy levels
+		// Slightly warm off-whites. The landing uses hsl(0 0% 98%) for foreground
+		// and hsl(0 0% 64%) for muted. We keep the same contrast ratios but shift
+		// slightly cooler to match the navy backgrounds.
+		// --------------------------------------------------------------------------
+		"text": {
+			"primary": "#ECEEF4",   // Main content, headings. ~93% luminance.
+			"secondary": "#8B92A8", // Labels, descriptions. Landing's --muted-foreground equivalent.
+			"tertiary": "#5C6378",  // Metadata, timestamps, captions.
+			"disabled": "#3D4356"   // Disabled states, inactive elements.
+		},
+
+		// --------------------------------------------------------------------------
+		// 1c. Brand accent — Gold
+		//
+		// The landing's primary accent is purple (HSL 262 85% 50%). Purple says
+		// "community, tech culture, creative energy." For the report, we shift
+		// to gold — "institutional authority, value, research credibility."
+		//
+		// This isn't arbitrary: gold is the color of data highlights, key metrics,
+		// and CTAs. When a corporate decision-maker scans the page, gold numbers
+		// say "these are the facts that matter."
+		//
+		// Note: the hardware house color (HSL 42 100% 50% ≈ #FFB300) is in the
+		// amber family. The brand gold (#EDAE49) is deliberately more yellow-gold
+		// vs. the hardware amber-orange, so they're distinguishable in context.
+		// --------------------------------------------------------------------------
+		"gold": {
+			"50": "#FDF8EB",
+			"100": "#FAE9C3",
+			"200": "#F5D48E",
+			"300": "#F0BF5A",  // Light gold — hover text on dark.
+			"400": "#EDAE49",  // ★ PRIMARY BRAND GOLD. CTAs, stats, highlights.
+			"500": "#D49A2A",  // Deeper — pressed states, borders.
+			"600": "#B07E1C",  // Dark gold — icon fills on lighter surfaces.
+			"700": "#8C6316",
+			"800": "#694A11",
+			"900": "#45310C",
+			"950": "#231808"
+		},
+
+		// --------------------------------------------------------------------------
+		// 1d. Secondary accent — Steel blue
+		// Cool counterpoint to the warm gold. Used for links, secondary
+		// actions, info states. No equivalent in the landing (which uses
+		// purple for everything). This gives the report more tonal range.
+		// --------------------------------------------------------------------------
+		"steel": {
+			"50": "#EFF6FC",
+			"100": "#D6EAFA",
+			"200": "#ADD4F5",
+			"300": "#7ABCE9",
+			"400": "#3DA5D9",  // ★ PRIMARY STEEL. Links, info badges.
+			"500": "#2B8CBD",
+			"600": "#1F709A",
+			"700": "#195A7C",
+			"800": "#134560",
+			"900": "#0E3044",
+			"950": "#091C28"
+		},
+
+		// --------------------------------------------------------------------------
+		// 1e. Borders & dividers
+		// Same alpha-on-white approach as the landing (which uses hsl(0 0% 18%)
+		// for --border). Alpha values adapt to any background level.
+		// --------------------------------------------------------------------------
+		"border": {
+			"subtle": "rgba(255, 255, 255, 0.06)",  // Default card/section borders.
+			"default": "rgba(255, 255, 255, 0.10)",  // Input borders, dividers.
+			"strong": "rgba(255, 255, 255, 0.16)",   // Hover borders, emphasis.
+			"focus": "#EDAE49"                        // Focus rings — gold (landing uses purple).
+		},
+
+		// --------------------------------------------------------------------------
+		// 1f. Semantic colors
+		// --------------------------------------------------------------------------
+		"semantic": {
+			"success": "#22C55E",
+			"successMuted": "rgba(34, 197, 94, 0.12)",
+			"warning": "#F59E0B",
+			"warningMuted": "rgba(245, 158, 11, 0.12)",
+			"error": "#EF4444",            // Same hue family as landing's --destructive.
+			"errorMuted": "rgba(239, 68, 68, 0.12)",
+			"info": "#3DA5D9",             // Uses steel blue, not a separate color.
+			"infoMuted": "rgba(61, 165, 217, 0.12)"
+		},
+
+		// --------------------------------------------------------------------------
+		// 1g. Vertical colors — 11 sectors + catch-all
+		//
+		// ★ BRAND CONTINUITY: The three house colors from the landing carry
+		// directly into the report as vertical colors. This is the strongest
+		// visual link between the two products.
+		//
+		//   Landing house-ai    (HSL 330 100% 70%) → verticals.ai    (#FF66B3)
+		//   Landing house-biotech (HSL 153 100% 37%) → verticals.biotech (#00BD68)
+		//   Landing house-hardware (HSL 42 100% 50%)  → verticals.hardware (#FFB300)
+		//
+		// The remaining 8 verticals are new colors designed to:
+		// - Be distinguishable at 6px dot size on bg-deep (#080B16)
+		// - Pass 3:1 contrast ratio on dark backgrounds
+		// - Avoid collision with the 3 anchor house colors
+		// - Work as fill, stroke, and text
+		//
+		// Hue map (to verify separation):
+		//   medtech 8° · hardware 42° · agritech 84° · biotech 153° ·
+		//   cleantech 174° · aerospace 200° · blockchain 220° ·
+		//   fintech 239° · materials 265° · quantum 292° · ai 330°
+		//
+		// Tightest pairs: cleantech↔biotech (21°), blockchain↔aerospace (20°).
+		// Both pairs differ enough in saturation/lightness to be distinguishable
+		// in practice, especially with labels.
+		// --------------------------------------------------------------------------
+		"verticals": {
+			"ai":         { "base": "#FF66B3", "muted": "rgba(255, 102, 179, 0.15)", "label": "AI / Machine Learning" },
+			"biotech":    { "base": "#00BD68", "muted": "rgba(0, 189, 104, 0.15)",   "label": "Biotech / Synthetic Bio" },
+			"hardware":   { "base": "#FFB300", "muted": "rgba(255, 179, 0, 0.15)",   "label": "Hardware / Robotics / IoT" },
+			"cleantech":  { "base": "#2DD4BF", "muted": "rgba(45, 212, 191, 0.15)",  "label": "Cleantech / Climate" },
+			"agritech":   { "base": "#A3E635", "muted": "rgba(163, 230, 53, 0.15)",  "label": "Agritech / Food Tech" },
+			"medtech":    { "base": "#F87171", "muted": "rgba(248, 113, 113, 0.15)", "label": "Medical Devices / Healthtech" },
+			"materials":  { "base": "#A78BFA", "muted": "rgba(167, 139, 250, 0.15)", "label": "Advanced Materials / Nano" },
+			"aerospace":  { "base": "#38BDF8", "muted": "rgba(56, 189, 248, 0.15)",  "label": "Aerospace / Space Tech" },
+			"quantum":    { "base": "#D946EF", "muted": "rgba(217, 70, 239, 0.15)",  "label": "Quantum Computing" },
+			"fintech":    { "base": "#6366F1", "muted": "rgba(99, 102, 241, 0.15)",  "label": "FinTech" },
+			"blockchain": { "base": "#22D3EE", "muted": "rgba(34, 211, 238, 0.15)",  "label": "Blockchain / Web3" },
+			"other":      { "base": "#94A3B8", "muted": "rgba(148, 163, 184, 0.15)", "label": "Other / Emerging" }
+		},
+
+		// --------------------------------------------------------------------------
+		// 1h. Gradients
+		// The landing uses .gradient-purple (linear 135deg from primary to secondary).
+		// The report replaces purple gradients with gold accents and atmospheric
+		// effects. Gradients are structural, not decorative.
+		// --------------------------------------------------------------------------
+		"gradients": {
+			// Hero section vignette — depth behind the LATAM dot map.
+			"heroRadial": "radial-gradient(ellipse 80% 70% at 50% 45%, #0F1320 0%, #080B16 100%)",
+
+			// Gold accent line — horizontal dividers, stat underlines.
+			// Analogous to .gradient-purple but for the report's accent.
+			"goldLine": "linear-gradient(90deg, transparent 0%, #EDAE49 20%, #EDAE49 80%, transparent 100%)",
+
+			// Featured card glow — subtle gold aura. Analogous to landing's
+			// .glow-border-* pattern but as a background gradient.
+			"goldGlow": "radial-gradient(ellipse at center, rgba(237, 174, 73, 0.08) 0%, transparent 70%)",
+
+			// Stat number shimmer — animated gradient for hero numbers.
+			"goldShimmer": "linear-gradient(110deg, #EDAE49 0%, #F5D48E 45%, #EDAE49 55%, #EDAE49 100%)",
+
+			// Map atmosphere — subtle glow behind the LATAM continent.
+			"mapAtmosphere": "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(79, 110, 232, 0.06) 0%, transparent 100%)",
+
+			// Section fade — top/bottom separators.
+			"sectionFade": "linear-gradient(180deg, #080B16 0%, transparent 100%)"
+		}
+	},
+
+	// ==========================================================================
+	// 2. TYPOGRAPHY
+	// ==========================================================================
+	//
+	// The landing uses Orbitron (headings) + Inter (body). Orbitron is geometric,
+	// futuristic, gaming-adjacent — it says "tech community." Inter is the
+	// default safe choice, invisible by design.
+	//
+	// The report needs a different voice: editorial authority + data precision.
+	// Both products are dark-mode-first, but the landing speaks to a 20-something
+	// dev community while the report speaks to corporate innovation directors.
+	//
+	// Four-voice system:
+	//
+	// 1. Instrument Serif — Display voice. Hero stats, section titles, pull quotes.
+	//    Editorial gravitas. Says "research publication, not startup blog."
+	//
+	// 2. Space Grotesk — Heading voice. Subheads, nav, UI labels, card titles.
+	//    Geometric sans with a technical edge — the closest relative to Orbitron's
+	//    geometric DNA, but grown up. Provides brand continuity at a subconscious
+	//    level (both are geometric, monoline, tech-forward).
+	//
+	// 3. Plus Jakarta Sans — Body voice. Paragraphs, descriptions, form labels.
+	//    Excellent readability across weights. Full italic set for emphasis.
+	//    Works well in both Spanish and English. Where Inter is invisible,
+	//    Plus Jakarta Sans has just enough personality to feel deliberate.
+	//
+	// 4. JetBrains Mono — Data voice. Stats, table numbers, code, IDs, metrics.
+	//    Tabular figures, clear at small sizes. The landing uses system mono;
+	//    we upgrade to a specific face because data is a first-class citizen here.
+	// ==========================================================================
+	"typography": {
+		"fonts": {
+			"display": "'Instrument Serif', Georgia, 'Times New Roman', serif",
+			"heading": "'Space Grotesk', 'Arial', sans-serif",
+			"body": "'Plus Jakarta Sans', 'Helvetica Neue', 'Arial', sans-serif",
+			"mono": "'JetBrains Mono', 'SF Mono', 'Consolas', monospace"
+		},
+
+		// Google Fonts URL. Preconnect to fonts.googleapis.com + fonts.gstatic.com.
+		"googleFontsUrl": "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Space+Grotesk:wght@300;400;500;600;700&display=swap",
+
+		// --------------------------------------------------------------------------
+		// 2a. Font weights
+		// --------------------------------------------------------------------------
+		"weights": {
+			"light": 300,      // Space Grotesk + Plus Jakarta Sans only.
+			"regular": 400,    // All fonts. Default body weight.
+			"medium": 500,     // UI labels, table headers, emphasis.
+			"semibold": 600,   // Subheads, card titles, nav items.
+			"bold": 700        // Headings, hero text, strong emphasis.
+		},
+
+		// --------------------------------------------------------------------------
+		// 2b. Type scale
+		// Base: 15px for body. The landing uses 16px (text-base/text-lg).
+		// 15px gives better data density while keeping readability.
+		// --------------------------------------------------------------------------
+		"scale": {
+			"xs":   { "size": "0.75rem",    "lineHeight": "1rem",      "tracking": "0.01em"   }, // 12px
+			"sm":   { "size": "0.8125rem",  "lineHeight": "1.25rem",   "tracking": "0.005em"  }, // 13px
+			"base": { "size": "0.9375rem",  "lineHeight": "1.5rem",    "tracking": "0"        }, // 15px
+			"md":   { "size": "1rem",       "lineHeight": "1.625rem",  "tracking": "0"        }, // 16px
+			"lg":   { "size": "1.125rem",   "lineHeight": "1.75rem",   "tracking": "-0.005em" }, // 18px
+			"xl":   { "size": "1.25rem",    "lineHeight": "1.875rem",  "tracking": "-0.01em"  }, // 20px
+			"2xl":  { "size": "1.5rem",     "lineHeight": "2rem",      "tracking": "-0.015em" }, // 24px
+			"3xl":  { "size": "1.875rem",   "lineHeight": "2.375rem",  "tracking": "-0.02em"  }, // 30px
+			"4xl":  { "size": "2.25rem",    "lineHeight": "2.75rem",   "tracking": "-0.025em" }, // 36px
+			"5xl":  { "size": "3rem",       "lineHeight": "3.5rem",    "tracking": "-0.03em"  }, // 48px
+			"6xl":  { "size": "3.75rem",    "lineHeight": "4.25rem",   "tracking": "-0.035em" }, // 60px
+			"7xl":  { "size": "4.5rem",     "lineHeight": "5rem",      "tracking": "-0.04em"  }  // 72px
+		},
+
+		// --------------------------------------------------------------------------
+		// 2c. Semantic type roles
+		// --------------------------------------------------------------------------
+		"roles": {
+			// Display — Instrument Serif. Big, editorial, rare.
+			"displayHero":    { "font": "display", "size": "7xl", "weight": "regular", "style": "normal" },
+			"displayStat":    { "font": "display", "size": "6xl", "weight": "regular", "style": "normal" },
+			"displaySection": { "font": "display", "size": "4xl", "weight": "regular", "style": "italic" },
+
+			// Headings — Space Grotesk. Structural, tech-forward.
+			"h1": { "font": "heading", "size": "3xl", "weight": "bold" },
+			"h2": { "font": "heading", "size": "2xl", "weight": "semibold" },
+			"h3": { "font": "heading", "size": "xl",  "weight": "semibold" },
+			"h4": { "font": "heading", "size": "lg",  "weight": "medium" },
+
+			// Body — Plus Jakarta Sans.
+			"bodyLg": { "font": "body", "size": "md",   "weight": "regular" },
+			"body":   { "font": "body", "size": "base", "weight": "regular" },
+			"bodySm": { "font": "body", "size": "sm",   "weight": "regular" },
+			"bodyXs": { "font": "body", "size": "xs",   "weight": "regular" },
+
+			// Labels — Space Grotesk at small sizes.
+			"label":    { "font": "heading", "size": "sm", "weight": "medium" },
+			"labelSm":  { "font": "heading", "size": "xs", "weight": "medium" },
+			"overline": { "font": "heading", "size": "xs", "weight": "semibold", "tracking": "0.08em", "transform": "uppercase" },
+
+			// Data — JetBrains Mono. Precision, authority.
+			"dataHero": { "font": "mono", "size": "5xl",  "weight": "medium" },
+			"dataLg":   { "font": "mono", "size": "2xl",  "weight": "medium" },
+			"data":     { "font": "mono", "size": "base", "weight": "regular" },
+			"dataSm":   { "font": "mono", "size": "sm",   "weight": "regular" },
+			"dataXs":   { "font": "mono", "size": "xs",   "weight": "regular" }
+		}
+	},
+
+	// ==========================================================================
+	// 3. SPACING SCALE
+	// ==========================================================================
+	// 4px base unit. Data-dense interfaces need finer-grained control than
+	// the landing's standard Tailwind spacing (which uses 4px base too, but
+	// mostly leans on the 4/8/16/24 multiples).
+	// ==========================================================================
+	"spacing": {
+		"px": "1px",
+		"0": "0",
+		"0.5": "0.125rem",  // 2px
+		"1": "0.25rem",     // 4px
+		"1.5": "0.375rem",  // 6px
+		"2": "0.5rem",      // 8px
+		"2.5": "0.625rem",  // 10px
+		"3": "0.75rem",     // 12px
+		"4": "1rem",        // 16px
+		"5": "1.25rem",     // 20px
+		"6": "1.5rem",      // 24px
+		"8": "2rem",        // 32px
+		"10": "2.5rem",     // 40px
+		"12": "3rem",       // 48px
+		"16": "4rem",       // 64px
+		"20": "5rem",       // 80px
+		"24": "6rem",       // 96px
+		"32": "8rem",       // 128px
+
+		// Semantic aliases
+		"cardPaddingCompact": "0.75rem",  // 12px — data tables, list items.
+		"cardPadding": "1.5rem",          // 24px — standard card interior.
+		"cardPaddingLarge": "2rem",       // 32px — featured/expanded cards.
+		"sectionGap": "5rem",             // 80px — between homepage sections.
+		"pageInset": "1.5rem",            // 24px — mobile page margin.
+		"pageInsetLg": "3rem",            // 48px — desktop page margin.
+		"containerMax": "80rem"           // 1280px — max content width (matches landing).
+	},
+
+	// ==========================================================================
+	// 4. BORDER RADIUS SCALE
+	// ==========================================================================
+	// Landing uses --radius: 0.75rem (12px) as its base. The report tightens
+	// to 0.5rem (8px) — data-professional interfaces feel sharper.
+	// Landing's rounded-xl (16px) cards become our lg (12px).
+	// ==========================================================================
+	"radius": {
+		"none": "0",
+		"xs": "0.125rem",    // 2px
+		"sm": "0.25rem",     // 4px  — Tags, badges, small chips.
+		"md": "0.375rem",    // 6px  — Buttons, inputs.
+		"DEFAULT": "0.5rem", // 8px  — Standard card radius. Landing: 12px.
+		"lg": "0.75rem",     // 12px — Large cards, panels. Landing's DEFAULT.
+		"xl": "1rem",        // 16px — Hero cards. Landing's xl.
+		"2xl": "1.5rem",     // 24px — Modal containers.
+		"full": "9999px"     // Pill shapes — filter chips, badges.
+	},
+
+	// ==========================================================================
+	// 5. SHADOW SYSTEM
+	// ==========================================================================
+	// The landing uses .text-glow-purple and .glow-border-{house} — colored
+	// box-shadows for depth and brand expression. The report continues this
+	// glow language but shifts to gold and adds structural shadows.
+	// ==========================================================================
+	"shadows": {
+		// Structural elevation.
+		"xs": "0 1px 2px rgba(0, 0, 0, 0.3)",
+		"sm": "0 2px 4px rgba(0, 0, 0, 0.35), 0 1px 2px rgba(0, 0, 0, 0.2)",
+		"md": "0 4px 12px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.25)",
+		"lg": "0 8px 24px rgba(0, 0, 0, 0.5), 0 4px 8px rgba(0, 0, 0, 0.3)",
+		"xl": "0 16px 48px rgba(0, 0, 0, 0.6), 0 8px 16px rgba(0, 0, 0, 0.35)",
+		"2xl": "0 24px 64px rgba(0, 0, 0, 0.7)",
+
+		// Colored glow — same language as landing's .glow-border-*, but gold.
+		// Landing pattern: `0 0 15px hsl(color / 0.3), inset 0 0 15px hsl(color / 0.05)`
+		// Report pattern: similar structure, gold instead of house colors.
+		"glowGold": "0 0 20px rgba(237, 174, 73, 0.15), 0 0 4px rgba(237, 174, 73, 0.1)",
+		"glowGoldStrong": "0 0 32px rgba(237, 174, 73, 0.25), 0 0 8px rgba(237, 174, 73, 0.15)",
+		"glowSteel": "0 0 20px rgba(61, 165, 217, 0.15), 0 0 4px rgba(61, 165, 217, 0.1)",
+
+		// Per-vertical glow — for startup cards when filtered/highlighted.
+		// Generated dynamically: `0 0 20px rgba({vertical.base}, 0.2)`
+		// Same concept as landing's .glow-border-ai / .glow-border-biotech / .glow-border-hardware.
+
+		// Focus ring.
+		"focusRing": "0 0 0 2px #080B16, 0 0 0 4px #EDAE49",
+
+		// Inset.
+		"inset": "inset 0 1px 3px rgba(0, 0, 0, 0.4)"
+	},
+
+	// ==========================================================================
+	// 6. COMPONENT TOKENS
+	// ==========================================================================
+	"components": {
+		// --------------------------------------------------------------------------
+		// 6a. Cards
+		// Landing's cards: bg-card (#1A1A1A), border-border (#2E2E2E), rounded-xl,
+		// p-6/p-8, hover:scale-[1.02].
+		// Report's cards: navy surfaces, alpha borders, tighter radii, no scale
+		// on hover (scale feels playful; border-color change feels professional).
+		// --------------------------------------------------------------------------
+		"card": {
+			"default": {
+				"bg": "#0F1320",
+				"border": "rgba(255, 255, 255, 0.06)",
+				"borderRadius": "0.5rem",
+				"padding": "1.5rem",
+				"hoverBorder": "rgba(255, 255, 255, 0.12)",
+				"hoverBg": "#121726",
+				"transition": "border-color 200ms ease-out, background-color 200ms ease-out"
+			},
+			"featured": {
+				"bg": "#0F1320",
+				"border": "rgba(237, 174, 73, 0.25)",
+				"borderRadius": "0.75rem",
+				"padding": "2rem",
+				"shadow": "0 0 20px rgba(237, 174, 73, 0.08)",
+				"hoverBorder": "rgba(237, 174, 73, 0.4)",
+				"hoverShadow": "0 0 32px rgba(237, 174, 73, 0.12)"
+			},
+			"compact": {
+				"bg": "#0F1320",
+				"border": "rgba(255, 255, 255, 0.06)",
+				"borderRadius": "0.375rem",
+				"padding": "0.75rem",
+				"hoverBg": "#171C2E"
+			}
+		},
+
+		// --------------------------------------------------------------------------
+		// 6b. Inputs
+		// Landing uses bg-white/10 with border-white/20 and focus:ring-white/30.
+		// Report uses recessed bg-deep with gold focus ring — more structured.
+		// --------------------------------------------------------------------------
+		"input": {
+			"bg": "#080B16",
+			"border": "rgba(255, 255, 255, 0.10)",
+			"borderRadius": "0.375rem",
+			"padding": "0.625rem 0.875rem",
+			"text": "#ECEEF4",
+			"placeholder": "#5C6378",
+			"focusBorder": "#EDAE49",
+			"focusRing": "0 0 0 2px rgba(237, 174, 73, 0.20)",
+			"disabledBg": "#0A0E1A",
+			"disabledText": "#3D4356",
+			"errorBorder": "#EF4444",
+			"errorRing": "0 0 0 2px rgba(239, 68, 68, 0.20)"
+		},
+
+		// --------------------------------------------------------------------------
+		// 6c. Buttons
+		// Landing: primary uses .gradient-purple bg, secondary uses border-border.
+		// Report: primary uses solid gold, secondary uses gold outline.
+		// --------------------------------------------------------------------------
+		"button": {
+			"borderRadius": "0.375rem",
+			"fontFamily": "heading",
+			"fontWeight": 600,
+			"transition": "all 150ms ease-out",
+
+			"primary": {
+				"bg": "#EDAE49",
+				"text": "#080B16",
+				"hoverBg": "#F5C46E",
+				"activeBg": "#D49A2A",
+				"disabledBg": "#45310C",
+				"disabledText": "#694A11"
+			},
+			"secondary": {
+				"bg": "transparent",
+				"text": "#EDAE49",
+				"border": "rgba(237, 174, 73, 0.4)",
+				"hoverBg": "rgba(237, 174, 73, 0.08)",
+				"hoverBorder": "rgba(237, 174, 73, 0.6)",
+				"activeBg": "rgba(237, 174, 73, 0.12)",
+				"disabledText": "#5C6378",
+				"disabledBorder": "rgba(255, 255, 255, 0.06)"
+			},
+			"ghost": {
+				"bg": "transparent",
+				"text": "#8B92A8",
+				"hoverBg": "rgba(255, 255, 255, 0.06)",
+				"hoverText": "#ECEEF4",
+				"activeBg": "rgba(255, 255, 255, 0.10)"
+			}
+		},
+
+		// --------------------------------------------------------------------------
+		// 6d. Tags / Badges
+		// Landing uses rounded-full badges with house-color bg/text:
+		//   bg-house-biotech/20 text-house-biotech
+		// Report continues this pattern for ALL verticals:
+		//   bg: verticals[key].muted  text: verticals[key].base
+		// --------------------------------------------------------------------------
+		"tag": {
+			"borderRadius": "9999px",
+			"padding": "0.125rem 0.625rem",
+			"fontSize": "0.75rem",
+			"fontFamily": "heading",
+			"fontWeight": 500,
+			"borderWidth": "1px"
+			// Colors are dynamic per-vertical:
+			// bg: verticals[key].muted
+			// text: verticals[key].base
+			// border: verticals[key].base at 25% opacity
+		},
+
+		// --------------------------------------------------------------------------
+		// 6e. Tooltips
+		// --------------------------------------------------------------------------
+		"tooltip": {
+			"bg": "#1E2438",
+			"border": "rgba(255, 255, 255, 0.10)",
+			"borderRadius": "0.375rem",
+			"padding": "0.5rem 0.75rem",
+			"shadow": "0 8px 24px rgba(0, 0, 0, 0.5)",
+			"text": "#ECEEF4",
+			"maxWidth": "320px"
+		},
+
+		// --------------------------------------------------------------------------
+		// 6f. Tables
+		// --------------------------------------------------------------------------
+		"table": {
+			"headerBg": "#0A0E1A",
+			"headerText": "#8B92A8",
+			"headerFont": "heading",
+			"headerWeight": 600,
+			"headerSize": "0.75rem",
+			"headerTracking": "0.04em",
+			"headerTransform": "uppercase",
+			"rowBg": "#0F1320",
+			"rowAltBg": "#0C0F1C",
+			"rowHoverBg": "#171C2E",
+			"rowBorder": "rgba(255, 255, 255, 0.04)",
+			"cellPadding": "0.75rem 1rem",
+			"cellFont": "body",
+			"numericFont": "mono"
+		},
+
+		// --------------------------------------------------------------------------
+		// 6g. Navigation / Sidebar
+		// --------------------------------------------------------------------------
+		"nav": {
+			"bg": "#0A0E1A",
+			"itemPadding": "0.625rem 1rem",
+			"itemRadius": "0.375rem",
+			"itemText": "#8B92A8",
+			"itemHoverBg": "rgba(255, 255, 255, 0.06)",
+			"itemHoverText": "#ECEEF4",
+			"itemActiveText": "#EDAE49",
+			"itemActiveBg": "rgba(237, 174, 73, 0.08)",
+			"divider": "rgba(255, 255, 255, 0.06)"
+		},
+
+		// --------------------------------------------------------------------------
+		// 6h. Skeleton / Loading states
+		// --------------------------------------------------------------------------
+		"skeleton": {
+			"base": "#171C2E",
+			"shimmer": "linear-gradient(90deg, #171C2E 0%, #1E2438 40%, #1E2438 60%, #171C2E 100%)",
+			"borderRadius": "0.25rem",
+			"animationDuration": "1.8s"
+		}
+	},
+
+	// ==========================================================================
+	// 7. ANIMATION PRINCIPLES
+	// ==========================================================================
+	//
+	// The landing uses Framer Motion with spring physics (stiffness: 300,
+	// damping: 20) and playful effects (FloatingMascot bobs, cards scale
+	// on tap, FadeInSection y:40). Springs feel alive and community-like.
+	//
+	// The report uses CSS easing curves and shorter, more deliberate motion.
+	// Data enters — it doesn't bounce. Nothing overshoots. The motion vocabulary
+	// says "precision instrument" not "fun interactive experience."
+	//
+	// Shared principle: scroll-triggered reveals (FadeInSection pattern).
+	// Different execution: landing uses y:40 + spring, report uses y:12 + ease-out.
+	//
+	// All animations must respect prefers-reduced-motion.
+	// ==========================================================================
+	"animation": {
+		"easing": {
+			"out": "cubic-bezier(0.16, 1, 0.3, 1)",        // Snappy entrance. Default.
+			"in": "cubic-bezier(0.7, 0, 0.84, 0)",         // Subtle exit.
+			"inOut": "cubic-bezier(0.45, 0, 0.55, 1)",     // Map pan/zoom.
+			"linear": "linear",                             // Progress bars, loaders.
+			"dataReveal": "cubic-bezier(0.22, 1, 0.36, 1)" // Chart animations. Slower ease-out.
+		},
+
+		"duration": {
+			"instant": "0ms",      // Reduced-motion fallback.
+			"fast": "100ms",       // Color changes, opacity toggles.
+			"normal": "150ms",     // Micro-interactions: hover, focus, press.
+			"moderate": "250ms",   // Panel transitions, sidebar expand.
+			"slow": "400ms",       // Page transitions, modal open/close.
+			"data": "600ms",       // Chart bars growing, numbers counting up.
+			"dataLong": "800ms",   // Complex chart sequences, map transitions.
+			"stagger": "50ms"      // Per-item delay in list entrances.
+		},
+
+		// What transitions.
+		"animates": [
+			"opacity",
+			"transform",
+			"background-color",
+			"border-color",
+			"box-shadow",
+			"clip-path",
+			"stroke-dashoffset",
+			"filter"
+		],
+
+		// What does NOT animate (instant changes only).
+		"doesNotAnimate": [
+			"color",               // Animated text color looks glitchy.
+			"font-size",           // Causes reflow.
+			"width/height",        // Use transform: scale instead.
+			"padding/margin",      // No layout animations.
+			"grid/flex properties"
+		],
+
+		"entrances": {
+			"fadeUp": {
+				"from": { "opacity": 0, "transform": "translateY(12px)" },
+				"to": { "opacity": 1, "transform": "translateY(0)" },
+				"duration": "moderate",
+				"easing": "out"
+			},
+			"fadeIn": {
+				"from": { "opacity": 0 },
+				"to": { "opacity": 1 },
+				"duration": "normal",
+				"easing": "out"
+			},
+			"scaleIn": {
+				"from": { "opacity": 0, "transform": "scale(0.95)" },
+				"to": { "opacity": 1, "transform": "scale(1)" },
+				"duration": "moderate",
+				"easing": "out"
+			},
+			"slideInRight": {
+				"from": { "opacity": 0, "transform": "translateX(16px)" },
+				"to": { "opacity": 1, "transform": "translateX(0)" },
+				"duration": "moderate",
+				"easing": "out"
+			}
+		}
+	},
+
+	// ==========================================================================
+	// 8. MAP-SPECIFIC TOKENS
+	// ==========================================================================
+	//
+	// The hero element: an interactive dot-grid map of LATAM.
+	// Each dot represents a startup, colored by its vertical (using the
+	// house-aligned vertical palette from section 1g).
+	// ==========================================================================
+	"map": {
+		"dot": {
+			"sizeDefault": 6,
+			"sizeHover": 10,
+			"sizeSelected": 12,
+			"sizeMin": 4,
+			"sizeMax": 14,
+
+			"opacity": 0.85,
+			"hoverOpacity": 1.0,
+			"inactiveOpacity": 0.2,
+
+			"borderWidth": 0,
+			"selectedBorderWidth": 2,
+			"selectedBorderColor": "#EDAE49",
+
+			// Glow effect — uses the dot's vertical color.
+			// Same glow language as landing's .glow-border-* utilities.
+			"glowRadius": 16,
+			"glowOpacity": 0.4,
+
+			"transition": "all 200ms cubic-bezier(0.16, 1, 0.3, 1)"
+		},
+
+		"cluster": {
+			"sizeMin": 24,
+			"sizeMax": 56,
+			"sizeScale": "sqrt",
+
+			"bg": "rgba(237, 174, 73, 0.12)",
+			"border": "rgba(237, 174, 73, 0.35)",
+			"borderWidth": 1.5,
+
+			"ringColor": "rgba(237, 174, 73, 0.15)",
+			"ringMaxScale": 1.6,
+			"ringDuration": "2000ms",
+			"ringEasing": "cubic-bezier(0.45, 0, 0.55, 1)",
+
+			"labelFont": "mono",
+			"labelSize": "0.75rem",
+			"labelWeight": 600,
+			"labelColor": "#EDAE49"
+		},
+
+		"background": "#080B16",
+		"gridColor": "rgba(255, 255, 255, 0.03)",
+		"gridSpacing": 32,
+		"coastlineColor": "rgba(255, 255, 255, 0.06)",
+		"coastlineWidth": 1,
+		"countryBorderColor": "rgba(255, 255, 255, 0.04)",
+		"countryBorderWidth": 0.5,
+		"waterColor": "#080B16",
+
+		"zoom": {
+			"min": 1,
+			"max": 8,
+			"default": 1.5,
+			"step": 0.5,
+			"animationDuration": "300ms",
+			"easing": "cubic-bezier(0.45, 0, 0.55, 1)"
+		},
+
+		"tooltip": {
+			"bg": "#171C2E",
+			"border": "rgba(255, 255, 255, 0.10)",
+			"borderRadius": "0.375rem",
+			"padding": "0.625rem 0.875rem",
+			"shadow": "0 8px 24px rgba(0, 0, 0, 0.5)",
+			"maxWidth": "280px",
+			"offsetY": 12,
+			"showDelay": 150,
+			"hideDelay": 100
+		},
+
+		"legend": {
+			"position": "bottom-left",
+			"bg": "rgba(8, 11, 22, 0.85)",
+			"backdropBlur": "12px",
+			"border": "rgba(255, 255, 255, 0.06)",
+			"borderRadius": "0.5rem",
+			"padding": "0.75rem 1rem",
+			"dotSize": 8,
+			"gap": "0.5rem",
+			"labelFont": "heading",
+			"labelSize": "0.6875rem",
+			"labelColor": "#8B92A8"
+		}
+	},
+
+	// ==========================================================================
+	// 9. CHART TOKENS
+	// ==========================================================================
+	//
+	// Charts are first-class content. Clean, precise, no chart junk.
+	// Think Bloomberg terminal, McKinsey report.
+	// ==========================================================================
+	"charts": {
+		"axis": {
+			"lineColor": "rgba(255, 255, 255, 0.10)",
+			"lineWidth": 1,
+			"tickColor": "rgba(255, 255, 255, 0.10)",
+			"tickLength": 4,
+			"labelFont": "mono",
+			"labelSize": "0.6875rem",
+			"labelWeight": 400,
+			"labelColor": "#5C6378",
+			"titleFont": "heading",
+			"titleSize": "0.75rem",
+			"titleWeight": 500,
+			"titleColor": "#8B92A8"
+		},
+
+		"grid": {
+			"color": "rgba(255, 255, 255, 0.04)",
+			"style": "solid",
+			"width": 1
+		},
+
+		// Default series colors for non-vertical charts.
+		"seriesDefault": [
+			"#EDAE49",  // Gold
+			"#3DA5D9",  // Steel
+			"#00BD68",  // Biotech green (house)
+			"#FF66B3",  // AI pink (house)
+			"#A78BFA",  // Violet
+			"#FFB300",  // Hardware amber (house)
+			"#38BDF8",  // Sky
+			"#A3E635"   // Lime
+		],
+
+		"bar": {
+			"borderRadius": "2px 2px 0 0",
+			"gap": 4,
+			"groupGap": 16,
+			"hoverOpacity": 1.0,
+			"inactiveOpacity": 0.3,
+			"animationDuration": "600ms",
+			"animationEasing": "cubic-bezier(0.22, 1, 0.36, 1)"
+		},
+
+		"line": {
+			"strokeWidth": 2,
+			"dotRadius": 3,
+			"dotHoverRadius": 5,
+			"dotFill": "#0F1320",
+			"dotStrokeWidth": 2,
+			"areaOpacity": 0.08,
+			"animationDuration": "800ms",
+			"curveType": "monotoneX"
+		},
+
+		"pie": {
+			"innerRadius": "60%",
+			"outerRadius": "100%",
+			"padAngle": 2,
+			"cornerRadius": 2,
+			"hoverScale": 1.04,
+			"animationDuration": "600ms",
+			"centerLabelFont": "mono",
+			"centerLabelSize": "1.5rem",
+			"centerLabelWeight": 600,
+			"centerLabelColor": "#ECEEF4",
+			"centerSubLabelFont": "heading",
+			"centerSubLabelSize": "0.75rem",
+			"centerSubLabelColor": "#8B92A8"
+		},
+
+		"tooltip": {
+			"bg": "#171C2E",
+			"border": "rgba(255, 255, 255, 0.10)",
+			"borderRadius": "0.375rem",
+			"padding": "0.75rem 1rem",
+			"shadow": "0 8px 24px rgba(0, 0, 0, 0.5)",
+			"maxWidth": "240px",
+			"titleFont": "heading",
+			"titleSize": "0.8125rem",
+			"titleWeight": 600,
+			"titleColor": "#ECEEF4",
+			"valueFont": "mono",
+			"valueSize": "0.9375rem",
+			"valueWeight": 500,
+			"valueColor": "#EDAE49",
+			"labelFont": "body",
+			"labelSize": "0.75rem",
+			"labelColor": "#8B92A8",
+			"swatchSize": 8,
+			"swatchRadius": "9999px",
+			"swatchGap": "0.5rem"
+		},
+
+		"annotation": {
+			"lineColor": "rgba(237, 174, 73, 0.4)",
+			"lineStyle": "dashed",
+			"lineWidth": 1,
+			"labelFont": "heading",
+			"labelSize": "0.6875rem",
+			"labelWeight": 500,
+			"labelColor": "#EDAE49",
+			"labelBg": "rgba(237, 174, 73, 0.12)",
+			"labelPadding": "0.125rem 0.5rem",
+			"labelRadius": "0.25rem"
+		}
+	},
+
+	// ==========================================================================
+	// 10. BREAKPOINTS & RESPONSIVE STRATEGY
+	// ==========================================================================
+	// Standard Tailwind breakpoints — same as the landing for consistency.
+	// ==========================================================================
+	"breakpoints": {
+		"sm": "640px",
+		"md": "768px",
+		"lg": "1024px",
+		"xl": "1280px",
+		"2xl": "1536px"
+	},
+
+	// ==========================================================================
+	// 11. Z-INDEX SCALE
+	// ==========================================================================
+	"zIndex": {
+		"base": 0,
+		"dropdown": 10,
+		"mapControls": 15,
+		"sticky": 20,
+		"overlay": 30,
+		"modal": 40,
+		"popover": 50,
+		"toast": 60
+	}
+}
