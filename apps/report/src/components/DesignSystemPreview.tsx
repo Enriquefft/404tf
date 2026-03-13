@@ -1,4 +1,5 @@
 import { type CSSProperties, type ReactNode, useState } from "react";
+import { AltArrowDown, AltArrowUp, Magnifier } from "@solar-icons/react";
 
 // ---------------------------------------------------------------------------
 // Data
@@ -261,28 +262,9 @@ function MaturityBadge({
 	);
 }
 
-// Magnifying glass SVG
-function SearchIcon() {
-	return (
-		<svg
-			width="16"
-			height="16"
-			viewBox="0 0 16 16"
-			fill="none"
-			stroke="currentColor"
-			strokeWidth="1.5"
-			strokeLinecap="round"
-			strokeLinejoin="round"
-		>
-			<circle cx="7" cy="7" r="4.5" />
-			<path d="M10.5 10.5L14 14" />
-		</svg>
-	);
-}
-
-// Trend arrow
 function TrendArrow({ direction, value }: { direction: "up" | "down"; value: string }) {
 	const isUp = direction === "up";
+	const Icon = isUp ? AltArrowUp : AltArrowDown;
 	return (
 		<span
 			className="inline-flex items-center gap-1"
@@ -293,33 +275,9 @@ function TrendArrow({ direction, value }: { direction: "up" | "down"; value: str
 				color: isUp ? "var(--success)" : "var(--error)",
 			}}
 		>
-			<svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
-				{isUp ? (
-					<path d="M6 2L10 7H2L6 2Z" />
-				) : (
-					<path d="M6 10L2 5H10L6 10Z" />
-				)}
-			</svg>
+			<Icon size={12} />
 			{value}
 		</span>
-	);
-}
-
-// Chevron down icon for select
-function ChevronDown() {
-	return (
-		<svg
-			width="14"
-			height="14"
-			viewBox="0 0 14 14"
-			fill="none"
-			stroke="currentColor"
-			strokeWidth="1.5"
-			strokeLinecap="round"
-			strokeLinejoin="round"
-		>
-			<path d="M3.5 5.25L7 8.75L10.5 5.25" />
-		</svg>
 	);
 }
 
@@ -428,9 +386,13 @@ export function DesignSystemPreview() {
 							className="mb-4"
 							style={{ animation: "ds-fadeUp 0.5s cubic-bezier(0.16,1,0.3,1) both" }}
 						>
-							<Overline>404 Tech Found</Overline>
+							<img
+								src="/brand/logo-transparent-ondark.svg"
+								alt="404 Tech Found"
+								style={{ height: "2.5rem", width: "auto" }}
+							/>
 							<h1
-								className="mt-3"
+								className="mt-4"
 								style={{
 									fontFamily: "var(--font-display)",
 									fontSize: "3.75rem",
@@ -1039,7 +1001,7 @@ export function DesignSystemPreview() {
 										className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2"
 										style={{ color: "var(--text-tertiary)" }}
 									>
-										<ChevronDown />
+										<AltArrowDown size={14} />
 									</div>
 								</div>
 							</div>
@@ -1061,7 +1023,7 @@ export function DesignSystemPreview() {
 										className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2"
 										style={{ color: "var(--text-tertiary)" }}
 									>
-										<SearchIcon />
+										<Magnifier size={16} />
 									</div>
 									<input
 										type="search"

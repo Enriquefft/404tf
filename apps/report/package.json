@@ -12,6 +12,7 @@
 	"dependencies": {
 		"@astrojs/check": "^0.9.7",
 		"@astrojs/react": "^4",
+		"@solar-icons/react": "^1.1.0",
 		"astro": "^5",
 		"react": "^19",
 		"react-dom": "^19"

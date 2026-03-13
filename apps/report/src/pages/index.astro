@@ -1,8 +1,10 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { DesignSystemPreview } from "@/components/DesignSystemPreview";
+import { VariantToolbar } from "@/components/VariantToolbar";
 ---
 
 <BaseLayout title="404tf Report — Design System">
+	<VariantToolbar client:load />
 	<DesignSystemPreview client:load />
 </BaseLayout>
