@@ -3,97 +3,97 @@
 
 :root {
 	/* ---- shadcn core ---- */
-	--background: #0A0710;
-	--foreground: #ECEEF4;
-	--card: #110E18;
-	--card-foreground: #ECEEF4;
-	--popover: #1A1622;
-	--popover-foreground: #ECEEF4;
-	--primary: #7C3AED;
-	--primary-foreground: #ECEEF4;
-	--secondary: #9B8BCA;
-	--secondary-foreground: #ECEEF4;
-	--muted: #231E2D;
-	--muted-foreground: #928BA8;
-	--accent: #231E2D;
-	--accent-foreground: #ECEEF4;
-	--destructive: #EF4444;
-	--destructive-foreground: #ECEEF4;
+	--background: #0a0710;
+	--foreground: #eceef4;
+	--card: #110e18;
+	--card-foreground: #eceef4;
+	--popover: #1a1622;
+	--popover-foreground: #eceef4;
+	--primary: #7c3aed;
+	--primary-foreground: #eceef4;
+	--secondary: #9b8bca;
+	--secondary-foreground: #eceef4;
+	--muted: #231e2d;
+	--muted-foreground: #928ba8;
+	--accent: #231e2d;
+	--accent-foreground: #eceef4;
+	--destructive: #ef4444;
+	--destructive-foreground: #eceef4;
 	--border: rgba(255, 255, 255, 0.1);
 	--input: rgba(255, 255, 255, 0.15);
-	--ring: #7C3AED;
+	--ring: #7c3aed;
 	--radius: 0.5rem;
 
 	/* ---- Extended text levels ---- */
-	--text-tertiary: #635C78;
-	--text-disabled: #433D56;
+	--text-tertiary: #635c78;
+	--text-disabled: #433d56;
 
 	/* ---- Extended borders ---- */
 	--border-subtle: rgba(255, 255, 255, 0.06);
 	--border-strong: rgba(255, 255, 255, 0.16);
 
 	/* ---- Primary (purple) shades & opacity scale ---- */
-	--primary-light: #9B5BFF;
-	--primary-dark: #5B21B6;
-	--primary-darker: #2E1065;
+	--primary-light: #9b5bff;
+	--primary-dark: #5b21b6;
+	--primary-darker: #2e1065;
 	--primary-4: rgba(124, 58, 237, 0.04);
 	--primary-8: rgba(124, 58, 237, 0.08);
-	--primary-10: rgba(124, 58, 237, 0.10);
+	--primary-10: rgba(124, 58, 237, 0.1);
 	--primary-15: rgba(124, 58, 237, 0.15);
 	--primary-25: rgba(124, 58, 237, 0.25);
-	--primary-30: rgba(124, 58, 237, 0.30);
-	--primary-40: rgba(124, 58, 237, 0.40);
-	--primary-60: rgba(124, 58, 237, 0.60);
+	--primary-30: rgba(124, 58, 237, 0.3);
+	--primary-40: rgba(124, 58, 237, 0.4);
+	--primary-60: rgba(124, 58, 237, 0.6);
 
 	/* ---- Purple scale (11 steps) ---- */
-	--purple-50: #F5F3FF;
-	--purple-100: #EDE9FE;
-	--purple-200: #DDD6FE;
-	--purple-300: #C4B5FD;
-	--purple-400: #A78BFA;
-	--purple-500: #8B5CF6;
-	--purple-600: #7C3AED;
-	--purple-700: #6D28D9;
-	--purple-800: #5B21B6;
-	--purple-900: #4C1D95;
-	--purple-950: #2E1065;
+	--purple-50: #f5f3ff;
+	--purple-100: #ede9fe;
+	--purple-200: #ddd6fe;
+	--purple-300: #c4b5fd;
+	--purple-400: #a78bfa;
+	--purple-500: #8b5cf6;
+	--purple-600: #7c3aed;
+	--purple-700: #6d28d9;
+	--purple-800: #5b21b6;
+	--purple-900: #4c1d95;
+	--purple-950: #2e1065;
 
 	/* ---- Lavender scale (11 steps) ---- */
-	--lavender-50: #F8F6FC;
-	--lavender-100: #EDE8F5;
-	--lavender-200: #DDD4ED;
-	--lavender-300: #C4B5E0;
-	--lavender-400: #A893D1;
-	--lavender-500: #9B8BCA;
-	--lavender-600: #7E6DB5;
-	--lavender-700: #6B5A9E;
+	--lavender-50: #f8f6fc;
+	--lavender-100: #ede8f5;
+	--lavender-200: #ddd4ed;
+	--lavender-300: #c4b5e0;
+	--lavender-400: #a893d1;
+	--lavender-500: #9b8bca;
+	--lavender-600: #7e6db5;
+	--lavender-700: #6b5a9e;
 	--lavender-800: #574885;
-	--lavender-900: #3D3366;
-	--lavender-950: #1A1530;
+	--lavender-900: #3d3366;
+	--lavender-950: #1a1530;
 
 	/* ---- Semantic ---- */
-	--success: #22C55E;
+	--success: #22c55e;
 	--success-muted: rgba(34, 197, 94, 0.12);
-	--warning: #F59E0B;
+	--warning: #f59e0b;
 	--warning-muted: rgba(245, 158, 11, 0.12);
-	--error: #EF4444;
+	--error: #ef4444;
 	--error-muted: rgba(239, 68, 68, 0.12);
-	--info: #9B8BCA;
+	--info: #9b8bca;
 	--info-muted: rgba(155, 139, 202, 0.12);
 
 	/* ---- Verticals ---- */
-	--v-ai: #FF66B3;
-	--v-biotech: #00BD68;
-	--v-hardware: #FFB300;
-	--v-cleantech: #2DD4BF;
-	--v-agritech: #A3E635;
-	--v-medtech: #F87171;
-	--v-materials: #A78BFA;
-	--v-aerospace: #38BDF8;
-	--v-quantum: #D946EF;
-	--v-fintech: #6366F1;
-	--v-blockchain: #22D3EE;
-	--v-other: #94A3B8;
+	--v-ai: #ff66b3;
+	--v-biotech: #00bd68;
+	--v-hardware: #ffb300;
+	--v-cleantech: #2dd4bf;
+	--v-agritech: #a3e635;
+	--v-medtech: #f87171;
+	--v-materials: #a78bfa;
+	--v-aerospace: #38bdf8;
+	--v-quantum: #d946ef;
+	--v-fintech: #6366f1;
+	--v-blockchain: #22d3ee;
+	--v-other: #94a3b8;
 
 	/* ---- Fonts ---- */
 	--font-display: "Bricolage Grotesque", Arial, sans-serif;
@@ -157,7 +157,9 @@
 
 .ds-root *:focus-visible {
 	outline: none;
-	box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--ring);
+	box-shadow:
+		0 0 0 2px var(--background),
+		0 0 0 4px var(--ring);
 }
 
 /* ---- Keyframes ---- */
@@ -242,4 +244,49 @@
 	background: radial-gradient(ellipse, var(--primary-15) 0%, transparent 70%);
 	pointer-events: none;
 	z-index: 0;
+}
+
+/* ---- Hero keyframes ---- */
+@keyframes hero-gridShimmer {
+	0%,
+	100% {
+		opacity: 0.35;
+	}
+	50% {
+		opacity: 0.55;
+	}
+}
+
+@keyframes hero-dotPulse {
+	0%,
+	100% {
+		opacity: 0.3;
+		transform: scale(1);
+	}
+	50% {
+		opacity: 0.5;
+		transform: scale(1.2);
+	}
+}
+
+@keyframes hero-tooltipIn {
+	from {
+		opacity: 0;
+		transform: translate(-50%, -100%) translateY(4px);
+	}
+	to {
+		opacity: 1;
+		transform: translate(-50%, -100%) translateY(0);
+	}
+}
+
+@keyframes hero-statReveal {
+	from {
+		opacity: 0;
+		transform: translateY(8px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
