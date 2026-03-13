@@ -103,7 +103,7 @@ function Overline({ children }: { children: ReactNode }) {
 				fontFamily: "var(--font-heading)",
 				fontSize: "0.75rem",
 				fontWeight: 600,
-				color: "var(--gold-400)",
+				color: "var(--accent)",
 			}}
 		>
 			{children}
@@ -132,7 +132,7 @@ function SectionHeading({ id, overline, title }: { id: string; overline: string;
 			<div
 				className="mt-4 h-px w-full"
 				style={{
-					background: "linear-gradient(90deg, var(--gold-400) 0%, transparent 60%)",
+					background: "linear-gradient(90deg, var(--accent) 0%, transparent 60%)",
 				}}
 			/>
 		</div>
@@ -349,8 +349,8 @@ export function DesignSystemPreview() {
 										fontFamily: "var(--font-heading)",
 										fontSize: "0.8125rem",
 										fontWeight: isActive ? 600 : 400,
-										color: isActive ? "var(--gold-400)" : "var(--text-secondary)",
-										background: isActive ? "rgba(237,174,73,0.08)" : "transparent",
+										color: isActive ? "var(--accent)" : "var(--text-secondary)",
+										background: isActive ? "var(--accent-8)" : "transparent",
 										borderRadius: "var(--radius-md)",
 										padding: "0.5rem 0.75rem",
 										textDecoration: "none",
@@ -636,8 +636,8 @@ export function DesignSystemPreview() {
 												style={{
 													fontFamily: "var(--font-mono)",
 													fontSize: "0.5625rem",
-													color: "var(--gold-400)",
-													background: "rgba(237,174,73,0.1)",
+													color: "var(--accent)",
+													background: "var(--accent-10)",
 													padding: "0 4px",
 													borderRadius: "2px",
 												}}
@@ -664,7 +664,7 @@ export function DesignSystemPreview() {
 							<div style={{ fontFamily: "var(--font-display)", fontSize: "4.5rem", lineHeight: "5rem", letterSpacing: "-0.04em", color: "var(--text-primary)" }}>
 								100 Startups
 							</div>
-							<div style={{ fontFamily: "var(--font-display)", fontSize: "3.75rem", lineHeight: "4.25rem", letterSpacing: "-0.035em", color: "var(--gold-400)" }}>
+							<div style={{ fontFamily: "var(--font-display)", fontSize: "3.75rem", lineHeight: "4.25rem", letterSpacing: "-0.035em", color: "var(--accent)" }}>
 								$2.4 Billion
 							</div>
 							<div style={{ fontFamily: "var(--font-display)", fontSize: "2.25rem", lineHeight: "2.75rem", letterSpacing: "-0.025em", fontStyle: "italic", color: "var(--text-secondary)" }}>
@@ -712,7 +712,7 @@ export function DesignSystemPreview() {
 						<SubHeading>Data — JetBrains Mono</SubHeading>
 						<div className="flex flex-wrap items-end gap-8">
 							<div>
-								<div style={{ fontFamily: "var(--font-mono)", fontSize: "3rem", lineHeight: "3.5rem", fontWeight: 500, color: "var(--gold-400)", letterSpacing: "-0.03em" }}>
+								<div style={{ fontFamily: "var(--font-mono)", fontSize: "3rem", lineHeight: "3.5rem", fontWeight: 500, color: "var(--accent)", letterSpacing: "-0.03em" }}>
 									$2.4B
 								</div>
 								<div style={{ fontFamily: "var(--font-mono)", fontSize: "0.8125rem", color: "var(--text-tertiary)" }}>
@@ -757,7 +757,7 @@ export function DesignSystemPreview() {
 										style={{
 											fontFamily: "var(--font-mono)",
 											fontSize: "0.6875rem",
-											color: "var(--gold-400)",
+											color: "var(--accent)",
 											fontWeight: 500,
 										}}
 									>
@@ -799,7 +799,7 @@ export function DesignSystemPreview() {
 								<ButtonDemo
 									label="Explore Directory"
 									style={{
-										background: "var(--gold-400)",
+										background: "var(--accent)",
 										color: "var(--bg-deep)",
 										fontFamily: "var(--font-heading)",
 										fontWeight: 600,
@@ -810,13 +810,13 @@ export function DesignSystemPreview() {
 										cursor: "pointer",
 										transition: "all 150ms ease-out",
 									}}
-									hoverStyle={{ background: "var(--gold-300)" }}
+									hoverStyle={{ background: "var(--accent-light)" }}
 								/>
 								<ButtonDemo
 									label="Explore Directory"
 									sublabel="hover"
 									style={{
-										background: "var(--gold-300)",
+										background: "var(--accent-light)",
 										color: "var(--bg-deep)",
 										fontFamily: "var(--font-heading)",
 										fontWeight: 600,
@@ -824,15 +824,15 @@ export function DesignSystemPreview() {
 										padding: "0.625rem 1.25rem",
 										borderRadius: "var(--radius-md)",
 										border: "none",
-										boxShadow: "var(--glow-gold)",
+										boxShadow: "var(--glow-accent)",
 									}}
 								/>
 								<ButtonDemo
 									label="Explore Directory"
 									sublabel="disabled"
 									style={{
-										background: "var(--gold-900)",
-										color: "var(--gold-700)",
+										background: "var(--accent-darker)",
+										color: "var(--accent-dark)",
 										fontFamily: "var(--font-heading)",
 										fontWeight: 600,
 										fontSize: "0.875rem",
@@ -852,30 +852,30 @@ export function DesignSystemPreview() {
 									label="Download Report"
 									style={{
 										background: "transparent",
-										color: "var(--gold-400)",
+										color: "var(--accent)",
 										fontFamily: "var(--font-heading)",
 										fontWeight: 600,
 										fontSize: "0.875rem",
 										padding: "0.625rem 1.25rem",
 										borderRadius: "var(--radius-md)",
-										border: "1px solid rgba(237,174,73,0.4)",
+										border: "1px solid var(--accent-40)",
 										cursor: "pointer",
 										transition: "all 150ms ease-out",
 									}}
-									hoverStyle={{ background: "rgba(237,174,73,0.08)", borderColor: "rgba(237,174,73,0.6)" }}
+									hoverStyle={{ background: "var(--accent-8)", borderColor: "var(--accent-60)" }}
 								/>
 								<ButtonDemo
 									label="Download Report"
 									sublabel="hover"
 									style={{
-										background: "rgba(237,174,73,0.08)",
-										color: "var(--gold-400)",
+										background: "var(--accent-8)",
+										color: "var(--accent)",
 										fontFamily: "var(--font-heading)",
 										fontWeight: 600,
 										fontSize: "0.875rem",
 										padding: "0.625rem 1.25rem",
 										borderRadius: "var(--radius-md)",
-										border: "1px solid rgba(237,174,73,0.6)",
+										border: "1px solid var(--accent-60)",
 									}}
 								/>
 								<ButtonDemo
@@ -1118,7 +1118,7 @@ export function DesignSystemPreview() {
 											fontFamily: "var(--font-mono)",
 											fontSize: "0.8125rem",
 											fontWeight: 500,
-											color: "var(--gold-400)",
+											color: "var(--accent)",
 										}}
 									>
 										$12.5M
@@ -1137,10 +1137,10 @@ export function DesignSystemPreview() {
 								className="rounded-lg border"
 								style={{
 									background: "var(--bg-surface)",
-									borderColor: "rgba(237,174,73,0.25)",
+									borderColor: "var(--accent-25)",
 									borderRadius: "var(--radius-lg)",
 									padding: "2rem",
-									boxShadow: "0 0 20px rgba(237,174,73,0.08)",
+									boxShadow: "0 0 20px var(--accent-8)",
 								}}
 							>
 								<div className="mb-3 flex items-center gap-2">
@@ -1149,8 +1149,8 @@ export function DesignSystemPreview() {
 											fontFamily: "var(--font-mono)",
 											fontSize: "0.6875rem",
 											fontWeight: 600,
-											color: "var(--gold-400)",
-											background: "rgba(237,174,73,0.1)",
+											color: "var(--accent)",
+											background: "var(--accent-10)",
 											padding: "0.125rem 0.5rem",
 											borderRadius: "var(--radius-sm)",
 											letterSpacing: "0.04em",
@@ -1205,7 +1205,7 @@ export function DesignSystemPreview() {
 									<span style={{ fontFamily: "var(--font-body)", fontSize: "0.8125rem", color: "var(--text-tertiary)" }}>
 										<span className="mr-1">&#127463;&#127479;</span> S&atilde;o Paulo
 									</span>
-									<span style={{ fontFamily: "var(--font-mono)", fontSize: "0.8125rem", fontWeight: 500, color: "var(--gold-400)" }}>
+									<span style={{ fontFamily: "var(--font-mono)", fontSize: "0.8125rem", fontWeight: 500, color: "var(--accent)" }}>
 										$3.2M
 									</span>
 								</div>
@@ -1357,7 +1357,7 @@ export function DesignSystemPreview() {
 								<div
 									className="h-px w-full"
 									style={{
-										background: "linear-gradient(90deg, transparent 0%, var(--gold-400) 20%, var(--gold-400) 80%, transparent 100%)",
+										background: "linear-gradient(90deg, transparent 0%, var(--accent) 20%, var(--accent) 80%, transparent 100%)",
 									}}
 								/>
 							</div>
@@ -1391,7 +1391,7 @@ export function DesignSystemPreview() {
 											key={i}
 											className="h-px flex-1"
 											style={{
-												background: i % 2 === 0 ? "var(--gold-400)" : "transparent",
+												background: i % 2 === 0 ? "var(--accent)" : "transparent",
 												opacity: 0.4,
 											}}
 										/>
@@ -1483,8 +1483,8 @@ function StatBlock({
 		<div
 			className="rounded-xl border p-6"
 			style={{
-				background: gold ? "rgba(237,174,73,0.04)" : "var(--bg-surface)",
-				borderColor: gold ? "rgba(237,174,73,0.15)" : "var(--border-subtle)",
+				background: gold ? "var(--accent-4)" : "var(--bg-surface)",
+				borderColor: gold ? "var(--accent-15)" : "var(--border-subtle)",
 			}}
 		>
 			<div
@@ -1493,7 +1493,7 @@ function StatBlock({
 					fontSize: "3rem",
 					lineHeight: "3.5rem",
 					letterSpacing: "-0.03em",
-					color: gold ? "var(--gold-400)" : "var(--text-primary)",
+					color: gold ? "var(--accent)" : "var(--text-primary)",
 				}}
 			>
 				{value}

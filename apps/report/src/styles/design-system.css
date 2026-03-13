@@ -83,9 +83,23 @@
 	--radius-xl: 1rem;
 	--radius-full: 9999px;
 
+	/* ---- Accent (derived from gold by default) ---- */
+	--accent: #EDAE49;
+	--accent-light: #F0BF5A;
+	--accent-dark: #8C6316;
+	--accent-darker: #45310C;
+	--accent-4: rgba(237, 174, 73, 0.04);
+	--accent-8: rgba(237, 174, 73, 0.08);
+	--accent-10: rgba(237, 174, 73, 0.1);
+	--accent-15: rgba(237, 174, 73, 0.15);
+	--accent-25: rgba(237, 174, 73, 0.25);
+	--accent-30: rgba(237, 174, 73, 0.3);
+	--accent-40: rgba(237, 174, 73, 0.4);
+	--accent-60: rgba(237, 174, 73, 0.6);
+
 	/* ---- Shadows ---- */
-	--glow-gold: 0 0 20px rgba(237, 174, 73, 0.15), 0 0 4px rgba(237, 174, 73, 0.1);
-	--glow-gold-strong: 0 0 32px rgba(237, 174, 73, 0.25), 0 0 8px rgba(237, 174, 73, 0.15);
+	--glow-accent: 0 0 20px var(--accent-15), 0 0 4px var(--accent-10);
+	--glow-accent-strong: 0 0 32px var(--accent-25), 0 0 8px var(--accent-15);
 }
 
 /* Keyframes */
@@ -130,7 +144,7 @@
 }
 
 .ds-root *::selection {
-	background: rgba(237, 174, 73, 0.3);
+	background: var(--accent-30);
 	color: var(--text-primary);
 }
 
@@ -149,5 +163,5 @@
 /* Focus visible */
 .ds-root *:focus-visible {
 	outline: none;
-	box-shadow: 0 0 0 2px var(--bg-deep), 0 0 0 4px var(--gold-400);
+	box-shadow: 0 0 0 2px var(--bg-deep), 0 0 0 4px var(--accent);
 }

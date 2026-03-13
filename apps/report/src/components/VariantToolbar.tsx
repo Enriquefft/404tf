@@ -84,29 +84,104 @@ const FONT_VARIANTS = [
 	},
 ] as const;
 
-const ORIGINAL_BG = {
+type AccentPalette = {
+	"--accent": string;
+	"--accent-light": string;
+	"--accent-dark": string;
+	"--accent-darker": string;
+	"--accent-4": string;
+	"--accent-8": string;
+	"--accent-10": string;
+	"--accent-15": string;
+	"--accent-25": string;
+	"--accent-30": string;
+	"--accent-40": string;
+	"--accent-60": string;
+};
+
+function accentScale(base: string, light: string, dark: string, darker: string, r: number, g: number, b: number): AccentPalette {
+	return {
+		"--accent": base,
+		"--accent-light": light,
+		"--accent-dark": dark,
+		"--accent-darker": darker,
+		"--accent-4": `rgba(${r},${g},${b},0.04)`,
+		"--accent-8": `rgba(${r},${g},${b},0.08)`,
+		"--accent-10": `rgba(${r},${g},${b},0.10)`,
+		"--accent-15": `rgba(${r},${g},${b},0.15)`,
+		"--accent-25": `rgba(${r},${g},${b},0.25)`,
+		"--accent-30": `rgba(${r},${g},${b},0.30)`,
+		"--accent-40": `rgba(${r},${g},${b},0.40)`,
+		"--accent-60": `rgba(${r},${g},${b},0.60)`,
+	};
+}
+
+const ACCENT_VARIANTS: { id: string; label: string; swatch: string; vars: AccentPalette }[] = [
+	{
+		id: "gold",
+		label: "Gold",
+		swatch: "#EDAE49",
+		vars: accentScale("#EDAE49", "#F0BF5A", "#8C6316", "#45310C", 237, 174, 73),
+	},
+	{
+		id: "purple",
+		label: "Brand Purple",
+		swatch: "#7C3AED",
+		vars: accentScale("#7C3AED", "#9B5BFF", "#5B21B6", "#2E1065", 124, 58, 237),
+	},
+	{
+		id: "copper",
+		label: "Copper",
+		swatch: "#D97706",
+		vars: accentScale("#D97706", "#F59E0B", "#92400E", "#451A03", 217, 119, 6),
+	},
+	{
+		id: "emerald",
+		label: "Emerald",
+		swatch: "#10B981",
+		vars: accentScale("#10B981", "#34D399", "#047857", "#022C22", 16, 185, 129),
+	},
+	{
+		id: "crimson",
+		label: "Crimson",
+		swatch: "#EF4444",
+		vars: accentScale("#EF4444", "#F87171", "#991B1B", "#450A0A", 239, 68, 68),
+	},
+	{
+		id: "frost",
+		label: "Frost",
+		swatch: "#38BDF8",
+		vars: accentScale("#38BDF8", "#7DD3FC", "#0369A1", "#082F49", 56, 189, 248),
+	},
+];
+
+const ORIGINAL_BG: Record<string, string> = {
 	"--bg-deep": "#080B16",
 	"--bg-surface": "#0F1320",
 	"--bg-elevated": "#171C2E",
 	"--bg-overlay": "#1E2438",
 };
 
-const ORIGINAL_FONT =
-	"'Instrument Serif', Georgia, serif";
+const ORIGINAL_FONT = "'Instrument Serif', Georgia, serif";
 
 export function VariantToolbar() {
 	const [activeBg, setActiveBg] = useState("original");
 	const [activeFont, setActiveFont] = useState("original");
+	const [activeAccent, setActiveAccent] = useState("gold");
+
+	function applyVars(vars: Record<string, string>) {
+		const root = document.querySelector(".ds-root") as HTMLElement | null;
+		if (!root) return;
+		for (const [key, value] of Object.entries(vars)) {
+			root.style.setProperty(key, value);
+		}
+	}
 
 	function applyBg(id: string) {
 		setActiveBg(id);
-		const root = document.querySelector(".ds-root") as HTMLElement | null;
-		if (!root) return;
 		const variant = BG_VARIANTS.find((v) => v.id === id);
 		const vars = id === "original" ? ORIGINAL_BG : variant?.vars ?? {};
-		for (const [key, value] of Object.entries(vars) as [string, string][]) {
-			root.style.setProperty(key, value);
-		}
+		applyVars(vars as Record<string, string>);
 	}
 
 	function applyFont(id: string) {
@@ -132,6 +207,12 @@ export function VariantToolbar() {
 		root.style.setProperty("--font-display", family);
 	}
 
+	function applyAccent(id: string) {
+		setActiveAccent(id);
+		const variant = ACCENT_VARIANTS.find((v) => v.id === id);
+		if (variant) applyVars(variant.vars);
+	}
+
 	const pill = (
 		isActive: boolean,
 	): React.CSSProperties => ({
@@ -146,6 +227,23 @@ export function VariantToolbar() {
 		background: isActive ? "#EDAE49" : "rgba(255,255,255,0.06)",
 		transition: "all 120ms ease-out",
 	});
+
+	const rowLabel: React.CSSProperties = {
+		fontFamily: "'JetBrains Mono', monospace",
+		fontSize: "0.5625rem",
+		color: "#5C6378",
+		textTransform: "uppercase",
+		letterSpacing: "0.08em",
+		width: "2.5rem",
+		flexShrink: 0,
+	};
+
+	const row: React.CSSProperties = {
+		display: "flex",
+		alignItems: "center",
+		gap: "0.375rem",
+		flexWrap: "wrap",
+	};
 
 	return (
 		<div
@@ -162,22 +260,11 @@ export function VariantToolbar() {
 				border: "1px solid rgba(255,255,255,0.08)",
 				borderRadius: "8px",
 				padding: "0.625rem",
-				maxWidth: "min(420px, 45vw)",
+				maxWidth: "min(480px, 50vw)",
 			}}
 		>
-			<div style={{ display: "flex", alignItems: "center", gap: "0.375rem", flexWrap: "wrap" }}>
-				<span
-					style={{
-						fontFamily: "'JetBrains Mono', monospace",
-						fontSize: "0.5625rem",
-						color: "#5C6378",
-						textTransform: "uppercase",
-						letterSpacing: "0.08em",
-						width: "1.5rem",
-					}}
-				>
-					BG
-				</span>
+			<div style={row}>
+				<span style={rowLabel}>BG</span>
 				{BG_VARIANTS.map((v) => (
 					<button
 						key={v.id}
@@ -189,19 +276,8 @@ export function VariantToolbar() {
 					</button>
 				))}
 			</div>
-			<div style={{ display: "flex", alignItems: "center", gap: "0.375rem", flexWrap: "wrap" }}>
-				<span
-					style={{
-						fontFamily: "'JetBrains Mono', monospace",
-						fontSize: "0.5625rem",
-						color: "#5C6378",
-						textTransform: "uppercase",
-						letterSpacing: "0.08em",
-						width: "1.5rem",
-					}}
-				>
-					Font
-				</span>
+			<div style={row}>
+				<span style={rowLabel}>Font</span>
 				{FONT_VARIANTS.map((v) => (
 					<button
 						key={v.id}
@@ -209,6 +285,34 @@ export function VariantToolbar() {
 						onClick={() => applyFont(v.id)}
 						style={pill(activeFont === v.id)}
 					>
+						{v.label}
+					</button>
+				))}
+			</div>
+			<div style={row}>
+				<span style={rowLabel}>Accent</span>
+				{ACCENT_VARIANTS.map((v) => (
+					<button
+						key={v.id}
+						type="button"
+						onClick={() => applyAccent(v.id)}
+						style={{
+							...pill(activeAccent === v.id),
+							display: "inline-flex",
+							alignItems: "center",
+							gap: "0.25rem",
+						}}
+					>
+						<span
+							style={{
+								display: "inline-block",
+								width: "0.5rem",
+								height: "0.5rem",
+								borderRadius: "50%",
+								background: v.swatch,
+								flexShrink: 0,
+							}}
+						/>
 						{v.label}
 					</button>
 				))}
