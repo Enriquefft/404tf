@@ -26,7 +26,7 @@
 	--gold-900: #45310C;
 	--gold-950: #231808;
 
-	/* ---- Steel ---- */
+	/* ---- Steel (secondary scale) ---- */
 	--steel-50: #EFF6FC;
 	--steel-100: #D6EAFA;
 	--steel-200: #ADD4F5;
@@ -39,11 +39,14 @@
 	--steel-900: #0E3044;
 	--steel-950: #091C28;
 
+	/* ---- Secondary (matches steel-400 by default, swappable) ---- */
+	--secondary: #3DA5D9;
+
 	/* ---- Borders ---- */
 	--border-subtle: rgba(255, 255, 255, 0.06);
 	--border-default: rgba(255, 255, 255, 0.1);
 	--border-strong: rgba(255, 255, 255, 0.16);
-	--border-focus: #EDAE49;
+	--border-focus: var(--accent);
 
 	/* ---- Semantic ---- */
 	--success: #22C55E;
@@ -52,7 +55,7 @@
 	--warning-muted: rgba(245, 158, 11, 0.12);
 	--error: #EF4444;
 	--error-muted: rgba(239, 68, 68, 0.12);
-	--info: #3DA5D9;
+	--info: var(--secondary);
 	--info-muted: rgba(61, 165, 217, 0.12);
 
 	/* ---- Verticals ---- */

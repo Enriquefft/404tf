@@ -10,6 +10,12 @@ const BG_VARIANTS = [
 			"--bg-surface": "#151210",
 			"--bg-elevated": "#1E1A17",
 			"--bg-overlay": "#272220",
+			// warm-shifted text tones
+			"--text-secondary": "#9B9088",
+			"--text-tertiary": "#6B5F57",
+			"--text-disabled": "#483E38",
+			// warm steel
+			"--secondary": "#C89B7A",
 		},
 	},
 	{
@@ -20,6 +26,12 @@ const BG_VARIANTS = [
 			"--bg-surface": "#0E0F0B",
 			"--bg-elevated": "#181A15",
 			"--bg-overlay": "#22241E",
+			// olive-shifted text tones
+			"--text-secondary": "#8B9282",
+			"--text-tertiary": "#5C6354",
+			"--text-disabled": "#3D4336",
+			// sage steel
+			"--secondary": "#6BA38A",
 		},
 	},
 	{
@@ -30,6 +42,12 @@ const BG_VARIANTS = [
 			"--bg-surface": "#110E18",
 			"--bg-elevated": "#1A1622",
 			"--bg-overlay": "#231E2D",
+			// purple-shifted text tones
+			"--text-secondary": "#928BA8",
+			"--text-tertiary": "#635C78",
+			"--text-disabled": "#433D56",
+			// lavender steel
+			"--secondary": "#9B8BCA",
 		},
 	},
 	{
@@ -40,6 +58,12 @@ const BG_VARIANTS = [
 			"--bg-surface": "#111111",
 			"--bg-elevated": "#1A1A1A",
 			"--bg-overlay": "#232323",
+			// pure neutral text tones
+			"--text-secondary": "#909090",
+			"--text-tertiary": "#606060",
+			"--text-disabled": "#404040",
+			// neutral steel
+			"--secondary": "#8CA0B0",
 		},
 	},
 ] as const;
@@ -160,6 +184,10 @@ const ORIGINAL_BG: Record<string, string> = {
 	"--bg-surface": "#0F1320",
 	"--bg-elevated": "#171C2E",
 	"--bg-overlay": "#1E2438",
+	"--text-secondary": "#8B92A8",
+	"--text-tertiary": "#5C6378",
+	"--text-disabled": "#3D4356",
+	"--secondary": "#3DA5D9",
 };
 
 const ORIGINAL_FONT = "'Instrument Serif', Georgia, serif";
