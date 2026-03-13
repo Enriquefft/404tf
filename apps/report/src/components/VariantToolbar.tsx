@@ -14,8 +14,8 @@ const BG_VARIANTS = [
 			"--text-secondary": "#9B9088",
 			"--text-tertiary": "#6B5F57",
 			"--text-disabled": "#483E38",
-			// warm steel
-			"--secondary": "#C89B7A",
+			// warm sage — contrasts copper instead of blending
+			"--secondary": "#7BA38A",
 		},
 	},
 	{
@@ -69,42 +69,54 @@ const BG_VARIANTS = [
 ] as const;
 
 const FONT_VARIANTS = [
-	{ id: "original", label: "Instrument Serif", css: "" },
+	{ id: "original", label: "Instrument Serif", css: "", displayStyle: "italic", displayWeight: "400" },
 	{
 		id: "syne",
 		label: "Syne",
 		css: "@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap');",
 		family: "'Syne', Arial, sans-serif",
+		displayStyle: "normal",
+		displayWeight: "700",
 	},
 	{
 		id: "bricolage",
 		label: "Bricolage Grotesque",
 		css: "@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap');",
 		family: "'Bricolage Grotesque', Arial, sans-serif",
+		displayStyle: "normal",
+		displayWeight: "600",
 	},
 	{
 		id: "bebas",
 		label: "Bebas Neue",
 		css: "@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');",
 		family: "'Bebas Neue', Impact, sans-serif",
+		displayStyle: "normal",
+		displayWeight: "400",
 	},
 	{
 		id: "playfair",
 		label: "Playfair Display",
 		css: "@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');",
 		family: "'Playfair Display', Georgia, serif",
+		displayStyle: "italic",
+		displayWeight: "400",
 	},
 	{
 		id: "familjen",
 		label: "Familjen Grotesk",
 		css: "@import url('https://fonts.googleapis.com/css2?family=Familjen+Grotesk:ital,wght@0,400..700;1,400..700&display=swap');",
 		family: "'Familjen Grotesk', Arial, sans-serif",
+		displayStyle: "normal",
+		displayWeight: "600",
 	},
 	{
 		id: "outfit",
 		label: "Outfit",
 		css: "@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');",
 		family: "'Outfit', Arial, sans-serif",
+		displayStyle: "normal",
+		displayWeight: "600",
 	},
 ] as const;
 
@@ -156,8 +168,8 @@ const ACCENT_VARIANTS: { id: string; label: string; swatch: string; vars: Accent
 	{
 		id: "copper",
 		label: "Copper",
-		swatch: "#D97706",
-		vars: accentScale("#D97706", "#F59E0B", "#92400E", "#451A03", 217, 119, 6),
+		swatch: "#C8802A",
+		vars: accentScale("#C8802A", "#DDA04E", "#8B5A1B", "#3D2508", 200, 128, 42),
 	},
 	{
 		id: "emerald",
@@ -233,6 +245,8 @@ export function VariantToolbar() {
 				? ORIGINAL_FONT
 				: (variant && "family" in variant ? variant.family : null) ?? ORIGINAL_FONT;
 		root.style.setProperty("--font-display", family);
+		root.style.setProperty("--font-display-style", variant?.displayStyle ?? "italic");
+		root.style.setProperty("--font-display-weight", variant?.displayWeight ?? "400");
 	}
 
 	function applyAccent(id: string) {

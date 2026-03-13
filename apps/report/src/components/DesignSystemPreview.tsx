@@ -113,7 +113,9 @@ function Overline({ children }: { children: ReactNode }) {
 
 function SectionHeading({ id, overline, title }: { id: string; overline: string; title: string }) {
 	return (
-		<div id={id} className="mb-10 scroll-mt-8 pt-16 first:pt-0">
+		<div id={id} className="ds-section mb-10 scroll-mt-8 pt-16 first:pt-0"
+			style={{ animationDelay: `${Number.parseInt(overline) * 0.08}s` }}
+		>
 			<Overline>{overline}</Overline>
 			<h2
 				className="mt-2"
@@ -122,13 +124,13 @@ function SectionHeading({ id, overline, title }: { id: string; overline: string;
 					fontSize: "2.25rem",
 					lineHeight: "2.75rem",
 					letterSpacing: "-0.025em",
-					fontWeight: 400,
+					fontWeight: "var(--font-display-weight)" as unknown as number,
 					color: "var(--text-primary)",
 				}}
 			>
 				{title}
 			</h2>
-			{/* Gold line divider */}
+			{/* Accent line divider */}
 			<div
 				className="mt-4 h-px w-full"
 				style={{
@@ -290,7 +292,7 @@ export function DesignSystemPreview() {
 	return (
 		<>
 			<div
-				className="ds-root flex min-h-screen"
+				className="ds-root ds-grain relative flex min-h-screen"
 				style={{
 					background: "var(--bg-deep)",
 					color: "var(--text-primary)",
@@ -379,8 +381,8 @@ export function DesignSystemPreview() {
 				{/* ------------------------------------------------------------ */}
 				{/* Main content                                                 */}
 				{/* ------------------------------------------------------------ */}
-				<main className="min-w-0 flex-1 px-6 pb-24 pt-8 lg:px-12">
-					<div className="mx-auto max-w-5xl">
+				<main className="ds-glow relative min-w-0 flex-1 px-6 pb-24 pt-8 lg:px-12">
+					<div className="relative z-[2] mx-auto max-w-5xl">
 						{/* Header */}
 						<header
 							className="mb-4"
@@ -398,8 +400,8 @@ export function DesignSystemPreview() {
 									fontSize: "3.75rem",
 									lineHeight: "4.25rem",
 									letterSpacing: "-0.035em",
-									fontWeight: 400,
-									fontStyle: "italic",
+									fontWeight: "var(--font-display-weight)" as unknown as number,
+									fontStyle: "var(--font-display-style)" as React.CSSProperties["fontStyle"],
 									color: "var(--text-primary)",
 								}}
 							>
@@ -667,7 +669,7 @@ export function DesignSystemPreview() {
 							<div style={{ fontFamily: "var(--font-display)", fontSize: "3.75rem", lineHeight: "4.25rem", letterSpacing: "-0.035em", color: "var(--accent)" }}>
 								$2.4 Billion
 							</div>
-							<div style={{ fontFamily: "var(--font-display)", fontSize: "2.25rem", lineHeight: "2.75rem", letterSpacing: "-0.025em", fontStyle: "italic", color: "var(--text-secondary)" }}>
+							<div style={{ fontFamily: "var(--font-display)", fontSize: "2.25rem", lineHeight: "2.75rem", letterSpacing: "-0.025em", fontStyle: "var(--font-display-style)" as React.CSSProperties["fontStyle"], color: "var(--text-secondary)" }}>
 								The Definitive LATAM Deeptech Directory
 							</div>
 						</div>
