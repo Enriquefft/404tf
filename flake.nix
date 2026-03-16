@@ -34,6 +34,7 @@
       devShell.env = pkgs: {
         # Skip Playwright host requirements check on NixOS
         PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS = "true";
+        PLAYWRIGHT_BROWSERS_PATH = "${pkgs.playwright-driver.browsers}";
       };
     };
 
