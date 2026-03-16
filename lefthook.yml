@@ -15,6 +15,6 @@ pre-commit:
     types-spechack:
       glob: "apps/spechack/**/*.{ts,tsx}"
       run: cd apps/spechack && bunx tsc --noEmit
-    types-report:
-      glob: "apps/report/**/*.{ts,tsx}"
-      run: cd apps/report && bunx astro check
+    types-map:
+      glob: "apps/map/**/*.{ts,tsx}"
+      run: cd apps/map && bunx astro check

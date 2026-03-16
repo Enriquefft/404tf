@@ -1,0 +1,919 @@
+---
+// ---------------------------------------------------------------------------
+// Data
+// ---------------------------------------------------------------------------
+const BG_SWATCHES = [
+	{ name: "background", var: "--background", hex: "#0A0710", desc: "Page background" },
+	{ name: "card", var: "--card", hex: "#110E18", desc: "Cards, panels" },
+	{ name: "popover", var: "--popover", hex: "#1A1622", desc: "Modals, popovers" },
+	{ name: "muted", var: "--muted", hex: "#231E2D", desc: "Hover states" },
+];
+
+const TEXT_LEVELS = [
+	{ name: "foreground", var: "--foreground", hex: "#ECEEF4", desc: "Headings, body" },
+	{ name: "muted-fg", var: "--muted-foreground", hex: "#928BA8", desc: "Labels, captions" },
+	{ name: "tertiary", var: "--text-tertiary", hex: "#635C78", desc: "Metadata, hints" },
+	{ name: "disabled", var: "--text-disabled", hex: "#433D56", desc: "Disabled elements" },
+];
+
+const PURPLE_SCALE = [
+	{ step: "50", hex: "#F5F3FF" },
+	{ step: "100", hex: "#EDE9FE" },
+	{ step: "200", hex: "#DDD6FE" },
+	{ step: "300", hex: "#C4B5FD" },
+	{ step: "400", hex: "#A78BFA" },
+	{ step: "500", hex: "#8B5CF6" },
+	{ step: "600", hex: "#7C3AED" },
+	{ step: "700", hex: "#6D28D9" },
+	{ step: "800", hex: "#5B21B6" },
+	{ step: "900", hex: "#4C1D95" },
+	{ step: "950", hex: "#2E1065" },
+];
+
+const LAVENDER_SCALE = [
+	{ step: "50", hex: "#F8F6FC" },
+	{ step: "100", hex: "#EDE8F5" },
+	{ step: "200", hex: "#DDD4ED" },
+	{ step: "300", hex: "#C4B5E0" },
+	{ step: "400", hex: "#A893D1" },
+	{ step: "500", hex: "#9B8BCA" },
+	{ step: "600", hex: "#7E6DB5" },
+	{ step: "700", hex: "#6B5A9E" },
+	{ step: "800", hex: "#574885" },
+	{ step: "900", hex: "#3D3366" },
+	{ step: "950", hex: "#1A1530" },
+];
+
+const SEMANTIC_COLORS = [
+	{ name: "success", color: "#22C55E", muted: "rgba(34,197,94,0.12)" },
+	{ name: "warning", color: "#F59E0B", muted: "rgba(245,158,11,0.12)" },
+	{ name: "error", color: "#EF4444", muted: "rgba(239,68,68,0.12)" },
+	{ name: "info", color: "#9B8BCA", muted: "rgba(155,139,202,0.12)" },
+];
+
+const VERTICALS = [
+	{ key: "ai", label: "AI / ML", color: "#FF66B3", flag: "house" },
+	{ key: "biotech", label: "Biotech", color: "#00BD68", flag: "house" },
+	{ key: "hardware", label: "Hardware", color: "#FFB300", flag: "house" },
+	{ key: "cleantech", label: "Cleantech", color: "#2DD4BF" },
+	{ key: "agritech", label: "Agritech", color: "#A3E635" },
+	{ key: "medtech", label: "Medtech", color: "#F87171" },
+	{ key: "materials", label: "Materials", color: "#A78BFA" },
+	{ key: "aerospace", label: "Aerospace", color: "#38BDF8" },
+	{ key: "quantum", label: "Quantum", color: "#D946EF" },
+	{ key: "fintech", label: "FinTech", color: "#6366F1" },
+	{ key: "blockchain", label: "Blockchain", color: "#22D3EE" },
+	{ key: "other", label: "Other", color: "#94A3B8" },
+];
+
+const TYPE_SCALE = [
+	{ name: "xs", size: "0.75rem", px: "12", lh: "1rem" },
+	{ name: "sm", size: "0.8125rem", px: "13", lh: "1.25rem" },
+	{ name: "base", size: "0.9375rem", px: "15", lh: "1.5rem" },
+	{ name: "md", size: "1rem", px: "16", lh: "1.625rem" },
+	{ name: "lg", size: "1.125rem", px: "18", lh: "1.75rem" },
+	{ name: "xl", size: "1.25rem", px: "20", lh: "1.875rem" },
+	{ name: "2xl", size: "1.5rem", px: "24", lh: "2rem" },
+	{ name: "3xl", size: "1.875rem", px: "30", lh: "2.375rem" },
+	{ name: "4xl", size: "2.25rem", px: "36", lh: "2.75rem" },
+];
+
+const BAR_DATA = [
+	{ label: "AI/ML", value: 24, color: "#FF66B3" },
+	{ label: "Biotech", value: 18, color: "#00BD68" },
+	{ label: "Hardware", value: 14, color: "#FFB300" },
+	{ label: "Cleantech", value: 12, color: "#2DD4BF" },
+	{ label: "FinTech", value: 10, color: "#6366F1" },
+	{ label: "Agritech", value: 8, color: "#A3E635" },
+	{ label: "Other", value: 14, color: "#94A3B8" },
+];
+
+const SECTIONS = [
+	{ id: "colors", label: "Colors" },
+	{ id: "typography", label: "Typography" },
+	{ id: "buttons", label: "Buttons" },
+	{ id: "inputs", label: "Inputs" },
+	{ id: "cards", label: "Cards" },
+	{ id: "tags", label: "Tags & Badges" },
+	{ id: "stats", label: "Stats" },
+	{ id: "charts", label: "Charts" },
+	{ id: "dividers", label: "Dividers" },
+];
+
+const BAR_MAX = Math.max(...BAR_DATA.map((b) => b.value));
+
+const MATURITY_COLORS = {
+	seed: { bg: "var(--warning-muted)", text: "var(--warning)", border: "rgba(245,158,11,0.3)" },
+	seriesA: { bg: "var(--info-muted)", text: "var(--info)", border: "rgba(61,165,217,0.3)" },
+	seriesB: { bg: "rgba(167,139,250,0.12)", text: "#A78BFA", border: "rgba(167,139,250,0.3)" },
+	growth: { bg: "var(--success-muted)", text: "var(--success)", border: "rgba(34,197,94,0.3)" },
+};
+---
+
+<div
+	class="ds-root ds-grain relative flex min-h-screen"
+	style="background: var(--background); color: var(--foreground); font-family: var(--font-body); font-size: 0.9375rem; line-height: 1.5rem;"
+>
+	<!-- Sidebar Nav -->
+	<nav
+		class="sticky top-0 hidden h-screen w-56 flex-shrink-0 flex-col border-r lg:flex"
+		style="background: var(--card); border-color: var(--border-subtle);"
+	>
+		<!-- Brand mark -->
+		<div class="px-5 pb-4 pt-8">
+			<div class="flex flex-col items-start gap-1.5">
+				<img
+					src="/brand/logo-transparent-ondark.svg"
+					alt="404 Tech Found"
+					style="height: 2rem; width: auto;"
+				/>
+				<span
+					class="tracking-[0.16em] uppercase"
+					style="font-family: var(--font-heading); font-size: 0.625rem; font-weight: 500; color: var(--text-tertiary);"
+				>
+					Design System
+				</span>
+			</div>
+			<div class="mt-4 h-px" style="background: var(--border-subtle);"></div>
+		</div>
+
+		<!-- Section links -->
+		<div class="flex flex-1 flex-col gap-0.5 overflow-y-auto px-3">
+			{SECTIONS.map((s) => (
+				<a
+					href={`#${s.id}`}
+					data-nav-link
+					class="ds-nav-link block transition-colors"
+					style={`font-family: var(--font-heading); font-size: 0.8125rem; font-weight: 400; color: var(--muted-foreground); background: transparent; border-radius: var(--radius-md); padding: 0.5rem 0.75rem; text-decoration: none;`}
+				>
+					{s.label}
+				</a>
+			))}
+		</div>
+
+		<!-- Version -->
+		<div class="px-5 py-4">
+			<span style="font-family: var(--font-mono); font-size: 0.6875rem; color: var(--text-disabled);">
+				v1.0 — Report Platform
+			</span>
+		</div>
+	</nav>
+
+	<!-- Main content -->
+	<main class="ds-glow relative min-w-0 flex-1 px-6 pb-24 pt-8 lg:px-12">
+		<div class="relative z-[2] mx-auto max-w-5xl">
+			<!-- Header -->
+			<header class="mb-4" style="animation: ds-fadeUp 0.5s cubic-bezier(0.16,1,0.3,1) both;">
+				<img
+					src="/brand/logo-transparent-ondark.svg"
+					alt="404 Tech Found"
+					style="height: 2.5rem; width: auto;"
+				/>
+				<h1
+					class="mt-4"
+					style="font-family: var(--font-display); font-size: 3.75rem; line-height: 4.25rem; letter-spacing: -0.035em; font-weight: var(--font-display-weight); font-style: var(--font-display-style); color: var(--foreground);"
+				>
+					Design System
+				</h1>
+				<p
+					class="mt-3 max-w-2xl"
+					style="font-family: var(--font-body); font-size: 1.125rem; line-height: 1.75rem; color: var(--muted-foreground); letter-spacing: -0.005em;"
+				>
+					Living style guide for the LATAM Deeptech Report platform. Every
+					token, component, and pattern rendered from the spec.
+				</p>
+			</header>
+
+			<!-- ====================================================== -->
+			<!-- COLORS                                                  -->
+			<!-- ====================================================== -->
+			<div id="colors" class="ds-section mb-10 scroll-mt-8 pt-16 first:pt-0" style="animation-delay: 0.08s;">
+				<span class="inline-block tracking-[0.08em] uppercase" style="font-family: var(--font-heading); font-size: 0.75rem; font-weight: 600; color: var(--primary);">01</span>
+				<h2 class="mt-2" style="font-family: var(--font-display); font-size: 2.25rem; line-height: 2.75rem; letter-spacing: -0.025em; font-weight: var(--font-display-weight); color: var(--foreground);">Color System</h2>
+				<div class="mt-4 h-px w-full" style="background: linear-gradient(90deg, var(--primary) 0%, transparent 60%);"></div>
+			</div>
+
+			<!-- Backgrounds -->
+			<h3 class="mb-4 mt-8" style="font-family: var(--font-heading); font-size: 1rem; font-weight: 600; color: var(--muted-foreground); letter-spacing: 0.02em;">Backgrounds</h3>
+			<div class="flex flex-wrap gap-4">
+				{BG_SWATCHES.map((s) => (
+					<div
+						class="flex items-center gap-3 rounded-lg border px-4 py-3"
+						style={`background: ${s.hex}; border-color: var(--border-subtle); min-width: 200px;`}
+					>
+						<div
+							class="h-10 w-10 flex-shrink-0 rounded-md"
+							style={`background: ${s.hex}; border: 1px solid var(--border);`}
+						></div>
+						<div>
+							<div style="font-family: var(--font-heading); font-size: 0.8125rem; font-weight: 500; color: var(--foreground);">
+								bg.{s.name}
+							</div>
+							<div style="font-family: var(--font-mono); font-size: 0.6875rem; color: var(--text-tertiary);">
+								{s.hex}
+							</div>
+							<div style="font-family: var(--font-body); font-size: 0.6875rem; color: var(--text-disabled); margin-top: 1px;">
+								{s.desc}
+							</div>
+						</div>
+					</div>
+				))}
+			</div>
+
+			<!-- Text levels -->
+			<h3 class="mb-4 mt-8" style="font-family: var(--font-heading); font-size: 1rem; font-weight: 600; color: var(--muted-foreground); letter-spacing: 0.02em;">Text Hierarchy</h3>
+			<div class="space-y-3">
+				{TEXT_LEVELS.map((t) => (
+					<div class="flex items-center gap-4">
+						<span
+							class="w-20 flex-shrink-0 text-right"
+							style="font-family: var(--font-mono); font-size: 0.6875rem; color: var(--text-disabled);"
+						>
+							{t.hex}
+						</span>
+						<span style={`font-family: var(--font-body); font-size: 1.125rem; font-weight: 500; color: ${t.hex};`}>
+							{t.desc}
+						</span>
+						<span
+							class="ml-auto"
+							style="font-family: var(--font-heading); font-size: 0.75rem; color: var(--text-tertiary);"
+						>
+							text.{t.name}
+						</span>
+					</div>
+				))}
+			</div>
+
+			<!-- Purple scale -->
+			<h3 class="mb-4 mt-8" style="font-family: var(--font-heading); font-size: 1rem; font-weight: 600; color: var(--muted-foreground); letter-spacing: 0.02em;">Purple — Primary Scale</h3>
+			<div class="flex flex-wrap gap-2.5">
+				{PURPLE_SCALE.map((g) => (
+					<div class="flex flex-col items-center gap-1.5">
+						<div
+							class="h-14 w-14 rounded-lg flex-shrink-0"
+							style={`background: ${g.hex}; border-radius: var(--radius); ${g.step === "600" ? `border: 2px solid ${g.hex};` : "border: 1px solid var(--border-subtle);"}`}
+						></div>
+						<span class="text-center leading-tight" style="font-family: var(--font-heading); font-size: 0.6875rem; font-weight: 500; color: var(--muted-foreground);">
+							{g.step}
+						</span>
+						<span style="font-family: var(--font-mono); font-size: 0.625rem; color: var(--text-tertiary);">
+							{g.hex}
+						</span>
+					</div>
+				))}
+			</div>
+
+			<!-- Lavender scale -->
+			<h3 class="mb-4 mt-8" style="font-family: var(--font-heading); font-size: 1rem; font-weight: 600; color: var(--muted-foreground); letter-spacing: 0.02em;">Lavender — Secondary Scale</h3>
+			<div class="flex flex-wrap gap-2.5">
+				{LAVENDER_SCALE.map((s) => (
+					<div class="flex flex-col items-center gap-1.5">
+						<div
+							class="h-14 w-14 rounded-lg flex-shrink-0"
+							style={`background: ${s.hex}; border-radius: var(--radius); ${s.step === "500" ? `border: 2px solid ${s.hex};` : "border: 1px solid var(--border-subtle);"}`}
+						></div>
+						<span class="text-center leading-tight" style="font-family: var(--font-heading); font-size: 0.6875rem; font-weight: 500; color: var(--muted-foreground);">
+							{s.step}
+						</span>
+						<span style="font-family: var(--font-mono); font-size: 0.625rem; color: var(--text-tertiary);">
+							{s.hex}
+						</span>
+					</div>
+				))}
+			</div>
+
+			<!-- Semantic -->
+			<h3 class="mb-4 mt-8" style="font-family: var(--font-heading); font-size: 1rem; font-weight: 600; color: var(--muted-foreground); letter-spacing: 0.02em;">Semantic</h3>
+			<div class="flex flex-wrap gap-4">
+				{SEMANTIC_COLORS.map((s) => (
+					<div
+						class="flex items-center gap-3 rounded-lg border px-4 py-3"
+						style={`background: ${s.muted}; border-color: ${s.color}40; min-width: 160px;`}
+					>
+						<div
+							class="h-8 w-8 flex-shrink-0 rounded-full"
+							style={`background: ${s.color};`}
+						></div>
+						<div>
+							<div style={`font-family: var(--font-heading); font-size: 0.8125rem; font-weight: 600; color: ${s.color}; text-transform: capitalize;`}>
+								{s.name}
+							</div>
+							<div style="font-family: var(--font-mono); font-size: 0.625rem; color: var(--text-tertiary);">
+								{s.color}
+							</div>
+						</div>
+					</div>
+				))}
+			</div>
+
+			<!-- Verticals -->
+			<h3 class="mb-4 mt-8" style="font-family: var(--font-heading); font-size: 1rem; font-weight: 600; color: var(--muted-foreground); letter-spacing: 0.02em;">Verticals — Data Visualization Palette</h3>
+			<div class="grid grid-cols-2 gap-2.5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+				{VERTICALS.map((v) => (
+					<div
+						class="flex flex-col items-center gap-2 rounded-lg border px-3 py-3"
+						style={`background: ${v.color}10; border-color: ${v.color}25;`}
+					>
+						<div
+							class="h-8 w-8 rounded-full"
+							style={`background: ${v.color}; box-shadow: 0 0 12px ${v.color}40;`}
+						></div>
+						<div class="text-center">
+							<div style={`font-family: var(--font-heading); font-size: 0.75rem; font-weight: 500; color: ${v.color};`}>
+								{v.label}
+							</div>
+							<div style={`font-family: var(--font-mono); font-size: 0.5625rem; color: var(--text-disabled); margin-top: 2px;`}>
+								{v.color}
+							</div>
+							{v.flag === "house" && (
+								<span
+									class="mt-1 inline-block"
+									style="font-family: var(--font-mono); font-size: 0.5625rem; color: var(--primary); background: var(--primary-10); padding: 0 4px; border-radius: 2px;"
+								>
+									house
+								</span>
+							)}
+						</div>
+					</div>
+				))}
+			</div>
+
+			<!-- ====================================================== -->
+			<!-- TYPOGRAPHY                                              -->
+			<!-- ====================================================== -->
+			<div id="typography" class="ds-section mb-10 scroll-mt-8 pt-16" style="animation-delay: 0.16s;">
+				<span class="inline-block tracking-[0.08em] uppercase" style="font-family: var(--font-heading); font-size: 0.75rem; font-weight: 600; color: var(--primary);">02</span>
+				<h2 class="mt-2" style="font-family: var(--font-display); font-size: 2.25rem; line-height: 2.75rem; letter-spacing: -0.025em; font-weight: var(--font-display-weight); color: var(--foreground);">Typography</h2>
+				<div class="mt-4 h-px w-full" style="background: linear-gradient(90deg, var(--primary) 0%, transparent 60%);"></div>
+			</div>
+
+			<!-- Display — Bricolage Grotesque -->
+			<h3 class="mb-4 mt-8" style="font-family: var(--font-heading); font-size: 1rem; font-weight: 600; color: var(--muted-foreground); letter-spacing: 0.02em;">Display — Bricolage Grotesque</h3>
+			<div
+				class="space-y-4 rounded-xl border p-6"
+				style="background: var(--card); border-color: var(--border-subtle);"
+			>
+				<div style="font-family: var(--font-display); font-size: 4.5rem; line-height: 5rem; letter-spacing: -0.04em; color: var(--foreground);">
+					100 Startups
+				</div>
+				<div style="font-family: var(--font-display); font-size: 3.75rem; line-height: 4.25rem; letter-spacing: -0.035em; color: var(--primary);">
+					$2.4 Billion
+				</div>
+				<div style="font-family: var(--font-display); font-size: 2.25rem; line-height: 2.75rem; letter-spacing: -0.025em; font-style: var(--font-display-style); color: var(--muted-foreground);">
+					The Definitive LATAM Deeptech Directory
+				</div>
+			</div>
+
+			<!-- Heading — Space Grotesk -->
+			<h3 class="mb-4 mt-8" style="font-family: var(--font-heading); font-size: 1rem; font-weight: 600; color: var(--muted-foreground); letter-spacing: 0.02em;">Heading — Space Grotesk</h3>
+			<div class="space-y-3">
+				<div style="font-family: var(--font-heading); font-size: 1.875rem; line-height: 2.375rem; font-weight: 700; letter-spacing: -0.02em;">
+					H1 — Ecosystem Overview
+				</div>
+				<div style="font-family: var(--font-heading); font-size: 1.5rem; line-height: 2rem; font-weight: 600; letter-spacing: -0.015em;">
+					H2 — Funding by Vertical
+				</div>
+				<div style="font-family: var(--font-heading); font-size: 1.25rem; line-height: 1.875rem; font-weight: 600; letter-spacing: -0.01em;">
+					H3 — Regional Distribution
+				</div>
+				<div style="font-family: var(--font-heading); font-size: 1.125rem; line-height: 1.75rem; font-weight: 500; letter-spacing: -0.005em; color: var(--muted-foreground);">
+					H4 — Methodology Notes
+				</div>
+			</div>
+
+			<!-- Body — Plus Jakarta Sans -->
+			<h3 class="mb-4 mt-8" style="font-family: var(--font-heading); font-size: 1rem; font-weight: 600; color: var(--muted-foreground); letter-spacing: 0.02em;">Body — Plus Jakarta Sans</h3>
+			<div class="max-w-2xl space-y-3">
+				<p style="font-family: var(--font-body); font-size: 1rem; line-height: 1.625rem;">
+					NovaBio is a Mexico City-based biotech startup developing
+					CRISPR-based crop resistance platforms for tropical agriculture.
+					Founded in 2022, they have raised $12.5M in Series A funding led
+					by ALLVP and Kaszek.
+				</p>
+				<p style="font-family: var(--font-body); font-size: 0.9375rem; line-height: 1.5rem; color: var(--muted-foreground);">
+					This report profiles 100 deeptech startups across 12 LATAM
+					countries, covering verticals from AI/ML to quantum computing.
+					Data collected between January and March 2026.
+				</p>
+				<p style="font-family: var(--font-body); font-size: 0.8125rem; line-height: 1.25rem; color: var(--text-tertiary);">
+					Methodology: Startups selected based on technology readiness
+					level (TRL 4+), minimum $500K in verifiable funding, and active
+					operations in at least one LATAM country.
+				</p>
+			</div>
+
+			<!-- Data — JetBrains Mono -->
+			<h3 class="mb-4 mt-8" style="font-family: var(--font-heading); font-size: 1rem; font-weight: 600; color: var(--muted-foreground); letter-spacing: 0.02em;">Data — JetBrains Mono</h3>
+			<div class="flex flex-wrap items-end gap-8">
+				<div>
+					<div style="font-family: var(--font-mono); font-size: 3rem; line-height: 3.5rem; font-weight: 500; color: var(--primary); letter-spacing: -0.03em;">
+						$2.4B
+					</div>
+					<div style="font-family: var(--font-mono); font-size: 0.8125rem; color: var(--text-tertiary);">
+						dataLg — Total Funding
+					</div>
+				</div>
+				<div>
+					<div style="font-family: var(--font-mono); font-size: 0.9375rem; color: var(--foreground);">
+						MXN 240,000,000
+					</div>
+					<div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-tertiary);">
+						data — Currency Format
+					</div>
+				</div>
+				<div>
+					<div style="font-family: var(--font-mono); font-size: 0.8125rem; color: var(--muted-foreground);">
+						ID-NB-2024-0847
+					</div>
+					<div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-tertiary);">
+						dataSm — Reference Code
+					</div>
+				</div>
+			</div>
+
+			<!-- Full scale table -->
+			<h3 class="mb-4 mt-8" style="font-family: var(--font-heading); font-size: 1rem; font-weight: 600; color: var(--muted-foreground); letter-spacing: 0.02em;">Type Scale Reference</h3>
+			<div class="overflow-hidden rounded-lg border" style="border-color: var(--border-subtle);">
+				{TYPE_SCALE.map((t, i) => (
+					<div
+						class="flex items-baseline gap-4 border-b px-4 py-2.5"
+						style={`background: ${i % 2 === 0 ? "var(--card)" : "var(--background)"}; border-color: var(--border-subtle);`}
+					>
+						<span
+							class="w-10 flex-shrink-0"
+							style="font-family: var(--font-mono); font-size: 0.6875rem; color: var(--primary); font-weight: 500;"
+						>
+							{t.name}
+						</span>
+						<span
+							class="w-16 flex-shrink-0"
+							style="font-family: var(--font-mono); font-size: 0.6875rem; color: var(--text-disabled);"
+						>
+							{t.px}px
+						</span>
+						<span style={`font-family: var(--font-body); font-size: ${t.size}; line-height: ${t.lh}; color: var(--foreground);`}>
+							LATAM Deeptech
+						</span>
+					</div>
+				))}
+			</div>
+
+			<!-- ====================================================== -->
+			<!-- BUTTONS                                                 -->
+			<!-- ====================================================== -->
+			<div id="buttons" class="ds-section mb-10 scroll-mt-8 pt-16" style="animation-delay: 0.24s;">
+				<span class="inline-block tracking-[0.08em] uppercase" style="font-family: var(--font-heading); font-size: 0.75rem; font-weight: 600; color: var(--primary);">03</span>
+				<h2 class="mt-2" style="font-family: var(--font-display); font-size: 2.25rem; line-height: 2.75rem; letter-spacing: -0.025em; font-weight: var(--font-display-weight); color: var(--foreground);">Buttons</h2>
+				<div class="mt-4 h-px w-full" style="background: linear-gradient(90deg, var(--primary) 0%, transparent 60%);"></div>
+			</div>
+
+			<div class="grid gap-8 md:grid-cols-3">
+				<!-- Primary -->
+				<div class="space-y-3">
+					<h3 class="mb-4 mt-8" style="font-family: var(--font-heading); font-size: 1rem; font-weight: 600; color: var(--muted-foreground); letter-spacing: 0.02em;">Primary</h3>
+					<div class="flex items-center gap-3">
+						<button type="button" style="background: var(--primary); color: var(--background); font-family: var(--font-heading); font-weight: 600; font-size: 0.875rem; padding: 0.625rem 1.25rem; border-radius: var(--radius-md); border: none; cursor: pointer; transition: all 150ms ease-out;">Explore Directory</button>
+					</div>
+					<div class="flex items-center gap-3">
+						<button type="button" style="background: var(--primary-light); color: var(--background); font-family: var(--font-heading); font-weight: 600; font-size: 0.875rem; padding: 0.625rem 1.25rem; border-radius: var(--radius-md); border: none; box-shadow: var(--glow-primary);">Explore Directory</button>
+						<span style="font-family: var(--font-mono); font-size: 0.6875rem; color: var(--text-disabled);">:hover</span>
+					</div>
+					<div class="flex items-center gap-3">
+						<button type="button" style="background: var(--primary-darker); color: var(--primary-dark); font-family: var(--font-heading); font-weight: 600; font-size: 0.875rem; padding: 0.625rem 1.25rem; border-radius: var(--radius-md); border: none; cursor: not-allowed; opacity: 0.7;">Explore Directory</button>
+						<span style="font-family: var(--font-mono); font-size: 0.6875rem; color: var(--text-disabled);">:disabled</span>
+					</div>
+				</div>
+
+				<!-- Secondary -->
+				<div class="space-y-3">
+					<h3 class="mb-4 mt-8" style="font-family: var(--font-heading); font-size: 1rem; font-weight: 600; color: var(--muted-foreground); letter-spacing: 0.02em;">Secondary</h3>
+					<div class="flex items-center gap-3">
+						<button type="button" style="background: transparent; color: var(--primary); font-family: var(--font-heading); font-weight: 600; font-size: 0.875rem; padding: 0.625rem 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--primary-40); cursor: pointer; transition: all 150ms ease-out;">Download Report</button>
+					</div>
+					<div class="flex items-center gap-3">
+						<button type="button" style="background: var(--primary-8); color: var(--primary); font-family: var(--font-heading); font-weight: 600; font-size: 0.875rem; padding: 0.625rem 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--primary-60);">Download Report</button>
+						<span style="font-family: var(--font-mono); font-size: 0.6875rem; color: var(--text-disabled);">:hover</span>
+					</div>
+					<div class="flex items-center gap-3">
+						<button type="button" style="background: transparent; color: var(--text-disabled); font-family: var(--font-heading); font-weight: 600; font-size: 0.875rem; padding: 0.625rem 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); cursor: not-allowed; opacity: 0.7;">Download Report</button>
+						<span style="font-family: var(--font-mono); font-size: 0.6875rem; color: var(--text-disabled);">:disabled</span>
+					</div>
+				</div>
+
+				<!-- Ghost -->
+				<div class="space-y-3">
+					<h3 class="mb-4 mt-8" style="font-family: var(--font-heading); font-size: 1rem; font-weight: 600; color: var(--muted-foreground); letter-spacing: 0.02em;">Ghost</h3>
+					<div class="flex items-center gap-3">
+						<button type="button" style="background: transparent; color: var(--muted-foreground); font-family: var(--font-heading); font-weight: 600; font-size: 0.875rem; padding: 0.625rem 1.25rem; border-radius: var(--radius-md); border: none; cursor: pointer; transition: all 150ms ease-out;">View All Startups</button>
+					</div>
+					<div class="flex items-center gap-3">
+						<button type="button" style="background: rgba(255,255,255,0.06); color: var(--foreground); font-family: var(--font-heading); font-weight: 600; font-size: 0.875rem; padding: 0.625rem 1.25rem; border-radius: var(--radius-md); border: none;">View All Startups</button>
+						<span style="font-family: var(--font-mono); font-size: 0.6875rem; color: var(--text-disabled);">:hover</span>
+					</div>
+				</div>
+			</div>
+
+			<!-- ====================================================== -->
+			<!-- INPUTS                                                  -->
+			<!-- ====================================================== -->
+			<div id="inputs" class="ds-section mb-10 scroll-mt-8 pt-16" style="animation-delay: 0.32s;">
+				<span class="inline-block tracking-[0.08em] uppercase" style="font-family: var(--font-heading); font-size: 0.75rem; font-weight: 600; color: var(--primary);">04</span>
+				<h2 class="mt-2" style="font-family: var(--font-display); font-size: 2.25rem; line-height: 2.75rem; letter-spacing: -0.025em; font-weight: var(--font-display-weight); color: var(--foreground);">Inputs</h2>
+				<div class="mt-4 h-px w-full" style="background: linear-gradient(90deg, var(--primary) 0%, transparent 60%);"></div>
+			</div>
+
+			<div class="grid gap-6 md:grid-cols-3">
+				<!-- Text input -->
+				<div class="space-y-2">
+					<label style="font-family: var(--font-heading); font-size: 0.8125rem; font-weight: 500; color: var(--muted-foreground);">
+						Company Name
+					</label>
+					<input
+						type="text"
+						placeholder="e.g. NovaBio"
+						class="block w-full outline-none"
+						style="background: var(--background); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 0.625rem 0.875rem; font-family: var(--font-body); font-size: 0.9375rem; color: var(--foreground);"
+					/>
+				</div>
+
+				<!-- Select -->
+				<div class="space-y-2">
+					<label style="font-family: var(--font-heading); font-size: 0.8125rem; font-weight: 500; color: var(--muted-foreground);">
+						Country
+					</label>
+					<div class="relative">
+						<select
+							class="block w-full appearance-none outline-none"
+							style="background: var(--background); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 0.625rem 2.5rem 0.625rem 0.875rem; font-family: var(--font-body); font-size: 0.9375rem; color: var(--foreground);"
+						>
+							<option>Mexico</option>
+							<option>Brazil</option>
+							<option>Colombia</option>
+							<option>Chile</option>
+							<option>Argentina</option>
+						</select>
+						<div
+							class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2"
+							style="color: var(--text-tertiary);"
+						>
+							<!-- Chevron Down SVG -->
+							<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+						</div>
+					</div>
+				</div>
+
+				<!-- Search -->
+				<div class="space-y-2">
+					<label style="font-family: var(--font-heading); font-size: 0.8125rem; font-weight: 500; color: var(--muted-foreground);">
+						Search
+					</label>
+					<div class="relative">
+						<div
+							class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2"
+							style="color: var(--text-tertiary);"
+						>
+							<!-- Magnifier SVG -->
+							<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+						</div>
+						<input
+							type="search"
+							placeholder="Search startups, verticals, countries..."
+							class="block w-full outline-none"
+							style="background: var(--background); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 0.625rem 0.875rem 0.625rem 2.25rem; font-family: var(--font-body); font-size: 0.9375rem; color: var(--foreground);"
+						/>
+					</div>
+				</div>
+			</div>
+
+			<!-- ====================================================== -->
+			<!-- CARDS                                                   -->
+			<!-- ====================================================== -->
+			<div id="cards" class="ds-section mb-10 scroll-mt-8 pt-16" style="animation-delay: 0.4s;">
+				<span class="inline-block tracking-[0.08em] uppercase" style="font-family: var(--font-heading); font-size: 0.75rem; font-weight: 600; color: var(--primary);">05</span>
+				<h2 class="mt-2" style="font-family: var(--font-display); font-size: 2.25rem; line-height: 2.75rem; letter-spacing: -0.025em; font-weight: var(--font-display-weight); color: var(--foreground);">Cards</h2>
+				<div class="mt-4 h-px w-full" style="background: linear-gradient(90deg, var(--primary) 0%, transparent 60%);"></div>
+			</div>
+
+			<div class="grid gap-6 lg:grid-cols-2">
+				<!-- Default startup card -->
+				<div
+					class="rounded-lg border transition-colors"
+					style="background: var(--card); border-color: var(--border-subtle); border-radius: var(--radius); padding: 1.5rem;"
+				>
+					<div class="flex items-start gap-4">
+						<div
+							class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg"
+							style="background: #00BD6818; border: 1px solid #00BD6830; font-family: var(--font-heading); font-size: 0.875rem; font-weight: 700; color: #00BD68;"
+						>
+							NB
+						</div>
+						<div class="min-w-0 flex-1">
+							<div class="flex items-center gap-2">
+								<h4 style="font-family: var(--font-heading); font-size: 1.125rem; font-weight: 600; color: var(--foreground);">
+									NovaBio
+								</h4>
+								<span style={`font-family: var(--font-heading); font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: ${MATURITY_COLORS.seriesA.text}; background: ${MATURITY_COLORS.seriesA.bg}; border: 1px solid ${MATURITY_COLORS.seriesA.border}; border-radius: var(--radius-sm); padding: 0.125rem 0.5rem;`}>
+									Series A
+								</span>
+							</div>
+							<p class="mt-1" style="font-family: var(--font-body); font-size: 0.8125rem; line-height: 1.25rem; color: var(--muted-foreground);">
+								CRISPR-based crop resistance platform for tropical agriculture
+							</p>
+						</div>
+					</div>
+					<div class="mt-4 flex items-center gap-3">
+						<span style="font-family: var(--font-body); font-size: 0.8125rem; color: var(--text-tertiary);">
+							<span class="mr-1">&#127474;&#127485;</span> Mexico City
+						</span>
+						<span style="font-family: var(--font-mono); font-size: 0.8125rem; font-weight: 500; color: var(--primary);">
+							$12.5M
+						</span>
+					</div>
+					<div class="mt-3 flex flex-wrap gap-1.5">
+						<span class="inline-flex items-center gap-1.5" style="font-family: var(--font-heading); font-size: 0.75rem; font-weight: 500; color: #00BD68; background: #00BD6826; border: 1px solid #00BD6840; border-radius: var(--radius-full); padding: 0.125rem 0.625rem;">
+							<span class="inline-block h-1.5 w-1.5 rounded-full" style="background: #00BD68;"></span>
+							Biotech
+						</span>
+						<span class="inline-flex items-center gap-1.5" style="font-family: var(--font-heading); font-size: 0.75rem; font-weight: 500; color: #A3E635; background: #A3E63526; border: 1px solid #A3E63540; border-radius: var(--radius-full); padding: 0.125rem 0.625rem;">
+							<span class="inline-block h-1.5 w-1.5 rounded-full" style="background: #A3E635;"></span>
+							Agritech
+						</span>
+					</div>
+				</div>
+
+				<!-- Featured startup card -->
+				<div
+					class="rounded-lg border"
+					style="background: var(--card); border-color: var(--primary-25); border-radius: var(--radius-lg); padding: 2rem; box-shadow: 0 0 20px var(--primary-8);"
+				>
+					<div class="mb-3 flex items-center gap-2">
+						<span style="font-family: var(--font-mono); font-size: 0.6875rem; font-weight: 600; color: var(--primary); background: var(--primary-10); padding: 0.125rem 0.5rem; border-radius: var(--radius-sm); letter-spacing: 0.04em; text-transform: uppercase;">
+							Featured
+						</span>
+					</div>
+					<div class="flex items-start gap-4">
+						<div
+							class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg"
+							style="background: #FF66B318; border: 1px solid #FF66B330; font-family: var(--font-heading); font-size: 0.875rem; font-weight: 700; color: #FF66B3;"
+						>
+							CA
+						</div>
+						<div class="min-w-0 flex-1">
+							<div class="flex items-center gap-2">
+								<h4 style="font-family: var(--font-heading); font-size: 1.125rem; font-weight: 600; color: var(--foreground);">
+									CósmicaAI
+								</h4>
+								<span style={`font-family: var(--font-heading); font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: ${MATURITY_COLORS.seed.text}; background: ${MATURITY_COLORS.seed.bg}; border: 1px solid ${MATURITY_COLORS.seed.border}; border-radius: var(--radius-sm); padding: 0.125rem 0.5rem;`}>
+									Seed
+								</span>
+							</div>
+							<p class="mt-1" style="font-family: var(--font-body); font-size: 0.8125rem; line-height: 1.25rem; color: var(--muted-foreground);">
+								Autonomous quality inspection for manufacturing lines using computer vision
+							</p>
+						</div>
+					</div>
+					<div class="mt-4 flex items-center gap-3">
+						<span style="font-family: var(--font-body); font-size: 0.8125rem; color: var(--text-tertiary);">
+							<span class="mr-1">&#127463;&#127479;</span> S&atilde;o Paulo
+						</span>
+						<span style="font-family: var(--font-mono); font-size: 0.8125rem; font-weight: 500; color: var(--primary);">
+							$3.2M
+						</span>
+					</div>
+					<div class="mt-3 flex flex-wrap gap-1.5">
+						<span class="inline-flex items-center gap-1.5" style="font-family: var(--font-heading); font-size: 0.75rem; font-weight: 500; color: #FF66B3; background: #FF66B326; border: 1px solid #FF66B340; border-radius: var(--radius-full); padding: 0.125rem 0.625rem;">
+							<span class="inline-block h-1.5 w-1.5 rounded-full" style="background: #FF66B3;"></span>
+							AI / ML
+						</span>
+						<span class="inline-flex items-center gap-1.5" style="font-family: var(--font-heading); font-size: 0.75rem; font-weight: 500; color: #FFB300; background: #FFB30026; border: 1px solid #FFB30040; border-radius: var(--radius-full); padding: 0.125rem 0.625rem;">
+							<span class="inline-block h-1.5 w-1.5 rounded-full" style="background: #FFB300;"></span>
+							Hardware
+						</span>
+					</div>
+				</div>
+			</div>
+
+			<!-- ====================================================== -->
+			<!-- TAGS & BADGES                                           -->
+			<!-- ====================================================== -->
+			<div id="tags" class="ds-section mb-10 scroll-mt-8 pt-16" style="animation-delay: 0.48s;">
+				<span class="inline-block tracking-[0.08em] uppercase" style="font-family: var(--font-heading); font-size: 0.75rem; font-weight: 600; color: var(--primary);">06</span>
+				<h2 class="mt-2" style="font-family: var(--font-display); font-size: 2.25rem; line-height: 2.75rem; letter-spacing: -0.025em; font-weight: var(--font-display-weight); color: var(--foreground);">Tags & Badges</h2>
+				<div class="mt-4 h-px w-full" style="background: linear-gradient(90deg, var(--primary) 0%, transparent 60%);"></div>
+			</div>
+
+			<h3 class="mb-4 mt-8" style="font-family: var(--font-heading); font-size: 1rem; font-weight: 600; color: var(--muted-foreground); letter-spacing: 0.02em;">Vertical Category Pills</h3>
+			<div class="flex flex-wrap gap-2">
+				{VERTICALS.map((v) => (
+					<span
+						class="inline-flex items-center gap-1.5"
+						style={`font-family: var(--font-heading); font-size: 0.75rem; font-weight: 500; color: ${v.color}; background: ${v.color}26; border: 1px solid ${v.color}40; border-radius: var(--radius-full); padding: 0.125rem 0.625rem;`}
+					>
+						<span class="inline-block h-1.5 w-1.5 rounded-full" style={`background: ${v.color};`}></span>
+						{v.label}
+					</span>
+				))}
+			</div>
+
+			<h3 class="mb-4 mt-8" style="font-family: var(--font-heading); font-size: 1rem; font-weight: 600; color: var(--muted-foreground); letter-spacing: 0.02em;">Maturity Level Indicators</h3>
+			<div class="flex flex-wrap gap-3">
+				{(["Pre-Seed", "Seed"] as const).map((level) => (
+					<span style={`font-family: var(--font-heading); font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: ${MATURITY_COLORS.seed.text}; background: ${MATURITY_COLORS.seed.bg}; border: 1px solid ${MATURITY_COLORS.seed.border}; border-radius: var(--radius-sm); padding: 0.125rem 0.5rem;`}>
+						{level}
+					</span>
+				))}
+				<span style={`font-family: var(--font-heading); font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: ${MATURITY_COLORS.seriesA.text}; background: ${MATURITY_COLORS.seriesA.bg}; border: 1px solid ${MATURITY_COLORS.seriesA.border}; border-radius: var(--radius-sm); padding: 0.125rem 0.5rem;`}>
+					Series A
+				</span>
+				<span style={`font-family: var(--font-heading); font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: ${MATURITY_COLORS.seriesB.text}; background: ${MATURITY_COLORS.seriesB.bg}; border: 1px solid ${MATURITY_COLORS.seriesB.border}; border-radius: var(--radius-sm); padding: 0.125rem 0.5rem;`}>
+					Series B
+				</span>
+				<span style={`font-family: var(--font-heading); font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: ${MATURITY_COLORS.growth.text}; background: ${MATURITY_COLORS.growth.bg}; border: 1px solid ${MATURITY_COLORS.growth.border}; border-radius: var(--radius-sm); padding: 0.125rem 0.5rem;`}>
+					Growth
+				</span>
+			</div>
+
+			<!-- ====================================================== -->
+			<!-- STATS                                                   -->
+			<!-- ====================================================== -->
+			<div id="stats" class="ds-section mb-10 scroll-mt-8 pt-16" style="animation-delay: 0.56s;">
+				<span class="inline-block tracking-[0.08em] uppercase" style="font-family: var(--font-heading); font-size: 0.75rem; font-weight: 600; color: var(--primary);">07</span>
+				<h2 class="mt-2" style="font-family: var(--font-display); font-size: 2.25rem; line-height: 2.75rem; letter-spacing: -0.025em; font-weight: var(--font-display-weight); color: var(--foreground);">Stat Blocks</h2>
+				<div class="mt-4 h-px w-full" style="background: linear-gradient(90deg, var(--primary) 0%, transparent 60%);"></div>
+			</div>
+
+			<div class="grid gap-6 md:grid-cols-3">
+				<!-- Stat: Total Startups -->
+				<div class="rounded-xl border p-6" style="background: var(--card); border-color: var(--border-subtle);">
+					<div style="font-family: var(--font-display); font-size: 3rem; line-height: 3.5rem; letter-spacing: -0.03em; color: var(--foreground);">
+						100
+					</div>
+					<div class="mt-1" style="font-family: var(--font-heading); font-size: 0.875rem; font-weight: 500; color: var(--muted-foreground);">
+						Total Startups
+					</div>
+					<div class="mt-2">
+						<span class="inline-flex items-center gap-1" style="font-family: var(--font-mono); font-size: 0.8125rem; font-weight: 500; color: var(--success);">
+							<!-- Arrow Up SVG -->
+							<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+							+12 vs 2025
+						</span>
+					</div>
+				</div>
+
+				<!-- Stat: Total Funding (gold) -->
+				<div class="rounded-xl border p-6" style="background: var(--primary-4); border-color: var(--primary-15);">
+					<div style="font-family: var(--font-display); font-size: 3rem; line-height: 3.5rem; letter-spacing: -0.03em; color: var(--primary);">
+						$2.4B
+					</div>
+					<div class="mt-1" style="font-family: var(--font-heading); font-size: 0.875rem; font-weight: 500; color: var(--muted-foreground);">
+						Total Funding
+					</div>
+					<div class="mt-2">
+						<span class="inline-flex items-center gap-1" style="font-family: var(--font-mono); font-size: 0.8125rem; font-weight: 500; color: var(--success);">
+							<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+							+34% YoY
+						</span>
+					</div>
+				</div>
+
+				<!-- Stat: Countries -->
+				<div class="rounded-xl border p-6" style="background: var(--card); border-color: var(--border-subtle);">
+					<div style="font-family: var(--font-display); font-size: 3rem; line-height: 3.5rem; letter-spacing: -0.03em; color: var(--foreground);">
+						12
+					</div>
+					<div class="mt-1" style="font-family: var(--font-heading); font-size: 0.875rem; font-weight: 500; color: var(--muted-foreground);">
+						Countries
+					</div>
+					<div class="mt-0.5" style="font-family: var(--font-body); font-size: 0.75rem; color: var(--text-tertiary);">
+						across LATAM
+					</div>
+				</div>
+			</div>
+
+			<!-- ====================================================== -->
+			<!-- CHARTS                                                  -->
+			<!-- ====================================================== -->
+			<div id="charts" class="ds-section mb-10 scroll-mt-8 pt-16" style="animation-delay: 0.64s;">
+				<span class="inline-block tracking-[0.08em] uppercase" style="font-family: var(--font-heading); font-size: 0.75rem; font-weight: 600; color: var(--primary);">08</span>
+				<h2 class="mt-2" style="font-family: var(--font-display); font-size: 2.25rem; line-height: 2.75rem; letter-spacing: -0.025em; font-weight: var(--font-display-weight); color: var(--foreground);">Charts</h2>
+				<div class="mt-4 h-px w-full" style="background: linear-gradient(90deg, var(--primary) 0%, transparent 60%);"></div>
+			</div>
+
+			<h3 class="mb-4 mt-8" style="font-family: var(--font-heading); font-size: 1rem; font-weight: 600; color: var(--muted-foreground); letter-spacing: 0.02em;">Startups by Vertical</h3>
+			<div class="rounded-xl border p-6" style="background: var(--card); border-color: var(--border-subtle);">
+				<div class="mb-4 flex items-center justify-between">
+					<span style="font-family: var(--font-heading); font-size: 0.875rem; font-weight: 600; color: var(--foreground);">
+						Distribution by Vertical
+					</span>
+					<span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-tertiary);">
+						n=100
+					</span>
+				</div>
+
+				<!-- Bar chart -->
+				<div class="flex items-end gap-2" style="height: 200px;">
+					{BAR_DATA.map((bar, i) => {
+						const heightPct = (bar.value / BAR_MAX) * 100;
+						return (
+							<div class="flex flex-1 flex-col items-center gap-2">
+								<span style={`font-family: var(--font-mono); font-size: 0.6875rem; font-weight: 500; color: ${bar.color};`}>
+									{bar.value}
+								</span>
+								<div class="w-full" style={`height: ${heightPct}%; position: relative;`}>
+									<div
+										class="absolute inset-0 w-full origin-bottom"
+										style={`background: ${bar.color}; border-radius: 2px 2px 0 0; opacity: 0.85; animation: ds-barGrow 600ms cubic-bezier(0.22,1,0.36,1) ${i * 80}ms both;`}
+									></div>
+								</div>
+								<span class="text-center" style="font-family: var(--font-heading); font-size: 0.5625rem; color: var(--text-tertiary); line-height: 1.1;">
+									{bar.label}
+								</span>
+							</div>
+						);
+					})}
+				</div>
+
+				<div class="mt-0 h-px w-full" style="background: rgba(255,255,255,0.1);"></div>
+
+				<div class="mt-3 flex items-center justify-between">
+					<span style="font-family: var(--font-mono); font-size: 0.625rem; color: var(--text-disabled);">
+						0
+					</span>
+					<span style="font-family: var(--font-mono); font-size: 0.625rem; color: var(--text-disabled);">
+						Source: 404TF Research, Q1 2026
+					</span>
+				</div>
+			</div>
+
+			<!-- ====================================================== -->
+			<!-- DIVIDERS                                                -->
+			<!-- ====================================================== -->
+			<div id="dividers" class="ds-section mb-10 scroll-mt-8 pt-16" style="animation-delay: 0.72s;">
+				<span class="inline-block tracking-[0.08em] uppercase" style="font-family: var(--font-heading); font-size: 0.75rem; font-weight: 600; color: var(--primary);">09</span>
+				<h2 class="mt-2" style="font-family: var(--font-display); font-size: 2.25rem; line-height: 2.75rem; letter-spacing: -0.025em; font-weight: var(--font-display-weight); color: var(--foreground);">Dividers & Separators</h2>
+				<div class="mt-4 h-px w-full" style="background: linear-gradient(90deg, var(--primary) 0%, transparent 60%);"></div>
+			</div>
+
+			<div class="space-y-12">
+				<!-- Primary gradient line -->
+				<div>
+					<h3 class="mb-4 mt-8" style="font-family: var(--font-heading); font-size: 1rem; font-weight: 600; color: var(--muted-foreground); letter-spacing: 0.02em;">Primary Gradient</h3>
+					<div class="h-px w-full" style="background: linear-gradient(90deg, transparent 0%, var(--primary) 20%, var(--primary) 80%, transparent 100%);"></div>
+				</div>
+
+				<!-- Subtle border -->
+				<div>
+					<h3 class="mb-4 mt-8" style="font-family: var(--font-heading); font-size: 1rem; font-weight: 600; color: var(--muted-foreground); letter-spacing: 0.02em;">Subtle Border</h3>
+					<div class="h-px w-full" style="background: var(--border);"></div>
+				</div>
+
+				<!-- Fade separator -->
+				<div>
+					<h3 class="mb-4 mt-8" style="font-family: var(--font-heading); font-size: 1rem; font-weight: 600; color: var(--muted-foreground); letter-spacing: 0.02em;">Section Fade</h3>
+					<div class="h-16 w-full" style="background: linear-gradient(180deg, var(--background) 0%, transparent 100%);"></div>
+				</div>
+
+				<!-- Decorative — dotted -->
+				<div>
+					<h3 class="mb-4 mt-8" style="font-family: var(--font-heading); font-size: 1rem; font-weight: 600; color: var(--muted-foreground); letter-spacing: 0.02em;">Primary Dot Pattern</h3>
+					<div class="flex items-center gap-1.5">
+						{Array.from({ length: 40 }).map((_, i) => (
+							<div
+								class="h-px flex-1"
+								style={`background: ${i % 2 === 0 ? "var(--primary)" : "transparent"}; opacity: 0.4;`}
+							></div>
+						))}
+					</div>
+				</div>
+			</div>
+
+			<!-- Footer note -->
+			<div class="mt-24 border-t pt-8" style="border-color: var(--border-subtle);">
+				<p style="font-family: var(--font-body); font-size: 0.8125rem; color: var(--text-disabled);">
+					404 Tech Found — LATAM Deeptech Report Platform — Design System v1.0
+				</p>
+			</div>
+		</div>
+	</main>
+</div>
+
+<script>
+	const observer = new IntersectionObserver(
+		(entries) => {
+			for (const entry of entries) {
+				if (entry.isIntersecting) {
+					document.querySelectorAll("[data-nav-link]").forEach((el) => {
+						const isActive = el.getAttribute("href") === `#${entry.target.id}`;
+						if (el instanceof HTMLElement) {
+							el.style.fontWeight = isActive ? "600" : "400";
+							el.style.color = isActive ? "var(--primary)" : "var(--muted-foreground)";
+							el.style.background = isActive ? "var(--primary-8)" : "transparent";
+						}
+					});
+				}
+			}
+		},
+		{ rootMargin: "-20% 0px -70% 0px" },
+	);
+	document.querySelectorAll(".ds-section").forEach((el) => observer.observe(el));
+</script>

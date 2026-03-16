@@ -16,18 +16,70 @@
 
 ---
 
-## Phase 0: Content Gathering (non-code)
+## Phase 0: Content Gathering & Brand Package
 
-Before any code changes, gather all real assets:
+Before any code changes, gather all real assets and consolidate shared brand identity.
+
+### 0a. Content Gathering (non-code)
 
 - [ ] **Founder photos** — Professional photos of Oscar Castro, Alejandra Vera, Enrique Flores
 - [ ] **AI character avatars** — Generated illustrations for each founder (for Houses section)
 - [ ] **Team member info** — Names, roles, photos/avatars for the ~9-20 collaborators and volunteers
-- [ ] **Partner logos & info** — Replace current placeholders with real partner branding
+- [ ] **Partner logos & info** — No official partners yet (coming soon). Replace placeholders once partnerships are confirmed
 - [ ] **Event photos** — Images for the events carousel
 - [ ] **Startup portfolio** — Info on startups 404 has supported (logos, descriptions, status)
 - [ ] **Blog seed content** — At least 2-3 posts ready for launch (ES + EN)
 - [ ] **Custom blog categories** — Define the category taxonomy (e.g. Tutorials, News, Deep Dives, Events, etc.)
+
+### 0b. Brand Package — `packages/brand/`
+
+Consolidate existing brand identity into a single source of truth. There's already a branding direction (Orbitron font, house colors, "404 TECH FOUND" text logo) — this phase migrates it, not reinvents it. Branding is open to evolution during Phase 1 (Design System).
+
+Currently logos live in `apps/landing/public/brand/`, fonts are duplicated in `apps/spechack/public/fonts/`, and the logo export script is orphaned at root `scripts/`.
+
+**Package scaffold:**
+- [ ] **Create package** — `packages/brand/` as `@404tf/brand`
+- [ ] **Migrate logos** — SVG sources + export script (from root `scripts/` + `apps/landing/public/brand/`)
+- [ ] **Migrate fonts** — Orbitron, JetBrains Mono (from `apps/spechack/public/fonts/`)
+- [ ] **Org-level tokens** — Core brand colors, logo usage constants (NOT app-specific design systems)
+- [ ] **Move devDeps** — `satori`, `@resvg/resvg-js` scoped to this package
+- [ ] **Update consumers** — Landing and report import from `@404tf/brand`
+
+**Logo system:**
+
+Current state: one text-based logo ("404 / TECH FOUND" in Orbitron) with multiple color variants (dark, light, transparent) exported at many sizes. No definitive version, no standalone mark.
+
+- [ ] **Define logo variants needed:**
+  - **Logomark** — Standalone symbol (favicon, app icons, social avatars, small spaces)
+  - **Wordmark** — "404 TECH FOUND" typographic treatment (headers, formal contexts)
+  - **Lockup** — Logomark + wordmark combined (primary logo, OG images, splash screens). Consider both horizontal (navbar, tight spaces) and vertical (hero, splash) orientations.
+- [ ] **Design logomark** — Needs to work at 16×16 (favicon) through 512×512
+- [ ] **Finalize wordmark** — Refine current Orbitron text treatment or explore alternatives
+- [ ] **Color variants** — Each logo variant in: on-dark, on-light, transparent backgrounds
+- [ ] **Export pipeline** — Update export script to generate all variants × sizes
+
+Deliverable: All apps reference `@404tf/brand` for shared identity. Complete logo system with logomark, wordmark, and lockup. No duplicated brand assets.
+
+### 0c. Remove SpecHack from Monorepo
+
+SpecHack is being retired from the monorepo. Keep `apps/spechack/` code intact (archive) but remove all infrastructure integrations so it's no longer built, linted, or deployed.
+
+**Root config:**
+- [ ] `package.json` — Remove `dev:spechack` and `build:spechack` scripts
+- [ ] `lefthook.yml` — Remove `types-spechack` pre-commit hook
+- [ ] `knip.config.ts` — Remove `apps/spechack` entry
+- [ ] `CLAUDE.md` — Remove spechack from monorepo layout and references
+- [ ] `README.md` — Remove spechack sections, commands, and Vercel config
+
+**Database:**
+- [ ] `packages/database/src/schema.ts` — Remove spechack enums, tables, and type exports
+- [ ] Run `bun run db:generate` to create migration dropping spechack tables
+
+**Cleanup:**
+- [ ] Run `bun install` to regenerate `bun.lock` without spechack deps
+- [ ] `.planning/` docs — Historical, leave as-is (no code impact)
+
+> **Note:** SpecHack references in landing page content (translations, AnnouncementBanner, Navbar badge, Events section, JSON-LD, llms.txt) are removed during Phase 3 when those sections get redesigned.
 
 ---
 
@@ -45,9 +97,9 @@ Deliverable: Design system documented as CSS variables + Tailwind config + refer
 
 ---
 
-## Phase 2: CMS Infrastructure
+## Phase 2: New Apps
 
-### Payload CMS 3.0 — `apps/blog/`
+### 2a. Payload CMS 3.0 — `apps/blog/`
 
 Separate Next.js app in the monorepo, deployed to `blog.404tf.com`.
 
@@ -65,6 +117,16 @@ Separate Next.js app in the monorepo, deployed to `blog.404tf.com`.
 - [ ] **RSS feed** — Auto-generated from posts
 - [ ] **Deployment** — Vercel project for `blog.404tf.com`
 - [ ] **API for landing** — Expose endpoint for landing page to fetch featured/recent posts
+
+### 2b. LATAM Deeptech Map — `apps/map/`
+
+Astro app with React islands, deployed to `map.404tf.com`. Full implementation spec lives in `apps/map/implementation.md` (12-step build order) with design tokens in `apps/map/design-spec.jsonc`.
+
+Has its own design system (deep plum / Bricolage Grotesque), separate from landing.
+
+**Depends on:** Phase 0a (startup portfolio data for seeding), Phase 0b (brand package for org logos).
+
+**Must complete before:** Phase 3f (landing's ecosystem section links to `report.404tf.com`).
 
 ---
 
@@ -94,7 +156,9 @@ Apply new design system while updating each section with real content.
 
 ### 3d. Partners Section
 
-- [ ] **Replace placeholders** — Real partner logos and info
+> **Status:** No official partners at the moment — partnerships coming soon.
+
+- [ ] **Replace placeholders** — Add real partner logos and info once partnerships are finalized
 - [ ] **Section redesign** — Apply new design system
 
 ### 3e. Blog Banner on Landing
@@ -109,7 +173,7 @@ Apply new design system while updating each section with real content.
 Unified showcase of the full 404 ecosystem — everything 404 has built and supports:
 
 - [ ] **Startups supported** — Portfolio/alumni grid with logos and brief descriptions
-- [ ] **Partners & programs** — Co-created programs with partner branding
+- [ ] **Partners & programs** — Co-created programs with partner branding (pending partner confirmations)
 - [ ] **Team highlight** — Key contributors beyond founders (teaser → team page)
 - [ ] **Report product showcase** — Feature the LATAM Deeptech Report as a product, CTA to `report.404tf.com`
 - [ ] **Impact metrics** — Numbers that tell the story (startups supported, events held, people reached, report coverage)
@@ -151,13 +215,15 @@ With the design system established and sections updated, do a holistic polish:
 ```
 404tf.com              → apps/landing/     (Main landing page)
 blog.404tf.com         → apps/blog/        (Payload CMS + Blog — NEW)
-report.404tf.com       → apps/report/      (LATAM Deeptech Report)
+map.404tf.com          → apps/map/      (LATAM Deeptech Map)
 
 apps/
   landing/             # Landing page (existing, gets redesigned)
   blog/                # Payload CMS 3.0 + blog frontend (new)
   report/              # LATAM Deeptech Report (existing, separate)
+  spechack/            # ARCHIVED — code kept, not built or deployed
 packages/
+  brand/               # Shared 404tf identity (logos, fonts, org tokens)
   database/            # Shared Drizzle ORM + Neon — landing + report
   config/              # Shared tsconfig + biome
 ```

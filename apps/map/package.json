@@ -1,5 +1,5 @@
 {
-	"name": "@404tf/report",
+	"name": "@404tf/map",
 	"type": "module",
 	"version": "0.0.1",
 	"private": true,
@@ -12,17 +12,11 @@
 	},
 	"dependencies": {
 		"@astrojs/check": "^0.9.7",
-		"@astrojs/react": "^4",
-		"@solar-icons/react": "^1.1.0",
-		"astro": "^5",
-		"react": "^19",
-		"react-dom": "^19"
+		"astro": "^5"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.4.7",
 		"@tailwindcss/vite": "~4.0.0",
-		"@types/react": "^19",
-		"@types/react-dom": "^19",
 		"tailwindcss": "~4.0.0",
 		"typescript": "^5"
 	}
