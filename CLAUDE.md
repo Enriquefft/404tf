@@ -19,7 +19,8 @@ Bilingual (ES/EN) Next.js 16 landing page for a tech community. Monorepo with Bu
 ## Monorepo Layout
 
 ```
-apps/landing/          # Main landing page (active development)
+apps/landing/          # Main landing page (Next.js 16, active development)
+apps/map/              # LATAM Deeptech Map (Astro, static data story)
 apps/spechack/         # Secondary app
 packages/database/     # Drizzle ORM + Neon (shared)
 packages/config/       # Shared tsconfig + biome.jsonc
@@ -48,7 +49,9 @@ packages/config/       # Shared tsconfig + biome.jsonc
 
 ```bash
 bun run dev              # Start landing app (Turbopack)
+bun run dev:map          # Start map app (Astro)
 bun run build            # Build all apps
+bun run build:map        # Build map app only
 bun run lint             # Biome check + fix
 bun run check            # Biome check only
 bun run check:deps       # Knip unused dependency check
