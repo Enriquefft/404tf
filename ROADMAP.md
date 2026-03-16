@@ -65,19 +65,19 @@ Deliverable: All apps reference `@404tf/brand` for shared identity. Complete log
 SpecHack is being retired from the monorepo. Keep `apps/spechack/` code intact (archive) but remove all infrastructure integrations so it's no longer built, linted, or deployed.
 
 **Root config:**
-- [ ] `package.json` — Remove `dev:spechack` and `build:spechack` scripts
-- [ ] `lefthook.yml` — Remove `types-spechack` pre-commit hook
-- [ ] `knip.config.ts` — Remove `apps/spechack` entry
-- [ ] `CLAUDE.md` — Remove spechack from monorepo layout and references
-- [ ] `README.md` — Remove spechack sections, commands, and Vercel config
+- [x] `package.json` — Remove `dev:spechack` and `build:spechack` scripts
+- [x] `lefthook.yml` — Remove `types-spechack` pre-commit hook
+- [x] `knip.config.ts` — Remove `apps/spechack` entry
+- [x] `CLAUDE.md` — Remove spechack from monorepo layout and references
+- [x] `README.md` — Remove spechack sections, commands, and Vercel config
 
 **Database:**
-- [ ] `packages/database/src/schema.ts` — Remove spechack enums, tables, and type exports
+- [x] `packages/database/src/schema.ts` — Remove spechack enums, tables, and type exports
 - [ ] Run `bun run db:generate` to create migration dropping spechack tables
 
 **Cleanup:**
-- [ ] Run `bun install` to regenerate `bun.lock` without spechack deps
-- [ ] `.planning/` docs — Historical, leave as-is (no code impact)
+- [x] Run `bun install` to regenerate `bun.lock` without spechack deps
+- [x] `.planning/` docs — Historical, leave as-is (no code impact)
 
 > **Note:** SpecHack references in landing page content (translations, AnnouncementBanner, Navbar badge, Events section, JSON-LD, llms.txt) are removed during Phase 3 when those sections get redesigned.
 

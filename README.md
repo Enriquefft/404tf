@@ -8,8 +8,9 @@ Bun workspace monorepo for 404 Tech Found digital products.
 404tf/
 ├── apps/
 │   ├── landing/          # 404tf.com landing page (Next.js 16)
-│   └── spechack/         # SpecHack hackathon platform (Next.js 16)
+│   └── map/              # LATAM Deeptech Map (Astro)
 ├── packages/
+│   ├── brand/            # Brand tokens, logos, fonts, export scripts (@404tf/brand)
 │   ├── config/           # Shared TypeScript, Biome, Tailwind configs
 │   └── database/         # Shared Drizzle ORM + Neon Postgres schemas
 └── package.json          # Workspace root
@@ -31,8 +32,8 @@ bun install
 # Start landing page in dev mode
 bun run dev
 
-# Start SpecHack in dev mode
-bun run dev:spechack
+# Start map app in dev mode
+bun run dev:map
 ```
 
 ### Development
@@ -44,8 +45,8 @@ Each app runs independently:
 cd apps/landing
 bun run dev
 
-# SpecHack (localhost:3001)
-cd apps/spechack
+# LATAM Deeptech Map (localhost:4321)
+cd apps/map
 bun run dev
 ```
 
@@ -57,7 +58,7 @@ bun run build
 
 # Build specific app
 bun run build:landing
-bun run build:spechack
+bun run build:map
 ```
 
 ## Apps
@@ -68,18 +69,25 @@ bun run build:spechack
 - next-intl for i18n routing
 - Tailwind v4 for styling
 - Framer Motion for animations
-- PostHog analytics
 - Drizzle ORM + Neon Postgres
 
 **Live:** [404tf.com](https://404tf.com)
 
-### SpecHack (apps/spechack/)
+### LATAM Deeptech Map (apps/map/)
 
-SpecHack hackathon platform - under development.
+Static data story of the LATAM deeptech ecosystem, built with Astro.
 
-**Live:** [spechack.404tf.com](https://spechack.404tf.com)
+**Live:** [map.404tf.com](https://map.404tf.com)
 
 ## Packages
+
+### @404tf/brand
+
+Single source of truth for 404tf brand identity:
+- Color tokens (OKLCH + hex)
+- Logo config and export pipeline
+- Font declarations
+- Team content and photos
 
 ### @404tf/config
 
@@ -107,6 +115,16 @@ bun run db:push
 bun run db:studio
 ```
 
+## Brand Commands
+
+```bash
+# Generate PNG/SVG wordmarks
+bun run logo:export
+
+# Copy brand assets to app public/ dirs
+bun run brand:sync
+```
+
 ## Linting
 
 ```bash
@@ -122,16 +140,14 @@ bun run check:deps
 
 ## Deployment
 
-Both apps deploy independently on Vercel:
+Apps deploy independently on Vercel:
 - **Landing:** Root Directory = `apps/landing`
-- **SpecHack:** Root Directory = `apps/spechack`
-
-Each app has its own `vercel.json` with workspace-aware build commands.
+- **Map:** Root Directory = `apps/map`
 
 ## Tech Stack
 
 - **Runtime:** Bun 1.x
-- **Framework:** Next.js 16
+- **Framework:** Next.js 16 (landing), Astro (map)
 - **Language:** TypeScript
 - **Styling:** Tailwind CSS v4
 - **Database:** Neon Postgres + Drizzle ORM

@@ -1,0 +1,92 @@
+{
+  "id": "423be37b-47ca-47f2-b1fa-d9840990a287",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "404tf.intent_submissions": {
+      "name": "intent_submissions",
+      "schema": "404tf",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "intent": {
+          "name": "intent",
+          "type": "landing_intent",
+          "typeSchema": "404tf",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "locale": {
+          "name": "locale",
+          "type": "landing_locale",
+          "typeSchema": "404tf",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {
+    "404tf.landing_intent": {
+      "name": "landing_intent",
+      "schema": "404tf",
+      "values": [
+        "build",
+        "collaborate",
+        "connect"
+      ]
+    },
+    "404tf.landing_locale": {
+      "name": "landing_locale",
+      "schema": "404tf",
+      "values": [
+        "es",
+        "en"
+      ]
+    }
+  },
+  "schemas": {
+    "404tf": "404tf"
+  },
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

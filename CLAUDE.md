@@ -21,7 +21,6 @@ Bilingual (ES/EN) Next.js 16 landing page for a tech community. Monorepo with Bu
 ```
 apps/landing/          # Main landing page (Next.js 16, active development)
 apps/map/              # LATAM Deeptech Map (Astro, static data story)
-apps/spechack/         # Secondary app
 packages/brand/        # Brand tokens, logo config, fonts, export scripts (@404tf/brand)
 packages/database/     # Drizzle ORM + Neon (shared)
 packages/config/       # Shared tsconfig + biome.jsonc

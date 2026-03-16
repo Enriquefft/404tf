@@ -12,13 +12,7 @@ const config: KnipConfig = {
 				"@/*": ["./src/*"],
 			},
 		},
-		"apps/spechack": {
-			entry: ["src/app/**/*"],
-			paths: {
-				"@/*": ["./src/*"],
-			},
-		},
-		"packages/brand": {
+"packages/brand": {
 			entry: ["src/index.ts"],
 		},
 	},

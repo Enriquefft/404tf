@@ -12,9 +12,6 @@ pre-commit:
     types-landing:
       glob: "apps/landing/**/*.{ts,tsx}"
       run: cd apps/landing && bunx tsc --noEmit
-    types-spechack:
-      glob: "apps/spechack/**/*.{ts,tsx}"
-      run: cd apps/spechack && bunx tsc --noEmit
-    types-map:
+types-map:
       glob: "apps/map/**/*.{ts,tsx}"
       run: cd apps/map && bunx astro check
