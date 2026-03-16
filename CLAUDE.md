@@ -22,6 +22,7 @@ Bilingual (ES/EN) Next.js 16 landing page for a tech community. Monorepo with Bu
 apps/landing/          # Main landing page (Next.js 16, active development)
 apps/map/              # LATAM Deeptech Map (Astro, static data story)
 apps/spechack/         # Secondary app
+packages/brand/        # Brand tokens, logo config, fonts, export scripts (@404tf/brand)
 packages/database/     # Drizzle ORM + Neon (shared)
 packages/config/       # Shared tsconfig + biome.jsonc
 ```
@@ -43,6 +44,11 @@ packages/config/       # Shared tsconfig + biome.jsonc
 | Styles | `apps/landing/src/styles/globals.css` |
 | i18n middleware | `apps/landing/src/proxy.ts` |
 | DB schema | `packages/database/src/schema.ts` |
+| Brand tokens | `packages/brand/src/tokens.ts` |
+| Brand logos | `packages/brand/assets/logos/svg/` |
+| Brand fonts | `packages/brand/assets/fonts/` |
+| Logo export | `packages/brand/scripts/export-wordmark.ts` |
+| Brand sync | `packages/brand/scripts/sync.ts` |
 | Biome config | `packages/config/biome.jsonc` |
 
 ## Commands
@@ -58,6 +64,8 @@ bun run check:deps       # Knip unused dependency check
 bun run db:generate      # Generate Drizzle migration
 bun run db:push          # Apply migration to Neon
 bun run db:studio        # Open Drizzle Studio
+bun run logo:export      # Generate PNG/SVG wordmarks
+bun run brand:sync       # Copy brand assets to app public/ dirs
 ```
 
 ## Code Conventions

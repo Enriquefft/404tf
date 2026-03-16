@@ -18,6 +18,9 @@ const config: KnipConfig = {
 				"@/*": ["./src/*"],
 			},
 		},
+		"packages/brand": {
+			entry: ["src/index.ts"],
+		},
 	},
 	compilers: {
 		css: (text: string) => [...text.matchAll(/(?<=@)import[^;]+/g)].join("\n"),

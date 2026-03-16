@@ -1,0 +1,3 @@
+assets/logos/generated/*.png
+assets/logos/generated/*.svg
+!assets/logos/generated/.gitkeep

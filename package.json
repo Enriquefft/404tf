@@ -18,10 +18,7 @@
 		"db:generate": "cd packages/database && bun run db:generate",
 		"db:push": "cd packages/database && bun run db:push",
 		"db:studio": "cd packages/database && bun run db:studio",
-		"logo:export": "bun run scripts/export-logo.ts"
-	},
-	"devDependencies": {
-		"@resvg/resvg-js": "^2.6.2",
-		"satori": "^0.24.1"
+		"logo:export": "bun run --filter='@404tf/brand' export",
+		"brand:sync": "bun run --filter='@404tf/brand' sync"
 	}
 }

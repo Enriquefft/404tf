@@ -10,6 +10,7 @@
 		"lint": "biome check --fix ."
 	},
 	"dependencies": {
+		"@404tf/brand": "workspace:*",
 		"@404tf/config": "workspace:*",
 		"@404tf/database": "workspace:*",
 		"clsx": "latest",

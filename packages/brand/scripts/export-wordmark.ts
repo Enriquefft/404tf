@@ -1,88 +1,35 @@
 /**
- * Logo export script — generates PNG + SVG brand assets from logo JSX
- * Uses Satori (JSX → SVG) + @resvg/resvg-js (SVG → PNG)
+ * Wordmark export script — generates PNG + SVG brand assets from logo JSX
+ * Uses Satori (JSX -> SVG) + @resvg/resvg-js (SVG -> PNG)
  *
- * Run: bun run logo:export
- * Output: apps/landing/public/brand/
+ * Run: bun run export (from packages/brand/)
+ *   or: bun run --filter='@404tf/brand' export
+ * Output: assets/logos/generated/
  */
 
+import { readFile } from "node:fs/promises";
 import { mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { Resvg } from "@resvg/resvg-js";
 import satori from "satori";
+import { type LogoVariant, logoSizes, logoVariants } from "../src/logo.ts";
 
 // ─── Config ────────────────────────────────────────────────────────────────
 
-const OUTPUT_DIR = join(import.meta.dir, "../apps/landing/public/brand");
-
-// Rectangular: width-based, height auto from content
-const SIZES = [64, 128, 256, 512, 1024, 1200];
-
-// Square: centered logo on equal-sided canvas (avatars, app icons, favicons)
-const SQUARE_SIZES = [16, 32, 64, 128, 256, 512, 1024];
-
-// Dark variant: dark bg, white text (default brand)
-// Light variant: white bg, dark text
-type Variant = {
-	name: string;
-	bg: string;
-	text: string;
-	subtext: string;
-};
-
-const VARIANTS: Variant[] = [
-	{
-		name: "dark",
-		bg: "#121212",
-		text: "#fafafa", // --foreground: 0 0% 98%
-		subtext: "#a3a3a3", // --muted-foreground: 0 0% 64%
-	},
-	{
-		name: "light",
-		bg: "#ffffff",
-		text: "#1a1a1a",
-		subtext: "#6b6b6b",
-	},
-	// Transparent bg — text color optimised for dark backgrounds
-	{
-		name: "transparent-ondark",
-		bg: "transparent",
-		text: "#fafafa",
-		subtext: "#a3a3a3",
-	},
-	// Transparent bg — text color optimised for light backgrounds
-	{
-		name: "transparent-onlight",
-		bg: "transparent",
-		text: "#1a1a1a",
-		subtext: "#6b6b6b",
-	},
-];
+const ASSETS_DIR = join(import.meta.dir, "../assets");
+const OUTPUT_DIR = join(ASSETS_DIR, "logos/generated");
+const FONTS_DIR = join(ASSETS_DIR, "fonts");
 
 // ─── Font loading ───────────────────────────────────────────────────────────
 
-async function loadFont(family: string, weight: number): Promise<ArrayBuffer> {
-	// Google Fonts v1 API returns TTF — Satori supports TTF but not woff2.
-	const cssUrl = `https://fonts.googleapis.com/css?family=${encodeURIComponent(family)}:${weight}`;
-	const cssRes = await fetch(cssUrl);
-	const css = await cssRes.text();
-
-	const match = css.match(/url\((https:\/\/[^)]+\.ttf)\)/);
-	if (!match) {
-		throw new Error(
-			`Could not find TTF URL for ${family} weight ${weight}.\nCSS response:\n${css}`,
-		);
-	}
-
-	const fontRes = await fetch(match[1]);
-	return fontRes.arrayBuffer();
+async function loadLocalFont(filename: string): Promise<ArrayBuffer> {
+	const buf = await readFile(join(FONTS_DIR, filename));
+	return buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength);
 }
 
 // ─── Logo JSX builders ──────────────────────────────────────────────────────
 
-function buildLogoElement(variant: Variant, width: number) {
-	// Scale text sizes proportionally to the requested width.
-	// Base design at width=400: "404" at ~56px, subtext at ~22px
+function buildLogoElement(variant: LogoVariant, width: number) {
 	const scale = width / 400;
 	const mainSize = Math.round(56 * scale);
 	const subSize = Math.round(22 * scale);
@@ -90,9 +37,6 @@ function buildLogoElement(variant: Variant, width: number) {
 	const paddingH = Math.round(24 * scale);
 	const paddingV = Math.round(20 * scale);
 	const gap = Math.round(6 * scale);
-
-	// Explicit height — Satori ignores CSS shorthand for padding/gap,
-	// so auto height under-calculates. Compute it explicitly.
 	const height = paddingV * 2 + mainSize + gap + subSize;
 
 	return {
@@ -106,7 +50,6 @@ function buildLogoElement(variant: Variant, width: number) {
 				width,
 				height,
 				backgroundColor: variant.bg,
-				// Satori requires individual padding props — shorthand not supported
 				paddingTop: paddingV,
 				paddingBottom: paddingV,
 				paddingLeft: paddingH,
@@ -127,8 +70,6 @@ function buildLogoElement(variant: Variant, width: number) {
 						children: "404",
 					},
 				},
-				// "TECH FOUND" with strikethrough O.
-				// Satori is flex-only: every child must have display:"flex".
 				{
 					type: "div",
 					props: {
@@ -153,7 +94,10 @@ function buildLogoElement(variant: Variant, width: number) {
 									style: {
 										display: "flex",
 										textDecoration: "line-through",
-										textDecorationThickness: Math.max(1, Math.round(1.5 * scale)),
+										textDecorationThickness: Math.max(
+											1,
+											Math.round(1.5 * scale),
+										),
 									},
 									children: "O",
 								},
@@ -170,11 +114,9 @@ function buildLogoElement(variant: Variant, width: number) {
 	};
 }
 
-// Square canvas: logo scaled to ~70% of the side, centered with equal padding
-function buildSquareLogoElement(variant: Variant, size: number) {
+function buildSquareLogoElement(variant: LogoVariant, size: number) {
 	const logoWidth = Math.round(size * 0.7);
 	const logo = buildLogoElement(variant, logoWidth);
-	const logoHeight = logo.props.style.height as number;
 
 	return {
 		type: "div",
@@ -212,8 +154,6 @@ async function renderSvg(
 	});
 }
 
-// Render SVG at 4× target size, then scale down with resvg for antialiasing.
-// The caller must pass an SVG built at targetWidth * 4.
 async function svgToPng(svg: string, targetWidth: number): Promise<Uint8Array> {
 	const resvg = new Resvg(svg, {
 		fitTo: { mode: "width", value: targetWidth },
@@ -224,10 +164,10 @@ async function svgToPng(svg: string, targetWidth: number): Promise<Uint8Array> {
 // ─── Main ───────────────────────────────────────────────────────────────────
 
 async function main() {
-	console.log("Loading fonts...");
+	console.log("Loading local fonts...");
 	const [font800, font500] = await Promise.all([
-		loadFont("Orbitron", 800),
-		loadFont("Orbitron", 500),
+		loadLocalFont("Orbitron-Bold.ttf"),
+		loadLocalFont("Orbitron-Medium.ttf"),
 	]);
 
 	const fonts = [
@@ -238,34 +178,43 @@ async function main() {
 	await mkdir(OUTPUT_DIR, { recursive: true });
 	console.log(`Output: ${OUTPUT_DIR}\n`);
 
-	for (const variant of VARIANTS) {
+	for (const variant of logoVariants) {
 		console.log(`Variant: ${variant.name}`);
 
 		// SVG (rectangular, high-res base)
 		const svgElement = buildLogoElement(variant, 800);
 		const svg = await renderSvg(svgElement, fonts);
-		await writeFile(join(OUTPUT_DIR, `logo-${variant.name}.svg`), svg, "utf-8");
-		console.log(`  ✓ logo-${variant.name}.svg`);
+		await writeFile(
+			join(OUTPUT_DIR, `logo-${variant.name}.svg`),
+			svg,
+			"utf-8",
+		);
+		console.log(`  + logo-${variant.name}.svg`);
 
-		// Rectangular PNGs — build at 4× then downscale for antialiasing
-		for (const size of SIZES) {
+		// Rectangular PNGs
+		for (const size of logoSizes.rectangular) {
 			const element = buildLogoElement(variant, size * 4);
 			const png = await svgToPng(await renderSvg(element, fonts), size);
 			await writeFile(join(OUTPUT_DIR, `logo-${variant.name}-${size}.png`), png);
-			console.log(`  ✓ logo-${variant.name}-${size}.png`);
+			console.log(`  + logo-${variant.name}-${size}.png`);
 		}
 
-		// Square PNGs — build at 4× then downscale for antialiasing
-		for (const size of SQUARE_SIZES) {
+		// Square PNGs
+		for (const size of logoSizes.square) {
 			const element = buildSquareLogoElement(variant, size * 4);
 			const png = await svgToPng(await renderSvg(element, fonts), size);
-			await writeFile(join(OUTPUT_DIR, `logo-${variant.name}-square-${size}.png`), png);
-			console.log(`  ✓ logo-${variant.name}-square-${size}.png`);
+			await writeFile(
+				join(OUTPUT_DIR, `logo-${variant.name}-square-${size}.png`),
+				png,
+			);
+			console.log(`  + logo-${variant.name}-square-${size}.png`);
 		}
 	}
 
-	const total = VARIANTS.length * (1 + SIZES.length + SQUARE_SIZES.length);
-	console.log(`\nDone — ${total} files written to public/brand/`);
+	const total =
+		logoVariants.length *
+		(1 + logoSizes.rectangular.length + logoSizes.square.length);
+	console.log(`\nDone — ${total} files written to assets/logos/generated/`);
 }
 
 main().catch((err) => {

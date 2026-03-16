@@ -38,12 +38,12 @@ Consolidate existing brand identity into a single source of truth. There's alrea
 Currently logos live in `apps/landing/public/brand/`, fonts are duplicated in `apps/spechack/public/fonts/`, and the logo export script is orphaned at root `scripts/`.
 
 **Package scaffold:**
-- [ ] **Create package** — `packages/brand/` as `@404tf/brand`
-- [ ] **Migrate logos** — SVG sources + export script (from root `scripts/` + `apps/landing/public/brand/`)
-- [ ] **Migrate fonts** — Orbitron, JetBrains Mono (from `apps/spechack/public/fonts/`)
-- [ ] **Org-level tokens** — Core brand colors, logo usage constants (NOT app-specific design systems)
-- [ ] **Move devDeps** — `satori`, `@resvg/resvg-js` scoped to this package
-- [ ] **Update consumers** — Landing and report import from `@404tf/brand`
+- [x] **Create package** — `packages/brand/` as `@404tf/brand`
+- [x] **Migrate logos** — SVG sources + export script (from root `scripts/` + `apps/landing/public/brand/`)
+- [x] **Migrate fonts** — Orbitron, JetBrains Mono (from `apps/spechack/public/fonts/`)
+- [x] **Org-level tokens** — Core brand colors in OKLCH + hex (`src/tokens.ts`), font metadata (`src/fonts.ts`), logo config (`src/logo.ts`)
+- [x] **Move devDeps** — `satori`, `@resvg/resvg-js` scoped to this package
+- [x] **Update consumers** — Landing and map depend on `@404tf/brand`, sync script copies assets
 
 **Logo system:**
 

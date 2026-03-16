@@ -11,6 +11,7 @@
 		"lint": "biome check --fix ."
 	},
 	"dependencies": {
+		"@404tf/brand": "workspace:*",
 		"@astrojs/check": "^0.9.7",
 		"astro": "^5"
 	},

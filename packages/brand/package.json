@@ -1,0 +1,20 @@
+{
+	"name": "@404tf/brand",
+	"version": "1.0.0",
+	"private": true,
+	"type": "module",
+	"exports": {
+		".": "./src/index.ts",
+		"./tokens": "./src/tokens.ts",
+		"./logo": "./src/logo.ts",
+		"./fonts": "./src/fonts.ts"
+	},
+	"scripts": {
+		"export": "bun run scripts/export-wordmark.ts",
+		"sync": "bun run scripts/sync.ts"
+	},
+	"devDependencies": {
+		"@resvg/resvg-js": "^2.6.2",
+		"satori": "^0.24.1"
+	}
+}

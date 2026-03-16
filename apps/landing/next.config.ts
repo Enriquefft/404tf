@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
 		formats: ["image/avif", "image/webp"],
 	},
 	transpilePackages: [
+		"@404tf/brand",
 		"@404tf/database",
 		"@404tf/config",
 		"@t3-oss/env-nextjs",
