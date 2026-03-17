@@ -1,0 +1,786 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+/* ── Font imports ─────────────────────────────────────────── */
+@import "@fontsource-variable/syne";
+@import "@fontsource-variable/plus-jakarta-sans";
+@import "@fontsource/space-mono/400.css";
+@import "@fontsource/space-mono/700.css";
+@import "@fontsource-variable/outfit";
+@import "@fontsource-variable/red-hat-display";
+@import "@fontsource-variable/figtree";
+@import "@fontsource-variable/fraunces";
+@import "@fontsource-variable/source-sans-3";
+@import "@fontsource-variable/jetbrains-mono";
+/* Proposal E: Extremophile */
+@import "@fontsource-variable/lexend";
+@import "@fontsource/be-vietnam-pro/400.css";
+@import "@fontsource/be-vietnam-pro/500.css";
+@import "@fontsource/be-vietnam-pro/600.css";
+/* Proposal F: Helio */
+@import "@fontsource-variable/instrument-sans";
+@import "@fontsource-variable/commissioner";
+/* Proposal G: Obsidian */
+@import "@fontsource-variable/manrope";
+@import "@fontsource-variable/nunito-sans";
+/* Proposal H: Tectonic */
+@import "@fontsource-variable/unbounded";
+@import "@fontsource-variable/albert-sans";
+/* Proposal I: Biolume */
+@import "@fontsource-variable/bricolage-grotesque";
+@import "@fontsource-variable/libre-franklin";
+/* Proposal J: Cortex */
+@import "@fontsource-variable/newsreader";
+@import "@fontsource-variable/dm-sans";
+/* Proposal K: Vulcan */
+@import "@fontsource-variable/big-shoulders-display";
+@import "@fontsource/barlow/400.css";
+@import "@fontsource/barlow/500.css";
+@import "@fontsource/barlow/600.css";
+@import "@fontsource/barlow/700.css";
+/* Proposal L: Codex */
+@import "@fontsource-variable/cormorant";
+@import "@fontsource/alegreya-sans/400.css";
+@import "@fontsource/alegreya-sans/500.css";
+@import "@fontsource/alegreya-sans/700.css";
+/* Proposal M: Static */
+@import "@fontsource-variable/archivo";
+@import "@fontsource-variable/karla";
+/* Proposal N: Anomaly Evolved (Tardi-forward purple) */
+@import "@fontsource-variable/gabarito";
+@import "@fontsource-variable/work-sans";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ══════════════════════════════════════════════════════════════
+   PROPOSAL A: SIGNAL IN THE VOID
+   Warm discovery cutting through purple darkness.
+   Display: Syne | Body: Plus Jakarta Sans
+   ══════════════════════════════════════════════════════════════ */
+[data-theme="signal"] {
+  --background: oklch(0.10 0.02 285);
+  --foreground: oklch(0.92 0.01 80);
+  --card: oklch(0.14 0.03 285);
+  --card-foreground: oklch(0.92 0.01 80);
+  --popover: oklch(0.14 0.03 285);
+  --popover-foreground: oklch(0.92 0.01 80);
+  --primary: oklch(0.68 0.21 45);
+  --primary-foreground: oklch(0.10 0.02 285);
+  --secondary: oklch(0.18 0.04 285);
+  --secondary-foreground: oklch(0.92 0.01 80);
+  --muted: oklch(0.18 0.04 285);
+  --muted-foreground: oklch(0.65 0.03 285);
+  --accent: oklch(0.18 0.04 285);
+  --accent-foreground: oklch(0.92 0.01 80);
+  --destructive: oklch(0.58 0.24 27);
+  --border: oklch(1 0 0 / 8%);
+  --input: oklch(1 0 0 / 12%);
+  --ring: oklch(0.68 0.21 45);
+  --radius: 0.5rem;
+
+  --font-display: "Syne Variable", sans-serif;
+  --font-body: "Plus Jakarta Sans Variable", sans-serif;
+  --font-code: "JetBrains Mono Variable", monospace;
+
+  --house-ai: oklch(0.66 0.25 340);
+  --house-biotech: oklch(0.82 0.20 155);
+  --house-hardware: oklch(0.90 0.18 95);
+  --house-ai-hex: #FF3CAC;
+  --house-biotech-hex: #00E676;
+  --house-hardware-hex: #FFD600;
+  --primary-hex: #FF5C00;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PROPOSAL B: PHOSPHOR
+   Terminal aesthetic elevated. CRT green on void black.
+   Display: Space Mono | Body: Outfit
+   ══════════════════════════════════════════════════════════════ */
+[data-theme="phosphor"] {
+  --background: oklch(0.08 0.01 240);
+  --foreground: oklch(0.94 0.01 240);
+  --card: oklch(0.12 0.01 240);
+  --card-foreground: oklch(0.94 0.01 240);
+  --popover: oklch(0.12 0.01 240);
+  --popover-foreground: oklch(0.94 0.01 240);
+  --primary: oklch(0.91 0.23 128);
+  --primary-foreground: oklch(0.08 0.01 240);
+  --secondary: oklch(0.16 0.01 240);
+  --secondary-foreground: oklch(0.94 0.01 240);
+  --muted: oklch(0.16 0.01 240);
+  --muted-foreground: oklch(0.60 0.01 240);
+  --accent: oklch(0.16 0.01 240);
+  --accent-foreground: oklch(0.94 0.01 240);
+  --destructive: oklch(0.58 0.24 27);
+  --border: oklch(1 0 0 / 6%);
+  --input: oklch(1 0 0 / 10%);
+  --ring: oklch(0.91 0.23 128);
+  --radius: 0rem;
+
+  --font-display: "Space Mono", monospace;
+  --font-body: "Outfit Variable", sans-serif;
+  --font-code: "JetBrains Mono Variable", monospace;
+
+  --house-ai: oklch(0.70 0.20 345);
+  --house-biotech: oklch(0.88 0.22 160);
+  --house-hardware: oklch(0.91 0.17 95);
+  --house-ai-hex: #F778BA;
+  --house-biotech-hex: #00FF88;
+  --house-hardware-hex: #FFE066;
+  --primary-hex: #BFFF00;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PROPOSAL C: ANOMALY
+   Bold, chromatic, experimental. The glitch becomes art.
+   Display: Red Hat Display | Body: Figtree
+   ══════════════════════════════════════════════════════════════ */
+[data-theme="anomaly"] {
+  --background: oklch(0.11 0.02 260);
+  --foreground: oklch(0.93 0.01 280);
+  --card: oklch(0.16 0.02 260);
+  --card-foreground: oklch(0.93 0.01 280);
+  --popover: oklch(0.16 0.02 260);
+  --popover-foreground: oklch(0.93 0.01 280);
+  --primary: oklch(0.59 0.29 345);
+  --primary-foreground: oklch(0.98 0 0);
+  --secondary: oklch(0.21 0.02 260);
+  --secondary-foreground: oklch(0.93 0.01 280);
+  --muted: oklch(0.21 0.02 260);
+  --muted-foreground: oklch(0.64 0.02 260);
+  --accent: oklch(0.21 0.02 260);
+  --accent-foreground: oklch(0.93 0.01 280);
+  --destructive: oklch(0.58 0.24 27);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 14%);
+  --ring: oklch(0.59 0.29 345);
+  --radius: 0.875rem;
+
+  --font-display: "Red Hat Display Variable", sans-serif;
+  --font-body: "Figtree Variable", sans-serif;
+  --font-code: "JetBrains Mono Variable", monospace;
+
+  --house-ai: oklch(0.55 0.24 285);
+  --house-biotech: oklch(0.82 0.20 155);
+  --house-hardware: oklch(0.78 0.16 65);
+  --house-ai-hex: #7C5CFC;
+  --house-biotech-hex: #00E676;
+  --house-hardware-hex: #FFA502;
+  --primary-hex: #FF0080;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PROPOSAL D: MONOLITH
+   Editorial. Contrarian. Serif in tech = true maverick.
+   Display: Fraunces | Body: Source Sans 3
+   ══════════════════════════════════════════════════════════════ */
+[data-theme="monolith"] {
+  --background: oklch(0.13 0.01 60);
+  --foreground: oklch(0.92 0.01 80);
+  --card: oklch(0.18 0.01 60);
+  --card-foreground: oklch(0.92 0.01 80);
+  --popover: oklch(0.18 0.01 60);
+  --popover-foreground: oklch(0.92 0.01 80);
+  --primary: oklch(0.48 0.25 260);
+  --primary-foreground: oklch(0.96 0.01 80);
+  --secondary: oklch(0.22 0.01 60);
+  --secondary-foreground: oklch(0.92 0.01 80);
+  --muted: oklch(0.22 0.01 60);
+  --muted-foreground: oklch(0.66 0.01 60);
+  --accent: oklch(0.22 0.01 60);
+  --accent-foreground: oklch(0.92 0.01 80);
+  --destructive: oklch(0.58 0.24 27);
+  --border: oklch(1 0 0 / 8%);
+  --input: oklch(1 0 0 / 12%);
+  --ring: oklch(0.48 0.25 260);
+  --radius: 0.125rem;
+
+  --font-display: "Fraunces Variable", serif;
+  --font-body: "Source Sans 3 Variable", sans-serif;
+  --font-code: "JetBrains Mono Variable", monospace;
+
+  --house-ai: oklch(0.62 0.22 350);
+  --house-biotech: oklch(0.70 0.15 170);
+  --house-hardware: oklch(0.87 0.13 85);
+  --house-ai-hex: #E84393;
+  --house-biotech-hex: #00B894;
+  --house-hardware-hex: #FDCB6E;
+  --primary-hex: #0055FF;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PROPOSAL E: EXTREMOPHILE
+   Tardi-forward. Bioluminescent deep-sea meets lab.
+   The tardigrade IS the brand. Alive, organic, otherworldly.
+   Display: Lexend | Body: Be Vietnam Pro
+   ══════════════════════════════════════════════════════════════ */
+[data-theme="extremophile"] {
+  --background: oklch(0.07 0.01 240);
+  --foreground: oklch(0.93 0.01 220);
+  --card: oklch(0.11 0.01 240);
+  --card-foreground: oklch(0.93 0.01 220);
+  --popover: oklch(0.11 0.01 240);
+  --popover-foreground: oklch(0.93 0.01 220);
+  --primary: oklch(0.82 0.14 180);
+  --primary-foreground: oklch(0.07 0.01 240);
+  --secondary: oklch(0.15 0.01 240);
+  --secondary-foreground: oklch(0.93 0.01 220);
+  --muted: oklch(0.15 0.01 240);
+  --muted-foreground: oklch(0.58 0.02 220);
+  --accent: oklch(0.15 0.01 240);
+  --accent-foreground: oklch(0.93 0.01 220);
+  --destructive: oklch(0.58 0.24 27);
+  --border: oklch(1 0 0 / 7%);
+  --input: oklch(1 0 0 / 10%);
+  --ring: oklch(0.82 0.14 180);
+  --radius: 0.75rem;
+
+  --font-display: "Lexend Variable", sans-serif;
+  --font-body: "Be Vietnam Pro", sans-serif;
+  --font-code: "JetBrains Mono Variable", monospace;
+
+  --house-ai: oklch(0.70 0.20 325);
+  --house-biotech: oklch(0.80 0.19 150);
+  --house-hardware: oklch(0.87 0.16 85);
+  --house-ai-hex: #E879F9;
+  --house-biotech-hex: #4ADE80;
+  --house-hardware-hex: #FBBF24;
+  --primary-hex: #00E5C8;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PROPOSAL F: HELIO
+   Light-first. Scientific institution. Clean authority.
+   The star that illuminates the deep-tech void.
+   Like a research paper designed by a luxury brand.
+   Display: Instrument Sans | Body: Commissioner
+   ══════════════════════════════════════════════════════════════ */
+[data-theme="helio"] {
+  --background: oklch(0.98 0.005 90);
+  --foreground: oklch(0.18 0.03 280);
+  --card: oklch(0.995 0.003 90);
+  --card-foreground: oklch(0.18 0.03 280);
+  --popover: oklch(0.995 0.003 90);
+  --popover-foreground: oklch(0.18 0.03 280);
+  --primary: oklch(0.50 0.24 265);
+  --primary-foreground: oklch(0.99 0.003 90);
+  --secondary: oklch(0.95 0.005 80);
+  --secondary-foreground: oklch(0.18 0.03 280);
+  --muted: oklch(0.95 0.005 80);
+  --muted-foreground: oklch(0.50 0.03 280);
+  --accent: oklch(0.95 0.005 80);
+  --accent-foreground: oklch(0.18 0.03 280);
+  --destructive: oklch(0.55 0.24 27);
+  --border: oklch(0 0 0 / 8%);
+  --input: oklch(0 0 0 / 10%);
+  --ring: oklch(0.50 0.24 265);
+  --radius: 0.375rem;
+
+  --font-display: "Instrument Sans Variable", sans-serif;
+  --font-body: "Commissioner Variable", sans-serif;
+  --font-code: "JetBrains Mono Variable", monospace;
+
+  --house-ai: oklch(0.50 0.24 290);
+  --house-biotech: oklch(0.58 0.14 165);
+  --house-hardware: oklch(0.62 0.14 70);
+  --house-ai-hex: #7C3AED;
+  --house-biotech-hex: #059669;
+  --house-hardware-hex: #D97706;
+  --primary-hex: #4F46E5;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PROPOSAL G: OBSIDIAN
+   BITKRAFT-inspired. Cinematic restraint. Maximum gravitas.
+   True black. Signal red. Architectural precision.
+   Every pixel earns its place.
+   Display: Manrope | Body: Nunito Sans
+   ══════════════════════════════════════════════════════════════ */
+[data-theme="obsidian"] {
+  --background: oklch(0.05 0.005 25);
+  --foreground: oklch(0.92 0.005 25);
+  --card: oklch(0.09 0.005 25);
+  --card-foreground: oklch(0.92 0.005 25);
+  --popover: oklch(0.09 0.005 25);
+  --popover-foreground: oklch(0.92 0.005 25);
+  --primary: oklch(0.55 0.24 25);
+  --primary-foreground: oklch(0.98 0.005 25);
+  --secondary: oklch(0.13 0.005 25);
+  --secondary-foreground: oklch(0.92 0.005 25);
+  --muted: oklch(0.13 0.005 25);
+  --muted-foreground: oklch(0.55 0.005 25);
+  --accent: oklch(0.13 0.005 25);
+  --accent-foreground: oklch(0.92 0.005 25);
+  --destructive: oklch(0.55 0.24 27);
+  --border: oklch(1 0 0 / 5%);
+  --input: oklch(1 0 0 / 8%);
+  --ring: oklch(0.55 0.24 25);
+  --radius: 0.25rem;
+
+  --font-display: "Manrope Variable", sans-serif;
+  --font-body: "Nunito Sans Variable", sans-serif;
+  --font-code: "JetBrains Mono Variable", monospace;
+
+  --house-ai: oklch(0.72 0.16 345);
+  --house-biotech: oklch(0.77 0.15 165);
+  --house-hardware: oklch(0.92 0.14 95);
+  --house-ai-hex: #F472B6;
+  --house-biotech-hex: #34D399;
+  --house-hardware-hex: #FDE047;
+  --primary-hex: #DC2626;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PROPOSAL H: TECTONIC
+   LATAM earth energy. Brutalist warmth. Terracotta on charcoal.
+   Nothing decorative. Every element earns its place.
+   Display: Unbounded | Body: Albert Sans
+   ══════════════════════════════════════════════════════════════ */
+[data-theme="tectonic"] {
+  --background: oklch(0.12 0.015 50);
+  --foreground: oklch(0.93 0.01 80);
+  --card: oklch(0.17 0.015 50);
+  --card-foreground: oklch(0.93 0.01 80);
+  --popover: oklch(0.17 0.015 50);
+  --popover-foreground: oklch(0.93 0.01 80);
+  --primary: oklch(0.58 0.17 35);
+  --primary-foreground: oklch(0.97 0.005 50);
+  --secondary: oklch(0.22 0.015 50);
+  --secondary-foreground: oklch(0.93 0.01 80);
+  --muted: oklch(0.22 0.015 50);
+  --muted-foreground: oklch(0.58 0.02 50);
+  --accent: oklch(0.22 0.015 50);
+  --accent-foreground: oklch(0.93 0.01 80);
+  --destructive: oklch(0.55 0.22 27);
+  --border: oklch(1 0.005 50 / 10%);
+  --input: oklch(1 0.005 50 / 14%);
+  --ring: oklch(0.58 0.17 35);
+  --radius: 0rem;
+
+  --font-display: "Unbounded Variable", sans-serif;
+  --font-body: "Albert Sans Variable", sans-serif;
+  --font-code: "JetBrains Mono Variable", monospace;
+
+  --house-ai: oklch(0.65 0.16 355);
+  --house-biotech: oklch(0.68 0.14 155);
+  --house-hardware: oklch(0.82 0.14 80);
+  --house-ai-hex: #D45672;
+  --house-biotech-hex: #2FA36B;
+  --house-hardware-hex: #C9A030;
+  --primary-hex: #C05A34;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PROPOSAL I: BIOLUME
+   Tardi's ocean. Deep-sea bioluminescence. Living, organic.
+   Dark but ALIVE. Every color glows from within.
+   Display: Bricolage Grotesque | Body: Libre Franklin
+   ══════════════════════════════════════════════════════════════ */
+[data-theme="biolume"] {
+  --background: oklch(0.08 0.025 270);
+  --foreground: oklch(0.93 0.01 230);
+  --card: oklch(0.12 0.025 270);
+  --card-foreground: oklch(0.93 0.01 230);
+  --popover: oklch(0.12 0.025 270);
+  --popover-foreground: oklch(0.93 0.01 230);
+  --primary: oklch(0.72 0.14 225);
+  --primary-foreground: oklch(0.08 0.025 270);
+  --secondary: oklch(0.16 0.025 270);
+  --secondary-foreground: oklch(0.93 0.01 230);
+  --muted: oklch(0.16 0.025 270);
+  --muted-foreground: oklch(0.55 0.02 260);
+  --accent: oklch(0.16 0.025 270);
+  --accent-foreground: oklch(0.93 0.01 230);
+  --destructive: oklch(0.55 0.22 27);
+  --border: oklch(1 0.01 240 / 7%);
+  --input: oklch(1 0.01 240 / 10%);
+  --ring: oklch(0.72 0.14 225);
+  --radius: 1rem;
+
+  --font-display: "Bricolage Grotesque Variable", sans-serif;
+  --font-body: "Libre Franklin Variable", sans-serif;
+  --font-code: "JetBrains Mono Variable", monospace;
+
+  --house-ai: oklch(0.68 0.20 335);
+  --house-biotech: oklch(0.80 0.20 155);
+  --house-hardware: oklch(0.85 0.16 85);
+  --house-ai-hex: #D862A8;
+  --house-biotech-hex: #22D872;
+  --house-hardware-hex: #E8B430;
+  --primary-hex: #3BA8D4;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PROPOSAL J: CORTEX
+   Editorial authority. Serif in tech = true contrarian.
+   Light, warm, paper-like. Forest green signals growth.
+   Like a premium research journal designed by a luxury house.
+   Display: Newsreader | Body: DM Sans
+   ══════════════════════════════════════════════════════════════ */
+[data-theme="cortex"] {
+  --background: oklch(0.97 0.007 80);
+  --foreground: oklch(0.18 0.02 60);
+  --card: oklch(0.99 0.004 80);
+  --card-foreground: oklch(0.18 0.02 60);
+  --popover: oklch(0.99 0.004 80);
+  --popover-foreground: oklch(0.18 0.02 60);
+  --primary: oklch(0.42 0.12 160);
+  --primary-foreground: oklch(0.98 0.005 80);
+  --secondary: oklch(0.94 0.007 80);
+  --secondary-foreground: oklch(0.18 0.02 60);
+  --muted: oklch(0.94 0.007 80);
+  --muted-foreground: oklch(0.48 0.02 60);
+  --accent: oklch(0.94 0.007 80);
+  --accent-foreground: oklch(0.18 0.02 60);
+  --destructive: oklch(0.52 0.22 27);
+  --border: oklch(0 0.005 60 / 10%);
+  --input: oklch(0 0.005 60 / 12%);
+  --ring: oklch(0.42 0.12 160);
+  --radius: 0.25rem;
+
+  --font-display: "Newsreader Variable", serif;
+  --font-body: "DM Sans Variable", sans-serif;
+  --font-code: "JetBrains Mono Variable", monospace;
+
+  --house-ai: oklch(0.48 0.18 340);
+  --house-biotech: oklch(0.48 0.12 155);
+  --house-hardware: oklch(0.58 0.12 75);
+  --house-ai-hex: #A33062;
+  --house-biotech-hex: #1A7A4C;
+  --house-hardware-hex: #9E7B20;
+  --primary-hex: #1C6B4C;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PROPOSAL K: VULCAN
+   Psychology: ASPIRATION (Social Identity Theory).
+   Condensed brutalist streetwear meets deep-tech forge.
+   Molten orange on volcanic black. Hard edges. Elite energy.
+   You don't join 404 — you're forged in it.
+   Display: Big Shoulders Display | Body: Barlow
+   ══════════════════════════════════════════════════════════════ */
+[data-theme="vulcan"] {
+  --background: oklch(0.06 0.01 40);
+  --foreground: oklch(0.90 0.01 55);
+  --card: oklch(0.10 0.01 40);
+  --card-foreground: oklch(0.90 0.01 55);
+  --popover: oklch(0.10 0.01 40);
+  --popover-foreground: oklch(0.90 0.01 55);
+  --primary: oklch(0.72 0.19 55);
+  --primary-foreground: oklch(0.06 0.01 40);
+  --secondary: oklch(0.14 0.01 40);
+  --secondary-foreground: oklch(0.90 0.01 55);
+  --muted: oklch(0.14 0.01 40);
+  --muted-foreground: oklch(0.50 0.015 45);
+  --accent: oklch(0.14 0.01 40);
+  --accent-foreground: oklch(0.90 0.01 55);
+  --destructive: oklch(0.55 0.22 27);
+  --border: oklch(1 0.005 45 / 8%);
+  --input: oklch(1 0.005 45 / 12%);
+  --ring: oklch(0.72 0.19 55);
+  --radius: 0rem;
+
+  --font-display: "Big Shoulders Display Variable", sans-serif;
+  --font-body: "Barlow", sans-serif;
+  --font-code: "JetBrains Mono Variable", monospace;
+
+  --house-ai: oklch(0.62 0.18 350);
+  --house-biotech: oklch(0.65 0.15 150);
+  --house-hardware: oklch(0.80 0.15 75);
+  --house-ai-hex: #CC4868;
+  --house-biotech-hex: #28945A;
+  --house-hardware-hex: #C4960E;
+  --primary-hex: #E88420;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PROPOSAL L: CODEX
+   Psychology: MYSTERY (Information Gap Theory + Zeigarnik).
+   Secret society meets luxury publisher. Ornate serif on
+   deep navy. Gold leaf accents. You've found something
+   most people haven't. Curiosity creates stickiness.
+   Display: Cormorant | Body: Alegreya Sans
+   ══════════════════════════════════════════════════════════════ */
+[data-theme="codex"] {
+  --background: oklch(0.10 0.02 280);
+  --foreground: oklch(0.93 0.008 85);
+  --card: oklch(0.14 0.02 280);
+  --card-foreground: oklch(0.93 0.008 85);
+  --popover: oklch(0.14 0.02 280);
+  --popover-foreground: oklch(0.93 0.008 85);
+  --primary: oklch(0.76 0.14 85);
+  --primary-foreground: oklch(0.10 0.02 280);
+  --secondary: oklch(0.18 0.02 280);
+  --secondary-foreground: oklch(0.93 0.008 85);
+  --muted: oklch(0.18 0.02 280);
+  --muted-foreground: oklch(0.58 0.015 270);
+  --accent: oklch(0.18 0.02 280);
+  --accent-foreground: oklch(0.93 0.008 85);
+  --destructive: oklch(0.55 0.22 27);
+  --border: oklch(1 0.008 85 / 8%);
+  --input: oklch(1 0.008 85 / 10%);
+  --ring: oklch(0.76 0.14 85);
+  --radius: 0.125rem;
+
+  --font-display: "Cormorant Variable", serif;
+  --font-body: "Alegreya Sans", sans-serif;
+  --font-code: "JetBrains Mono Variable", monospace;
+
+  --house-ai: oklch(0.65 0.18 340);
+  --house-biotech: oklch(0.68 0.13 160);
+  --house-hardware: oklch(0.80 0.13 80);
+  --house-ai-hex: #C84878;
+  --house-biotech-hex: #2D8C5A;
+  --house-hardware-hex: #C0960E;
+  --primary-hex: #C8A530;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PROPOSAL M: STATIC
+   Psychology: DISRUPTION (Von Restorff + Orienting Response).
+   Signal yellow on void. Warning-sign energy meets precision.
+   Your brain can't ignore it. Nobody in tech uses yellow.
+   That's the point.
+   Display: Archivo | Body: Karla
+   ══════════════════════════════════════════════════════════════ */
+[data-theme="static"] {
+  --background: oklch(0.05 0.008 240);
+  --foreground: oklch(0.88 0.008 100);
+  --card: oklch(0.09 0.008 240);
+  --card-foreground: oklch(0.88 0.008 100);
+  --popover: oklch(0.09 0.008 240);
+  --popover-foreground: oklch(0.88 0.008 100);
+  --primary: oklch(0.90 0.18 100);
+  --primary-foreground: oklch(0.10 0.02 100);
+  --secondary: oklch(0.13 0.008 240);
+  --secondary-foreground: oklch(0.88 0.008 100);
+  --muted: oklch(0.13 0.008 240);
+  --muted-foreground: oklch(0.52 0.01 230);
+  --accent: oklch(0.13 0.008 240);
+  --accent-foreground: oklch(0.88 0.008 100);
+  --destructive: oklch(0.55 0.22 27);
+  --border: oklch(1 0.005 100 / 6%);
+  --input: oklch(1 0.005 100 / 10%);
+  --ring: oklch(0.90 0.18 100);
+  --radius: 0.125rem;
+
+  --font-display: "Archivo Variable", sans-serif;
+  --font-body: "Karla Variable", sans-serif;
+  --font-code: "JetBrains Mono Variable", monospace;
+
+  --house-ai: oklch(0.66 0.20 340);
+  --house-biotech: oklch(0.72 0.16 155);
+  --house-hardware: oklch(0.82 0.15 80);
+  --house-ai-hex: #CC4878;
+  --house-biotech-hex: #2CB86A;
+  --house-hardware-hex: #C8A020;
+  --primary-hex: #E8D000;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PROPOSAL N: ANOMALY EVOLVED
+   Philosophy: Purple is ATMOSPHERIC, not structural.
+   Base is warm near-black. Purple enters as light, emanating
+   from Tardi — the mascot IS the source of brand energy.
+   House colors do the chromatic heavy lifting.
+   Display: Gabarito | Body: Work Sans
+   ══════════════════════════════════════════════════════════════ */
+[data-theme="evolved"] {
+  /* Warm near-black base — NOT purple. Purple is atmosphere. */
+  --background: oklch(0.08 0.012 340);
+  --foreground: oklch(0.93 0.008 340);
+  --card: oklch(0.12 0.015 340);
+  --card-foreground: oklch(0.93 0.008 340);
+  --popover: oklch(0.12 0.015 340);
+  --popover-foreground: oklch(0.93 0.008 340);
+  /* Purple-magenta primary — warmer than generic violet */
+  --primary: oklch(0.55 0.25 305);
+  --primary-foreground: oklch(0.97 0.005 340);
+  --secondary: oklch(0.16 0.015 340);
+  --secondary-foreground: oklch(0.93 0.008 340);
+  --muted: oklch(0.16 0.015 340);
+  --muted-foreground: oklch(0.55 0.02 340);
+  /* Accent has a touch of purple — for elevated surfaces */
+  --accent: oklch(0.18 0.03 310);
+  --accent-foreground: oklch(0.93 0.008 340);
+  --destructive: oklch(0.55 0.22 27);
+  --border: oklch(1 0.008 340 / 8%);
+  --input: oklch(1 0.008 340 / 12%);
+  --ring: oklch(0.55 0.25 305);
+  --radius: 0.625rem;
+
+  --font-display: "Gabarito Variable", sans-serif;
+  --font-body: "Work Sans Variable", sans-serif;
+  --font-code: "JetBrains Mono Variable", monospace;
+
+  /* House colors — vivid, they own the chromatic spectrum */
+  --house-ai: oklch(0.68 0.26 340);
+  --house-biotech: oklch(0.80 0.22 155);
+  --house-hardware: oklch(0.88 0.18 90);
+  --house-ai-hex: #FF3CAC;
+  --house-biotech-hex: #00E676;
+  --house-hardware-hex: #FFD600;
+  --primary-hex: #8B3AE8;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PROPOSAL O: FORGE
+   Hybrid: Vulcan's aspiration + Tectonic's warmth + Codex's mystery.
+   Psychology: Von Restorff (rare amber in tech) + Social Identity
+   (the forge = earned membership) + Information Gap (404 = discovery).
+   The error IS the brand. Warm charcoal base. Forge amber signal.
+   Zero radius. Condensed industrial typography. Earned brutalism.
+   Display: Big Shoulders Display | Body: Barlow
+   ══════════════════════════════════════════════════════════════ */
+[data-theme="forge"] {
+  /* Warm charcoal — the forge floor */
+  --background: oklch(0.07 0.012 50);
+  --foreground: oklch(0.92 0.01 60);
+  --card: oklch(0.11 0.012 50);
+  --card-foreground: oklch(0.92 0.01 60);
+  --popover: oklch(0.11 0.012 50);
+  --popover-foreground: oklch(0.92 0.01 60);
+  /* Forge amber — molten, warm, rare in tech */
+  --primary: oklch(0.73 0.19 55);
+  --primary-foreground: oklch(0.07 0.012 50);
+  --secondary: oklch(0.14 0.012 50);
+  --secondary-foreground: oklch(0.92 0.01 60);
+  --muted: oklch(0.14 0.012 50);
+  --muted-foreground: oklch(0.62 0.015 55);
+  /* Accent — warm elevated surface */
+  --accent: oklch(0.16 0.015 50);
+  --accent-foreground: oklch(0.92 0.01 60);
+  --destructive: oklch(0.55 0.22 27);
+  --border: oklch(1 0.008 55 / 7%);
+  --input: oklch(1 0.008 55 / 10%);
+  --ring: oklch(0.73 0.19 55);
+  --radius: 0rem;
+
+  --font-display: "Big Shoulders Display Variable", sans-serif;
+  --font-body: "Barlow", sans-serif;
+  --font-code: "JetBrains Mono Variable", monospace;
+
+  /* House colors — vivid, they own the chromatic range */
+  --house-ai: oklch(0.65 0.22 345);
+  --house-biotech: oklch(0.72 0.18 155);
+  --house-hardware: oklch(0.85 0.15 95);
+  --house-ai-hex: #D44878;
+  --house-biotech-hex: #2DB868;
+  --house-hardware-hex: #D4B020;
+  --primary-hex: #D49420;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PROPOSAL P: LITHO
+   The inversion. Purple becomes INK, not accent.
+   Warm cream paper base. Deep violet text (reads as rich black).
+   Amber for CTAs — the complementary spark on paper.
+   Light theme = contrarian in a dark-mode ecosystem.
+   Same industrial typography as Forge — proves brand flexibility.
+   Display: Big Shoulders Display | Body: Barlow
+   ══════════════════════════════════════════════════════════════ */
+[data-theme="litho"] {
+  /* Warm cream — paper, not screen */
+  --background: oklch(0.975 0.006 85);
+  --foreground: oklch(0.14 0.05 285);
+  --card: oklch(0.95 0.008 85);
+  --card-foreground: oklch(0.14 0.05 285);
+  --popover: oklch(0.95 0.008 85);
+  --popover-foreground: oklch(0.14 0.05 285);
+  /* Amber — complementary spark on paper */
+  --primary: oklch(0.62 0.18 55);
+  --primary-foreground: oklch(0.975 0.006 85);
+  --secondary: oklch(0.92 0.008 85);
+  --secondary-foreground: oklch(0.14 0.05 285);
+  --muted: oklch(0.92 0.008 80);
+  --muted-foreground: oklch(0.42 0.03 285);
+  /* Lavender accent — the violet whisper in surfaces */
+  --accent: oklch(0.94 0.018 285);
+  --accent-foreground: oklch(0.14 0.05 285);
+  --destructive: oklch(0.55 0.22 27);
+  --border: oklch(0 0.015 285 / 12%);
+  --input: oklch(0 0.015 285 / 15%);
+  --ring: oklch(0.62 0.18 55);
+  --radius: 0rem;
+
+  --font-display: "Big Shoulders Display Variable", sans-serif;
+  --font-body: "Barlow", sans-serif;
+  --font-code: "JetBrains Mono Variable", monospace;
+
+  /* House colors — deeper for light background readability */
+  --house-ai: oklch(0.55 0.22 340);
+  --house-biotech: oklch(0.52 0.18 155);
+  --house-hardware: oklch(0.62 0.16 75);
+  --house-ai-hex: #C42060;
+  --house-biotech-hex: #107840;
+  --house-hardware-hex: #A87818;
+  --primary-hex: #C88418;
+}
+
+/* ── Theme inline bindings ──────────────────────────────────── */
+@theme inline {
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-code: var(--font-code);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-house-ai: var(--house-ai);
+  --color-house-biotech: var(--house-biotech);
+  --color-house-hardware: var(--house-hardware);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+    transition: background-color 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+                color 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
+  code, pre {
+    font-family: var(--font-code);
+  }
+}
+
+/* Smooth scroll hint — replaces dated bounce */
+@keyframes scroll-breathe {
+  0%, 100% { transform: translateY(0); opacity: 0.5; }
+  50% { transform: translateY(6px); opacity: 1; }
+}
+.scroll-hint {
+  animation: scroll-breathe 2.5s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-hint {
+    animation: none;
+    opacity: 0.5;
+  }
+}

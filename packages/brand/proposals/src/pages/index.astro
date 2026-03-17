@@ -1,0 +1,390 @@
+---
+import Layout from "@/layouts/main.astro"
+import { ThemeSwitcher } from "@/components/ThemeSwitcher"
+import { Button } from "@/components/ui/button"
+---
+
+<Layout>
+  <ThemeSwitcher client:load />
+
+  <main class="pt-16">
+
+    <!-- ═══ HERO ═══════════════════════════════════════════════ -->
+    <section class="relative min-h-[85vh] flex flex-col items-center justify-center px-6 overflow-hidden">
+      <!-- Subtle atmosphere -->
+      <div class="absolute inset-0 pointer-events-none opacity-[0.03]" style="background: repeating-linear-gradient(90deg, var(--primary) 0px, transparent 1px, transparent 60px); mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);"></div>
+
+      <div class="relative z-10 text-center max-w-3xl">
+        <!-- Wordmark -->
+        <div class="mb-8">
+          <h1 class="text-7xl sm:text-8xl md:text-9xl font-black tracking-tight leading-none text-primary">
+            404
+          </h1>
+          <p class="text-2xl sm:text-3xl md:text-4xl font-medium tracking-[0.15em] text-foreground/70 mt-2">
+            TECH F<span class="relative inline-block">
+              <span class="relative z-10">O</span>
+              <span class="absolute inset-0 flex items-center justify-center">
+                <span class="block w-full h-[2px] bg-primary/60"></span>
+              </span>
+            </span>UND
+          </p>
+        </div>
+
+        <!-- Tagline -->
+        <p class="text-lg sm:text-xl text-muted-foreground max-w-lg mx-auto mb-10 leading-relaxed">
+          Where anomalies thrive and tomorrow is engineered today.
+        </p>
+
+        <!-- CTAs -->
+        <div class="flex gap-4 justify-center flex-wrap">
+          <Button client:load size="lg" className="text-base px-8">
+            Join the Movement
+          </Button>
+          <Button client:load variant="outline" size="lg" className="text-base px-8">
+            Learn More
+          </Button>
+        </div>
+      </div>
+
+      <!-- Scroll hint -->
+      <div class="scroll-hint absolute bottom-8 left-1/2 -translate-x-1/2">
+        <div class="w-5 h-8 rounded-full border-2 border-muted-foreground/30 flex justify-center pt-1.5">
+          <div class="w-1 h-2 rounded-full bg-muted-foreground/40"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ PROPOSAL INFO ══════════════════════════════════════ -->
+    <section class="px-6 py-16 max-w-5xl mx-auto">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="rounded-lg border border-border bg-card p-5">
+          <p class="text-xs text-muted-foreground uppercase tracking-widest mb-1">Proposal</p>
+          <p class="text-sm font-semibold text-foreground" id="info-name">Signal in the Void</p>
+        </div>
+        <div class="rounded-lg border border-border bg-card p-5">
+          <p class="text-xs text-muted-foreground uppercase tracking-widest mb-1">Display</p>
+          <p class="text-sm font-semibold text-foreground" id="info-display">Syne</p>
+        </div>
+        <div class="rounded-lg border border-border bg-card p-5">
+          <p class="text-xs text-muted-foreground uppercase tracking-widest mb-1">Body</p>
+          <p class="text-sm font-semibold text-foreground" id="info-body">Plus Jakarta Sans</p>
+        </div>
+        <div class="rounded-lg border border-border bg-card p-5">
+          <p class="text-xs text-muted-foreground uppercase tracking-widest mb-1">Primary</p>
+          <div class="flex items-center gap-2">
+            <span class="w-4 h-4 rounded-sm bg-primary shrink-0"></span>
+            <p class="text-sm font-semibold text-foreground font-mono" id="info-primary">#FF5C00</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ COLOR PALETTE ══════════════════════════════════════ -->
+    <section class="px-6 py-16 max-w-5xl mx-auto">
+      <h2 class="text-3xl font-bold mb-2">Color Palette</h2>
+      <p class="text-muted-foreground mb-10">Surfaces, accents, and house colors.</p>
+
+      <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3">
+        <!-- Surfaces -->
+        <div class="space-y-2">
+          <div class="aspect-square rounded-lg bg-background border border-border"></div>
+          <p class="text-xs text-muted-foreground">Background</p>
+        </div>
+        <div class="space-y-2">
+          <div class="aspect-square rounded-lg bg-card border border-border"></div>
+          <p class="text-xs text-muted-foreground">Card</p>
+        </div>
+        <div class="space-y-2">
+          <div class="aspect-square rounded-lg bg-muted border border-border"></div>
+          <p class="text-xs text-muted-foreground">Muted</p>
+        </div>
+        <!-- Primary -->
+        <div class="space-y-2">
+          <div class="aspect-square rounded-lg bg-primary"></div>
+          <p class="text-xs text-muted-foreground">Primary</p>
+        </div>
+        <!-- Houses -->
+        <div class="space-y-2">
+          <div class="aspect-square rounded-lg bg-house-ai"></div>
+          <p class="text-xs text-muted-foreground">AI</p>
+        </div>
+        <div class="space-y-2">
+          <div class="aspect-square rounded-lg bg-house-biotech"></div>
+          <p class="text-xs text-muted-foreground">Biotech</p>
+        </div>
+        <div class="space-y-2">
+          <div class="aspect-square rounded-lg bg-house-hardware"></div>
+          <p class="text-xs text-muted-foreground">Hardware</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ TYPOGRAPHY ═════════════════════════════════════════ -->
+    <section class="px-6 py-16 max-w-5xl mx-auto">
+      <h2 class="text-3xl font-bold mb-2">Typography</h2>
+      <p class="text-muted-foreground mb-10">Display, body, and code specimens.</p>
+
+      <div class="space-y-10">
+        <!-- Display -->
+        <div class="space-y-4">
+          <p class="text-xs text-muted-foreground uppercase tracking-widest">Display</p>
+          <p class="text-5xl md:text-6xl font-bold leading-tight">
+            Breaking the Laws<br/>of Deep Tech
+          </p>
+          <p class="text-3xl md:text-4xl font-semibold text-foreground/80">
+            Building LATAM's Future, One Anomaly at a Time
+          </p>
+        </div>
+
+        <!-- Body -->
+        <div class="space-y-4 max-w-2xl">
+          <p class="text-xs text-muted-foreground uppercase tracking-widest">Body</p>
+          <p class="text-lg leading-relaxed">
+            404 Tech Found is LATAM's maverick deep-tech pre-incubator, built by founders for founders.
+            We turn breakthrough science into venture-grade companies -- catalysing the next generation
+            of biotech, AI, and hardware startups right where the talent is.
+          </p>
+          <p class="text-base text-muted-foreground leading-relaxed">
+            Muted body text for secondary information, captions, and supporting content that doesn't
+            compete with primary messaging but remains comfortably readable.
+          </p>
+        </div>
+
+        <!-- Code -->
+        <div class="space-y-4">
+          <p class="text-xs text-muted-foreground uppercase tracking-widest">Code</p>
+          <pre class="bg-card border border-border rounded-lg p-5 text-sm leading-relaxed overflow-x-auto"><code class="text-foreground"><span class="text-primary">const</span> deeptech = await <span class="text-primary">discover</span>({'{'}
+  region: <span class="text-house-biotech">"LATAM"</span>,
+  verticals: [<span class="text-house-ai">"AI"</span>, <span class="text-house-biotech">"Biotech"</span>, <span class="text-house-hardware">"Hardware"</span>],
+  status: <span class="text-primary">404</span>, <span class="text-muted-foreground">// not found -- until now</span>
+{'}'});</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ HOUSE CARDS ════════════════════════════════════════ -->
+    <section class="px-6 py-16 max-w-5xl mx-auto">
+      <h2 class="text-3xl font-bold mb-2">Programme Houses</h2>
+      <p class="text-muted-foreground mb-10">Three verticals. Three identities. One mission.</p>
+
+      <div class="grid md:grid-cols-3 gap-5">
+        <!-- AI -->
+        <div class="group relative rounded-lg border border-border bg-card overflow-hidden transition-colors duration-200 hover:bg-house-ai/5">
+          <div class="p-6">
+            <div class="flex items-center gap-3 mb-4">
+              <svg class="w-5 h-5 text-house-ai" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z" />
+              </svg>
+              <h3 class="text-xl font-bold text-house-ai">AI</h3>
+            </div>
+            <p class="text-sm font-medium text-foreground/80 italic mb-3">"Code that thinks."</p>
+            <p class="text-sm text-muted-foreground leading-relaxed">
+              Machine learning, NLP, computer vision, and autonomous agents. From research papers to production systems.
+            </p>
+          </div>
+        </div>
+
+        <!-- Biotech -->
+        <div class="group relative rounded-lg border border-border bg-card overflow-hidden transition-colors duration-200 hover:bg-house-biotech/5">
+          <div class="p-6">
+            <div class="flex items-center gap-3 mb-4">
+              <svg class="w-5 h-5 text-house-biotech" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
+              </svg>
+              <h3 class="text-xl font-bold text-house-biotech">Biotech</h3>
+            </div>
+            <p class="text-sm font-medium text-foreground/80 italic mb-3">"Evolving life, engineering futures."</p>
+            <p class="text-sm text-muted-foreground leading-relaxed">
+              Synthetic biology, biomaterials, environmental biotech, and bioinformatics. Lab to market, science to scale.
+            </p>
+          </div>
+        </div>
+
+        <!-- Hardware -->
+        <div class="group relative rounded-lg border border-border bg-card overflow-hidden transition-colors duration-200 hover:bg-house-hardware/5">
+          <div class="p-6">
+            <div class="flex items-center gap-3 mb-4">
+              <svg class="w-5 h-5 text-house-hardware" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 002.25-2.25V6.75a2.25 2.25 0 00-2.25-2.25H6.75A2.25 2.25 0 004.5 6.75v10.5a2.25 2.25 0 002.25 2.25zm.75-12h9v9h-9v-9z" />
+              </svg>
+              <h3 class="text-xl font-bold text-house-hardware">Hardware</h3>
+            </div>
+            <p class="text-sm font-medium text-foreground/80 italic mb-3">"Atoms to products."</p>
+            <p class="text-sm text-muted-foreground leading-relaxed">
+              Robotics, IoT, embedded systems, and physical computing. From prototype bench to production line.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ TEAM + MASCOT ══════════════════════════════════════ -->
+    <section class="px-6 py-16 max-w-5xl mx-auto">
+      <h2 class="text-3xl font-bold mb-2">Team & Mascot</h2>
+      <p class="text-muted-foreground mb-10">The people and the spirit behind 404.</p>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- Founder card -->
+        <div class="rounded-lg border border-border bg-card overflow-hidden">
+          <div class="p-6 flex gap-5">
+            <img
+              src="/enrique.png"
+              alt="Enrique Flores"
+              class="w-20 h-20 rounded-lg object-cover shrink-0"
+            />
+            <div>
+              <h3 class="text-lg font-bold">Enrique Flores</h3>
+              <p class="text-sm text-primary font-medium">Co-Founder & CTO</p>
+              <p class="text-sm text-muted-foreground mt-2 leading-relaxed">
+                CS/Software at UTEC. One of Peru's fastest 0-to-1 builders.
+                10+ startup MVPs, production agent systems, and the driving force
+                behind 404's technical infrastructure.
+              </p>
+            </div>
+          </div>
+          <div class="px-6 pb-5 flex gap-2">
+            <span class="text-xs px-2.5 py-1 rounded-md bg-house-ai/15 text-house-ai font-medium">AI</span>
+            <span class="text-xs px-2.5 py-1 rounded-md bg-muted text-muted-foreground">Full-Stack</span>
+            <span class="text-xs px-2.5 py-1 rounded-md bg-muted text-muted-foreground">Agents</span>
+          </div>
+        </div>
+
+        <!-- Tardi card -->
+        <div class="rounded-lg border border-border bg-card overflow-hidden">
+          <div class="p-6 flex gap-5">
+            <div class="w-20 h-20 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 overflow-hidden">
+              <img
+                src="/tardi.png"
+                alt="Tardi the tardigrade"
+                class="w-16 h-16 object-contain"
+              />
+            </div>
+            <div>
+              <h3 class="text-lg font-bold">Tardi</h3>
+              <p class="text-sm text-primary font-medium">Official Mascot</p>
+              <p class="text-sm text-muted-foreground mt-2 leading-relaxed">
+                A tardigrade -- the most resilient creature on Earth. Survives vacuum,
+                radiation, and extreme temperatures. Like our startups: built to endure
+                conditions nothing else can.
+              </p>
+            </div>
+          </div>
+          <div class="px-6 pb-5 flex gap-2">
+            <span class="text-xs px-2.5 py-1 rounded-md bg-primary/15 text-primary font-medium">Resilient</span>
+            <span class="text-xs px-2.5 py-1 rounded-md bg-muted text-muted-foreground">Microscopic</span>
+            <span class="text-xs px-2.5 py-1 rounded-md bg-muted text-muted-foreground">Indestructible</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ SAMPLE COMPONENTS ══════════════════════════════════ -->
+    <section class="px-6 py-16 max-w-5xl mx-auto">
+      <h2 class="text-3xl font-bold mb-2">Components</h2>
+      <p class="text-muted-foreground mb-10">Buttons, inputs, and interactive patterns.</p>
+
+      <div class="space-y-8">
+        <!-- Buttons -->
+        <div class="space-y-3">
+          <p class="text-xs text-muted-foreground uppercase tracking-widest">Buttons</p>
+          <div class="flex flex-wrap gap-3">
+            <Button client:load size="lg">Primary Action</Button>
+            <Button client:load variant="outline" size="lg">Outline</Button>
+            <Button client:load variant="secondary" size="lg">Secondary</Button>
+            <Button client:load variant="ghost" size="lg">Ghost</Button>
+          </div>
+        </div>
+
+        <!-- Input -->
+        <div class="space-y-3 max-w-md">
+          <p class="text-xs text-muted-foreground uppercase tracking-widest">Form</p>
+          <div class="flex gap-2">
+            <input
+              type="email"
+              placeholder="founder@deeptech.com"
+              class="flex-1 h-10 px-3 rounded-lg border border-input bg-card text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+            />
+            <Button client:load>Subscribe</Button>
+          </div>
+        </div>
+
+        <!-- Banner -->
+        <div class="space-y-3">
+          <p class="text-xs text-muted-foreground uppercase tracking-widest">Banner</p>
+          <div class="rounded-lg border border-primary/20 bg-primary/5 p-5">
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 rounded-md bg-primary/20 flex items-center justify-center shrink-0 mt-0.5">
+                <svg class="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-foreground">404 Founders Cohort II is open</p>
+                <p class="text-sm text-muted-foreground mt-1">
+                  18 teams. 12 weeks. From breakthrough research to venture-grade company.
+                  Applications close March 30.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ FOOTER ═════════════════════════════════════════════ -->
+    <footer class="px-6 py-12 border-t border-border">
+      <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <span class="text-xl font-bold text-primary">404</span>
+          <span class="text-sm text-muted-foreground">Tech Found</span>
+        </div>
+        <p class="text-xs text-muted-foreground">
+          Brand proposal comparison tool. Not a production page.
+        </p>
+      </div>
+    </footer>
+
+  </main>
+</Layout>
+
+<script>
+  // Sync info cards with active theme
+  const observer = new MutationObserver(() => {
+    const theme = document.documentElement.getAttribute("data-theme");
+    const style = getComputedStyle(document.documentElement);
+
+    const info: Record<string, { name: string; display: string; body: string; hex: string }> = {
+      signal:       { name: "Signal in the Void", display: "Syne",            body: "Plus Jakarta Sans", hex: "#FF5C00" },
+      phosphor:     { name: "Phosphor",           display: "Space Mono",      body: "Outfit",            hex: "#BFFF00" },
+      anomaly:      { name: "Anomaly",            display: "Red Hat Display", body: "Figtree",           hex: "#FF0080" },
+      monolith:     { name: "Monolith",           display: "Fraunces",        body: "Source Sans 3",     hex: "#0055FF" },
+      extremophile: { name: "Extremophile",       display: "Lexend",          body: "Be Vietnam Pro",    hex: "#00E5C8" },
+      helio:        { name: "Helio",              display: "Instrument Sans", body: "Commissioner",      hex: "#4F46E5" },
+      obsidian:     { name: "Obsidian",           display: "Manrope",         body: "Nunito Sans",       hex: "#DC2626" },
+      tectonic:     { name: "Tectonic",           display: "Unbounded",       body: "Albert Sans",       hex: "#C05A34" },
+      biolume:      { name: "Biolume",            display: "Bricolage Grotesque", body: "Libre Franklin", hex: "#3BA8D4" },
+      cortex:       { name: "Cortex",             display: "Newsreader",      body: "DM Sans",           hex: "#1C6B4C" },
+      vulcan:       { name: "Vulcan",             display: "Big Shoulders",   body: "Barlow",            hex: "#E88420" },
+      codex:        { name: "Codex",              display: "Cormorant",       body: "Alegreya Sans",     hex: "#C8A530" },
+      static:       { name: "Static",             display: "Archivo",         body: "Karla",             hex: "#E8D000" },
+      evolved:      { name: "Anomaly Evolved",    display: "Gabarito",        body: "Work Sans",         hex: "#7C3AED" },
+      forge:        { name: "Forge",              display: "Big Shoulders",   body: "Barlow",            hex: "#D49420" },
+      litho:        { name: "Litho",              display: "Big Shoulders",   body: "Barlow",            hex: "#C88418" },
+    };
+
+    if (theme && info[theme]) {
+      const d = info[theme];
+      const el = (id: string) => document.getElementById(id);
+      const nameEl = el("info-name");
+      const displayEl = el("info-display");
+      const bodyEl = el("info-body");
+      const primaryEl = el("info-primary");
+      if (nameEl) nameEl.textContent = d.name;
+      if (displayEl) displayEl.textContent = d.display;
+      if (bodyEl) bodyEl.textContent = d.body;
+      if (primaryEl) primaryEl.textContent = d.hex;
+    }
+  });
+
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+</script>
