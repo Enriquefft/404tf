@@ -29,14 +29,18 @@ const targets = [
 ];
 
 async function copyFiles(srcDir: string, destDir: string, filter?: string[]) {
-	const files = await readdir(srcDir);
-	const toCopy = filter ? files.filter((f) => filter.includes(f)) : files;
+	const entries = await readdir(srcDir, { withFileTypes: true });
+	const toCopy = filter
+		? entries.filter((e) => filter.includes(e.name))
+		: entries;
 
-	for (const file of toCopy) {
-		if (file === ".gitkeep") continue;
-		await cp(join(srcDir, file), join(destDir, file));
+	let count = 0;
+	for (const entry of toCopy) {
+		if (entry.name === ".gitkeep") continue;
+		await cp(join(srcDir, entry.name), join(destDir, entry.name), { recursive: true });
+		count += entry.isDirectory() ? 0 : 1; // count files, not dirs
 	}
-	return toCopy.length;
+	return count;
 }
 
 async function main() {

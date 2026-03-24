@@ -1,54 +1,67 @@
 /**
  * Brand color tokens — single source of truth for all 404 Tech Found colors.
  *
+ * Direction: Foundry (Proposal T) — warm red-violet purple primary,
+ * forge amber secondary, 4 programme houses, brutalist (0 radius).
+ *
  * OKLCH is the primary format (perceptually uniform, Tailwind v4 native).
  * Hex is provided for non-CSS contexts (export scripts, OG images, Figma).
  *
- * Source: content_unorganized/brand.md (Brand Book v1.0)
+ * Source: packages/brand/proposals/src/styles/global.css [data-theme="foundry"]
  */
 
 export const colors = {
 	primary: {
-		oklch: "0.48 0.27 285",
-		hex: "#5E17EB",
+		oklch: "0.53 0.24 305",
+		hex: "#8E2CD7",
 	},
 	secondary: {
-		oklch: "0.60 0.24 293",
-		hex: "#8C52FF",
+		oklch: "0.72 0.18 55",
+		hex: "#F77F00",
+	},
+	accent: {
+		oklch: "0.16 0.035 310",
+		hex: "#120918",
+	},
+	ring: {
+		oklch: "0.58 0.22 305",
+		hex: "#9A49E0",
 	},
 	houses: {
 		ai: {
-			oklch: "0.73 0.21 346",
-			hex: "#FF66C4",
+			oklch: "0.68 0.26 358",
+			hex: "#FF2898",
 		},
 		biotech: {
-			oklch: "0.70 0.18 152",
-			hex: "#00BF63",
+			oklch: "0.73 0.23 150",
+			hex: "#00CD4E",
 		},
 		hardware: {
-			oklch: "0.82 0.17 79",
-			hex: "#FFB400",
+			oklch: "0.68 0.23 30",
+			hex: "#FF4834",
 		},
 		space: {
-			oklch: "0.74 0.15 240",
-			hex: "#38B6FF",
+			oklch: "0.65 0.20 230",
+			hex: "#00A0F0",
 		},
 	},
 	surface: {
 		dark: {
-			bg: { oklch: "0.18 0 0", hex: "#111111" },
-			fg: { oklch: "0.99 0 0", hex: "#FAFAFA" },
-			muted: { oklch: "0.55 0 0", hex: "#6b6b6b" },
+			bg: { oklch: "0.07 0.020 315", hex: "#0F080F" },
+			fg: { oklch: "0.92 0.008 55", hex: "#EDE8E0" },
+			card: { oklch: "0.11 0.028 312", hex: "#1A0E1C" },
+			muted: { oklch: "0.52 0.018 315", hex: "#766878" },
 		},
 		light: {
-			bg: { oklch: "0.99 0 0", hex: "#FAFAFA" },
-			fg: { oklch: "0.18 0 0", hex: "#111111" },
-			muted: { oklch: "0.55 0 0", hex: "#6b6b6b" },
+			bg: { oklch: "0.975 0.006 85", hex: "#FAF8F3" },
+			fg: { oklch: "0.18 0.09 280", hex: "#2D1856" },
+			card: { oklch: "0.94 0.015 275", hex: "#E8E0F0" },
+			muted: { oklch: "0.38 0.07 280", hex: "#504068" },
 		},
 	},
 	destructive: {
-		oklch: "0.64 0.21 25",
-		hex: "#f24545",
+		oklch: "0.55 0.22 27",
+		hex: "#D83030",
 	},
 } as const;
 
