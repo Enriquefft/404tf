@@ -1,0 +1,568 @@
+---
+import "@/styles/global.css"
+import { Button } from "@/components/ui/button"
+---
+
+<html lang="en" data-theme="stratum">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>404 Tech Found — Stratum</title>
+  <style>
+    /* ── Entrance choreography ──────────────────────────────── */
+    @keyframes emerge {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes expand-right {
+      from { transform: scaleX(0); }
+      to { transform: scaleX(1); }
+    }
+    @keyframes drift {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      40% { transform: translateY(-8px) rotate(0.3deg); }
+      70% { transform: translateY(4px) rotate(-0.15deg); }
+    }
+    @keyframes stratum-pulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+
+    .emerge {
+      opacity: 0;
+      animation: emerge 700ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation-delay: var(--d, 0ms);
+    }
+    .on-scroll {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 600ms cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+      transition-delay: var(--d, 0ms);
+    }
+    .on-scroll.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Atmospheric layers — purple radiates from beneath ──── */
+
+    /* Multiple purple radial gradients at varying depths */
+    .atmosphere {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      background:
+        radial-gradient(ellipse 90% 50% at 20% 110%, oklch(0.12 0.05 295 / 35%), transparent 60%),
+        radial-gradient(ellipse 45% 35% at 80% 20%, oklch(0.10 0.04 305 / 20%), transparent 55%),
+        radial-gradient(ellipse 60% 40% at 50% 60%, oklch(0.09 0.03 290 / 15%), transparent 65%);
+    }
+
+    /* Film grain — higher opacity for geological/tactile feel */
+    .grain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9998;
+      opacity: 0.03;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 256px 256px;
+    }
+
+    /* ── Tardi drift ────────────────────────────────────────── */
+    .tardi-drift {
+      animation: drift 14s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+    }
+
+    /* ── Hero rule expands on load ──────────────────────────── */
+    .rule-expand {
+      transform-origin: left;
+      transform: scaleX(0);
+      animation: expand-right 900ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation-delay: 1.6s;
+    }
+
+    /* ── Geological stratum band — visible between sections ── */
+    .stratum-band {
+      height: 4px;
+      background: linear-gradient(
+        90deg,
+        oklch(0.10 0.040 295),
+        oklch(0.12 0.030 305),
+        oklch(0.10 0.018 310),
+        oklch(0.10 0.040 295)
+      );
+      animation: stratum-pulse 8s ease-in-out infinite;
+    }
+
+    /* ── Color band interaction ─────────────────────────────── */
+    .color-band {
+      transition: padding-left 250ms cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .color-band:hover {
+      padding-left: calc(var(--pad) + 12px);
+    }
+
+    /* ── House row interaction ──────────────────────────────── */
+    .house-row {
+      transition: background-color 200ms cubic-bezier(0.25, 1, 0.5, 1),
+                  padding-left 200ms cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .house-row:hover {
+      padding-left: calc(var(--pad) + 6px);
+    }
+
+    /* ── Card hover — purple reveals on elevation ──────────── */
+    .stratum-card {
+      transition: box-shadow 250ms cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .stratum-card:hover {
+      box-shadow: 0 0 0 1px oklch(0.45 0.20 290 / 15%);
+    }
+
+    /* ── Section label ────────────────────────────────────────── */
+    .label {
+      font-family: var(--font-body);
+      font-size: 0.6875rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: oklch(0.60 0.17 35 / 65%);
+    }
+
+    /* ── Manifesto lines ──────────────────────────────────────── */
+    .manifesto-line {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 4.5vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.1;
+      text-transform: uppercase;
+      letter-spacing: 0;
+      color: oklch(0.93 0.008 50 / 85%);
+    }
+
+    /* ── Background watermark — faint purple ─────────────────── */
+    .watermark {
+      position: absolute;
+      font-family: var(--font-display);
+      font-size: clamp(15rem, 40vw, 35rem);
+      font-weight: 900;
+      line-height: 0.8;
+      text-transform: uppercase;
+      color: oklch(0.45 0.20 290 / 3%);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* ── Reduced motion ───────────────────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      .emerge { animation: none; opacity: 1; transform: none; }
+      .on-scroll { transition: none; opacity: 1; transform: none; }
+      .tardi-drift { animation: none; }
+      .rule-expand { animation: none; transform: scaleX(1); }
+      .stratum-band { animation: none; }
+    }
+  </style>
+</head>
+
+<body class="bg-background text-foreground overflow-x-hidden">
+  <div class="atmosphere"></div>
+  <div class="grain"></div>
+
+  <!-- Back to all proposals -->
+  <a
+    href="/"
+    style="font-family: var(--font-body)"
+    class="fixed top-5 left-6 z-50 text-[0.625rem] uppercase tracking-[0.2em] text-muted-foreground/80 hover:text-primary transition-colors duration-200"
+  >
+    All proposals
+  </a>
+
+  <!-- ═══ HERO — deepest stratum exposed ═══════════════════════════ -->
+  <section
+    class="min-h-svh relative flex items-end px-6 md:px-12 lg:px-20 pb-20 md:pb-28"
+    style="background: oklch(0.08 0.030 290);"
+  >
+    <!-- Tardi — emerging from the deep purple substrate -->
+    <div class="tardi-drift absolute right-[-8%] top-[6%] md:right-[2%] md:top-[3%] w-[55vw] md:w-[35vw] max-w-[480px] pointer-events-none select-none">
+      <!-- Deep purple radial glow behind Tardi -->
+      <div
+        class="absolute inset-0 -inset-x-[40%] -inset-y-[30%]"
+        style="background: radial-gradient(ellipse 70% 60% at 50% 50%, oklch(0.14 0.06 290 / 40%), oklch(0.10 0.04 295 / 20%) 50%, transparent 80%); pointer-events: none;"
+      ></div>
+      <img
+        src="/tardi.png"
+        alt=""
+        class="relative w-full h-auto"
+        style="opacity: 0.14; filter: brightness(0.7) saturate(0.35) hue-rotate(-15deg);"
+      />
+    </div>
+
+    <div class="relative z-10 max-w-5xl">
+      <p class="label mb-6 emerge" style="--d: 200ms">Proposal S · Stratum</p>
+
+      <h1>
+        <span
+          class="emerge block text-[clamp(10rem,28vw,24rem)] font-black leading-[0.75] tracking-[-0.03em] text-primary"
+          style="--d: 400ms; margin-left: -0.04em;"
+        >
+          404
+        </span>
+      </h1>
+
+      <div class="emerge flex items-baseline gap-[0.5em] mt-3" style="--d: 600ms; font-family: var(--font-display)">
+        <span class="text-[clamp(1.2rem,3.5vw,3rem)] font-bold uppercase tracking-[0.12em] text-foreground/80">TECH FOUND</span>
+      </div>
+
+      <p
+        class="emerge text-[clamp(0.95rem,1.5vw,1.1rem)] text-muted-foreground max-w-sm mt-10 leading-[1.75]"
+        style="--d: 850ms"
+      >
+        LATAM's deep-tech pre-incubator.<br />
+        Built on what lies beneath.
+      </p>
+
+      <div class="emerge flex gap-3 mt-10 flex-wrap" style="--d: 1000ms">
+        <Button client:load size="lg" className="text-sm px-8 tracking-wide uppercase font-semibold">
+          Go Deeper
+        </Button>
+        <Button client:load variant="outline" size="lg" className="text-sm px-8 tracking-wide uppercase font-semibold">
+          Explore
+        </Button>
+      </div>
+    </div>
+
+    <!-- Expanding horizontal rule -->
+    <div class="rule-expand absolute bottom-0 left-0 h-[2px] w-[35%] bg-gradient-to-r from-primary/50 via-primary/20 to-transparent"></div>
+  </section>
+
+  <!-- ── Stratum band: hero → identity ──────────────────────── -->
+  <div class="stratum-band"></div>
+
+  <!-- ═══ IDENTITY STRIP ═══════════════════════════════════════── -->
+  <div class="on-scroll border-y-2 border-border">
+    <div class="flex items-center justify-between gap-x-8 px-6 md:px-12 lg:px-20 py-4 overflow-x-auto text-[0.625rem] uppercase tracking-[0.18em] text-muted-foreground/80" style="font-family: var(--font-body)">
+      <span class="shrink-0 font-semibold text-foreground/60">Stratum</span>
+      <span class="shrink-0 hidden sm:block">Unbounded</span>
+      <span class="shrink-0 hidden sm:block">Albert Sans</span>
+      <span class="shrink-0 hidden md:block">JetBrains Mono</span>
+      <span class="shrink-0 flex items-center gap-2">
+        <span class="w-2 h-2 bg-primary"></span>
+        #C05A34
+      </span>
+    </div>
+  </div>
+
+  <!-- ── Stratum band: identity → manifesto ─────────────────── -->
+  <div class="stratum-band"></div>
+
+  <!-- ═══ THE SIGNAL — Brand Manifesto ═══════════════════════════ -->
+  <section class="relative px-6 md:px-12 lg:px-20 pt-32 md:pt-48 pb-20 md:pb-32">
+    <!-- 404 watermark in faint purple -->
+    <span class="watermark -right-[5%] top-[5%]">404</span>
+
+    <div class="relative z-10 max-w-3xl">
+      <p class="on-scroll label mb-16">The Signal</p>
+
+      <div class="space-y-5 md:space-y-7">
+        <p class="on-scroll manifesto-line">The substrate holds the signal.</p>
+        <p class="on-scroll manifesto-line" style="--d: 80ms">The deeper you go, the more you find.</p>
+        <p class="on-scroll manifesto-line" style="--d: 160ms">The tardigrade endures at every layer.</p>
+        <p class="on-scroll manifesto-line" style="--d: 240ms">The surface is just the beginning.</p>
+      </div>
+
+      <p class="on-scroll text-[clamp(1rem,1.5vw,1.1rem)] text-muted-foreground max-w-lg mt-14 leading-[1.75]" style="--d: 320ms">
+        404 Tech Found is LATAM's deep-tech pre-incubator. We take breakthrough
+        science — the kind the world hasn't categorized yet — and build it into
+        ventures that endure conditions nothing else can. The deeper you go,
+        the more you find.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── Stratum band: manifesto → palette ──────────────────── -->
+  <div class="stratum-band"></div>
+
+  <!-- ═══ COLOR UNIVERSE ═══════════════════════════════════════── -->
+  <section class="on-scroll py-20 md:py-28">
+    <div class="px-6 md:px-12 lg:px-20 mb-12">
+      <p class="label">The Palette</p>
+      <p class="text-sm text-muted-foreground mt-3 max-w-md">
+        Purple is the substrate. Terracotta is the surface.
+        Depth reveals origin.
+      </p>
+    </div>
+
+    <div class="space-y-[2px]">
+      <!-- Deepest stratum — hero background -->
+      <div class="color-band h-14 md:h-16 flex items-center justify-between px-6 md:px-12 lg:px-20 border-y-2 border-border" style="background: oklch(0.08 0.030 290); --pad: 1.5rem">
+        <span class="text-[0.6875rem] font-medium text-foreground/70 uppercase tracking-wider">Stratum Deep</span>
+        <span class="text-[0.6875rem] font-mono text-muted-foreground/80">oklch(0.08 0.030 290)</span>
+      </div>
+      <!-- Base background -->
+      <div class="color-band h-14 md:h-16 bg-background flex items-center justify-between px-6 md:px-12 lg:px-20" style="--pad: 1.5rem">
+        <span class="text-[0.6875rem] font-medium text-foreground/70 uppercase tracking-wider">Background</span>
+        <span class="text-[0.6875rem] font-mono text-muted-foreground/80">oklch(0.10 0.018 310) &middot; chroma 0.018</span>
+      </div>
+      <!-- Card surface — more purple -->
+      <div class="color-band h-14 md:h-16 bg-card flex items-center justify-between px-6 md:px-12 lg:px-20" style="--pad: 1.5rem">
+        <span class="text-[0.6875rem] font-medium text-foreground/70 uppercase tracking-wider">Card</span>
+        <span class="text-[0.6875rem] font-mono text-muted-foreground/80">oklch(0.15 0.020 310) &middot; chroma 0.020</span>
+      </div>
+      <!-- Accent — visibly purple -->
+      <div class="color-band h-14 md:h-16 bg-accent flex items-center justify-between px-6 md:px-12 lg:px-20" style="--pad: 1.5rem">
+        <span class="text-[0.6875rem] font-medium text-foreground/70 uppercase tracking-wider">Accent</span>
+        <span class="text-[0.6875rem] font-mono text-muted-foreground/80">oklch(0.18 0.040 295) &middot; chroma 0.040</span>
+      </div>
+      <!-- Primary terracotta -->
+      <div class="color-band h-16 md:h-20 bg-primary flex items-center justify-between px-6 md:px-12 lg:px-20" style="--pad: 1.5rem">
+        <span class="text-xs font-semibold text-primary-foreground uppercase tracking-wider">Primary — Terracotta</span>
+        <span class="text-[0.6875rem] font-mono text-primary-foreground/70">#C05A34</span>
+      </div>
+      <!-- House colors -->
+      <div class="color-band h-14 md:h-16 flex items-center justify-between px-6 md:px-12 lg:px-20" style="background: var(--house-ai); --pad: 1.5rem">
+        <span class="text-[0.6875rem] font-semibold uppercase tracking-wider" style="color: oklch(0.12 0.02 345)">House AI</span>
+        <span class="text-[0.6875rem] font-mono" style="color: oklch(0.18 0.02 345)">#D45670</span>
+      </div>
+      <div class="color-band h-14 md:h-16 flex items-center justify-between px-6 md:px-12 lg:px-20" style="background: var(--house-biotech); --pad: 1.5rem">
+        <span class="text-[0.6875rem] font-semibold uppercase tracking-wider" style="color: oklch(0.12 0.02 155)">House Biotech</span>
+        <span class="text-[0.6875rem] font-mono" style="color: oklch(0.18 0.02 155)">#2DA06A</span>
+      </div>
+      <div class="color-band h-14 md:h-16 flex items-center justify-between px-6 md:px-12 lg:px-20" style="background: var(--house-hardware); --pad: 1.5rem">
+        <span class="text-[0.6875rem] font-semibold uppercase tracking-wider" style="color: oklch(0.15 0.02 95)">House Hardware</span>
+        <span class="text-[0.6875rem] font-mono" style="color: oklch(0.22 0.02 95)">#C8A030</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Stratum band: palette → typography ─────────────────── -->
+  <div class="stratum-band"></div>
+
+  <!-- ═══ TYPOGRAPHY ═══════════════════════════════════════════── -->
+  <section class="px-6 md:px-12 lg:px-20 pt-24 md:pt-36 pb-20 md:pb-28">
+    <p class="on-scroll label mb-20">Typography</p>
+
+    <!-- Display specimen — Unbounded at massive scale -->
+    <div class="on-scroll mb-24">
+      <p class="text-[0.6875rem] text-muted-foreground/70 mb-5 uppercase tracking-wider">Display · Unbounded</p>
+      <h2 class="text-[clamp(3rem,9vw,8rem)] font-black leading-[0.85] tracking-[-0.01em] uppercase">
+        Layers of<br class="hidden md:block" /> Deep Tech
+      </h2>
+    </div>
+
+    <!-- Secondary display -->
+    <div class="on-scroll mb-24" style="--d: 80ms">
+      <h3 class="text-[clamp(1.5rem,4vw,3.5rem)] font-semibold text-foreground/70 leading-[1.05] max-w-3xl uppercase">
+        Building LATAM's Future,<br />One Layer at a Time
+      </h3>
+    </div>
+
+    <!-- Body specimen — Albert Sans -->
+    <div class="on-scroll max-w-[62ch] mb-20" style="--d: 120ms">
+      <p class="text-[0.6875rem] text-muted-foreground/70 mb-5 uppercase tracking-wider">Body · Albert Sans</p>
+      <p class="text-[1.0625rem] leading-[1.75] text-foreground/80">
+        404 Tech Found is LATAM's maverick deep-tech pre-incubator, built by
+        founders for founders. We turn breakthrough science into venture-grade
+        companies — catalysing the next generation of biotech, AI, and hardware
+        startups right where the talent is.
+      </p>
+      <p class="text-[0.9375rem] text-muted-foreground leading-[1.75] mt-5">
+        Secondary text for captions, metadata, and supporting content that
+        doesn't compete with primary messaging but remains comfortably readable.
+      </p>
+    </div>
+
+    <!-- Code specimen -->
+    <div class="on-scroll max-w-2xl" style="--d: 160ms">
+      <p class="text-[0.6875rem] text-muted-foreground/70 mb-5 uppercase tracking-wider">Code · JetBrains Mono</p>
+      <pre class="stratum-card bg-card border-2 border-border p-6 text-sm leading-[1.75] overflow-x-auto"><code class="text-foreground"><span class="text-primary">const</span> deeptech = <span class="text-primary">await</span> discover({"{"}<br />  region: <span class="text-house-biotech">"LATAM"</span>,<br />  verticals: [<span class="text-house-ai">"AI"</span>, <span class="text-house-biotech">"Biotech"</span>, <span class="text-house-hardware">"Hardware"</span>],<br />  status: <span class="text-primary">404</span>, <span class="text-muted-foreground">// not found — until exposed</span><br />{"}"});</code></pre>
+    </div>
+  </section>
+
+  <!-- ── Stratum band: typography → houses ──────────────────── -->
+  <div class="stratum-band"></div>
+
+  <!-- ═══ PROGRAMME HOUSES ═════════════════════════════════════── -->
+  <section class="py-20 md:py-28">
+    <div class="px-6 md:px-12 lg:px-20 mb-12">
+      <p class="on-scroll label">Programme Houses</p>
+      <p class="on-scroll text-sm text-muted-foreground mt-3">Three verticals. Three identities. One substrate.</p>
+    </div>
+
+    <div class="on-scroll border-y-2 border-border divide-y-2 divide-border">
+      <div class="house-row flex items-center gap-5 md:gap-8 px-6 md:px-12 lg:px-20 py-5 md:py-7 hover:bg-house-ai/[0.04] cursor-default" style="--pad: 1.5rem">
+        <svg class="w-[18px] h-[18px] text-house-ai shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z" />
+        </svg>
+        <h3 class="text-lg md:text-xl font-bold text-house-ai uppercase tracking-wide">AI</h3>
+        <span class="flex-1 hidden sm:block h-[2px] bg-border"></span>
+        <p class="text-sm text-muted-foreground italic hidden sm:block shrink-0">"Code that thinks."</p>
+      </div>
+
+      <div class="house-row flex items-center gap-5 md:gap-8 px-6 md:px-12 lg:px-20 py-5 md:py-7 hover:bg-house-biotech/[0.04] cursor-default" style="--pad: 1.5rem">
+        <svg class="w-[18px] h-[18px] text-house-biotech shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
+        </svg>
+        <h3 class="text-lg md:text-xl font-bold text-house-biotech uppercase tracking-wide">Biotech</h3>
+        <span class="flex-1 hidden sm:block h-[2px] bg-border"></span>
+        <p class="text-sm text-muted-foreground italic hidden sm:block shrink-0">"Evolving life, engineering futures."</p>
+      </div>
+
+      <div class="house-row flex items-center gap-5 md:gap-8 px-6 md:px-12 lg:px-20 py-5 md:py-7 hover:bg-house-hardware/[0.04] cursor-default" style="--pad: 1.5rem">
+        <svg class="w-[18px] h-[18px] text-house-hardware shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 002.25-2.25V6.75a2.25 2.25 0 00-2.25-2.25H6.75A2.25 2.25 0 004.5 6.75v10.5a2.25 2.25 0 002.25 2.25zm.75-12h9v9h-9v-9z" />
+        </svg>
+        <h3 class="text-lg md:text-xl font-bold text-house-hardware uppercase tracking-wide">Hardware</h3>
+        <span class="flex-1 hidden sm:block h-[2px] bg-border"></span>
+        <p class="text-sm text-muted-foreground italic hidden sm:block shrink-0">"Atoms to products."</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Stratum band: houses → process ─────────────────────── -->
+  <div class="stratum-band"></div>
+
+  <!-- ═══ THE PROCESS — Geological crescendo ═══════════════════── -->
+  <section class="px-6 md:px-12 lg:px-20 py-16 md:py-24 border-y-2 border-border">
+    <p class="on-scroll label mb-10">The Process</p>
+    <div class="on-scroll flex flex-wrap items-baseline gap-x-6 md:gap-x-10 gap-y-3" style="font-family: var(--font-display)">
+      <span class="text-xs md:text-sm font-medium text-muted-foreground/70 uppercase tracking-[0.2em]">Stratum</span>
+      <span class="text-sm md:text-base font-semibold text-muted-foreground uppercase tracking-[0.12em]">Pressure</span>
+      <span class="text-xl md:text-2xl font-bold text-foreground/60 uppercase tracking-[0.04em]">Erosion</span>
+      <span class="text-3xl md:text-5xl font-black text-primary uppercase tracking-tight">Exposed</span>
+    </div>
+  </section>
+
+  <!-- ── Stratum band: process → tardi ──────────────────────── -->
+  <div class="stratum-band"></div>
+
+  <!-- ═══ TARDI — Emerging from the deepest layer ════════════════ -->
+  <section class="px-6 md:px-12 lg:px-20 py-28 md:py-36 relative overflow-hidden">
+    <!-- Large soft purple radial gradient — Tardi emerges from deep within -->
+    <div
+      class="absolute left-[5%] top-1/2 -translate-y-1/2 w-[420px] h-[420px] pointer-events-none"
+      style="background: radial-gradient(circle, oklch(0.14 0.06 290 / 35%), oklch(0.10 0.04 295 / 18%) 45%, transparent 75%);"
+    ></div>
+    <!-- Secondary deeper glow -->
+    <div
+      class="absolute left-[12%] top-[45%] -translate-y-1/2 w-[250px] h-[250px] pointer-events-none"
+      style="background: radial-gradient(circle, oklch(0.18 0.08 290 / 20%), transparent 65%);"
+    ></div>
+
+    <div class="on-scroll relative z-10 flex flex-col md:flex-row items-start gap-14 md:gap-20 max-w-4xl">
+      <!-- Tardi image — square container with purple depth -->
+      <div class="stratum-card w-36 h-36 md:w-48 md:h-48 bg-accent/50 flex items-center justify-center shrink-0 overflow-hidden border-2 border-border">
+        <img
+          src="/tardi.png"
+          alt="Tardi the tardigrade — 404's mascot"
+          class="w-28 md:w-40 h-auto object-contain"
+        />
+      </div>
+
+      <div class="flex-1">
+        <p class="label mb-5">Mascot</p>
+        <h3 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold leading-tight mb-3 uppercase">Tardi</h3>
+        <p class="text-sm text-primary font-medium mb-6">The tardigrade. Most resilient creature on Earth.</p>
+        <p class="text-[0.9375rem] text-muted-foreground leading-[1.75] max-w-lg">
+          Survives vacuum, radiation, and temperatures from near absolute zero
+          to boiling. Endures pressures six times the deepest ocean trenches.
+          Can desiccate completely and revive decades later. Like our startups —
+          built to endure at every layer.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Stratum band: tardi → components ───────────────────── -->
+  <div class="stratum-band"></div>
+
+  <!-- ═══ COMPONENTS ═══════════════════════════════════════════── -->
+  <section class="px-6 md:px-12 lg:px-20 py-20 md:py-28 border-t-2 border-border">
+    <p class="on-scroll label mb-14">Components</p>
+
+    <div class="space-y-14 max-w-xl">
+      <div class="on-scroll">
+        <p class="text-[0.6875rem] text-muted-foreground/70 uppercase tracking-wider mb-5">Buttons</p>
+        <div class="flex flex-wrap gap-3">
+          <Button client:load size="lg">Primary</Button>
+          <Button client:load variant="outline" size="lg">Outline</Button>
+          <Button client:load variant="secondary" size="lg">Secondary</Button>
+          <Button client:load variant="ghost" size="lg">Ghost</Button>
+        </div>
+      </div>
+
+      <div class="on-scroll" style="--d: 80ms">
+        <p class="text-[0.6875rem] text-muted-foreground/70 uppercase tracking-wider mb-5">Form</p>
+        <div class="flex gap-2">
+          <input
+            type="email"
+            placeholder="founder@deeptech.com"
+            class="flex-1 h-10 px-3 border-2 border-input bg-card text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+          />
+          <Button client:load>Subscribe</Button>
+        </div>
+      </div>
+
+      <div class="on-scroll" style="--d: 120ms">
+        <p class="text-[0.6875rem] text-muted-foreground/70 uppercase tracking-wider mb-5">Cards</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="stratum-card bg-card border-2 border-border p-5">
+            <p class="text-sm font-semibold text-foreground mb-1">Surface Card</p>
+            <p class="text-[0.8125rem] text-muted-foreground leading-relaxed">Purple chroma increases with elevation. Hover to see the substrate.</p>
+          </div>
+          <div class="stratum-card bg-accent border-2 border-border p-5">
+            <p class="text-sm font-semibold text-foreground mb-1">Accent Card</p>
+            <p class="text-[0.8125rem] text-muted-foreground leading-relaxed">Deeper surfaces reveal more of the purple underneath.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="on-scroll" style="--d: 160ms">
+        <p class="text-[0.6875rem] text-muted-foreground/70 uppercase tracking-wider mb-5">Banner</p>
+        <div class="border-2 border-primary/20 bg-primary/[0.04] p-5 flex items-start gap-3">
+          <div class="w-8 h-8 bg-primary/15 flex items-center justify-center shrink-0 mt-0.5">
+            <svg class="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-foreground">Cohort II is open</p>
+            <p class="text-sm text-muted-foreground mt-1">18 teams. 12 weeks. Applications close March 30.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Stratum band: components → footer ──────────────────── -->
+  <div class="stratum-band"></div>
+
+  <!-- ═══ FOOTER ═══════════════════════════════════════════════── -->
+  <footer class="px-6 md:px-12 lg:px-20 py-14 border-t-2 border-border">
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div class="flex items-baseline gap-2" style="font-family: var(--font-display)">
+        <span class="text-3xl font-black text-primary tracking-[-0.02em] uppercase">404</span>
+        <span class="text-sm text-muted-foreground/80 tracking-wider uppercase font-semibold">Tech Found</span>
+      </div>
+      <p class="text-[0.6875rem] text-muted-foreground/60" style="font-family: var(--font-body)">Brand proposal · Not a production page</p>
+    </div>
+  </footer>
+
+  <!-- Scroll reveal -->
+  <script>
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("revealed");
+            observer.unobserve(entry.target);
+          }
+        }
+      },
+      { threshold: 0.08, rootMargin: "0px 0px -30px 0px" }
+    );
+    document.querySelectorAll(".on-scroll").forEach((el) => observer.observe(el));
+  </script>
+</body>
+</html>

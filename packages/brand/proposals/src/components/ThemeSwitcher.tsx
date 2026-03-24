@@ -17,6 +17,10 @@ const themes = [
 	{ id: "evolved", label: "Evolved", color: "#7C3AED", gen: "N" },
 	{ id: "forge", label: "Forge", color: "#D49420", gen: "O" },
 	{ id: "litho", label: "Litho", color: "#2D1856", gen: "P" },
+	{ id: "crucible", label: "Crucible", color: "#D49420", gen: "Q" },
+	{ id: "fission", label: "Fission", color: "#7830E8", gen: "R" },
+	{ id: "stratum", label: "Stratum", color: "#C05A34", gen: "S" },
+	{ id: "foundry", label: "Foundry", color: "#9B35A8", gen: "T" },
 ] as const;
 
 export function ThemeSwitcher() {

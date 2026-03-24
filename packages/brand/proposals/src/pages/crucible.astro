@@ -1,0 +1,577 @@
+---
+import "@/styles/global.css"
+import { Button } from "@/components/ui/button"
+---
+
+<html lang="en" data-theme="crucible">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>404 Tech Found — Crucible</title>
+  <style>
+    /* ── Entrance choreography ──────────────────────────────── */
+    @keyframes emerge {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes expand-right {
+      from { transform: scaleX(0); }
+      to { transform: scaleX(1); }
+    }
+    @keyframes drift {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      40% { transform: translateY(-8px) rotate(0.3deg); }
+      70% { transform: translateY(4px) rotate(-0.15deg); }
+    }
+    @keyframes strike-draw {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+    @keyframes fade-struck {
+      from { opacity: 1; }
+      to { opacity: 0.15; }
+    }
+
+    .emerge {
+      opacity: 0;
+      animation: emerge 700ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation-delay: var(--d, 0ms);
+    }
+    .on-scroll {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 600ms cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+      transition-delay: var(--d, 0ms);
+    }
+    .on-scroll.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Atmospheric layers ─────────────────────────────────── */
+
+    /* Forge glow rises from below + purple spark from upper-right */
+    .atmosphere {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      background:
+        radial-gradient(ellipse 80% 40% at 25% 105%, oklch(0.14 0.06 55 / 40%), transparent 65%),
+        radial-gradient(ellipse 35% 30% at 85% 15%, oklch(0.12 0.06 290 / 25%), transparent 55%);
+    }
+
+    /* Film grain — tactile warmth, industrial texture */
+    .grain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9998;
+      opacity: 0.025;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 256px 256px;
+    }
+
+    /* ── Tardi drift ────────────────────────────────────────── */
+    .tardi-drift {
+      animation: drift 14s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+    }
+
+    /* ── Hero rule expands on load — amber-to-purple gradient ─ */
+    .rule-expand {
+      transform-origin: left;
+      transform: scaleX(0);
+      animation: expand-right 900ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation-delay: 1.6s;
+    }
+
+    /* ── NOT strikethrough + fade ────────────────────────────── */
+    .strike-word {
+      position: relative;
+      display: inline-block;
+    }
+    .strike-word::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 52%;
+      height: 3px;
+      background: oklch(0.73 0.19 55);
+      width: 0;
+      animation: strike-draw 500ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation-delay: 1.2s;
+    }
+    .struck-fade {
+      animation: fade-struck 350ms cubic-bezier(0.25, 1, 0.5, 1) forwards;
+      animation-delay: 1.5s;
+    }
+
+    /* ── Color band interaction ─────────────────────────────── */
+    .color-band {
+      transition: padding-left 250ms cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .color-band:hover {
+      padding-left: calc(var(--pad) + 12px);
+    }
+
+    /* ── House row interaction ──────────────────────────────── */
+    .house-row {
+      transition: background-color 200ms cubic-bezier(0.25, 1, 0.5, 1),
+                  padding-left 200ms cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .house-row:hover {
+      padding-left: calc(var(--pad) + 6px);
+    }
+
+    /* ── Section label ────────────────────────────────────────── */
+    .label {
+      font-family: var(--font-body);
+      font-size: 0.6875rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: oklch(0.73 0.19 55 / 65%);
+    }
+
+    /* ── Manifesto lines ──────────────────────────────────────── */
+    .manifesto-line {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 4.5vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.1;
+      text-transform: uppercase;
+      letter-spacing: 0;
+      color: oklch(0.92 0.01 60 / 85%);
+    }
+
+    /* ── Background watermark ─────────────────────────────────── */
+    .watermark {
+      position: absolute;
+      font-family: var(--font-display);
+      font-size: clamp(15rem, 40vw, 35rem);
+      font-weight: 900;
+      line-height: 0.8;
+      text-transform: uppercase;
+      color: oklch(0.73 0.19 55 / 3%);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* ── Section transition bands — faint purple gradients ────── */
+    .section-transition {
+      height: 1px;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        oklch(0.52 0.24 290 / 12%) 20%,
+        oklch(0.52 0.24 290 / 20%) 50%,
+        oklch(0.52 0.24 290 / 12%) 80%,
+        transparent 100%
+      );
+    }
+
+    /* ── Reduced motion ───────────────────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      .emerge { animation: none; opacity: 1; transform: none; }
+      .on-scroll { transition: none; opacity: 1; transform: none; }
+      .tardi-drift { animation: none; }
+      .rule-expand { animation: none; transform: scaleX(1); }
+      .strike-word::after { animation: none; width: 100%; }
+      .struck-fade { animation: none; opacity: 0.15; }
+    }
+  </style>
+</head>
+
+<body class="bg-background text-foreground overflow-x-hidden">
+  <div class="atmosphere"></div>
+  <div class="grain"></div>
+
+  <!-- Back to all proposals -->
+  <a
+    href="/"
+    style="font-family: var(--font-body)"
+    class="fixed top-5 left-6 z-50 text-[0.625rem] uppercase tracking-[0.2em] text-muted-foreground/80 hover:text-primary transition-colors duration-200"
+  >
+    All proposals
+  </a>
+
+  <!-- ═══ HERO ═══════════════════════════════════════════════════ -->
+  <section class="min-h-svh relative flex items-end px-6 md:px-12 lg:px-20 pb-20 md:pb-28">
+    <!-- Tardi — dual glow: inner amber, outer purple aura -->
+    <div class="tardi-drift absolute right-[-8%] top-[6%] md:right-[2%] md:top-[3%] w-[55vw] md:w-[35vw] max-w-[480px] pointer-events-none select-none">
+      <!-- Outer purple aura -->
+      <div class="absolute inset-[-20%] pointer-events-none" style="background: radial-gradient(circle, oklch(0.52 0.24 290 / 8%), transparent 60%);"></div>
+      <!-- Inner amber glow -->
+      <div class="absolute inset-[-5%] pointer-events-none" style="background: radial-gradient(circle, oklch(0.73 0.19 55 / 10%), transparent 50%);"></div>
+      <img
+        src="/tardi.png"
+        alt=""
+        class="w-full h-auto relative"
+        style="opacity: 0.12; filter: brightness(0.6) saturate(0.3) sepia(0.4);"
+      />
+    </div>
+
+    <div class="relative z-10 max-w-5xl">
+      <p class="label mb-6 emerge" style="--d: 200ms">Proposal Q · Crucible</p>
+
+      <h1>
+        <span
+          class="emerge block text-[clamp(10rem,28vw,24rem)] font-black leading-[0.75] tracking-[-0.03em] text-primary"
+          style="--d: 400ms; margin-left: -0.04em;"
+        >
+          404
+        </span>
+      </h1>
+
+      <!-- NOT FOUND → FOUND — the error resolves into discovery -->
+      <div class="emerge flex items-baseline gap-[0.4em] mt-2" style="--d: 600ms; font-family: var(--font-display)">
+        <span class="strike-word struck-fade text-[clamp(1.2rem,3.5vw,3rem)] font-bold uppercase tracking-[0.12em] text-muted-foreground">NOT</span>
+        <span class="text-[clamp(1.2rem,3.5vw,3rem)] font-bold uppercase tracking-[0.12em] text-foreground/80">FOUND</span>
+      </div>
+
+      <p
+        class="emerge text-[clamp(0.95rem,1.5vw,1.1rem)] text-muted-foreground max-w-sm mt-10 leading-[1.75]"
+        style="--d: 850ms"
+      >
+        LATAM's deep-tech pre-incubator.<br />
+        Where breakthroughs spark to life.
+      </p>
+
+      <div class="emerge flex gap-3 mt-10 flex-wrap" style="--d: 1000ms">
+        <Button client:load size="lg" className="text-sm px-8 tracking-wide uppercase font-semibold">
+          Enter the Crucible
+        </Button>
+        <Button client:load variant="secondary" size="lg" className="text-sm px-8 tracking-wide uppercase font-semibold">
+          Explore
+        </Button>
+      </div>
+    </div>
+
+    <!-- Expanding horizontal rule — amber-to-purple gradient -->
+    <div class="rule-expand absolute bottom-0 left-0 h-[2px] w-[35%]" style="background: linear-gradient(135deg, oklch(0.73 0.19 55), oklch(0.52 0.24 290));"></div>
+  </section>
+
+  <!-- Purple transition band -->
+  <div class="section-transition"></div>
+
+  <!-- ═══ IDENTITY STRIP ═══════════════════════════════════════── -->
+  <div class="on-scroll border-y-2 border-border">
+    <div class="flex items-center justify-between gap-x-8 px-6 md:px-12 lg:px-20 py-4 overflow-x-auto text-[0.625rem] uppercase tracking-[0.18em] text-muted-foreground/80" style="font-family: var(--font-body)">
+      <span class="shrink-0 font-semibold text-foreground/60">Crucible</span>
+      <span class="shrink-0 hidden sm:block">Big Shoulders Display</span>
+      <span class="shrink-0 hidden sm:block">Barlow</span>
+      <span class="shrink-0 hidden md:block">JetBrains Mono</span>
+      <span class="shrink-0 flex items-center gap-2">
+        <span class="w-2 h-2 bg-primary"></span>
+        #D49420
+      </span>
+      <span class="shrink-0 flex items-center gap-2">
+        <span class="w-2 h-2 bg-secondary"></span>
+        #7B2CF5
+      </span>
+    </div>
+  </div>
+
+  <!-- Purple transition band -->
+  <div class="section-transition"></div>
+
+  <!-- ═══ THE SIGNAL — Brand Manifesto ═══════════════════════════ -->
+  <section class="relative px-6 md:px-12 lg:px-20 pt-32 md:pt-48 pb-20 md:pb-32">
+    <!-- 404 watermark -->
+    <span class="watermark -right-[5%] top-[5%]">404</span>
+
+    <!-- Subtle purple atmospheric gradient from the left side -->
+    <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 40% 60% at -5% 50%, oklch(0.52 0.24 290 / 6%), transparent 70%);"></div>
+
+    <div class="relative z-10 max-w-3xl">
+      <p class="on-scroll label mb-16">The Signal</p>
+
+      <div class="space-y-5 md:space-y-7">
+        <p class="on-scroll manifesto-line">The error is the origin.</p>
+        <p class="on-scroll manifesto-line" style="--d: 80ms">The anomaly is the advantage.</p>
+        <p class="on-scroll manifesto-line" style="--d: 160ms">The tardigrade is the spirit.</p>
+        <p class="on-scroll manifesto-line" style="--d: 240ms">The crucible is the catalyst.</p>
+      </div>
+
+      <p class="on-scroll text-[clamp(1rem,1.5vw,1.1rem)] text-muted-foreground max-w-lg mt-14 leading-[1.75]" style="--d: 320ms">
+        404 Tech Found is LATAM's deep-tech pre-incubator. We take breakthrough
+        science — the kind the world hasn't categorized yet — and ignite it into
+        ventures that endure conditions nothing else can.
+      </p>
+    </div>
+  </section>
+
+  <!-- Purple transition band -->
+  <div class="section-transition"></div>
+
+  <!-- ═══ COLOR UNIVERSE ═══════════════════════════════════════── -->
+  <section class="on-scroll py-20 md:py-28">
+    <div class="px-6 md:px-12 lg:px-20 mb-12">
+      <p class="label">The Palette</p>
+      <p class="text-sm text-muted-foreground mt-3 max-w-md">
+        Warm charcoal base. Forge amber as the structure.
+        404 purple as the spark. House colors own the spectrum.
+      </p>
+    </div>
+
+    <div class="space-y-[2px]">
+      <div class="color-band h-14 md:h-16 bg-background flex items-center justify-between px-6 md:px-12 lg:px-20 border-y-2 border-border" style="--pad: 1.5rem">
+        <span class="text-[0.6875rem] font-medium text-foreground/70 uppercase tracking-wider">Base</span>
+        <span class="text-[0.6875rem] font-mono text-muted-foreground/80">oklch(0.07 0.012 50)</span>
+      </div>
+      <div class="color-band h-14 md:h-16 bg-card flex items-center justify-between px-6 md:px-12 lg:px-20" style="--pad: 1.5rem">
+        <span class="text-[0.6875rem] font-medium text-foreground/70 uppercase tracking-wider">Surface</span>
+        <span class="text-[0.6875rem] font-mono text-muted-foreground/80">oklch(0.11 0.012 50)</span>
+      </div>
+      <div class="color-band h-16 md:h-20 bg-primary flex items-center justify-between px-6 md:px-12 lg:px-20" style="--pad: 1.5rem">
+        <span class="text-xs font-semibold text-primary-foreground uppercase tracking-wider">Primary — Forge Amber</span>
+        <span class="text-[0.6875rem] font-mono text-primary-foreground/70">#D49420</span>
+      </div>
+      <div class="color-band h-14 md:h-16 bg-secondary flex items-center justify-between px-6 md:px-12 lg:px-20" style="--pad: 1.5rem">
+        <span class="text-xs font-semibold text-secondary-foreground uppercase tracking-wider">Secondary — 404 Purple</span>
+        <span class="text-[0.6875rem] font-mono text-secondary-foreground/70">#7B2CF5</span>
+      </div>
+      <div class="color-band h-14 md:h-16 flex items-center justify-between px-6 md:px-12 lg:px-20" style="background: var(--house-ai); --pad: 1.5rem">
+        <span class="text-[0.6875rem] font-semibold uppercase tracking-wider" style="color: oklch(0.12 0.02 345)">House AI</span>
+        <span class="text-[0.6875rem] font-mono" style="color: oklch(0.18 0.02 345)">#D44878</span>
+      </div>
+      <div class="color-band h-14 md:h-16 flex items-center justify-between px-6 md:px-12 lg:px-20" style="background: var(--house-biotech); --pad: 1.5rem">
+        <span class="text-[0.6875rem] font-semibold uppercase tracking-wider" style="color: oklch(0.12 0.02 155)">House Biotech</span>
+        <span class="text-[0.6875rem] font-mono" style="color: oklch(0.18 0.02 155)">#2DB868</span>
+      </div>
+      <div class="color-band h-14 md:h-16 flex items-center justify-between px-6 md:px-12 lg:px-20" style="background: var(--house-hardware); --pad: 1.5rem">
+        <span class="text-[0.6875rem] font-semibold uppercase tracking-wider" style="color: oklch(0.15 0.02 95)">House Hardware</span>
+        <span class="text-[0.6875rem] font-mono" style="color: oklch(0.22 0.02 95)">#D4B020</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Purple transition band -->
+  <div class="section-transition"></div>
+
+  <!-- ═══ TYPOGRAPHY ═══════════════════════════════════════════── -->
+  <section class="px-6 md:px-12 lg:px-20 pt-24 md:pt-36 pb-20 md:pb-28">
+    <p class="on-scroll label mb-20">Typography</p>
+
+    <!-- Display specimen — Big Shoulders Display at massive scale -->
+    <div class="on-scroll mb-24">
+      <p class="text-[0.6875rem] text-muted-foreground/70 mb-5 uppercase tracking-wider">Display · Big Shoulders Display</p>
+      <h2 class="text-[clamp(3rem,9vw,8rem)] font-black leading-[0.85] tracking-[-0.01em] uppercase">
+        Breaking the<br class="hidden md:block" /> Laws of Deep Tech
+      </h2>
+    </div>
+
+    <!-- Secondary display -->
+    <div class="on-scroll mb-24" style="--d: 80ms">
+      <h3 class="text-[clamp(1.5rem,4vw,3.5rem)] font-semibold text-foreground/70 leading-[1.05] max-w-3xl uppercase">
+        Building LATAM's Future,<br />One Anomaly at a Time
+      </h3>
+    </div>
+
+    <!-- Body specimen — Barlow -->
+    <div class="on-scroll max-w-[62ch] mb-20" style="--d: 120ms">
+      <p class="text-[0.6875rem] text-muted-foreground/70 mb-5 uppercase tracking-wider">Body · Barlow</p>
+      <p class="text-[1.0625rem] leading-[1.75] text-foreground/80">
+        404 Tech Found is LATAM's maverick deep-tech pre-incubator, built by
+        founders for founders. We turn breakthrough science into venture-grade
+        companies — catalysing the next generation of biotech, AI, and hardware
+        startups right where the talent is.
+      </p>
+      <p class="text-[0.9375rem] text-muted-foreground leading-[1.75] mt-5">
+        Secondary text for captions, metadata, and supporting content that
+        doesn't compete with primary messaging but remains comfortably readable.
+      </p>
+    </div>
+
+    <!-- Code specimen — purple-tinted accent background -->
+    <div class="on-scroll max-w-2xl" style="--d: 160ms">
+      <p class="text-[0.6875rem] text-muted-foreground/70 mb-5 uppercase tracking-wider">Code · JetBrains Mono</p>
+      <pre class="bg-accent border-2 border-border p-6 text-sm leading-[1.75] overflow-x-auto"><code class="text-foreground"><span class="text-primary">const</span> deeptech = <span class="text-primary">await</span> discover({"{"}<br />  region: <span class="text-house-biotech">"LATAM"</span>,<br />  verticals: [<span class="text-house-ai">"AI"</span>, <span class="text-house-biotech">"Biotech"</span>, <span class="text-house-hardware">"Hardware"</span>],<br />  status: <span class="text-primary">404</span>, <span class="text-muted-foreground">// not found — until sparked</span><br />{"}"});</code></pre>
+    </div>
+  </section>
+
+  <!-- Purple transition band -->
+  <div class="section-transition"></div>
+
+  <!-- ═══ PROGRAMME HOUSES ═════════════════════════════════════── -->
+  <section class="py-20 md:py-28">
+    <div class="px-6 md:px-12 lg:px-20 mb-12">
+      <p class="on-scroll label">Programme Houses</p>
+      <p class="on-scroll text-sm text-muted-foreground mt-3">Three verticals. Three identities. One crucible.</p>
+    </div>
+
+    <div class="on-scroll border-y-2 border-border divide-y-2 divide-border">
+      <div class="house-row flex items-center gap-5 md:gap-8 px-6 md:px-12 lg:px-20 py-5 md:py-7 hover:bg-house-ai/[0.04] cursor-default" style="--pad: 1.5rem">
+        <svg class="w-[18px] h-[18px] text-house-ai shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z" />
+        </svg>
+        <h3 class="text-lg md:text-xl font-bold text-house-ai uppercase tracking-wide">AI</h3>
+        <span class="flex-1 hidden sm:block h-[2px] bg-border"></span>
+        <p class="text-sm text-muted-foreground italic hidden sm:block shrink-0">"Code that thinks."</p>
+      </div>
+
+      <div class="house-row flex items-center gap-5 md:gap-8 px-6 md:px-12 lg:px-20 py-5 md:py-7 hover:bg-house-biotech/[0.04] cursor-default" style="--pad: 1.5rem">
+        <svg class="w-[18px] h-[18px] text-house-biotech shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
+        </svg>
+        <h3 class="text-lg md:text-xl font-bold text-house-biotech uppercase tracking-wide">Biotech</h3>
+        <span class="flex-1 hidden sm:block h-[2px] bg-border"></span>
+        <p class="text-sm text-muted-foreground italic hidden sm:block shrink-0">"Evolving life, engineering futures."</p>
+      </div>
+
+      <div class="house-row flex items-center gap-5 md:gap-8 px-6 md:px-12 lg:px-20 py-5 md:py-7 hover:bg-house-hardware/[0.04] cursor-default" style="--pad: 1.5rem">
+        <svg class="w-[18px] h-[18px] text-house-hardware shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 002.25-2.25V6.75a2.25 2.25 0 00-2.25-2.25H6.75A2.25 2.25 0 004.5 6.75v10.5a2.25 2.25 0 002.25 2.25zm.75-12h9v9h-9v-9z" />
+        </svg>
+        <h3 class="text-lg md:text-xl font-bold text-house-hardware uppercase tracking-wide">Hardware</h3>
+        <span class="flex-1 hidden sm:block h-[2px] bg-border"></span>
+        <p class="text-sm text-muted-foreground italic hidden sm:block shrink-0">"Atoms to products."</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Purple transition band -->
+  <div class="section-transition"></div>
+
+  <!-- ═══ THE PROCESS — Visual crescendo ═══════════════════════── -->
+  <section class="px-6 md:px-12 lg:px-20 py-16 md:py-24 border-y-2 border-border">
+    <p class="on-scroll label mb-10">The Process</p>
+    <div class="on-scroll flex flex-wrap items-baseline gap-x-6 md:gap-x-10 gap-y-3" style="font-family: var(--font-display)">
+      <span class="text-xs md:text-sm font-medium text-muted-foreground/70 uppercase tracking-[0.2em]">Raw Science</span>
+      <span class="text-sm md:text-base font-semibold text-muted-foreground uppercase tracking-[0.12em]">Pressure</span>
+      <span class="text-xl md:text-2xl font-bold uppercase tracking-[0.04em]" style="color: oklch(0.52 0.24 290)">Spark</span>
+      <span class="text-3xl md:text-5xl font-black text-primary uppercase tracking-tight">Forged</span>
+    </div>
+  </section>
+
+  <!-- Purple transition band -->
+  <div class="section-transition"></div>
+
+  <!-- ═══ TARDI ════════════════════════════════════════════════── -->
+  <section class="px-6 md:px-12 lg:px-20 py-28 md:py-36 relative overflow-hidden">
+    <!-- Dual glow behind Tardi — inner amber, outer purple aura -->
+    <div class="absolute left-[10%] top-1/2 -translate-y-1/2 w-[320px] h-[320px] pointer-events-none" style="background: radial-gradient(circle, oklch(0.52 0.24 290 / 12%), transparent 70%);"></div>
+    <div class="absolute left-[10%] top-1/2 -translate-y-1/2 w-[240px] h-[240px] pointer-events-none" style="background: radial-gradient(circle, oklch(0.18 0.06 55 / 30%), transparent 65%);"></div>
+
+    <div class="on-scroll relative z-10 flex flex-col md:flex-row items-start gap-14 md:gap-20 max-w-4xl">
+      <!-- Tardi image — square container, industrial -->
+      <div class="w-36 h-36 md:w-48 md:h-48 bg-accent/50 flex items-center justify-center shrink-0 overflow-hidden border-2 border-border">
+        <img
+          src="/tardi.png"
+          alt="Tardi the tardigrade — 404's mascot"
+          class="w-28 md:w-40 h-auto object-contain"
+        />
+      </div>
+
+      <div class="flex-1">
+        <p class="label mb-5">Mascot</p>
+        <h3 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold leading-tight mb-3 uppercase">Tardi</h3>
+        <p class="text-sm text-primary font-medium mb-6">The tardigrade. Most resilient creature on Earth.</p>
+        <p class="text-[0.9375rem] text-muted-foreground leading-[1.75] max-w-lg">
+          Survives vacuum, radiation, and temperatures from near absolute zero
+          to boiling. Endures pressures six times the deepest ocean trenches.
+          Can desiccate completely and revive decades later. Like our startups —
+          sparked in the crucible, forged to endure conditions nothing else can.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Purple transition band -->
+  <div class="section-transition"></div>
+
+  <!-- ═══ COMPONENTS ═══════════════════════════════════════════── -->
+  <section class="px-6 md:px-12 lg:px-20 py-20 md:py-28 border-t-2 border-border">
+    <p class="on-scroll label mb-14">Components</p>
+
+    <div class="space-y-14 max-w-xl">
+      <div class="on-scroll">
+        <p class="text-[0.6875rem] text-muted-foreground/70 uppercase tracking-wider mb-5">Buttons</p>
+        <div class="flex flex-wrap gap-3">
+          <Button client:load size="lg">Primary</Button>
+          <Button client:load variant="secondary" size="lg">Secondary</Button>
+          <Button client:load variant="outline" size="lg">Outline</Button>
+          <Button client:load variant="ghost" size="lg">Ghost</Button>
+        </div>
+      </div>
+
+      <div class="on-scroll" style="--d: 80ms">
+        <p class="text-[0.6875rem] text-muted-foreground/70 uppercase tracking-wider mb-5">Button Pairs</p>
+        <div class="flex flex-wrap gap-3">
+          <Button client:load size="lg" className="text-sm px-8 tracking-wide uppercase font-semibold">Apply Now</Button>
+          <Button client:load variant="secondary" size="lg" className="text-sm px-8 tracking-wide uppercase font-semibold">Learn More</Button>
+        </div>
+      </div>
+
+      <div class="on-scroll" style="--d: 120ms">
+        <p class="text-[0.6875rem] text-muted-foreground/70 uppercase tracking-wider mb-5">Form</p>
+        <div class="flex gap-2">
+          <input
+            type="email"
+            placeholder="founder@deeptech.com"
+            class="flex-1 h-10 px-3 border-2 border-input bg-card text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+          />
+          <Button client:load>Subscribe</Button>
+        </div>
+      </div>
+
+      <div class="on-scroll" style="--d: 200ms">
+        <p class="text-[0.6875rem] text-muted-foreground/70 uppercase tracking-wider mb-5">Banner</p>
+        <div class="border-2 border-primary/20 bg-primary/[0.04] p-5 flex items-start gap-3">
+          <div class="w-8 h-8 bg-primary/15 flex items-center justify-center shrink-0 mt-0.5">
+            <svg class="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-foreground">Cohort II is open</p>
+            <p class="text-sm text-muted-foreground mt-1">18 teams. 12 weeks. Applications close March 30.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="on-scroll" style="--d: 240ms">
+        <p class="text-[0.6875rem] text-muted-foreground/70 uppercase tracking-wider mb-5">Purple Banner</p>
+        <div class="border-2 p-5 flex items-start gap-3" style="border-color: oklch(0.52 0.24 290 / 20%); background: oklch(0.52 0.24 290 / 4%);">
+          <div class="w-8 h-8 flex items-center justify-center shrink-0 mt-0.5" style="background: oklch(0.52 0.24 290 / 15%);">
+            <svg class="w-4 h-4" style="color: oklch(0.52 0.24 290);" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
+            </svg>
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-foreground">New research track</p>
+            <p class="text-sm text-muted-foreground mt-1">Quantum computing vertical launching Q3. Express interest.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══════════════════════════════════════════════── -->
+  <footer class="px-6 md:px-12 lg:px-20 py-14 border-t-2 border-border">
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div class="flex items-baseline gap-2" style="font-family: var(--font-display)">
+        <span class="text-3xl font-black text-primary tracking-[-0.02em] uppercase">404</span>
+        <span class="text-sm text-muted-foreground/80 tracking-wider uppercase font-semibold">Tech Found</span>
+      </div>
+      <p class="text-[0.6875rem] text-muted-foreground/60" style="font-family: var(--font-body)">Brand proposal · Not a production page</p>
+    </div>
+  </footer>
+
+  <!-- Scroll reveal -->
+  <script>
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("revealed");
+            observer.unobserve(entry.target);
+          }
+        }
+      },
+      { threshold: 0.08, rootMargin: "0px 0px -30px 0px" }
+    );
+    document.querySelectorAll(".on-scroll").forEach((el) => observer.observe(el));
+  </script>
+</body>
+</html>
