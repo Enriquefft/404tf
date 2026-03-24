@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- CONCEPT F: AMBER 404
+       Inverted color: "404" in amber (the artifact found),
+       zero strikethrough in purple. Follows the Foundry rule:
+       "the 404 numeral is always amber."
+  -->
+  <rect x="0" y="0" width="512" height="512" fill="#0F080F"/>
+
+  <!-- "404" in amber -->
+  <text x="32" y="368" font-family="'Big Shoulders Display', sans-serif" font-weight="900" font-size="380" fill="#D49420" letter-spacing="-10">4</text>
+  <text x="162" y="368" font-family="'Big Shoulders Display', sans-serif" font-weight="900" font-size="380" fill="#D49420" letter-spacing="-10">0</text>
+  <text x="302" y="368" font-family="'Big Shoulders Display', sans-serif" font-weight="900" font-size="380" fill="#D49420" letter-spacing="-10">4</text>
+
+  <!-- Strikethrough on zero — PURPLE (the world correcting itself) -->
+  <line x1="175" y1="360" x2="310" y2="80" stroke="#9B35A8" stroke-width="28" stroke-linecap="butt"/>
+</svg>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- LOGOMARK: Single color white (for dark contexts, overlays) -->
+  <ellipse cx="256" cy="256" rx="128" ry="192"
+    fill="none" stroke="#FFFFFF" stroke-width="52"/>
+  <line x1="148" y1="428" x2="364" y2="84"
+    stroke="#FFFFFF" stroke-width="44" stroke-linecap="butt"/>
+</svg>

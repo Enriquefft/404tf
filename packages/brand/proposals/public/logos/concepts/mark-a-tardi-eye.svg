@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- CONCEPT A: TARDI EYE
+       Tardi's cybernetic eye abstracted into a geometric mark.
+       Sharp square frame (brutalist), concentric rings (the lens),
+       amber iris dot (the "found" artifact within the purple world).
+       Works at 16×16: square → circle → dot. Instantly mascot-adjacent.
+  -->
+
+  <!-- Outer frame — Foundry purple -->
+  <rect x="0" y="0" width="512" height="512" fill="#9B35A8"/>
+
+  <!-- Inner cutout — dark background reveals depth -->
+  <rect x="48" y="48" width="416" height="416" fill="#0F080F"/>
+
+  <!-- Eye outer ring — purple, concentric -->
+  <circle cx="256" cy="256" r="176" fill="none" stroke="#9B35A8" stroke-width="24"/>
+
+  <!-- Eye inner ring — lighter purple -->
+  <circle cx="256" cy="256" r="120" fill="none" stroke="#B040C0" stroke-width="16"/>
+
+  <!-- Eye lens housing — dark circle -->
+  <circle cx="256" cy="256" r="80" fill="#1A0E1C"/>
+
+  <!-- Iris — forge amber (the "found" artifact) -->
+  <circle cx="256" cy="256" r="48" fill="#D49420"/>
+
+  <!-- Pupil — deep dark -->
+  <circle cx="256" cy="256" r="20" fill="#0F080F"/>
+
+  <!-- Lens glint — small highlight -->
+  <rect x="224" y="216" width="16" height="16" fill="#EDE8E0" opacity="0.7"/>
+</svg>

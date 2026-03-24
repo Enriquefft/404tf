@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" width="800" height="200">
+  <!-- HORIZONTAL LOCKUP: Logomark + wordmark side by side
+       For navbars, email signatures, partner banners.
+       Full color on dark.
+       Wordmark uses paths approximating Big Shoulders Display.
+  -->
+  <rect width="800" height="200" fill="#0F080F"/>
+
+  <!-- Logomark — scaled down, left-aligned -->
+  <ellipse cx="80" cy="100" rx="40" ry="60"
+    fill="none" stroke="#9B35A8" stroke-width="16"/>
+  <line x1="46" y1="152" x2="114" y2="48"
+    stroke="#D49420" stroke-width="14" stroke-linecap="butt"/>
+
+  <!-- Divider line -->
+  <line x1="148" y1="40" x2="148" y2="160"
+    stroke="#EDE8E0" stroke-width="2" opacity="0.12"/>
+
+  <!-- "404" — amber, heavy weight -->
+  <!-- Approximated as geometric paths for Big Shoulders Display style -->
+  <g fill="#D49420">
+    <!-- "4" first -->
+    <path d="M180 52 L180 130 L172 130 L172 112 L192 112 L192 52 L200 52 L200 112 L208 112 L208 130 L200 130 L200 152 L192 152 L192 130 L172 130 L172 138 L164 138 L164 112 L180 52 Z M184 72 L172 112 L192 112 L192 72 Z"/>
+    <!-- "0" with slash -->
+    <path d="M228 62 Q228 52 238 52 L270 52 Q280 52 280 62 L280 142 Q280 152 270 152 L238 152 Q228 152 228 142 Z M236 62 L236 142 Q236 144 238 144 L270 144 Q272 144 272 142 L272 62 Q272 60 270 60 L238 60 Q236 60 236 62 Z"/>
+    <!-- "4" second -->
+    <path d="M300 52 L300 130 L292 130 L292 112 L312 112 L312 52 L320 52 L320 112 L328 112 L328 130 L320 130 L320 152 L312 152 L312 130 L292 130 L292 138 L284 138 L284 112 L300 52 Z M304 72 L292 112 L312 112 L312 72 Z"/>
+  </g>
+
+  <!-- Slash through the zero — purple -->
+  <line x1="232" y1="148" x2="276" y2="56"
+    stroke="#9B35A8" stroke-width="6" stroke-linecap="butt"/>
+
+  <!-- "TECH FOUND" — muted, lighter weight -->
+  <text x="172" y="178" font-family="sans-serif" font-weight="500" font-size="18" fill="#766878" letter-spacing="4">TECH FOUND</text>
+</svg>

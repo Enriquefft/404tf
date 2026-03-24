@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- CONCEPT G: MINIMAL SLASH
+       Maximum reduction. Just the "0" with the diagonal slash.
+       The single most recognizable element of the brand at any size.
+       At 16px: a circle with a line through it. Unmistakable.
+  -->
+  <rect x="0" y="0" width="512" height="512" fill="#0F080F"/>
+
+  <!-- The zero — large, centered -->
+  <text x="256" y="400" font-family="'Big Shoulders Display', sans-serif" font-weight="900" font-size="480" fill="#9B35A8" text-anchor="middle">0</text>
+
+  <!-- The slash — amber, bold -->
+  <line x1="120" y1="440" x2="392" y2="60" stroke="#D49420" stroke-width="36" stroke-linecap="butt"/>
+</svg>

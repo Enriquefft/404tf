@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- CONCEPT D: STRUCK ZERO
+       The proven LinkedIn mark elevated to Foundry.
+       "404" in Big Shoulders Display weight, the zero has a diagonal
+       strikethrough in amber. Pure typography. No symbol needed.
+       Dark background variant.
+  -->
+  <rect x="0" y="0" width="512" height="512" fill="#0F080F"/>
+
+  <!-- "4" left — purple -->
+  <text x="32" y="368" font-family="'Big Shoulders Display', sans-serif" font-weight="900" font-size="380" fill="#9B35A8" letter-spacing="-10">4</text>
+
+  <!-- "0" center — purple -->
+  <text x="162" y="368" font-family="'Big Shoulders Display', sans-serif" font-weight="900" font-size="380" fill="#9B35A8" letter-spacing="-10">0</text>
+
+  <!-- "4" right — purple -->
+  <text x="302" y="368" font-family="'Big Shoulders Display', sans-serif" font-weight="900" font-size="380" fill="#9B35A8" letter-spacing="-10">4</text>
+
+  <!-- Strikethrough on the zero — AMBER -->
+  <line x1="175" y1="360" x2="310" y2="80" stroke="#D49420" stroke-width="28" stroke-linecap="butt"/>
+</svg>

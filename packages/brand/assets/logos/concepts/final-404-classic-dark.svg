@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- CLASSIC: Clean geometric "404" with struck zero.
+       Horizontal layout. Pure path geometry, no font dependency.
+       Proportions inspired by Big Shoulders Display: very condensed, heavy, sharp.
+       The "4" has a triangular flag, horizontal crossbar, vertical stem.
+       The "0" is a tall narrow shape with flat sides and angled top/bottom.
+       Amber slash through the zero.
+  -->
+  <rect width="512" height="512" fill="#0F080F"/>
+
+  <!-- === LEFT "4" === -->
+  <!-- The "4" geometry: vertical stem on right, diagonal flag from top, crossbar at ~60% -->
+  <g fill="#9B35A8">
+    <!-- Diagonal flag: goes from top of stem diagonally down-left to crossbar level -->
+    <polygon points="
+      148,68
+      148,108
+      44,296
+      44,340
+      28,340
+      28,296
+    "/>
+    <!-- Horizontal crossbar -->
+    <rect x="28" y="296" width="164" height="44"/>
+    <!-- Vertical stem (right side, full height below flag start) -->
+    <rect x="148" y="68" width="44" height="376"/>
+  </g>
+
+  <!-- === CENTER "0" === -->
+  <!-- Condensed rectangular zero with angled top-left and bottom-right corners -->
+  <g fill="#9B35A8">
+    <!-- Outer shape of "0" as a path — tall narrow rectangle with chamfered corners -->
+    <path d="
+      M 228,100
+      L 228,68
+      L 330,68
+      L 330,444
+      L 228,444
+      L 228,412
+      L 228,100
+      Z
+    "/>
+    <!-- Inner cutout (counter) — punched out -->
+    <path d="
+      M 228,68
+      L 330,68
+      L 330,444
+      L 228,444
+      Z
+      M 272,112
+      L 272,400
+      L 286,400
+      L 286,112
+      Z
+    " fill-rule="evenodd"/>
+  </g>
+  <!-- Redraw "0" properly as outlined rectangle -->
+  <!-- Clear and redo: "0" as four bars forming a rectangle -->
+  <g fill="#9B35A8">
+    <!-- Left vertical bar of "0" -->
+    <rect x="216" y="68" width="42" height="376"/>
+    <!-- Right vertical bar of "0" -->
+    <rect x="300" y="68" width="42" height="376"/>
+    <!-- Top horizontal bar of "0" -->
+    <rect x="216" y="68" width="126" height="42"/>
+    <!-- Bottom horizontal bar of "0" -->
+    <rect x="216" y="402" width="126" height="42"/>
+  </g>
+
+  <!-- Amber slash through the "0" -->
+  <line x1="222" y1="438" x2="336" y2="74" stroke="#D49420" stroke-width="30" stroke-linecap="butt"/>
+
+  <!-- === RIGHT "4" === -->
+  <g fill="#9B35A8">
+    <!-- Diagonal flag -->
+    <polygon points="
+      468,68
+      468,108
+      364,296
+      364,340
+      348,340
+      348,296
+    "/>
+    <!-- Horizontal crossbar -->
+    <rect x="348" y="296" width="164" height="44"/>
+    <!-- Vertical stem -->
+    <rect x="468" y="68" width="44" height="376"/>
+  </g>
+</svg>

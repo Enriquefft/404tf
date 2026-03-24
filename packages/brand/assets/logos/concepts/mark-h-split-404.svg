@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- CONCEPT H: SPLIT 404
+       "404" split by the amber slash — the line divides the mark
+       diagonally, with content on both sides. The slash IS the brand
+       gesture, cutting through everything.
+  -->
+  <rect x="0" y="0" width="512" height="512" fill="#0F080F"/>
+
+  <!-- "4" left — sits above the slash -->
+  <text x="40" y="240" font-family="'Big Shoulders Display', sans-serif" font-weight="900" font-size="260" fill="#9B35A8">4</text>
+
+  <!-- "4" right — sits below the slash -->
+  <text x="320" y="440" font-family="'Big Shoulders Display', sans-serif" font-weight="900" font-size="260" fill="#9B35A8">4</text>
+
+  <!-- The slash — amber, cutting diagonally across the full mark -->
+  <line x1="0" y1="512" x2="512" y2="0" stroke="#D49420" stroke-width="32"/>
+
+  <!-- "0" center — straddling the slash, partially obscured -->
+  <text x="175" y="380" font-family="'Big Shoulders Display', sans-serif" font-weight="900" font-size="320" fill="#9B35A8" opacity="0.6">0</text>
+</svg>

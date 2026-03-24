@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- CONCEPT B: 404 BLOCK
+       The "404" as a monolithic typographic block mark.
+       Three vertical slabs — 4, 0, 4 — each a distinct column.
+       The center "0" has a diagonal slash (the strikethrough motif).
+       Heavy, industrial, reads as "404" at any size.
+       Purple body, amber slash through the zero.
+  -->
+
+  <!-- Background -->
+  <rect x="0" y="0" width="512" height="512" fill="#0F080F"/>
+
+  <!-- First "4" — left column -->
+  <!-- Vertical stem -->
+  <rect x="24" y="40" width="48" height="432" fill="#9B35A8"/>
+  <!-- Horizontal crossbar -->
+  <rect x="24" y="280" width="128" height="48" fill="#9B35A8"/>
+  <!-- Top diagonal (the "4" flag) — simplified as a rect -->
+  <rect x="104" y="40" width="48" height="288" fill="#9B35A8"/>
+
+  <!-- Center "0" — middle column -->
+  <!-- Left wall -->
+  <rect x="192" y="40" width="40" height="432" fill="#9B35A8"/>
+  <!-- Right wall -->
+  <rect x="280" y="40" width="40" height="432" fill="#9B35A8"/>
+  <!-- Top bar -->
+  <rect x="192" y="40" width="128" height="40" fill="#9B35A8"/>
+  <!-- Bottom bar -->
+  <rect x="192" y="432" width="128" height="40" fill="#9B35A8"/>
+  <!-- Diagonal slash through zero — AMBER (the "found" strike) -->
+  <line x1="200" y1="460" x2="312" y2="52" stroke="#D49420" stroke-width="32" stroke-linecap="butt"/>
+
+  <!-- Second "4" — right column -->
+  <!-- Vertical stem -->
+  <rect x="344" y="40" width="48" height="432" fill="#9B35A8"/>
+  <!-- Horizontal crossbar -->
+  <rect x="344" y="280" width="128" height="48" fill="#9B35A8"/>
+  <!-- Top diagonal (the "4" flag) -->
+  <rect x="424" y="40" width="48" height="288" fill="#9B35A8"/>
+</svg>

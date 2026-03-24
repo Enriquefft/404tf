@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- LOGOMARK: THE SLASHED ZERO
+       Pure geometry. No font dependency.
+       A condensed zero (oval) with a diagonal slash.
+       The "0" from "404" — the error digit, struck through = found.
+       Proportions inspired by Big Shoulders Display's condensed zero.
+       Variant: Full color on dark background.
+  -->
+  <rect width="512" height="512" fill="#0F080F"/>
+
+  <!-- The zero — condensed oval, bold stroke -->
+  <ellipse cx="256" cy="256" rx="128" ry="192"
+    fill="none" stroke="#9B35A8" stroke-width="52"/>
+
+  <!-- The slash — amber, bold, extends beyond the oval -->
+  <line x1="148" y1="428" x2="364" y2="84"
+    stroke="#D49420" stroke-width="44" stroke-linecap="butt"/>
+</svg>

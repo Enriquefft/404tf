@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- CONCEPT C: FOUND FRAME
+       A browser/terminal error frame with a bold strikethrough.
+       The frame = "the error page". The strike = "NOT → FOUND".
+       What remains after the strike is the brand.
+       Two heavy border lines (top/bottom) with a diagonal amber slash.
+       Minimal. Iconic. Tells the brand story in one mark.
+  -->
+
+  <!-- Background -->
+  <rect x="0" y="0" width="512" height="512" fill="#0F080F"/>
+
+  <!-- Outer frame — heavy 2-line border (brutalist) -->
+  <!-- Top border -->
+  <rect x="32" y="32" width="448" height="24" fill="#9B35A8"/>
+  <!-- Bottom border -->
+  <rect x="32" y="456" width="448" height="24" fill="#9B35A8"/>
+  <!-- Left border -->
+  <rect x="32" y="32" width="24" height="448" fill="#9B35A8"/>
+  <!-- Right border -->
+  <rect x="456" y="32" width="24" height="448" fill="#9B35A8"/>
+
+  <!-- Inner frame — second border line for brutalist weight -->
+  <rect x="72" y="72" width="368" height="16" fill="#9B35A8" opacity="0.5"/>
+  <rect x="72" y="424" width="368" height="16" fill="#9B35A8" opacity="0.5"/>
+  <rect x="72" y="72" width="16" height="368" fill="#9B35A8" opacity="0.5"/>
+  <rect x="424" y="72" width="16" height="368" fill="#9B35A8" opacity="0.5"/>
+
+  <!-- The "NOT" — faded text-like horizontal lines (the error content) -->
+  <rect x="120" y="160" width="272" height="12" fill="#766878" opacity="0.3"/>
+  <rect x="120" y="196" width="200" height="12" fill="#766878" opacity="0.3"/>
+  <rect x="120" y="232" width="240" height="12" fill="#766878" opacity="0.3"/>
+  <rect x="120" y="268" width="160" height="12" fill="#766878" opacity="0.3"/>
+  <rect x="120" y="304" width="272" height="12" fill="#766878" opacity="0.3"/>
+  <rect x="120" y="340" width="200" height="12" fill="#766878" opacity="0.3"/>
+
+  <!-- THE STRIKETHROUGH — bold amber diagonal (the "FOUND" moment) -->
+  <line x1="80" y1="432" x2="432" y2="80" stroke="#D49420" stroke-width="40" stroke-linecap="butt"/>
+
+  <!-- Small amber dot — bottom right (the signal found) -->
+  <rect x="416" y="416" width="32" height="32" fill="#D49420"/>
+</svg>
