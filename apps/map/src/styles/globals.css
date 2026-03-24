@@ -82,9 +82,10 @@
 	--info-muted: rgba(155, 139, 202, 0.12);
 
 	/* ---- Verticals ---- */
-	--v-ai: #ff66b3;
-	--v-biotech: #00bd68;
-	--v-hardware: #ffb300;
+	--v-ai: #ff2898;
+	--v-biotech: #00cd4e;
+	--v-hardware: #ff4834;
+	--v-space: #00a0f0;
 	--v-cleantech: #2dd4bf;
 	--v-agritech: #a3e635;
 	--v-medtech: #f87171;
@@ -136,6 +137,19 @@
 	--color-border: var(--border);
 	--color-input: var(--input);
 	--color-ring: var(--ring);
+	--color-v-ai: var(--v-ai);
+	--color-v-biotech: var(--v-biotech);
+	--color-v-hardware: var(--v-hardware);
+	--color-v-space: var(--v-space);
+	--color-v-cleantech: var(--v-cleantech);
+	--color-v-agritech: var(--v-agritech);
+	--color-v-medtech: var(--v-medtech);
+	--color-v-materials: var(--v-materials);
+	--color-v-aerospace: var(--v-aerospace);
+	--color-v-quantum: var(--v-quantum);
+	--color-v-fintech: var(--v-fintech);
+	--color-v-blockchain: var(--v-blockchain);
+	--color-v-other: var(--v-other);
 }
 
 /* ---- Scoped styles (.ds-root) ---- */

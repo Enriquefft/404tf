@@ -1,0 +1,322 @@
+---
+import "@/styles/global.css"
+---
+
+<html lang="en" data-theme="foundry">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>404 Tech Found — Logo System</title>
+  <style>
+    .label {
+      font-family: var(--font-body);
+      font-size: 0.6875rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: oklch(0.58 0.22 305);
+    }
+    .divider {
+      height: 2px;
+      background: linear-gradient(to right, oklch(0.53 0.24 305 / 60%), oklch(0.72 0.18 55 / 60%), transparent);
+      margin: 3rem 0;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+    .card {
+      border: 2px solid oklch(1 0.008 310 / 8%);
+      padding: 1.5rem;
+    }
+    .card h3 {
+      font-family: var(--font-display);
+      font-size: 1.125rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 0.125rem;
+    }
+    .card .subtitle {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      color: oklch(0.72 0.18 55);
+      margin-bottom: 0.5rem;
+    }
+    .card .uses {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      color: oklch(0.52 0.018 315);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+    .preview {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid oklch(1 0.008 310 / 8%);
+    }
+    .preview img { max-width: 100%; height: auto; }
+    .size-row {
+      display: flex;
+      align-items: end;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 0.75rem;
+    }
+    .size-row > div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    .size-row span {
+      font-family: var(--font-code);
+      font-size: 0.5625rem;
+      color: oklch(0.52 0.018 315);
+    }
+    .circle-crop {
+      border-radius: 50%;
+      overflow: hidden;
+      display: inline-block;
+    }
+    .sit-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--font-body);
+      font-size: 0.8125rem;
+    }
+    .sit-table th {
+      text-align: left;
+      padding: 0.75rem 0;
+      color: oklch(0.58 0.22 305);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 0.6875rem;
+      border-bottom: 2px solid oklch(1 0.008 310 / 12%);
+    }
+    .sit-table td {
+      padding: 0.625rem 0;
+      border-bottom: 1px solid oklch(1 0.008 310 / 6%);
+      color: oklch(0.52 0.018 315);
+    }
+    .sit-table td:first-child {
+      color: oklch(0.92 0.008 55);
+      font-weight: 500;
+    }
+    .sit-table .file {
+      font-family: var(--font-code);
+      font-size: 0.6875rem;
+    }
+    .variant-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1rem;
+    }
+    .variant-item {
+      text-align: center;
+    }
+    .variant-item p {
+      font-family: var(--font-body);
+      font-size: 0.6875rem;
+      color: oklch(0.52 0.018 315);
+      margin-top: 0.375rem;
+    }
+  </style>
+</head>
+
+<body class="bg-background text-foreground overflow-x-hidden">
+
+  <a href="/" style="font-family: var(--font-body)"
+    class="fixed top-5 left-6 z-50 text-[0.625rem] uppercase tracking-[0.2em] text-muted-foreground/80 hover:text-secondary transition-colors duration-200">
+    All proposals
+  </a>
+
+  <main class="px-6 md:px-12 lg:px-20 pt-24 pb-20 max-w-5xl mx-auto">
+
+    <!-- Header -->
+    <div class="mb-16">
+      <p class="label mb-4">Logo System</p>
+      <h1 style="font-family: var(--font-display)" class="text-[clamp(2.5rem,6vw,5rem)] font-black uppercase leading-[0.85] mb-4">
+        <span style="color: oklch(0.72 0.18 55)">404</span> Brand Marks
+      </h1>
+      <p class="text-muted-foreground max-w-md leading-relaxed text-sm">
+        3 primary assets for daily use. Situational variants below.
+      </p>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         PRIMARY — 80% of daily use
+         ═══════════════════════════════════════════════════════════ -->
+    <p class="label mb-2">Primary</p>
+    <p class="text-muted-foreground text-sm mb-8">These 3 cover 80% of your needs.</p>
+
+    <div class="grid-3">
+
+      <!-- Icon -->
+      <div class="card">
+        <h3>Icon</h3>
+        <p class="subtitle">Amber on dark</p>
+        <p class="uses">Favicon, app icon, WhatsApp group icon</p>
+        <div class="preview" style="aspect-ratio: 1; background: oklch(0.07 0.020 315);">
+          <img src="/logos/concepts/mark-amber-dark-512.png" alt="Icon — amber 404 on dark" width="280" height="280" />
+        </div>
+        <div class="size-row">
+          <div><img src="/logos/concepts/mark-amber-dark-32.png" width="16" height="16" alt="" /><span>16</span></div>
+          <div><img src="/logos/concepts/mark-amber-dark-32.png" width="32" height="32" alt="" /><span>32</span></div>
+          <div><img src="/logos/concepts/mark-amber-dark-64.png" width="48" height="48" alt="" /><span>48</span></div>
+        </div>
+      </div>
+
+      <!-- Wordmark -->
+      <div class="card">
+        <h3>Wordmark</h3>
+        <p class="subtitle">Logo.tsx component</p>
+        <p class="uses">Navbar, email signature, footer</p>
+        <div class="preview" style="padding: 2rem 1.5rem; background: oklch(0.07 0.020 315);">
+          <div style="text-align: left; line-height: 1;">
+            <div style="font-family: var(--font-display); font-weight: 900; font-size: 3.5rem; color: oklch(0.72 0.18 55); letter-spacing: -0.03em; line-height: 0.85;">404</div>
+            <div style="font-family: var(--font-display); font-weight: 500; font-size: 1.1rem; color: oklch(0.52 0.018 315); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 0.2rem;">
+              TECH F<span style="text-decoration: line-through; text-decoration-color: oklch(0.72 0.18 55); text-decoration-thickness: 2px;">O</span>UND
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Avatar -->
+      <div class="card">
+        <h3>Avatar</h3>
+        <p class="subtitle">Negative purple</p>
+        <p class="uses">LinkedIn, Twitter, Instagram, all social</p>
+        <div class="preview" style="aspect-ratio: 1;">
+          <img src="/logos/concepts/mark-negative-purple-512.png" alt="Avatar — negative purple" width="280" height="280" />
+        </div>
+        <p class="label" style="margin-top: 0.75rem; margin-bottom: 0.375rem">Circle crop</p>
+        <div style="display: flex; gap: 1rem; align-items: end;">
+          <div class="variant-item">
+            <div class="circle-crop"><img src="/logos/concepts/mark-negative-purple-512.png" width="64" height="64" alt="" /></div>
+            <p>LinkedIn</p>
+          </div>
+          <div class="variant-item">
+            <div class="circle-crop"><img src="/logos/concepts/mark-negative-purple-512.png" width="44" height="44" alt="" /></div>
+            <p>Twitter</p>
+          </div>
+          <div class="variant-item">
+            <div class="circle-crop"><img src="/logos/concepts/mark-negative-purple-512.png" width="32" height="32" alt="" /></div>
+            <p>Small</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         BY SITUATION — the other 20%
+         ═══════════════════════════════════════════════════════════ -->
+    <p class="label mb-2">By Situation</p>
+    <p class="text-muted-foreground text-sm mb-8">When the primary set doesn't fit the context.</p>
+
+    <div style="max-width: 640px; margin-bottom: 2rem;">
+      <table class="sit-table">
+        <thead>
+          <tr>
+            <th>Situation</th>
+            <th>Use</th>
+            <th>File</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Light background</td>
+            <td>Icon, lockup, or wordmark on cream/white</td>
+            <td class="file">*-light variants</td>
+          </tr>
+          <tr>
+            <td>Complete identity</td>
+            <td>When you need "404 TECH FOUND" in one image</td>
+            <td class="file">mark-stacked-dark</td>
+          </tr>
+          <tr>
+            <td>Slides / presentations</td>
+            <td>Both brand colors visible</td>
+            <td class="file">mark-duotone-dark</td>
+          </tr>
+          <tr>
+            <td>Merch / stickers</td>
+            <td>Single-color on any surface</td>
+            <td class="file">mark-duotone-white</td>
+          </tr>
+          <tr>
+            <td>Print / B&W</td>
+            <td>Formal documents, grayscale</td>
+            <td class="file">mark-duotone-black</td>
+          </tr>
+          <tr>
+            <td>Co-branding</td>
+            <td>Next to partner logos</td>
+            <td class="file">mark-duotone-transparent</td>
+          </tr>
+          <tr>
+            <td>Video / poster overlay</td>
+            <td>Watermark or title card</td>
+            <td class="file">mark-stacked-transparent</td>
+          </tr>
+          <tr>
+            <td>OG images</td>
+            <td>Automatic — link previews</td>
+            <td class="file">opengraph-image.tsx</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Visual preview of situational variants -->
+    <p class="label mb-4">Variant Preview</p>
+    <div class="variant-grid" style="max-width: 640px;">
+      <div class="variant-item">
+        <div class="preview" style="aspect-ratio: 1; background: oklch(0.07 0.020 315);">
+          <img src="/logos/concepts/mark-duotone-dark-512.png" alt="Duotone" width="120" height="120" />
+        </div>
+        <p>Duotone (slides)</p>
+      </div>
+      <div class="variant-item">
+        <div class="preview" style="aspect-ratio: 1; background: oklch(0.07 0.020 315);">
+          <img src="/logos/concepts/mark-stacked-dark-512.png" alt="Stacked" width="120" height="120" />
+        </div>
+        <p>Stacked (identity)</p>
+      </div>
+      <div class="variant-item">
+        <div class="preview" style="aspect-ratio: 1; background: oklch(0.975 0.006 85);">
+          <img src="/logos/concepts/mark-amber-light-512.png" alt="Amber light" width="120" height="120" />
+        </div>
+        <p>Light bg</p>
+      </div>
+      <div class="variant-item">
+        <div class="preview" style="aspect-ratio: 1;">
+          <img src="/logos/concepts/mark-negative-amber-512.png" alt="Negative amber" width="120" height="120" />
+        </div>
+        <p>Negative amber</p>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-20 pt-8 border-t-2 border-border">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div class="flex items-baseline gap-2" style="font-family: var(--font-display)">
+          <span class="text-2xl font-black tracking-[-0.02em] uppercase" style="color: oklch(0.72 0.18 55);">404</span>
+          <span class="text-xs text-muted-foreground/80 tracking-wider uppercase font-semibold">Tech Found</span>
+        </div>
+        <div style="font-family: var(--font-body)" class="text-[0.6875rem] text-muted-foreground/60 flex gap-4">
+          <a href="/foundry" class="hover:text-secondary transition-colors">Foundry</a>
+          <a href="/foundry-system" class="hover:text-secondary transition-colors">System</a>
+          <a href="/foundry-motion" class="hover:text-secondary transition-colors">Motion</a>
+          <a href="/" class="hover:text-secondary transition-colors">All proposals</a>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+</body>
+</html>

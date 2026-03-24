@@ -33,32 +33,35 @@ Before any code changes, gather all real assets and consolidate shared brand ide
 
 ### 0b. Brand Package — `packages/brand/`
 
-Consolidate existing brand identity into a single source of truth. There's already a branding direction (Orbitron font, house colors, "404 TECH FOUND" text logo) — this phase migrates it, not reinvents it. Branding is open to evolution during Phase 1 (Design System).
-
-Currently logos live in `apps/landing/public/brand/`, fonts are duplicated in `apps/spechack/public/fonts/`, and the logo export script is orphaned at root `scripts/`.
+Consolidate existing brand identity into a single source of truth and finalize the org-level design system.
 
 **Package scaffold:**
 - [x] **Create package** — `packages/brand/` as `@404tf/brand`
 - [x] **Migrate logos** — SVG sources + export script (from root `scripts/` + `apps/landing/public/brand/`)
-- [x] **Migrate fonts** — Orbitron, JetBrains Mono (from `apps/spechack/public/fonts/`)
+- [x] **Migrate fonts** — Big Shoulders Display, Barlow Semi Condensed, JetBrains Mono (updated for Foundry direction)
 - [x] **Org-level tokens** — Core brand colors in OKLCH + hex (`src/tokens.ts`), font metadata (`src/fonts.ts`), logo config (`src/logo.ts`)
 - [x] **Move devDeps** — `satori`, `@resvg/resvg-js` scoped to this package
 - [x] **Update consumers** — Landing and map depend on `@404tf/brand`, sync script copies assets
 
 **Logo system:**
 
-Current state: one text-based logo ("404 / TECH FOUND" in Orbitron) with multiple color variants (dark, light, transparent) exported at many sizes. No definitive version, no standalone mark.
+Current state: one text-based logo ("404 / TECH FOUND" in Big Shoulders Display) with multiple color variants (dark, light, transparent) exported at many sizes. No definitive version, no standalone mark.
 
-- [ ] **Define logo variants needed:**
+- [x] **Define logo variants needed:**
   - **Logomark** — Standalone symbol (favicon, app icons, social avatars, small spaces)
   - **Wordmark** — "404 TECH FOUND" typographic treatment (headers, formal contexts)
   - **Lockup** — Logomark + wordmark combined (primary logo, OG images, splash screens). Consider both horizontal (navbar, tight spaces) and vertical (hero, splash) orientations.
-- [ ] **Design logomark** — Needs to work at 16×16 (favicon) through 512×512
-- [ ] **Finalize wordmark** — Refine current Orbitron text treatment or explore alternatives
-- [ ] **Color variants** — Each logo variant in: on-dark, on-light, transparent backgrounds
-- [ ] **Export pipeline** — Update export script to generate all variants × sizes
+- [x] **Color variants** — Each logo variant in: on-dark, on-light, transparent backgrounds (wired to `tokens.ts`)
+- [x] **Export pipeline** — Generates all wordmark variants × sizes (56 files). Ready to extend for logomark/lockup.
 
-Deliverable: All apps reference `@404tf/brand` for shared identity. Complete logo system with logomark, wordmark, and lockup. No duplicated brand assets.
+**Brand design (org-level):**
+- [x] **Brand direction chosen** — Foundry (Proposal T): warm red-violet purple primary (hue 305), forge amber secondary, Big Shoulders Display + Barlow Semi Condensed, 0rem radius brutalist. Design system spec at `packages/brand/proposals/` showcase pages.
+- [ ] **Reference moodboard** — Founders provide visual references → distill into an org-wide direction
+- [ ] **Design logomark** — Standalone symbol, works at 16×16 (favicon) through 512×512
+- [ ] **Finalize wordmark** — Refine Big Shoulders Display text treatment
+- [ ] **Create lockup** — Logomark + wordmark combined, horizontal and vertical orientations
+
+Deliverable: All apps reference `@404tf/brand` for shared identity. Brand direction: **Foundry** — Big Shoulders Display + Barlow Semi Condensed, warm purple/amber, 0-radius brutalist. Logo system complete (logomark + wordmark + lockup). Export pipeline operational. No duplicated brand assets.
 
 ### 0c. Remove SpecHack from Monorepo
 
@@ -73,7 +76,7 @@ SpecHack is being retired from the monorepo. Keep `apps/spechack/` code intact (
 
 **Database:**
 - [x] `packages/database/src/schema.ts` — Remove spechack enums, tables, and type exports
-- [ ] Run `bun run db:generate` to create migration dropping spechack tables
+- [x] Run `bun run db:push` to drop spechack tables from live Neon DB (no migration history exists — project uses `db:push`)
 
 **Cleanup:**
 - [x] Run `bun install` to regenerate `bun.lock` without spechack deps
@@ -83,17 +86,18 @@ SpecHack is being retired from the monorepo. Keep `apps/spechack/` code intact (
 
 ---
 
-## Phase 1: Design System
+## Phase 1: Landing Design System
 
-Define the landing page's own visual direction. Current design is functional but not memorable — the goal is **bold, maverick, deeptech identity**. This is separate from the report app's design.
+Define the landing page's own visual direction, built on top of `@404tf/brand` tokens. Current design is functional but not memorable — the goal is **bold, maverick, deeptech identity**. This is separate from the report app's design.
 
-- [ ] **Visual audit** — Document what works and what doesn't in the current design
-- [ ] **Design tokens** — New typography, expanded color palette, spacing scale, border/radius system
+**Depends on:** Phase 0b (brand package complete — logo system, org tokens, moodboard).
+
+- [ ] **Visual audit** — Document what works and what doesn't in the current landing design
+- [ ] **Design tokens** — Landing-specific: expanded color palette, spacing scale, border/radius system, shadows
 - [ ] **Motion language** — Define animation patterns (transitions, hover states, scroll effects, micro-interactions)
 - [ ] **Component library direction** — Establish the visual vocabulary (card styles, buttons, section layouts)
-- [ ] **Reference moodboard** — Founders provide visual references → distill into a direction
 
-Deliverable: Design system documented as CSS variables + Tailwind config + reference examples.
+Deliverable: Landing design system documented as CSS variables + Tailwind config + reference examples.
 
 ---
 

@@ -61,11 +61,12 @@
 	// │ --card: 0 0% 10%        │ --card: #110E18               │
 	// │ --foreground: 0 0% 98%  │ --foreground: #ECEEF4         │
 	// │ --primary: 262 85% 50%  │ --primary: #7C3AED            │
-	// │ --house-ai: 330 100 70  │ --v-ai: #FF66B3               │
-	// │ --house-bio: 153 100 37 │ --v-biotech: #00BD68          │
-	// │ --house-hw: 42 100% 50% │ --v-hardware: #FFB300         │
-	// │ Orbitron (headings)      │ Space Grotesk (headings)      │
-	// │ Inter (body)             │ Plus Jakarta Sans (body)      │
+	// │ --house-ai: #FF2898      │ --v-ai: #FF2898               │
+	// │ --house-bio: #00CD4E    │ --v-biotech: #00CD4E          │
+	// │ --house-hw: #FF4834     │ --v-hardware: #FF4834         │
+	// │ --house-space: #00A0F0  │ --v-space: #00A0F0            │
+	// │ Big Shoulders (headings) │ Space Grotesk (headings)      │
+	// │ Barlow Semi Cond (body)  │ Plus Jakarta Sans (body)      │
 	// │ —                        │ Bricolage Grotesque (display) │
 	// │ system mono              │ JetBrains Mono (data)         │
 	// │ --radius: 0.75rem       │ --radius: 0.5rem              │
@@ -193,9 +194,9 @@
 		// directly into the report as vertical colors. This is the strongest
 		// visual link between the two products.
 		//
-		//   Landing house-ai    (HSL 330 100% 70%) → --v-ai    (#FF66B3)
-		//   Landing house-biotech (HSL 153 100% 37%) → --v-biotech (#00BD68)
-		//   Landing house-hardware (HSL 42 100% 50%)  → --v-hardware (#FFB300)
+		//   Landing house-ai    (HSL 330 100% 70%) → --v-ai    (#FF2898)
+		//   Landing house-biotech (HSL 153 100% 37%) → --v-biotech (#00CD4E)
+		//   Landing house-hardware (HSL 42 100% 50%)  → --v-hardware (#FF4834)
 		//
 		// The remaining 8 verticals are new colors designed to:
 		// - Be distinguishable at 6px dot size on --background (#0A0710)
@@ -205,17 +206,17 @@
 		// --------------------------------------------------------------------------
 		"verticals": {
 			"ai": {
-				"base": "#FF66B3",
+				"base": "#FF2898",
 				"muted": "rgba(255, 102, 179, 0.15)",
 				"label": "AI / Machine Learning"
 			},
 			"biotech": {
-				"base": "#00BD68",
+				"base": "#00CD4E",
 				"muted": "rgba(0, 189, 104, 0.15)",
 				"label": "Biotech / Synthetic Bio"
 			},
 			"hardware": {
-				"base": "#FFB300",
+				"base": "#FF4834",
 				"muted": "rgba(255, 179, 0, 0.15)",
 				"label": "Hardware / Robotics / IoT"
 			},
@@ -871,10 +872,10 @@
 		"seriesDefault": [
 			"#7C3AED", // Primary purple
 			"#9B8BCA", // Lavender
-			"#00BD68", // Biotech green (house)
-			"#FF66B3", // AI pink (house)
+			"#00CD4E", // Biotech green (house)
+			"#FF2898", // AI pink (house)
 			"#A78BFA", // Violet
-			"#FFB300", // Hardware amber (house)
+			"#FF4834", // Hardware amber (house)
 			"#38BDF8", // Sky
 			"#A3E635" // Lime
 		],
