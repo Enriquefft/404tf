@@ -9,12 +9,7 @@ export default function NotFound() {
 			<div className="max-w-2xl text-center">
 				{/* Large 404 number with purple glow */}
 				<div className="mb-8">
-					<h1
-						className="font-display text-9xl font-bold text-transparent bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text"
-						style={{
-							textShadow: "0 0 40px rgba(168, 85, 247, 0.4)",
-						}}
-					>
+					<h1 className="font-display text-9xl font-bold text-primary">
 						404
 					</h1>
 				</div>
@@ -26,7 +21,7 @@ export default function NotFound() {
 				{/* Back to home link */}
 				<Link
 					href="/"
-					className="inline-block rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 px-6 py-3 font-semibold text-white transition-opacity hover:opacity-90"
+					className="inline-block rounded-lg bg-primary px-6 py-3 font-semibold text-primary-foreground transition-opacity hover:opacity-90"
 				>
 					{t("backHome")}
 				</Link>

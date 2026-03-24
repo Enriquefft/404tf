@@ -21,7 +21,7 @@ export function AnnouncementBanner({ translations }: AnnouncementBannerProps) {
 	return (
 		<div
 			id="announcement-banner"
-			className="gradient-purple text-primary-foreground py-2.5 px-4 text-center text-sm font-medium relative z-50"
+			className="bg-primary text-primary-foreground py-2.5 px-4 text-center text-sm font-medium relative z-50"
 		>
 			<span>{translations.text} </span>
 			<a

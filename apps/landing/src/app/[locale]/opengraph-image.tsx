@@ -16,12 +16,16 @@ export default async function Image({ params }: { params: Promise<{ locale: stri
 	const t = await getTranslations({ locale, namespace: "metadata" });
 
 	// Fetch fonts from Google Fonts (next/font not available in ImageResponse runtime)
-	const orbitronBold = await fetch(
-		new URL("https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap"),
+	const bigShouldersBold = await fetch(
+		new URL(
+			"https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700&display=swap",
+		),
 	).then((res) => res.arrayBuffer());
 
-	const interSemiBold = await fetch(
-		new URL("https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap"),
+	const barlowSemiBold = await fetch(
+		new URL(
+			"https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600&display=swap",
+		),
 	).then((res) => res.arrayBuffer());
 
 	return new ImageResponse(
@@ -33,26 +37,10 @@ export default async function Image({ params }: { params: Promise<{ locale: stri
 				flexDirection: "column",
 				alignItems: "center",
 				justifyContent: "center",
-				backgroundColor: "#0a0a0a",
-				backgroundImage:
-					"radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.15) 0%, transparent 50%)",
+				backgroundColor: "#0F080F",
 				position: "relative",
 			}}
 		>
-			{/* Purple radial glow */}
-			<div
-				style={{
-					position: "absolute",
-					top: "50%",
-					left: "50%",
-					transform: "translate(-50%, -50%)",
-					width: "800px",
-					height: "800px",
-					background: "radial-gradient(circle, rgba(139, 92, 246, 0.3) 0%, transparent 70%)",
-					display: "flex",
-				}}
-			/>
-
 			{/* Content */}
 			<div
 				style={{
@@ -68,9 +56,9 @@ export default async function Image({ params }: { params: Promise<{ locale: stri
 					style={{
 						fontSize: 72,
 						fontWeight: 700,
-						color: "white",
+						color: "#9B35A8",
 						textAlign: "center",
-						fontFamily: "Orbitron",
+						fontFamily: "Big Shoulders Display",
 						letterSpacing: "-0.02em",
 						marginBottom: "24px",
 						display: "flex",
@@ -81,9 +69,9 @@ export default async function Image({ params }: { params: Promise<{ locale: stri
 				<div
 					style={{
 						fontSize: 36,
-						color: "#a1a1aa",
+						color: "#766878",
 						textAlign: "center",
-						fontFamily: "Inter",
+						fontFamily: "Barlow Semi Condensed",
 						fontWeight: 600,
 						display: "flex",
 					}}
@@ -107,21 +95,21 @@ export default async function Image({ params }: { params: Promise<{ locale: stri
 				<div
 					style={{
 						flex: 1,
-						background: "#ec4899",
+						background: "#E84070",
 						display: "flex",
 					}}
 				/>
 				<div
 					style={{
 						flex: 1,
-						background: "#10b981",
+						background: "#18C060",
 						display: "flex",
 					}}
 				/>
 				<div
 					style={{
 						flex: 1,
-						background: "#f97316",
+						background: "#D85030",
 						display: "flex",
 					}}
 				/>
@@ -131,14 +119,14 @@ export default async function Image({ params }: { params: Promise<{ locale: stri
 			...size,
 			fonts: [
 				{
-					name: "Orbitron",
-					data: orbitronBold,
+					name: "Big Shoulders Display",
+					data: bigShouldersBold,
 					style: "normal",
 					weight: 700,
 				},
 				{
-					name: "Inter",
-					data: interSemiBold,
+					name: "Barlow Semi Condensed",
+					data: barlowSemiBold,
 					style: "normal",
 					weight: 600,
 				},

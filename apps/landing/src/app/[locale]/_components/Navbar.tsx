@@ -112,7 +112,7 @@ export function Navbar({ locale, translations }: NavbarProps) {
 
 					<a
 						href="#intent-cta"
-						className="gradient-purple text-primary-foreground text-sm font-semibold px-4 py-2 rounded-lg hover:opacity-90 transition-opacity"
+						className="bg-primary text-primary-foreground text-sm font-semibold px-4 py-2 rounded-lg hover:opacity-90 transition-opacity"
 					>
 						{translations.cta}
 					</a>
@@ -120,7 +120,7 @@ export function Navbar({ locale, translations }: NavbarProps) {
 
 				{/* Mobile toggle */}
 				<div className="md:hidden">
-					<Hamburger toggled={isOpen} toggle={setIsOpen} size={20} color="hsl(var(--foreground))" />
+					<Hamburger toggled={isOpen} toggle={setIsOpen} size={20} color="var(--foreground)" />
 				</div>
 			</div>
 
@@ -183,7 +183,7 @@ export function Navbar({ locale, translations }: NavbarProps) {
 						<a
 							href="#intent-cta"
 							onClick={handleNavLinkClick}
-							className="gradient-purple text-primary-foreground text-sm font-semibold px-4 py-2 rounded-lg hover:opacity-90 transition-opacity text-center"
+							className="bg-primary text-primary-foreground text-sm font-semibold px-4 py-2 rounded-lg hover:opacity-90 transition-opacity text-center"
 						>
 							{translations.cta}
 						</a>

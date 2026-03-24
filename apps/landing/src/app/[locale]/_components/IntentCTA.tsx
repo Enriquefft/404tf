@@ -60,7 +60,7 @@ export function IntentCTA({ locale, translations }: IntentCTAProps) {
 	};
 
 	return (
-		<section id="intent-cta" className="py-24 gradient-purple relative overflow-hidden">
+		<section id="intent-cta" className="py-24 bg-primary relative overflow-hidden">
 			{/* Decorative grid */}
 			<div
 				className="absolute inset-0 opacity-[0.06]"
@@ -73,7 +73,7 @@ export function IntentCTA({ locale, translations }: IntentCTAProps) {
 
 			<div className="container mx-auto px-4 relative z-10">
 				<div className="text-center mb-12">
-					<h2 className="font-orbitron text-3xl md:text-4xl font-bold text-primary-foreground mb-4">
+					<h2 className="font-display text-3xl md:text-4xl font-bold text-primary-foreground mb-4">
 						{translations.headline}
 					</h2>
 					<p className="text-primary-foreground/70 text-lg max-w-lg mx-auto">
@@ -120,7 +120,7 @@ export function IntentCTA({ locale, translations }: IntentCTAProps) {
 										}`}
 									>
 										<span className="text-3xl mb-3 block">{intent.emoji}</span>
-										<span className="font-orbitron text-sm font-bold text-primary-foreground">
+										<span className="font-display text-sm font-bold text-primary-foreground">
 											{translations[intent.key]}
 										</span>
 									</motion.button>
@@ -188,7 +188,7 @@ export function IntentCTA({ locale, translations }: IntentCTAProps) {
 										className={`w-full px-6 py-3 rounded-lg font-semibold transition-all duration-200 ${
 											isPending || !selectedIntent
 												? "bg-white/20 cursor-not-allowed opacity-50 text-white"
-												: "bg-white text-purple-600 hover:opacity-90"
+												: "bg-white text-secondary-foreground hover:opacity-90"
 										}`}
 									>
 										{isPending ? translations.submitting : getSubmitText()}

@@ -13,7 +13,7 @@ export async function Hero() {
 				className="absolute inset-0 opacity-[0.04]"
 				style={{
 					backgroundImage:
-						"linear-gradient(hsl(var(--foreground)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)",
+						"linear-gradient(var(--foreground) 1px, transparent 1px), linear-gradient(90deg, var(--foreground) 1px, transparent 1px)",
 					backgroundSize: "60px 60px",
 				}}
 			/>
@@ -25,7 +25,7 @@ export async function Hero() {
 							{t("eyebrow")}
 						</p>
 
-						<h1 className="font-orbitron text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-glow-purple">
+						<h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
 							{t("headline")}
 						</h1>
 
@@ -36,7 +36,7 @@ export async function Hero() {
 						<div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
 							<a
 								href="#intent-cta"
-								className="gradient-purple text-primary-foreground font-semibold px-8 py-3.5 rounded-lg text-base hover:opacity-90 transition-opacity"
+								className="bg-primary text-primary-foreground font-semibold px-8 py-3.5 rounded-lg text-base hover:opacity-90 transition-opacity"
 							>
 								{t("cta1")}
 							</a>
@@ -58,7 +58,7 @@ export async function Hero() {
 								width={384}
 								height={384}
 								priority
-								className="w-64 md:w-80 lg:w-96 drop-shadow-[0_0_30px_hsl(262_85%_50%/0.4)]"
+								className="w-64 md:w-80 lg:w-96"
 							/>
 						</FloatingMascot>
 					</div>

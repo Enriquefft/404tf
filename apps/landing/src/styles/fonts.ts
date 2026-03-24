@@ -1,14 +1,21 @@
-import { Inter, Orbitron } from "next/font/google";
+import { Barlow_Semi_Condensed, Big_Shoulders, JetBrains_Mono } from "next/font/google";
 
-export const inter = Inter({
+export const bigShouldersDisplay = Big_Shoulders({
 	subsets: ["latin"],
-	variable: "--font-sans",
+	variable: "--font-display",
+	display: "swap",
+	adjustFontFallback: false,
+});
+
+export const barlowSemiCondensed = Barlow_Semi_Condensed({
+	subsets: ["latin"],
+	variable: "--font-body",
+	weight: ["400", "500", "600", "700"],
 	display: "swap",
 });
 
-export const orbitron = Orbitron({
+export const jetbrainsMono = JetBrains_Mono({
 	subsets: ["latin"],
-	variable: "--font-orbitron",
-	weight: ["400", "500", "600", "700", "800", "900"],
+	variable: "--font-mono",
 	display: "swap",
 });

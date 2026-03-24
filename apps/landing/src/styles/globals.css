@@ -1,28 +1,29 @@
 @import "tailwindcss";
 
 @theme {
-	--color-background: hsl(var(--background));
-	--color-foreground: hsl(var(--foreground));
-	--color-card: hsl(var(--card));
-	--color-card-foreground: hsl(var(--card-foreground));
-	--color-popover: hsl(var(--popover));
-	--color-popover-foreground: hsl(var(--popover-foreground));
-	--color-primary: hsl(var(--primary));
-	--color-primary-foreground: hsl(var(--primary-foreground));
-	--color-secondary: hsl(var(--secondary));
-	--color-secondary-foreground: hsl(var(--secondary-foreground));
-	--color-muted: hsl(var(--muted));
-	--color-muted-foreground: hsl(var(--muted-foreground));
-	--color-accent: hsl(var(--accent));
-	--color-accent-foreground: hsl(var(--accent-foreground));
-	--color-destructive: hsl(var(--destructive));
-	--color-destructive-foreground: hsl(var(--destructive-foreground));
-	--color-border: hsl(var(--border));
-	--color-input: hsl(var(--input));
-	--color-ring: hsl(var(--ring));
-	--color-house-ai: hsl(var(--house-ai));
-	--color-house-biotech: hsl(var(--house-biotech));
-	--color-house-hardware: hsl(var(--house-hardware));
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--color-card: var(--card);
+	--color-card-foreground: var(--card-foreground);
+	--color-popover: var(--popover);
+	--color-popover-foreground: var(--popover-foreground);
+	--color-primary: var(--primary);
+	--color-primary-foreground: var(--primary-foreground);
+	--color-secondary: var(--secondary);
+	--color-secondary-foreground: var(--secondary-foreground);
+	--color-muted: var(--muted);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-accent: var(--accent);
+	--color-accent-foreground: var(--accent-foreground);
+	--color-destructive: var(--destructive);
+	--color-destructive-foreground: var(--destructive-foreground);
+	--color-border: var(--border);
+	--color-input: var(--input);
+	--color-ring: var(--ring);
+	--color-house-ai: var(--house-ai);
+	--color-house-biotech: var(--house-biotech);
+	--color-house-hardware: var(--house-hardware);
+	--color-house-space: var(--house-space);
 	--radius-sm: calc(var(--radius) - 4px);
 	--radius-md: calc(var(--radius) - 2px);
 	--radius-lg: var(--radius);
@@ -30,39 +31,40 @@
 }
 
 :root {
-	--background: 0 0% 7%;
-	--foreground: 0 0% 98%;
-	--card: 0 0% 10%;
-	--card-foreground: 0 0% 98%;
-	--popover: 0 0% 10%;
-	--popover-foreground: 0 0% 98%;
-	--primary: 262 85% 50%;
-	--primary-foreground: 0 0% 98%;
-	--secondary: 262 100% 66%;
-	--secondary-foreground: 0 0% 98%;
-	--muted: 0 0% 15%;
-	--muted-foreground: 0 0% 64%;
-	--accent: 262 100% 66%;
-	--accent-foreground: 0 0% 98%;
-	--destructive: 0 84% 60%;
-	--destructive-foreground: 0 0% 98%;
-	--border: 0 0% 18%;
-	--input: 0 0% 18%;
-	--ring: 262 85% 50%;
-	--radius: 0.75rem;
-	--house-ai: 330 100% 70%;
-	--house-biotech: 153 100% 37%;
-	--house-hardware: 42 100% 50%;
+	--background: oklch(0.07 0.020 315);
+	--foreground: oklch(0.92 0.008 55);
+	--card: oklch(0.11 0.028 312);
+	--card-foreground: oklch(0.92 0.008 55);
+	--popover: oklch(0.11 0.028 312);
+	--popover-foreground: oklch(0.92 0.008 55);
+	--primary: oklch(0.53 0.24 305);
+	--primary-foreground: oklch(0.97 0.008 310);
+	--secondary: oklch(0.72 0.18 55);
+	--secondary-foreground: oklch(0.07 0.020 315);
+	--muted: oklch(0.15 0.020 315);
+	--muted-foreground: oklch(0.52 0.018 315);
+	--accent: oklch(0.16 0.035 310);
+	--accent-foreground: oklch(0.92 0.008 55);
+	--destructive: oklch(0.55 0.22 27);
+	--destructive-foreground: oklch(0.97 0.008 310);
+	--border: oklch(1 0.008 310 / 8%);
+	--input: oklch(1 0.008 310 / 11%);
+	--ring: oklch(0.58 0.22 305);
+	--radius: 0rem;
+	--house-ai: oklch(0.68 0.26 358);
+	--house-biotech: oklch(0.73 0.23 150);
+	--house-hardware: oklch(0.68 0.23 30);
+	--house-space: oklch(0.65 0.20 230);
 }
 
 @layer base {
 	* {
-		border-color: hsl(var(--border));
+		border-color: var(--border);
 	}
 	body {
-		background-color: hsl(var(--background));
-		color: hsl(var(--foreground));
-		font-family: var(--font-sans, "Inter"), sans-serif;
+		background-color: var(--background);
+		color: var(--foreground);
+		font-family: var(--font-body, "Barlow Semi Condensed"), sans-serif;
 	}
 	h1,
 	h2,
@@ -70,41 +72,18 @@
 	h4,
 	h5,
 	h6 {
-		font-family: var(--font-orbitron, "Orbitron"), sans-serif;
+		font-family: var(--font-display, "Big Shoulders Display Variable"), sans-serif;
 	}
 }
 
 @layer utilities {
-	.font-orbitron {
-		font-family: var(--font-orbitron, "Orbitron"), sans-serif;
+	.font-display {
+		font-family: var(--font-display, "Big Shoulders Display Variable"), sans-serif;
 	}
 	.font-mono-accent {
 		font-family:
 			ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
 			monospace;
 		letter-spacing: 0.05em;
-	}
-	.text-glow-purple {
-		text-shadow:
-			0 0 20px hsl(262 85% 50% / 0.5),
-			0 0 40px hsl(262 85% 50% / 0.3);
-	}
-	.gradient-purple {
-		background: linear-gradient(135deg, hsl(262 85% 50%), hsl(262 100% 66%));
-	}
-	.glow-border-ai {
-		box-shadow:
-			0 0 15px hsl(330 100% 70% / 0.3),
-			inset 0 0 15px hsl(330 100% 70% / 0.05);
-	}
-	.glow-border-biotech {
-		box-shadow:
-			0 0 15px hsl(153 100% 37% / 0.3),
-			inset 0 0 15px hsl(153 100% 37% / 0.05);
-	}
-	.glow-border-hardware {
-		box-shadow:
-			0 0 15px hsl(42 100% 50% / 0.3),
-			inset 0 0 15px hsl(42 100% 50% / 0.05);
 	}
 }

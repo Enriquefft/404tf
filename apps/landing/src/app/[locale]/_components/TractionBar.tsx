@@ -25,7 +25,7 @@ export function TractionBar({ translations }: TractionBarProps) {
 				<div className="grid grid-cols-2 md:grid-cols-4 gap-8">
 					{stats.map((stat) => (
 						<div key={stat.label} className="text-center">
-							<p className="font-orbitron text-4xl md:text-5xl font-bold text-primary text-glow-purple">
+							<p className="font-display text-4xl md:text-5xl font-bold text-primary">
 								<CountUp
 									end={stat.value}
 									duration={2}

@@ -12,10 +12,10 @@ export function Logo({ className }: LogoProps) {
 			aria-label="404 Tech Found - Scroll to top"
 			className={cn("inline-flex flex-col items-center leading-none", className)}
 		>
-			<span className="font-orbitron font-extrabold text-[1.4em] text-foreground text-glow-purple">
+			<span className="font-display font-extrabold text-[1.4em] text-foreground">
 				404
 			</span>
-			<span className="font-orbitron font-medium text-[0.55em] tracking-[0.2em] text-muted-foreground">
+			<span className="font-display font-medium text-[0.55em] tracking-[0.2em] text-muted-foreground">
 				TECH F<span className="line-through decoration-[0.12em]">O</span>
 				UND
 			</span>

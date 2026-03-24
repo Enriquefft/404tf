@@ -5,7 +5,7 @@ import { PostHogPageView } from "@/lib/analytics/posthog-pageview";
 import { PHProvider } from "@/lib/analytics/posthog-provider";
 import { WebVitals } from "@/lib/analytics/web-vitals";
 import { cn } from "@/lib/utils";
-import { inter, orbitron } from "@/styles/fonts";
+import { barlowSemiCondensed, bigShouldersDisplay, jetbrainsMono } from "@/styles/fonts";
 
 type Props = {
 	children: React.ReactNode;
@@ -18,9 +18,10 @@ export default async function RootLayout({ children }: Props) {
 		<html lang={locale} suppressHydrationWarning>
 			<body
 				className={cn(
-					"min-h-screen bg-background font-sans antialiased",
-					inter.variable,
-					orbitron.variable,
+					"min-h-screen bg-background antialiased",
+					bigShouldersDisplay.variable,
+					barlowSemiCondensed.variable,
+					jetbrainsMono.variable,
 				)}
 			>
 				<PHProvider>

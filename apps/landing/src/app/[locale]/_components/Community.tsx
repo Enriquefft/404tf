@@ -31,7 +31,7 @@ export async function Community() {
 		<section id="community" className="py-24">
 			<div className="container mx-auto px-4">
 				<div className="text-center mb-16">
-					<h2 className="font-orbitron text-3xl md:text-4xl font-bold mb-4">{t("title")}</h2>
+					<h2 className="font-display text-3xl md:text-4xl font-bold mb-4">{t("title")}</h2>
 					<p className="text-muted-foreground text-lg">{t("subtitle")}</p>
 				</div>
 
@@ -47,7 +47,7 @@ export async function Community() {
 							>
 								{fellow.house}
 							</span>
-							<h4 className="font-orbitron text-sm font-bold mt-3">{fellow.name}</h4>
+							<h4 className="font-display text-sm font-bold mt-3">{fellow.name}</h4>
 							<p className="text-xs text-primary font-medium mt-1">{fellow.startup}</p>
 							<p className="text-xs text-muted-foreground mt-2">{fellow.desc}</p>
 						</div>

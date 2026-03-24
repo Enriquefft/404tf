@@ -24,7 +24,7 @@ export async function Programs() {
 		<section id="programs" className="py-24">
 			<div className="container mx-auto px-4">
 				<div className="text-center mb-16">
-					<h2 className="font-orbitron text-3xl md:text-4xl font-bold mb-4">{t("title")}</h2>
+					<h2 className="font-display text-3xl md:text-4xl font-bold mb-4">{t("title")}</h2>
 					<p className="text-muted-foreground text-lg">{t("subtitle")}</p>
 				</div>
 
@@ -39,7 +39,7 @@ export async function Programs() {
 								{t("preincubation.duration")}
 							</span>
 						</div>
-						<h3 className="font-orbitron text-xl font-bold mb-6">Pre-Incubation</h3>
+						<h3 className="font-display text-xl font-bold mb-6">Pre-Incubation</h3>
 						<ul className="space-y-3 mb-8">
 							{preincBenefits.map((b) => (
 								<li key={b} className="flex items-start gap-3 text-sm text-muted-foreground">
@@ -50,7 +50,7 @@ export async function Programs() {
 						</ul>
 						<a
 							href="#intent-cta"
-							className="block w-full gradient-purple text-primary-foreground font-semibold py-3 rounded-lg hover:opacity-90 transition-opacity text-center"
+							className="block w-full bg-primary text-primary-foreground font-semibold py-3 rounded-lg hover:opacity-90 transition-opacity text-center"
 						>
 							{t("preincubation.cta")}
 						</a>
@@ -66,7 +66,7 @@ export async function Programs() {
 								{t("fellowship.duration")}
 							</span>
 						</div>
-						<h3 className="font-orbitron text-xl font-bold mb-6">404 Founders Fellowship</h3>
+						<h3 className="font-display text-xl font-bold mb-6">404 Founders Fellowship</h3>
 						<ul className="space-y-3 mb-8">
 							{fellowshipBenefits.map((b) => (
 								<li key={b} className="flex items-start gap-3 text-sm text-muted-foreground">
@@ -94,7 +94,7 @@ export async function Programs() {
 								{t("bootcamp.duration")}
 							</span>
 						</div>
-						<h3 className="font-orbitron text-xl font-bold mb-6">404 Bootcamp</h3>
+						<h3 className="font-display text-xl font-bold mb-6">404 Bootcamp</h3>
 						<ul className="space-y-3 mb-8">
 							{bootcampBenefits.map((b) => (
 								<li key={b} className="flex items-start gap-3 text-sm text-muted-foreground">
