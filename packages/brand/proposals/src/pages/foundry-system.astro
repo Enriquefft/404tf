@@ -1,0 +1,1145 @@
+---
+import "@/styles/global.css"
+import { Button } from "@/components/ui/button"
+---
+
+<html lang="en" data-theme="foundry">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Foundry Design System — 404 Tech Found</title>
+  <style>
+    /* ── Entrance choreography ──────────────────────────────── */
+    @keyframes emerge {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes expand-right {
+      from { transform: scaleX(0); }
+      to { transform: scaleX(1); }
+    }
+    @keyframes drift {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      40% { transform: translateY(-8px) rotate(0.3deg); }
+      70% { transform: translateY(4px) rotate(-0.15deg); }
+    }
+    @keyframes strike-draw {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+    @keyframes fade-struck {
+      from { opacity: 1; }
+      to { opacity: 0.15; }
+    }
+
+    .emerge {
+      opacity: 0;
+      animation: emerge 700ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation-delay: var(--d, 0ms);
+    }
+    .on-scroll {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 600ms cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+      transition-delay: var(--d, 0ms);
+    }
+    .on-scroll.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Atmospheric layers ─────────────────────────────────── */
+    .atmosphere {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      background:
+        radial-gradient(ellipse 80% 45% at 20% 110%, oklch(0.14 0.08 305 / 35%), transparent 65%),
+        radial-gradient(ellipse 40% 35% at 85% 10%, oklch(0.12 0.06 310 / 20%), transparent 55%);
+    }
+
+    .grain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9998;
+      opacity: 0.025;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 256px 256px;
+    }
+
+    /* ── Section label ──────────────────────────────────────── */
+    .label {
+      font-family: var(--font-body);
+      font-size: 0.6875rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: oklch(0.55 0.22 305 / 65%);
+    }
+
+    /* ── Manifesto lines ────────────────────────────────────── */
+    .manifesto-line {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 4.5vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.1;
+      text-transform: uppercase;
+      letter-spacing: 0;
+      color: oklch(0.92 0.008 55 / 85%);
+      transition: text-shadow 300ms cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .manifesto-line:hover {
+      text-shadow: 0 0 30px oklch(0.44 0.24 305 / 25%), 0 0 60px oklch(0.44 0.24 305 / 10%);
+    }
+
+    /* ── Background watermark ───────────────────────────────── */
+    .watermark {
+      position: absolute;
+      font-family: var(--font-display);
+      font-size: clamp(15rem, 40vw, 35rem);
+      font-weight: 900;
+      line-height: 0.8;
+      text-transform: uppercase;
+      color: oklch(0.44 0.24 305 / 3%);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* ── Section divider ────────────────────────────────────── */
+    .divider-gradient {
+      height: 2px;
+      background: linear-gradient(to right, oklch(0.44 0.24 305 / 60%), oklch(0.72 0.18 55 / 60%), transparent);
+    }
+
+    /* ── Color band interaction ─────────────────────────────── */
+    .color-band {
+      transition: padding-left 250ms cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .color-band:hover {
+      padding-left: calc(var(--pad) + 12px);
+    }
+
+    /* ── House row interaction ──────────────────────────────── */
+    .house-row {
+      transition: background-color 200ms cubic-bezier(0.25, 1, 0.5, 1),
+                  padding-left 200ms cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .house-row:hover {
+      padding-left: calc(var(--pad) + 6px);
+    }
+
+    /* ── Design system spec utilities ───────────────────────── */
+    .spec-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid oklch(1 0.008 310 / 5%);
+    }
+    .spec-label {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: oklch(0.52 0.018 315);
+    }
+    .spec-value {
+      font-family: var(--font-code);
+      font-size: 0.75rem;
+      color: oklch(0.92 0.008 55 / 60%);
+    }
+    .swatch {
+      width: 3rem;
+      height: 3rem;
+      border: 2px solid oklch(1 0.008 310 / 8%);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .section-number {
+      font-family: var(--font-display);
+      font-size: clamp(6rem, 15vw, 10rem);
+      font-weight: 900;
+      line-height: 0.8;
+      color: oklch(0.44 0.24 305 / 5%);
+      position: absolute;
+      right: -2%;
+      top: -10%;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* ── Reduced motion ─────────────────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      .emerge { animation: none; opacity: 1; transform: none; }
+      .on-scroll { transition: none; opacity: 1; transform: none; }
+      .manifesto-line { transition: none; }
+    }
+  </style>
+</head>
+
+<body class="bg-background text-foreground overflow-x-hidden">
+  <div class="atmosphere"></div>
+  <div class="grain"></div>
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-12 lg:px-20 py-5">
+    <a
+      href="/"
+      style="font-family: var(--font-body)"
+      class="text-[0.625rem] uppercase tracking-[0.2em] text-muted-foreground/80 hover:text-secondary transition-colors duration-200"
+    >
+      All proposals
+    </a>
+    <a
+      href="/foundry"
+      style="font-family: var(--font-body)"
+      class="text-[0.625rem] uppercase tracking-[0.2em] text-muted-foreground/80 hover:text-primary transition-colors duration-200"
+    >
+      Foundry showcase
+    </a>
+  </nav>
+
+  <!-- ═══ SECTION 0: SYSTEM HEADER ═════════════════════════════════ -->
+  <section class="relative px-6 md:px-12 lg:px-20 pt-32 md:pt-40 pb-20 md:pb-28">
+    <div class="relative z-10 max-w-4xl">
+      <p class="emerge label mb-8" style="--d: 200ms">Proposal T · Design System Reference</p>
+
+      <h1>
+        <span
+          class="emerge block uppercase tracking-[-0.02em]"
+          style="--d: 400ms; font-family: var(--font-display); font-size: clamp(4rem, 12vw, 10rem); font-weight: 900; line-height: 0.85; color: oklch(0.44 0.24 305);"
+        >
+          Foundry
+        </span>
+        <span
+          class="emerge block uppercase tracking-[0.12em] mt-2"
+          style="--d: 600ms; font-family: var(--font-display); font-size: clamp(1.2rem, 3.5vw, 2.8rem); font-weight: 700; line-height: 1; color: oklch(0.72 0.18 55);"
+        >
+          Design System
+        </span>
+      </h1>
+
+      <p
+        class="emerge text-[clamp(0.95rem,1.5vw,1.1rem)] text-muted-foreground max-w-lg mt-10 leading-[1.75]"
+        style="--d: 800ms"
+      >
+        The complete visual specification for 404 Tech Found's Foundry brand direction.
+      </p>
+
+      <div class="emerge flex items-center gap-4 mt-8" style="--d: 1000ms">
+        <div class="flex items-center gap-3">
+          <div class="swatch" style="background: oklch(0.44 0.24 305);">
+            <span class="text-[0.5rem] font-semibold uppercase tracking-widest" style="color: oklch(0.95 0.008 310)">P</span>
+          </div>
+          <div class="flex flex-col">
+            <span class="text-[0.625rem] font-medium text-foreground/70 uppercase tracking-wider" style="font-family: var(--font-body)">Primary</span>
+            <span class="text-[0.625rem] text-muted-foreground/60" style="font-family: var(--font-code)">oklch(0.44 0.24 305)</span>
+          </div>
+        </div>
+        <div class="w-8 h-[2px] bg-gradient-to-r from-primary/40 to-secondary/40"></div>
+        <div class="flex items-center gap-3">
+          <div class="swatch" style="background: oklch(0.72 0.18 55);">
+            <span class="text-[0.5rem] font-semibold uppercase tracking-widest" style="color: oklch(0.07 0.015 320)">S</span>
+          </div>
+          <div class="flex flex-col">
+            <span class="text-[0.625rem] font-medium text-foreground/70 uppercase tracking-wider" style="font-family: var(--font-body)">Secondary</span>
+            <span class="text-[0.625rem] text-muted-foreground/60" style="font-family: var(--font-code)">oklch(0.72 0.18 55)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Expanding rule -->
+    <div class="absolute bottom-0 left-0 h-[2px] w-[50%] bg-gradient-to-r from-primary/50 via-secondary/30 to-transparent" style="transform-origin: left; transform: scaleX(0); animation: expand-right 900ms cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 1.4s;"></div>
+  </section>
+
+  <!-- Section divider -->
+  <div class="divider-gradient mx-6 md:mx-12 lg:mx-20"></div>
+
+  <!-- ═══ SECTION 1: DESIGN PRINCIPLES ═════════════════════════════ -->
+  <section class="relative px-6 md:px-12 lg:px-20 py-24 md:py-36">
+    <span class="section-number">01</span>
+
+    <div class="relative z-10">
+      <p class="on-scroll label mb-20">Design Principles</p>
+
+      <!-- Principle 01 -->
+      <div class="on-scroll border-t-2 border-border py-10 md:py-14 flex flex-col md:flex-row md:items-baseline gap-4 md:gap-16">
+        <div class="flex items-baseline gap-6 md:w-[28rem] shrink-0">
+          <span style="font-family: var(--font-code); font-size: 0.75rem; color: oklch(0.72 0.18 55 / 60%);">01</span>
+          <h3 style="font-family: var(--font-display); font-size: clamp(1.25rem, 2.5vw, 1.75rem); font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em; line-height: 1.1;">
+            Earned Attention
+          </h3>
+        </div>
+        <p class="text-[0.9375rem] text-muted-foreground leading-[1.75] max-w-md">
+          Every element justifies its existence. No decoration without purpose. If it doesn't communicate, clarify, or compel — it doesn't belong.
+        </p>
+      </div>
+
+      <!-- Principle 02 -->
+      <div class="on-scroll border-t-2 border-border py-10 md:py-14 flex flex-col md:flex-row md:items-baseline gap-4 md:gap-16" style="--d: 60ms">
+        <div class="flex items-baseline gap-6 md:w-[28rem] shrink-0">
+          <span style="font-family: var(--font-code); font-size: 0.75rem; color: oklch(0.72 0.18 55 / 60%);">02</span>
+          <h3 style="font-family: var(--font-display); font-size: clamp(1.25rem, 2.5vw, 1.75rem); font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em; line-height: 1.1;">
+            Purple World, Amber Artifact
+          </h3>
+        </div>
+        <p class="text-[0.9375rem] text-muted-foreground leading-[1.75] max-w-md">
+          Purple is the environment, the commitment, the brand. Amber is the discovery, the action, the thing found within. This duality drives every color decision.
+        </p>
+      </div>
+
+      <!-- Principle 03 -->
+      <div class="on-scroll border-t-2 border-border py-10 md:py-14 flex flex-col md:flex-row md:items-baseline gap-4 md:gap-16" style="--d: 120ms">
+        <div class="flex items-baseline gap-6 md:w-[28rem] shrink-0">
+          <span style="font-family: var(--font-code); font-size: 0.75rem; color: oklch(0.72 0.18 55 / 60%);">03</span>
+          <h3 style="font-family: var(--font-display); font-size: clamp(1.25rem, 2.5vw, 1.75rem); font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em; line-height: 1.1;">
+            Brutalist Clarity
+          </h3>
+        </div>
+        <p class="text-[0.9375rem] text-muted-foreground leading-[1.75] max-w-md">
+          Zero radius. 2px borders. No shadows. Depth through color saturation, not visual tricks. Every surface has a clear edge.
+        </p>
+      </div>
+
+      <!-- Principle 04 -->
+      <div class="on-scroll border-t-2 border-border py-10 md:py-14 flex flex-col md:flex-row md:items-baseline gap-4 md:gap-16" style="--d: 180ms">
+        <div class="flex items-baseline gap-6 md:w-[28rem] shrink-0">
+          <span style="font-family: var(--font-code); font-size: 0.75rem; color: oklch(0.72 0.18 55 / 60%);">04</span>
+          <h3 style="font-family: var(--font-display); font-size: clamp(1.25rem, 2.5vw, 1.75rem); font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em; line-height: 1.1;">
+            Industrial Typography
+          </h3>
+        </div>
+        <p class="text-[0.9375rem] text-muted-foreground leading-[1.75] max-w-md">
+          Big Shoulders Display commands attention. Barlow communicates clearly. Together they feel built, not designed — forged from function.
+        </p>
+      </div>
+
+      <!-- Principle 05 -->
+      <div class="on-scroll border-t-2 border-border py-10 md:py-14 border-b-2 flex flex-col md:flex-row md:items-baseline gap-4 md:gap-16" style="--d: 240ms">
+        <div class="flex items-baseline gap-6 md:w-[28rem] shrink-0">
+          <span style="font-family: var(--font-code); font-size: 0.75rem; color: oklch(0.72 0.18 55 / 60%);">05</span>
+          <h3 style="font-family: var(--font-display); font-size: clamp(1.25rem, 2.5vw, 1.75rem); font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em; line-height: 1.1;">
+            Tardi Resilience
+          </h3>
+        </div>
+        <p class="text-[0.9375rem] text-muted-foreground leading-[1.75] max-w-md">
+          The brand feels indestructible, adaptive, alive — like its mascot. Motion is earned, not decorative. Every animation has intent.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section divider -->
+  <div class="divider-gradient mx-6 md:mx-12 lg:mx-20"></div>
+
+  <!-- ═══ SECTION 2: COLOR SYSTEM ═══════════════════════════════════ -->
+  <section class="relative px-6 md:px-12 lg:px-20 py-24 md:py-36">
+    <span class="section-number">02</span>
+
+    <div class="relative z-10">
+      <p class="on-scroll label mb-6">Color System</p>
+      <p class="on-scroll text-sm text-muted-foreground max-w-lg mb-20" style="--d: 60ms">
+        Deep violet substrate. Foundry purple as the world. Forge amber as the artifact. Neither generic, neither ordinary. Every color in OKLCH for perceptual uniformity.
+      </p>
+
+      <!-- ── 2a. Core Palette ─────────────────────────────────── -->
+      <div class="on-scroll mb-24" style="--d: 80ms">
+        <p class="text-[0.6875rem] text-muted-foreground/70 uppercase tracking-wider mb-8" style="font-family: var(--font-body)">2a · Core Palette</p>
+
+        <div class="space-y-[2px]">
+          <!-- Background -->
+          <div class="color-band h-14 md:h-16 flex items-center justify-between px-5 md:px-8 border-2 border-border" style="background: oklch(0.07 0.015 320); --pad: 1.25rem">
+            <div class="flex items-center gap-4">
+              <span class="text-[0.6875rem] font-medium text-foreground/70 uppercase tracking-wider" style="font-family: var(--font-body)">Background</span>
+              <span class="hidden sm:inline text-[0.6rem] text-muted-foreground/40 uppercase tracking-wider" style="font-family: var(--font-body)">Page base, body</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="hidden md:inline text-[0.6875rem] text-muted-foreground/60" style="font-family: var(--font-code)">oklch(0.07 0.015 320)</span>
+              <span class="text-[0.6875rem] text-muted-foreground/40" style="font-family: var(--font-code)">#0E0A10</span>
+            </div>
+          </div>
+
+          <!-- Foreground -->
+          <div class="color-band h-14 md:h-16 flex items-center justify-between px-5 md:px-8" style="background: oklch(0.92 0.008 55); --pad: 1.25rem">
+            <div class="flex items-center gap-4">
+              <span class="text-[0.6875rem] font-medium uppercase tracking-wider" style="font-family: var(--font-body); color: oklch(0.07 0.015 320)">Foreground</span>
+              <span class="hidden sm:inline text-[0.6rem] uppercase tracking-wider" style="font-family: var(--font-body); color: oklch(0.07 0.015 320 / 50%)">Primary text</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="hidden md:inline text-[0.6875rem]" style="font-family: var(--font-code); color: oklch(0.07 0.015 320 / 60%)">oklch(0.92 0.008 55)</span>
+              <span class="text-[0.6875rem]" style="font-family: var(--font-code); color: oklch(0.07 0.015 320 / 40%)">#EDE8E0</span>
+            </div>
+          </div>
+
+          <!-- Card -->
+          <div class="color-band h-14 md:h-16 flex items-center justify-between px-5 md:px-8" style="background: oklch(0.11 0.018 315); --pad: 1.25rem">
+            <div class="flex items-center gap-4">
+              <span class="text-[0.6875rem] font-medium text-foreground/70 uppercase tracking-wider" style="font-family: var(--font-body)">Card / Surface</span>
+              <span class="hidden sm:inline text-[0.6rem] text-muted-foreground/40 uppercase tracking-wider" style="font-family: var(--font-body)">Elevated panels</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="hidden md:inline text-[0.6875rem] text-muted-foreground/60" style="font-family: var(--font-code)">oklch(0.11 0.018 315)</span>
+              <span class="text-[0.6875rem] text-muted-foreground/40" style="font-family: var(--font-code)">#1A1320</span>
+            </div>
+          </div>
+
+          <!-- Primary -->
+          <div class="color-band h-16 md:h-20 flex items-center justify-between px-5 md:px-8" style="background: oklch(0.44 0.24 305); --pad: 1.25rem">
+            <div class="flex items-center gap-4">
+              <span class="text-xs font-semibold uppercase tracking-wider" style="font-family: var(--font-body); color: oklch(0.95 0.008 310)">Primary — Foundry Purple</span>
+              <span class="hidden sm:inline text-[0.6rem] uppercase tracking-wider" style="font-family: var(--font-body); color: oklch(0.95 0.008 310 / 60%)">CTAs, focus, brand</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="hidden md:inline text-[0.6875rem]" style="font-family: var(--font-code); color: oklch(0.95 0.008 310 / 70%)">oklch(0.44 0.24 305)</span>
+              <span class="text-[0.6875rem]" style="font-family: var(--font-code); color: oklch(0.95 0.008 310 / 50%)">#7B2080</span>
+            </div>
+          </div>
+
+          <!-- Primary Bright -->
+          <div class="color-band h-14 md:h-16 flex items-center justify-between px-5 md:px-8" style="background: oklch(0.55 0.22 305); --pad: 1.25rem">
+            <div class="flex items-center gap-4">
+              <span class="text-[0.6875rem] font-medium uppercase tracking-wider" style="font-family: var(--font-body); color: oklch(0.95 0.008 310)">Primary Bright</span>
+              <span class="hidden sm:inline text-[0.6rem] uppercase tracking-wider" style="font-family: var(--font-body); color: oklch(0.95 0.008 310 / 50%)">Hover state, focus rings</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="hidden md:inline text-[0.6875rem]" style="font-family: var(--font-code); color: oklch(0.95 0.008 310 / 70%)">oklch(0.55 0.22 305)</span>
+              <span class="text-[0.6875rem]" style="font-family: var(--font-code); color: oklch(0.95 0.008 310 / 50%)">#A03BA5</span>
+            </div>
+          </div>
+
+          <!-- Primary Deep -->
+          <div class="color-band h-14 md:h-16 flex items-center justify-between px-5 md:px-8" style="background: oklch(0.33 0.20 305); --pad: 1.25rem">
+            <div class="flex items-center gap-4">
+              <span class="text-[0.6875rem] font-medium uppercase tracking-wider" style="font-family: var(--font-body); color: oklch(0.95 0.008 310)">Primary Deep</span>
+              <span class="hidden sm:inline text-[0.6rem] uppercase tracking-wider" style="font-family: var(--font-body); color: oklch(0.95 0.008 310 / 50%)">Pressed state, depth</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="hidden md:inline text-[0.6875rem]" style="font-family: var(--font-code); color: oklch(0.95 0.008 310 / 70%)">oklch(0.33 0.20 305)</span>
+              <span class="text-[0.6875rem]" style="font-family: var(--font-code); color: oklch(0.95 0.008 310 / 50%)">#581060</span>
+            </div>
+          </div>
+
+          <!-- Secondary -->
+          <div class="color-band h-16 md:h-20 flex items-center justify-between px-5 md:px-8" style="background: oklch(0.72 0.18 55); --pad: 1.25rem">
+            <div class="flex items-center gap-4">
+              <span class="text-xs font-semibold uppercase tracking-wider" style="font-family: var(--font-body); color: oklch(0.07 0.015 320)">Secondary — Forge Amber</span>
+              <span class="hidden sm:inline text-[0.6rem] uppercase tracking-wider" style="font-family: var(--font-body); color: oklch(0.07 0.015 320 / 50%)">Tags, 404, discovery</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="hidden md:inline text-[0.6875rem]" style="font-family: var(--font-code); color: oklch(0.07 0.015 320 / 60%)">oklch(0.72 0.18 55)</span>
+              <span class="text-[0.6875rem]" style="font-family: var(--font-code); color: oklch(0.07 0.015 320 / 40%)">#D49420</span>
+            </div>
+          </div>
+
+          <!-- Accent -->
+          <div class="color-band h-14 md:h-16 flex items-center justify-between px-5 md:px-8" style="background: oklch(0.16 0.030 310); --pad: 1.25rem">
+            <div class="flex items-center gap-4">
+              <span class="text-[0.6875rem] font-medium text-foreground/70 uppercase tracking-wider" style="font-family: var(--font-body)">Accent</span>
+              <span class="hidden sm:inline text-[0.6rem] text-muted-foreground/40 uppercase tracking-wider" style="font-family: var(--font-body)">Purple-shifted surface</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="hidden md:inline text-[0.6875rem] text-muted-foreground/60" style="font-family: var(--font-code)">oklch(0.16 0.030 310)</span>
+              <span class="text-[0.6875rem] text-muted-foreground/40" style="font-family: var(--font-code)">#201828</span>
+            </div>
+          </div>
+
+          <!-- Muted -->
+          <div class="color-band h-14 md:h-16 flex items-center justify-between px-5 md:px-8" style="background: oklch(0.15 0.015 320); --pad: 1.25rem">
+            <div class="flex items-center gap-4">
+              <span class="text-[0.6875rem] font-medium text-foreground/70 uppercase tracking-wider" style="font-family: var(--font-body)">Muted</span>
+              <span class="hidden sm:inline text-[0.6rem] text-muted-foreground/40 uppercase tracking-wider" style="font-family: var(--font-body)">Disabled surfaces</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="hidden md:inline text-[0.6875rem] text-muted-foreground/60" style="font-family: var(--font-code)">oklch(0.15 0.015 320)</span>
+              <span class="text-[0.6875rem] text-muted-foreground/40" style="font-family: var(--font-code)">#1C161E</span>
+            </div>
+          </div>
+
+          <!-- Muted Foreground -->
+          <div class="color-band h-14 md:h-16 flex items-center justify-between px-5 md:px-8" style="background: oklch(0.52 0.018 315); --pad: 1.25rem">
+            <div class="flex items-center gap-4">
+              <span class="text-[0.6875rem] font-medium uppercase tracking-wider" style="font-family: var(--font-body); color: oklch(0.07 0.015 320)">Muted Foreground</span>
+              <span class="hidden sm:inline text-[0.6rem] uppercase tracking-wider" style="font-family: var(--font-body); color: oklch(0.07 0.015 320 / 50%)">Secondary text, captions</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="hidden md:inline text-[0.6875rem]" style="font-family: var(--font-code); color: oklch(0.07 0.015 320 / 60%)">oklch(0.52 0.018 315)</span>
+              <span class="text-[0.6875rem]" style="font-family: var(--font-code); color: oklch(0.07 0.015 320 / 40%)">#7A6E82</span>
+            </div>
+          </div>
+
+          <!-- Border -->
+          <div class="color-band h-14 md:h-16 flex items-center justify-between px-5 md:px-8 border-2" style="background: oklch(0.07 0.015 320); border-color: oklch(1 0.008 310 / 8%); --pad: 1.25rem">
+            <div class="flex items-center gap-4">
+              <span class="text-[0.6875rem] font-medium text-foreground/70 uppercase tracking-wider" style="font-family: var(--font-body)">Border</span>
+              <span class="hidden sm:inline text-[0.6rem] text-muted-foreground/40 uppercase tracking-wider" style="font-family: var(--font-body)">Structural lines, dividers</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="hidden md:inline text-[0.6875rem] text-muted-foreground/60" style="font-family: var(--font-code)">oklch(1 0.008 310 / 8%)</span>
+              <span class="text-[0.6875rem] text-muted-foreground/40" style="font-family: var(--font-code)">8% white</span>
+            </div>
+          </div>
+
+          <!-- Input -->
+          <div class="color-band h-14 md:h-16 flex items-center justify-between px-5 md:px-8 border-2" style="background: oklch(0.07 0.015 320); border-color: oklch(1 0.008 310 / 11%); --pad: 1.25rem">
+            <div class="flex items-center gap-4">
+              <span class="text-[0.6875rem] font-medium text-foreground/70 uppercase tracking-wider" style="font-family: var(--font-body)">Input</span>
+              <span class="hidden sm:inline text-[0.6rem] text-muted-foreground/40 uppercase tracking-wider" style="font-family: var(--font-body)">Form field borders</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="hidden md:inline text-[0.6875rem] text-muted-foreground/60" style="font-family: var(--font-code)">oklch(1 0.008 310 / 11%)</span>
+              <span class="text-[0.6875rem] text-muted-foreground/40" style="font-family: var(--font-code)">11% white</span>
+            </div>
+          </div>
+
+          <!-- Ring -->
+          <div class="color-band h-14 md:h-16 flex items-center justify-between px-5 md:px-8" style="background: oklch(0.55 0.22 305); --pad: 1.25rem">
+            <div class="flex items-center gap-4">
+              <span class="text-[0.6875rem] font-medium uppercase tracking-wider" style="font-family: var(--font-body); color: oklch(0.95 0.008 310)">Ring</span>
+              <span class="hidden sm:inline text-[0.6rem] uppercase tracking-wider" style="font-family: var(--font-body); color: oklch(0.95 0.008 310 / 50%)">Focus outlines</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="hidden md:inline text-[0.6875rem]" style="font-family: var(--font-code); color: oklch(0.95 0.008 310 / 70%)">oklch(0.55 0.22 305)</span>
+              <span class="text-[0.6875rem]" style="font-family: var(--font-code); color: oklch(0.95 0.008 310 / 50%)">#A03BA5</span>
+            </div>
+          </div>
+
+          <!-- Destructive -->
+          <div class="color-band h-14 md:h-16 flex items-center justify-between px-5 md:px-8" style="background: oklch(0.55 0.22 27); --pad: 1.25rem">
+            <div class="flex items-center gap-4">
+              <span class="text-[0.6875rem] font-medium uppercase tracking-wider" style="font-family: var(--font-body); color: oklch(0.95 0.01 27)">Destructive</span>
+              <span class="hidden sm:inline text-[0.6rem] uppercase tracking-wider" style="font-family: var(--font-body); color: oklch(0.95 0.01 27 / 50%)">Error states, delete</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="hidden md:inline text-[0.6875rem]" style="font-family: var(--font-code); color: oklch(0.95 0.01 27 / 70%)">oklch(0.55 0.22 27)</span>
+              <span class="text-[0.6875rem]" style="font-family: var(--font-code); color: oklch(0.95 0.01 27 / 50%)">#D03020</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 2b. Purple/Amber Decision Framework ──────────────── -->
+      <div class="on-scroll mb-24" style="--d: 120ms">
+        <p class="text-[0.6875rem] text-muted-foreground/70 uppercase tracking-wider mb-8" style="font-family: var(--font-body)">2b · The Purple / Amber Decision Framework</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-[2px]">
+          <!-- Purple column -->
+          <div class="border-2 border-border">
+            <div class="h-12 flex items-center px-5" style="background: oklch(0.44 0.24 305);">
+              <span class="text-xs font-semibold uppercase tracking-[0.15em]" style="font-family: var(--font-display); color: oklch(0.95 0.008 310)">Purple is for...</span>
+            </div>
+            <div class="p-5 space-y-0">
+              <div class="spec-row">
+                <span class="spec-label">Primary CTAs</span>
+                <span class="spec-value">Apply, Enter, Join, Subscribe</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-label">Focus Rings</span>
+                <span class="spec-value">All interactive elements</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-label">Section Labels</span>
+                <span class="spec-value">At 65% opacity</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-label">Atmosphere</span>
+                <span class="spec-value">Gradients & environment</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-label">Watermarks</span>
+                <span class="spec-value">Background numerals at 3%</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-label">Hover Glows</span>
+                <span class="spec-value">text-shadow, box-shadow</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-label">Banner Borders</span>
+                <span class="spec-value">Alert & notification outlines</span>
+              </div>
+              <div class="spec-row" style="border-bottom: none;">
+                <span class="spec-label">The World</span>
+                <span class="spec-value">Surfaces, depth, identity</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Amber column -->
+          <div class="border-2 border-border">
+            <div class="h-12 flex items-center px-5" style="background: oklch(0.72 0.18 55);">
+              <span class="text-xs font-semibold uppercase tracking-[0.15em]" style="font-family: var(--font-display); color: oklch(0.07 0.015 320)">Amber is for...</span>
+            </div>
+            <div class="p-5 space-y-0">
+              <div class="spec-row">
+                <span class="spec-label">The "404" Numeral</span>
+                <span class="spec-value">Always amber</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-label">Secondary CTAs</span>
+                <span class="spec-value">Explore, Learn More, View</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-label">Tags & Badges</span>
+                <span class="spec-value">Deep Tech, LATAM, etc.</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-label">Data Highlights</span>
+                <span class="spec-value">Metrics, key numbers</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-label">Tardi's Accent</span>
+                <span class="spec-value">Inner glow, amber warmth</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-label">Divider Gradients</span>
+                <span class="spec-value">Paired with purple</span>
+              </div>
+              <div class="spec-row">
+                <span class="spec-label">Code Syntax</span>
+                <span class="spec-value">Numbers, keywords</span>
+              </div>
+              <div class="spec-row" style="border-bottom: none;">
+                <span class="spec-label">The Found</span>
+                <span class="spec-value">The artifact discovered</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Decision rule -->
+        <div class="mt-6 py-4 px-5 border-2 border-border flex items-center justify-center gap-4 text-center">
+          <span class="w-3 h-3 shrink-0" style="background: oklch(0.44 0.24 305);"></span>
+          <p class="text-[0.8125rem] font-medium tracking-wide" style="font-family: var(--font-body); color: oklch(0.92 0.008 55 / 70%);">
+            <strong class="text-primary">Purple</strong> = commitment & environment.
+            <strong style="color: oklch(0.72 0.18 55);">Amber</strong> = discovery & navigation.
+          </p>
+          <span class="w-3 h-3 shrink-0" style="background: oklch(0.72 0.18 55);"></span>
+        </div>
+      </div>
+
+      <!-- ── 2c. House Colors ─────────────────────────────────── -->
+      <div class="on-scroll" style="--d: 160ms">
+        <p class="text-[0.6875rem] text-muted-foreground/70 uppercase tracking-wider mb-8" style="font-family: var(--font-body)">2c · House Colors</p>
+
+        <div class="border-y-2 border-border divide-y-2 divide-border">
+          <div class="house-row flex items-center gap-5 md:gap-8 px-5 md:px-8 py-5 md:py-6 hover:bg-house-ai/[0.04] cursor-default" style="--pad: 1.25rem">
+            <div class="swatch shrink-0" style="background: oklch(0.65 0.20 348);"></div>
+            <div class="flex-1 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 sm:gap-4">
+              <div class="flex items-baseline gap-4">
+                <h4 class="text-base font-bold text-house-ai uppercase tracking-wide" style="font-family: var(--font-display)">House AI</h4>
+                <span class="hidden sm:inline text-[0.6rem] text-muted-foreground/40 uppercase tracking-wider" style="font-family: var(--font-body)">Code that thinks</span>
+              </div>
+              <div class="flex items-center gap-4">
+                <span class="text-[0.6875rem] text-muted-foreground/60" style="font-family: var(--font-code)">oklch(0.65 0.20 348)</span>
+                <span class="text-[0.6875rem] text-muted-foreground/40" style="font-family: var(--font-code)">#D44870</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="house-row flex items-center gap-5 md:gap-8 px-5 md:px-8 py-5 md:py-6 hover:bg-house-biotech/[0.04] cursor-default" style="--pad: 1.25rem">
+            <div class="swatch shrink-0" style="background: oklch(0.70 0.17 152);"></div>
+            <div class="flex-1 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 sm:gap-4">
+              <div class="flex items-baseline gap-4">
+                <h4 class="text-base font-bold text-house-biotech uppercase tracking-wide" style="font-family: var(--font-display)">House Biotech</h4>
+                <span class="hidden sm:inline text-[0.6rem] text-muted-foreground/40 uppercase tracking-wider" style="font-family: var(--font-body)">Evolving life</span>
+              </div>
+              <div class="flex items-center gap-4">
+                <span class="text-[0.6875rem] text-muted-foreground/60" style="font-family: var(--font-code)">oklch(0.70 0.17 152)</span>
+                <span class="text-[0.6875rem] text-muted-foreground/40" style="font-family: var(--font-code)">#2DB06A</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="house-row flex items-center gap-5 md:gap-8 px-5 md:px-8 py-5 md:py-6 hover:bg-house-hardware/[0.04] cursor-default" style="--pad: 1.25rem">
+            <div class="swatch shrink-0" style="background: oklch(0.82 0.15 80);"></div>
+            <div class="flex-1 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 sm:gap-4">
+              <div class="flex items-baseline gap-4">
+                <h4 class="text-base font-bold text-house-hardware uppercase tracking-wide" style="font-family: var(--font-display)">House Hardware</h4>
+                <span class="hidden sm:inline text-[0.6rem] text-muted-foreground/40 uppercase tracking-wider" style="font-family: var(--font-body)">Atoms to products</span>
+              </div>
+              <div class="flex items-center gap-4">
+                <span class="text-[0.6875rem] text-muted-foreground/60" style="font-family: var(--font-code)">oklch(0.82 0.15 80)</span>
+                <span class="text-[0.6875rem] text-muted-foreground/40" style="font-family: var(--font-code)">#C8A030</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section divider -->
+  <div class="divider-gradient mx-6 md:mx-12 lg:mx-20"></div>
+
+  <!-- ═══ SECTION 3: TYPOGRAPHY SCALE ═══════════════════════════════ -->
+  <section class="relative px-6 md:px-12 lg:px-20 py-24 md:py-36">
+    <span class="section-number">03</span>
+
+    <div class="relative z-10">
+      <p class="on-scroll label mb-6">Typography Scale</p>
+      <p class="on-scroll text-sm text-muted-foreground max-w-lg mb-20" style="--d: 60ms">
+        Big Shoulders Display commands. Barlow communicates. JetBrains Mono reveals. The complete type ramp from hero to micro.
+      </p>
+
+      <!-- Hero -->
+      <div class="on-scroll mb-16" style="--d: 80ms">
+        <div class="overflow-hidden">
+          <span
+            style="font-family: var(--font-display); font-size: clamp(8rem, 25vw, 20rem); font-weight: 900; line-height: 0.75; letter-spacing: -0.03em; color: oklch(0.72 0.18 55);"
+          >404</span>
+        </div>
+        <div class="spec-row mt-4">
+          <span class="spec-label">Hero</span>
+          <span class="spec-value">Big Shoulders Display · clamp(8rem, 25vw, 20rem) · 900 · 0.75 · -0.03em</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label">Usage</span>
+          <span class="spec-value">Hero numerals — the 404 artifact</span>
+        </div>
+      </div>
+
+      <!-- Display 1 -->
+      <div class="on-scroll mb-16" style="--d: 100ms">
+        <h2 style="font-family: var(--font-display); font-size: clamp(3rem, 9vw, 8rem); font-weight: 900; line-height: 0.85; letter-spacing: -0.01em; text-transform: uppercase;">
+          Breaking the Laws
+        </h2>
+        <div class="spec-row mt-4">
+          <span class="spec-label">Display 1</span>
+          <span class="spec-value">Big Shoulders Display · clamp(3rem, 9vw, 8rem) · 900 · 0.85 · -0.01em</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label">Usage</span>
+          <span class="spec-value">Section headings, large statements</span>
+        </div>
+      </div>
+
+      <!-- Display 2 -->
+      <div class="on-scroll mb-16" style="--d: 120ms">
+        <p class="manifesto-line">The error is the origin.</p>
+        <div class="spec-row mt-4">
+          <span class="spec-label">Display 2</span>
+          <span class="spec-value">Big Shoulders Display · clamp(1.6rem, 4.5vw, 3.2rem) · 700 · 1.1 · 0</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label">Usage</span>
+          <span class="spec-value">Manifesto lines, brand statements</span>
+        </div>
+      </div>
+
+      <!-- H1 -->
+      <div class="on-scroll mb-16" style="--d: 140ms">
+        <h3 style="font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.5rem); font-weight: 700; line-height: 1.1; text-transform: uppercase;">
+          Programme Houses
+        </h3>
+        <div class="spec-row mt-4">
+          <span class="spec-label">H1</span>
+          <span class="spec-value">Big Shoulders Display · clamp(1.5rem, 3vw, 2.5rem) · 700 · 1.1 · 0</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label">Usage</span>
+          <span class="spec-value">Component headings, page sections</span>
+        </div>
+      </div>
+
+      <!-- H2 -->
+      <div class="on-scroll mb-16" style="--d: 160ms">
+        <h4 style="font-family: var(--font-display); font-size: clamp(1.25rem, 2vw, 1.75rem); font-weight: 600; line-height: 1.2; letter-spacing: 0.02em; text-transform: uppercase;">
+          Deep Tech Pre-Incubator
+        </h4>
+        <div class="spec-row mt-4">
+          <span class="spec-label">H2</span>
+          <span class="spec-value">Big Shoulders Display · clamp(1.25rem, 2vw, 1.75rem) · 600 · 1.2 · 0.02em</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label">Usage</span>
+          <span class="spec-value">Sub-headings, card group titles</span>
+        </div>
+      </div>
+
+      <!-- H3 -->
+      <div class="on-scroll mb-16" style="--d: 180ms">
+        <h5 style="font-family: var(--font-display); font-size: 1.125rem; font-weight: 600; line-height: 1.3; letter-spacing: 0.04em; text-transform: uppercase;">
+          Cohort II Applications
+        </h5>
+        <div class="spec-row mt-4">
+          <span class="spec-label">H3</span>
+          <span class="spec-value">Big Shoulders Display · 1.125rem · 600 · 1.3 · 0.04em</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label">Usage</span>
+          <span class="spec-value">Card titles, tertiary headings</span>
+        </div>
+      </div>
+
+      <!-- Body -->
+      <div class="on-scroll mb-16" style="--d: 200ms">
+        <p style="font-family: var(--font-body); font-size: 1.0625rem; font-weight: 400; line-height: 1.75; color: oklch(0.92 0.008 55 / 80%); max-width: 62ch;">
+          404 Tech Found is LATAM's maverick deep-tech pre-incubator, built by founders for founders. We turn breakthrough science into venture-grade companies — catalysing the next generation of biotech, AI, and hardware startups right where the talent is.
+        </p>
+        <div class="spec-row mt-4">
+          <span class="spec-label">Body</span>
+          <span class="spec-value">Barlow · 1.0625rem · 400 · 1.75 · 0</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label">Usage</span>
+          <span class="spec-value">Primary body text, paragraphs</span>
+        </div>
+      </div>
+
+      <!-- Body SM -->
+      <div class="on-scroll mb-16" style="--d: 220ms">
+        <p style="font-family: var(--font-body); font-size: 0.9375rem; font-weight: 400; line-height: 1.75; color: oklch(0.52 0.018 315); max-width: 62ch;">
+          Secondary text for captions, metadata, and supporting content that doesn't compete with primary messaging but remains comfortably readable at smaller sizes.
+        </p>
+        <div class="spec-row mt-4">
+          <span class="spec-label">Body SM</span>
+          <span class="spec-value">Barlow · 0.9375rem · 400 · 1.75 · 0</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label">Usage</span>
+          <span class="spec-value">Secondary text, captions, descriptions</span>
+        </div>
+      </div>
+
+      <!-- Caption -->
+      <div class="on-scroll mb-16" style="--d: 240ms">
+        <p style="font-family: var(--font-body); font-size: 0.8125rem; font-weight: 500; line-height: 1.5; letter-spacing: 0.02em; color: oklch(0.52 0.018 315);">
+          March 30, 2025 · Lima, Peru
+        </p>
+        <div class="spec-row mt-4">
+          <span class="spec-label">Caption</span>
+          <span class="spec-value">Barlow · 0.8125rem · 500 · 1.5 · 0.02em</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label">Usage</span>
+          <span class="spec-value">Metadata, timestamps, footnotes</span>
+        </div>
+      </div>
+
+      <!-- Label -->
+      <div class="on-scroll mb-16" style="--d: 260ms">
+        <p class="label">The Signal</p>
+        <div class="spec-row mt-4">
+          <span class="spec-label">Label</span>
+          <span class="spec-value">Barlow · 0.6875rem · 500 · 1 · 0.25em · uppercase</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label">Usage</span>
+          <span class="spec-value">Section labels, category markers</span>
+        </div>
+      </div>
+
+      <!-- Micro -->
+      <div class="on-scroll mb-16" style="--d: 280ms">
+        <p style="font-family: var(--font-body); font-size: 0.625rem; font-weight: 600; line-height: 1; letter-spacing: 0.2em; text-transform: uppercase; color: oklch(0.52 0.018 315);">
+          Proposal T
+        </p>
+        <div class="spec-row mt-4">
+          <span class="spec-label">Micro</span>
+          <span class="spec-value">Barlow · 0.625rem · 600 · 1 · 0.2em · uppercase</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label">Usage</span>
+          <span class="spec-value">Tiny labels, identity strip, nav metadata</span>
+        </div>
+      </div>
+
+      <!-- Code -->
+      <div class="on-scroll" style="--d: 300ms">
+        <pre class="bg-card border-2 border-border p-5 overflow-x-auto"><code style="font-family: var(--font-code); font-size: 0.875rem; font-weight: 400; line-height: 1.75; color: oklch(0.92 0.008 55);">const status = <span style="color: oklch(0.72 0.18 55);">404</span>;</code></pre>
+        <div class="spec-row mt-4">
+          <span class="spec-label">Code</span>
+          <span class="spec-value">JetBrains Mono · 0.875rem · 400 · 1.75 · 0</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label">Usage</span>
+          <span class="spec-value">Code blocks, inline code, terminal output</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section divider -->
+  <div class="divider-gradient mx-6 md:mx-12 lg:mx-20"></div>
+
+  <!-- ═══ SECTION 4: SPACING SYSTEM ═════════════════════════════════ -->
+  <section class="relative px-6 md:px-12 lg:px-20 py-24 md:py-36">
+    <span class="section-number">04</span>
+
+    <div class="relative z-10">
+      <p class="on-scroll label mb-6">Spacing System</p>
+      <p class="on-scroll text-sm text-muted-foreground max-w-lg mb-20" style="--d: 60ms">
+        Base unit: 4px (0.25rem). Every spatial decision is a multiple of this unit. Consistency is structural, not decorative.
+      </p>
+
+      <!-- ── Spacing Scale ────────────────────────────────────── -->
+      <div class="on-scroll mb-24" style="--d: 80ms">
+        <p class="text-[0.6875rem] text-muted-foreground/70 uppercase tracking-wider mb-8" style="font-family: var(--font-body)">4a · Scale</p>
+
+        <div class="space-y-[2px]">
+          <!-- space-1 -->
+          <div class="flex items-center gap-4 py-3">
+            <span class="spec-label w-20 shrink-0 text-right">space-1</span>
+            <div class="flex-1 flex items-center gap-4">
+              <div class="h-5" style="width: 0.25rem; background: oklch(0.44 0.24 305 / 60%);"></div>
+              <span class="spec-value">0.25rem · 4px</span>
+            </div>
+          </div>
+
+          <!-- space-2 -->
+          <div class="flex items-center gap-4 py-3">
+            <span class="spec-label w-20 shrink-0 text-right">space-2</span>
+            <div class="flex-1 flex items-center gap-4">
+              <div class="h-5" style="width: 0.5rem; background: oklch(0.44 0.24 305 / 60%);"></div>
+              <span class="spec-value">0.5rem · 8px</span>
+            </div>
+          </div>
+
+          <!-- space-3 -->
+          <div class="flex items-center gap-4 py-3">
+            <span class="spec-label w-20 shrink-0 text-right">space-3</span>
+            <div class="flex-1 flex items-center gap-4">
+              <div class="h-5" style="width: 0.75rem; background: oklch(0.44 0.24 305 / 60%);"></div>
+              <span class="spec-value">0.75rem · 12px</span>
+            </div>
+          </div>
+
+          <!-- space-4 -->
+          <div class="flex items-center gap-4 py-3">
+            <span class="spec-label w-20 shrink-0 text-right">space-4</span>
+            <div class="flex-1 flex items-center gap-4">
+              <div class="h-5" style="width: 1rem; background: oklch(0.44 0.24 305 / 60%);"></div>
+              <span class="spec-value">1rem · 16px</span>
+            </div>
+          </div>
+
+          <!-- space-6 -->
+          <div class="flex items-center gap-4 py-3">
+            <span class="spec-label w-20 shrink-0 text-right">space-6</span>
+            <div class="flex-1 flex items-center gap-4">
+              <div class="h-5" style="width: 1.5rem; background: oklch(0.44 0.24 305 / 60%);"></div>
+              <span class="spec-value">1.5rem · 24px</span>
+            </div>
+          </div>
+
+          <!-- space-8 -->
+          <div class="flex items-center gap-4 py-3">
+            <span class="spec-label w-20 shrink-0 text-right">space-8</span>
+            <div class="flex-1 flex items-center gap-4">
+              <div class="h-5" style="width: 2rem; background: oklch(0.44 0.24 305 / 55%);"></div>
+              <span class="spec-value">2rem · 32px</span>
+            </div>
+          </div>
+
+          <!-- space-10 -->
+          <div class="flex items-center gap-4 py-3">
+            <span class="spec-label w-20 shrink-0 text-right">space-10</span>
+            <div class="flex-1 flex items-center gap-4">
+              <div class="h-5" style="width: 2.5rem; background: oklch(0.44 0.24 305 / 55%);"></div>
+              <span class="spec-value">2.5rem · 40px</span>
+            </div>
+          </div>
+
+          <!-- space-12 -->
+          <div class="flex items-center gap-4 py-3">
+            <span class="spec-label w-20 shrink-0 text-right">space-12</span>
+            <div class="flex-1 flex items-center gap-4">
+              <div class="h-5" style="width: 3rem; background: oklch(0.44 0.24 305 / 50%);"></div>
+              <span class="spec-value">3rem · 48px</span>
+            </div>
+          </div>
+
+          <!-- space-16 -->
+          <div class="flex items-center gap-4 py-3">
+            <span class="spec-label w-20 shrink-0 text-right">space-16</span>
+            <div class="flex-1 flex items-center gap-4">
+              <div class="h-5" style="width: 4rem; background: oklch(0.55 0.20 330 / 45%);"></div>
+              <span class="spec-value">4rem · 64px</span>
+            </div>
+          </div>
+
+          <!-- space-20 -->
+          <div class="flex items-center gap-4 py-3">
+            <span class="spec-label w-20 shrink-0 text-right">space-20</span>
+            <div class="flex-1 flex items-center gap-4">
+              <div class="h-5" style="width: 5rem; background: oklch(0.55 0.20 330 / 45%);"></div>
+              <span class="spec-value">5rem · 80px</span>
+            </div>
+          </div>
+
+          <!-- space-24 -->
+          <div class="flex items-center gap-4 py-3">
+            <span class="spec-label w-20 shrink-0 text-right">space-24</span>
+            <div class="flex-1 flex items-center gap-4">
+              <div class="h-5" style="width: 6rem; background: oklch(0.60 0.18 340 / 40%);"></div>
+              <span class="spec-value">6rem · 96px</span>
+            </div>
+          </div>
+
+          <!-- space-28 -->
+          <div class="flex items-center gap-4 py-3">
+            <span class="spec-label w-20 shrink-0 text-right">space-28</span>
+            <div class="flex-1 flex items-center gap-4">
+              <div class="h-5" style="width: 7rem; background: oklch(0.60 0.18 340 / 40%);"></div>
+              <span class="spec-value">7rem · 112px</span>
+            </div>
+          </div>
+
+          <!-- space-32 -->
+          <div class="flex items-center gap-4 py-3">
+            <span class="spec-label w-20 shrink-0 text-right">space-32</span>
+            <div class="flex-1 flex items-center gap-4">
+              <div class="h-5" style="width: 8rem; background: oklch(0.65 0.17 350 / 35%);"></div>
+              <span class="spec-value">8rem · 128px</span>
+            </div>
+          </div>
+
+          <!-- space-36 -->
+          <div class="flex items-center gap-4 py-3">
+            <span class="spec-label w-20 shrink-0 text-right">space-36</span>
+            <div class="flex-1 flex items-center gap-4">
+              <div class="h-5" style="width: 9rem; background: oklch(0.72 0.18 55 / 35%);"></div>
+              <span class="spec-value">9rem · 144px</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Layout Grid ──────────────────────────────────────── -->
+      <div class="on-scroll mb-24" style="--d: 120ms">
+        <p class="text-[0.6875rem] text-muted-foreground/70 uppercase tracking-wider mb-8" style="font-family: var(--font-body)">4b · Layout Grid</p>
+
+        <div class="space-y-0">
+          <div class="spec-row">
+            <span class="spec-label">Max Content</span>
+            <span class="spec-value">72rem (1152px)</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">Max Text Width</span>
+            <span class="spec-value">62ch</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">Page Margins — Mobile</span>
+            <span class="spec-value">1.5rem (24px)</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">Page Margins — Tablet</span>
+            <span class="spec-value">3rem (48px)</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">Page Margins — Desktop</span>
+            <span class="spec-value">5rem (80px)</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">Gutters — Mobile</span>
+            <span class="spec-value">1.5rem (24px)</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">Gutters — Tablet</span>
+            <span class="spec-value">2rem (32px)</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">Gutters — Desktop</span>
+            <span class="spec-value">2.5rem (40px)</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">Border Width</span>
+            <span class="spec-value">2px (structural), 1px (spec rows)</span>
+          </div>
+          <div class="spec-row" style="border-bottom: none;">
+            <span class="spec-label">Border Radius</span>
+            <span class="spec-value">0rem — always zero</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Breakpoints ──────────────────────────────────────── -->
+      <div class="on-scroll" style="--d: 160ms">
+        <p class="text-[0.6875rem] text-muted-foreground/70 uppercase tracking-wider mb-8" style="font-family: var(--font-body)">4c · Breakpoints</p>
+
+        <!-- Visual breakpoint bar -->
+        <div class="relative h-16 border-2 border-border overflow-hidden mb-6">
+          <!-- Full bar background -->
+          <div class="absolute inset-0" style="background: linear-gradient(to right, oklch(0.44 0.24 305 / 8%), oklch(0.44 0.24 305 / 3%), oklch(0.72 0.18 55 / 5%));"></div>
+
+          <!-- sm marker at 640px — scale relative to 1280 max shown = 50% -->
+          <div class="absolute top-0 bottom-0 w-[2px]" style="left: 50%; background: oklch(0.44 0.24 305 / 40%);">
+            <span class="absolute -top-0.5 left-2 text-[0.5625rem] font-medium text-primary/60" style="font-family: var(--font-code)">sm · 640</span>
+          </div>
+
+          <!-- md marker at 768px — 60% -->
+          <div class="absolute top-0 bottom-0 w-[2px]" style="left: 60%; background: oklch(0.44 0.24 305 / 50%);">
+            <span class="absolute top-3 left-2 text-[0.5625rem] font-medium text-primary/70" style="font-family: var(--font-code)">md · 768</span>
+          </div>
+
+          <!-- lg marker at 1024px — 80% -->
+          <div class="absolute top-0 bottom-0 w-[2px]" style="left: 80%; background: oklch(0.55 0.22 305 / 60%);">
+            <span class="absolute top-6 left-2 text-[0.5625rem] font-medium text-primary/80" style="font-family: var(--font-code)">lg · 1024</span>
+          </div>
+
+          <!-- xl marker at 1280px — 100% -->
+          <div class="absolute top-0 bottom-0 w-[2px]" style="right: 0; background: oklch(0.72 0.18 55 / 50%);">
+            <span class="absolute bottom-1 right-2 text-[0.5625rem] font-medium" style="font-family: var(--font-code); color: oklch(0.72 0.18 55 / 70%);">xl · 1280</span>
+          </div>
+        </div>
+
+        <div class="space-y-0">
+          <div class="spec-row">
+            <span class="spec-label">sm</span>
+            <span class="spec-value">640px — single-column to multi-column</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">md</span>
+            <span class="spec-value">768px — tablet layout, expanded margins</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">lg</span>
+            <span class="spec-value">1024px — desktop layout, full margins</span>
+          </div>
+          <div class="spec-row" style="border-bottom: none;">
+            <span class="spec-label">xl</span>
+            <span class="spec-value">1280px — max content width reached</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section divider -->
+  <div class="divider-gradient mx-6 md:mx-12 lg:mx-20"></div>
+
+  <!-- CONTINUED IN SECTION 5+ -->
+
+  <!-- ═══ FOOTER (minimal) ═══════════════════════════════════════── -->
+  <footer class="px-6 md:px-12 lg:px-20 py-14 border-t-2 border-border">
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div class="flex items-baseline gap-2" style="font-family: var(--font-display)">
+        <span class="text-3xl font-black tracking-[-0.02em] uppercase" style="color: oklch(0.72 0.18 55);">404</span>
+        <span class="text-sm text-muted-foreground/80 tracking-wider uppercase font-semibold">Tech Found</span>
+      </div>
+      <p class="text-[0.6875rem] text-muted-foreground/60" style="font-family: var(--font-body)">Foundry Design System · Sections 5+ appended below</p>
+    </div>
+  </footer>
+
+  <!-- Scroll reveal -->
+  <script>
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("revealed");
+            observer.unobserve(entry.target);
+          }
+        }
+      },
+      { threshold: 0.08, rootMargin: "0px 0px -30px 0px" }
+    );
+    document.querySelectorAll(".on-scroll").forEach((el) => observer.observe(el));
+  </script>
+</body>
+</html>

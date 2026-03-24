@@ -1,0 +1,1450 @@
+---
+import "@/styles/global.css"
+import { Button } from "@/components/ui/button"
+---
+
+<html lang="en" data-theme="foundry">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Foundry Motion & Components — 404 Tech Found</title>
+  <style>
+    /* ── Entrance choreography ──────────────────────────────── */
+    @keyframes emerge {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes expand-right {
+      from { transform: scaleX(0); }
+      to { transform: scaleX(1); }
+    }
+    @keyframes drift {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      40% { transform: translateY(-8px) rotate(0.3deg); }
+      70% { transform: translateY(4px) rotate(-0.15deg); }
+    }
+
+    .emerge {
+      opacity: 0;
+      animation: emerge 700ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation-delay: var(--d, 0ms);
+    }
+    .on-scroll {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 600ms cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+      transition-delay: var(--d, 0ms);
+    }
+    .on-scroll.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Atmospheric layers ─────────────────────────────────── */
+    .atmosphere {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      background:
+        radial-gradient(ellipse 80% 45% at 20% 110%, oklch(0.14 0.08 305 / 35%), transparent 65%),
+        radial-gradient(ellipse 40% 35% at 85% 10%, oklch(0.12 0.06 310 / 20%), transparent 55%);
+    }
+
+    .grain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9998;
+      opacity: 0.025;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 256px 256px;
+    }
+
+    /* ── Section label ──────────────────────────────────────── */
+    .label {
+      font-family: var(--font-body);
+      font-size: 0.6875rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: oklch(0.55 0.22 305 / 65%);
+    }
+
+    /* ── Color band / house row interaction ─────────────────── */
+    .color-band {
+      transition: padding-left 250ms cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .color-band:hover {
+      padding-left: calc(var(--pad) + 12px);
+    }
+    .house-row {
+      transition: background-color 200ms cubic-bezier(0.25, 1, 0.5, 1),
+                  padding-left 200ms cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .house-row:hover {
+      padding-left: calc(var(--pad) + 6px);
+    }
+
+    /* ── Manifesto lines ────────────────────────────────────── */
+    .manifesto-line {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 4.5vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.1;
+      text-transform: uppercase;
+      letter-spacing: 0;
+      color: oklch(0.92 0.008 55 / 85%);
+      transition: text-shadow 300ms cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .manifesto-line:hover {
+      text-shadow: 0 0 30px oklch(0.44 0.24 305 / 25%), 0 0 60px oklch(0.44 0.24 305 / 10%);
+    }
+
+    /* ── Watermark ──────────────────────────────────────────── */
+    .watermark {
+      position: absolute;
+      font-family: var(--font-display);
+      font-size: clamp(15rem, 40vw, 35rem);
+      font-weight: 900;
+      line-height: 0.8;
+      text-transform: uppercase;
+      color: oklch(0.44 0.24 305 / 3%);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* ── Section divider ────────────────────────────────────── */
+    .divider-gradient {
+      height: 2px;
+      background: linear-gradient(to right, oklch(0.44 0.24 305 / 60%), oklch(0.72 0.18 55 / 60%), transparent);
+    }
+
+    /* ── Spec rows ──────────────────────────────────────────── */
+    .spec-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid oklch(1 0.008 310 / 5%);
+    }
+    .spec-label {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: oklch(0.52 0.018 315);
+    }
+    .spec-value {
+      font-family: var(--font-code);
+      font-size: 0.75rem;
+      color: oklch(0.92 0.008 55 / 60%);
+    }
+
+    /* ── Section number — giant background glyph ────────────── */
+    .section-number {
+      font-family: var(--font-display);
+      font-size: clamp(6rem, 15vw, 10rem);
+      font-weight: 900;
+      line-height: 0.8;
+      color: oklch(0.44 0.24 305 / 5%);
+      position: absolute;
+      right: -2%;
+      top: -10%;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* ── Easing demos — animated boxes that loop ────────────── */
+    @keyframes ease-demo {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(calc(100% - 2.5rem)); }
+      100% { transform: translateX(0); }
+    }
+    .ease-box {
+      width: 2.5rem;
+      height: 2.5rem;
+      background: oklch(0.44 0.24 305);
+      animation-duration: 2.5s;
+      animation-iteration-count: infinite;
+      animation-name: ease-demo;
+    }
+
+    /* ── Duration demo — fade in/out at different speeds ───── */
+    @keyframes duration-demo {
+      0%, 100% { opacity: 0.15; }
+      50% { opacity: 1; }
+    }
+    .duration-box {
+      width: 100%;
+      height: 2.5rem;
+      background: oklch(0.44 0.24 305 / 30%);
+      animation-name: duration-demo;
+      animation-iteration-count: infinite;
+    }
+
+    /* ── Hover state demos ──────────────────────────────────── */
+    .hover-demo {
+      transition-property: background-color, color, border-color, box-shadow, transform;
+      transition-timing-function: cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    /* ── Reduced motion ─────────────────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      .emerge { animation: none; opacity: 1; transform: none; }
+      .on-scroll { transition: none; opacity: 1; transform: none; }
+      .ease-box { animation: none; transform: none; }
+      .duration-box { animation: none; opacity: 0.5; }
+      .manifesto-line { transition: none; }
+    }
+  </style>
+</head>
+
+<body class="bg-background text-foreground overflow-x-hidden">
+  <div class="atmosphere"></div>
+  <div class="grain"></div>
+
+  <!-- Back links -->
+  <nav class="fixed top-5 left-6 z-50 flex items-center gap-4">
+    <a
+      href="/"
+      style="font-family: var(--font-body)"
+      class="text-[0.625rem] uppercase tracking-[0.2em] text-muted-foreground/80 hover:text-secondary transition-colors duration-200"
+    >
+      All proposals
+    </a>
+    <span class="text-muted-foreground/30 text-[0.5rem]">/</span>
+    <a
+      href="/foundry"
+      style="font-family: var(--font-body)"
+      class="text-[0.625rem] uppercase tracking-[0.2em] text-muted-foreground/80 hover:text-secondary transition-colors duration-200"
+    >
+      Foundry Showcase
+    </a>
+  </nav>
+
+  <!-- ═══ HEADER ═══════════════════════════════════════════════════ -->
+  <header class="min-h-[60vh] relative flex items-end px-6 md:px-12 lg:px-20 pb-20 md:pb-28 pt-24">
+    <div class="relative z-10 max-w-4xl">
+      <p class="label mb-6 emerge" style="--d: 200ms">Foundry Design System · Part II</p>
+
+      <h1 class="emerge" style="--d: 400ms">
+        <span
+          class="block text-[clamp(3rem,10vw,7rem)] font-black leading-[0.85] tracking-[-0.02em] uppercase"
+          style="font-family: var(--font-display)"
+        >
+          Motion &<br />Components
+        </span>
+      </h1>
+
+      <p
+        class="emerge text-[clamp(0.95rem,1.5vw,1.1rem)] text-muted-foreground max-w-md mt-10 leading-[1.75]"
+        style="--d: 700ms"
+      >
+        How the Foundry moves, responds, and assembles.<br />
+        Every easing curve, every state change, every surface.
+      </p>
+    </div>
+
+    <span class="watermark -right-[5%] bottom-[-15%]">II</span>
+  </header>
+
+  <div class="divider-gradient mx-6 md:mx-12 lg:mx-20"></div>
+
+
+  <!-- ═══ SECTION 5: MOTION LANGUAGE ════════════════════════════════ -->
+  <section class="relative px-6 md:px-12 lg:px-20 pt-28 md:pt-40 pb-20 md:pb-28 overflow-hidden">
+    <span class="section-number">05</span>
+
+    <div class="relative z-10">
+      <p class="on-scroll label mb-4">Section 05</p>
+      <h2 class="on-scroll text-[clamp(2rem,5vw,4rem)] font-black leading-[0.9] uppercase mb-6" style="font-family: var(--font-display)">
+        Motion Language
+      </h2>
+      <p class="on-scroll text-sm text-muted-foreground max-w-lg mb-20" style="--d: 80ms">
+        Nothing in the Foundry bounces. Nothing overshoots. Movement is deliberate —
+        like molten metal finding its mold. Sharp entrance, controlled deceleration, stillness.
+      </p>
+
+      <!-- ── 5a. Easing Curves ──────────────────────────────────── -->
+      <div class="on-scroll mb-20" style="--d: 120ms">
+        <p class="text-[0.6875rem] text-muted-foreground/70 uppercase tracking-wider mb-10">5a · Easing Curves</p>
+
+        <div class="space-y-10">
+          <!-- Primary easing -->
+          <div class="border-2 border-border bg-card p-6">
+            <div class="flex flex-col md:flex-row md:items-start gap-6">
+              <div class="flex-1 min-w-0">
+                <h4 class="text-sm font-semibold uppercase tracking-wide mb-2" style="color: oklch(0.72 0.18 55)">Primary</h4>
+                <div class="spec-row">
+                  <span class="spec-label">CSS</span>
+                  <span class="spec-value">cubic-bezier(0.16, 1, 0.3, 1)</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-label">Character</span>
+                  <span class="spec-value">Sharp in, decelerate out</span>
+                </div>
+                <div class="spec-row" style="border-bottom: none">
+                  <span class="spec-label">Usage</span>
+                  <span class="spec-value">Entrances and reveals</span>
+                </div>
+              </div>
+              <div class="w-full md:w-64 h-14 bg-background border-2 border-border overflow-hidden flex items-center px-2">
+                <div class="ease-box" style="animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Secondary easing -->
+          <div class="border-2 border-border bg-card p-6">
+            <div class="flex flex-col md:flex-row md:items-start gap-6">
+              <div class="flex-1 min-w-0">
+                <h4 class="text-sm font-semibold uppercase tracking-wide mb-2" style="color: oklch(0.72 0.18 55)">Secondary</h4>
+                <div class="spec-row">
+                  <span class="spec-label">CSS</span>
+                  <span class="spec-value">cubic-bezier(0.25, 1, 0.5, 1)</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-label">Character</span>
+                  <span class="spec-value">Gentler deceleration</span>
+                </div>
+                <div class="spec-row" style="border-bottom: none">
+                  <span class="spec-label">Usage</span>
+                  <span class="spec-value">Hover states, micro-interactions</span>
+                </div>
+              </div>
+              <div class="w-full md:w-64 h-14 bg-background border-2 border-border overflow-hidden flex items-center px-2">
+                <div class="ease-box" style="animation-timing-function: cubic-bezier(0.25, 1, 0.5, 1);"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Symmetric easing -->
+          <div class="border-2 border-border bg-card p-6">
+            <div class="flex flex-col md:flex-row md:items-start gap-6">
+              <div class="flex-1 min-w-0">
+                <h4 class="text-sm font-semibold uppercase tracking-wide mb-2" style="color: oklch(0.72 0.18 55)">Symmetric</h4>
+                <div class="spec-row">
+                  <span class="spec-label">CSS</span>
+                  <span class="spec-value">cubic-bezier(0.45, 0, 0.55, 1)</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-label">Character</span>
+                  <span class="spec-value">Even motion, no bias</span>
+                </div>
+                <div class="spec-row" style="border-bottom: none">
+                  <span class="spec-label">Usage</span>
+                  <span class="spec-value">Ambient, continuous animation</span>
+                </div>
+              </div>
+              <div class="w-full md:w-64 h-14 bg-background border-2 border-border overflow-hidden flex items-center px-2">
+                <div class="ease-box" style="animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1);"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 5b. Duration Scale ─────────────────────────────────── -->
+      <div class="on-scroll mb-20" style="--d: 160ms">
+        <p class="text-[0.6875rem] text-muted-foreground/70 uppercase tracking-wider mb-10">5b · Duration Scale</p>
+
+        <div class="space-y-4 max-w-3xl">
+          <!-- Instant -->
+          <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5">
+            <div class="flex items-baseline gap-3 sm:w-48 shrink-0">
+              <span class="text-xs font-semibold uppercase tracking-wide" style="color: oklch(0.72 0.18 55)">Instant</span>
+              <span class="text-[0.6875rem] font-mono text-muted-foreground">100ms</span>
+            </div>
+            <div class="flex-1">
+              <div class="duration-box" style="animation-duration: 200ms;"></div>
+            </div>
+            <span class="text-[0.6875rem] text-muted-foreground/60 sm:w-48 shrink-0 sm:text-right">Color transitions, opacity micro</span>
+          </div>
+
+          <!-- Quick -->
+          <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5">
+            <div class="flex items-baseline gap-3 sm:w-48 shrink-0">
+              <span class="text-xs font-semibold uppercase tracking-wide" style="color: oklch(0.72 0.18 55)">Quick</span>
+              <span class="text-[0.6875rem] font-mono text-muted-foreground">200ms</span>
+            </div>
+            <div class="flex-1">
+              <div class="duration-box" style="animation-duration: 400ms;"></div>
+            </div>
+            <span class="text-[0.6875rem] text-muted-foreground/60 sm:w-48 shrink-0 sm:text-right">Hover states, button interactions</span>
+          </div>
+
+          <!-- Standard -->
+          <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5">
+            <div class="flex items-baseline gap-3 sm:w-48 shrink-0">
+              <span class="text-xs font-semibold uppercase tracking-wide" style="color: oklch(0.72 0.18 55)">Standard</span>
+              <span class="text-[0.6875rem] font-mono text-muted-foreground">350ms</span>
+            </div>
+            <div class="flex-1">
+              <div class="duration-box" style="animation-duration: 700ms;"></div>
+            </div>
+            <span class="text-[0.6875rem] text-muted-foreground/60 sm:w-48 shrink-0 sm:text-right">Panel transitions, small reveals</span>
+          </div>
+
+          <!-- Expressive -->
+          <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5">
+            <div class="flex items-baseline gap-3 sm:w-48 shrink-0">
+              <span class="text-xs font-semibold uppercase tracking-wide" style="color: oklch(0.72 0.18 55)">Expressive</span>
+              <span class="text-[0.6875rem] font-mono text-muted-foreground">600ms</span>
+            </div>
+            <div class="flex-1">
+              <div class="duration-box" style="animation-duration: 1200ms;"></div>
+            </div>
+            <span class="text-[0.6875rem] text-muted-foreground/60 sm:w-48 shrink-0 sm:text-right">Entrance animations, scroll reveals</span>
+          </div>
+
+          <!-- Dramatic -->
+          <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5">
+            <div class="flex items-baseline gap-3 sm:w-48 shrink-0">
+              <span class="text-xs font-semibold uppercase tracking-wide" style="color: oklch(0.72 0.18 55)">Dramatic</span>
+              <span class="text-[0.6875rem] font-mono text-muted-foreground">900ms</span>
+            </div>
+            <div class="flex-1">
+              <div class="duration-box" style="animation-duration: 1800ms;"></div>
+            </div>
+            <span class="text-[0.6875rem] text-muted-foreground/60 sm:w-48 shrink-0 sm:text-right">Hero entrance, hero rule</span>
+          </div>
+
+          <!-- Ambient -->
+          <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5">
+            <div class="flex items-baseline gap-3 sm:w-48 shrink-0">
+              <span class="text-xs font-semibold uppercase tracking-wide" style="color: oklch(0.72 0.18 55)">Ambient</span>
+              <span class="text-[0.6875rem] font-mono text-muted-foreground">14s</span>
+            </div>
+            <div class="flex-1">
+              <div class="duration-box" style="animation-duration: 28s;"></div>
+            </div>
+            <span class="text-[0.6875rem] text-muted-foreground/60 sm:w-48 shrink-0 sm:text-right">Tardi drift, atmospheric loops</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 5c. Animation Principles ───────────────────────────── -->
+      <div class="on-scroll" style="--d: 200ms">
+        <p class="text-[0.6875rem] text-muted-foreground/70 uppercase tracking-wider mb-10">5c · Animation Principles</p>
+
+        <div class="max-w-2xl border-t-2 border-border">
+          <div class="border-b-2 border-border py-6 flex gap-6">
+            <span class="text-[0.6875rem] font-mono text-primary/60 shrink-0 pt-0.5 w-6 text-right">01</span>
+            <div>
+              <p class="text-sm font-semibold text-foreground/90 mb-1">Elements animate IN but don't animate OUT</p>
+              <p class="text-[0.8125rem] text-muted-foreground leading-relaxed">Entrance only. No exit animations for scroll content. Once revealed, the element stays.</p>
+            </div>
+          </div>
+          <div class="border-b-2 border-border py-6 flex gap-6">
+            <span class="text-[0.6875rem] font-mono text-primary/60 shrink-0 pt-0.5 w-6 text-right">02</span>
+            <div>
+              <p class="text-sm font-semibold text-foreground/90 mb-1">Stagger siblings by 80ms</p>
+              <p class="text-[0.8125rem] text-muted-foreground leading-relaxed">Via <code class="text-[0.75rem] font-mono text-primary/80 bg-primary/5 px-1.5 py-0.5">--d</code> CSS custom property. Creates a cascading reveal without orchestration complexity.</p>
+            </div>
+          </div>
+          <div class="border-b-2 border-border py-6 flex gap-6">
+            <span class="text-[0.6875rem] font-mono text-primary/60 shrink-0 pt-0.5 w-6 text-right">03</span>
+            <div>
+              <p class="text-sm font-semibold text-foreground/90 mb-1">Only animate: opacity, transform, color, shadows</p>
+              <p class="text-[0.8125rem] text-muted-foreground leading-relaxed">Never animate layout properties. No width, height, padding, or margin transitions. The compositor does the work.</p>
+            </div>
+          </div>
+          <div class="py-6 flex gap-6">
+            <span class="text-[0.6875rem] font-mono text-primary/60 shrink-0 pt-0.5 w-6 text-right">04</span>
+            <div>
+              <p class="text-sm font-semibold text-foreground/90 mb-1">Reduced motion: instant, no transform</p>
+              <p class="text-[0.8125rem] text-muted-foreground leading-relaxed">Respect <code class="text-[0.75rem] font-mono text-primary/80 bg-primary/5 px-1.5 py-0.5">prefers-reduced-motion</code>. Content appears immediately. No transforms. Opacity jumps to 1.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider-gradient mx-6 md:mx-12 lg:mx-20"></div>
+
+
+  <!-- ═══ SECTION 6: INTERACTION STATES ═════════════════════════════ -->
+  <section class="relative px-6 md:px-12 lg:px-20 pt-28 md:pt-40 pb-20 md:pb-28 overflow-hidden">
+    <span class="section-number">06</span>
+
+    <div class="relative z-10">
+      <p class="on-scroll label mb-4">Section 06</p>
+      <h2 class="on-scroll text-[clamp(2rem,5vw,4rem)] font-black leading-[0.9] uppercase mb-6" style="font-family: var(--font-display)">
+        Interaction States
+      </h2>
+      <p class="on-scroll text-sm text-muted-foreground max-w-lg mb-20" style="--d: 80ms">
+        Every touchable surface declares its state. No ambiguity.
+        The user always knows what's live, what's focused, what's done.
+      </p>
+
+      <!-- ── 6a. Button States ──────────────────────────────────── -->
+      <div class="on-scroll mb-20" style="--d: 120ms">
+        <p class="text-[0.6875rem] text-muted-foreground/70 uppercase tracking-wider mb-10">6a · Button States</p>
+
+        <!-- Primary buttons -->
+        <div class="mb-12">
+          <p class="text-xs font-semibold uppercase tracking-wide text-foreground/60 mb-5">Primary (Purple)</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            <!-- Default -->
+            <div class="border-2 border-border bg-card p-5 flex flex-col items-center gap-3">
+              <Button client:load size="default" className="text-sm tracking-wide uppercase font-semibold">
+                Default
+              </Button>
+              <span class="text-[0.6rem] font-mono text-muted-foreground/60 text-center">bg-primary<br />text-primary-foreground</span>
+            </div>
+            <!-- Hover -->
+            <div class="border-2 border-border bg-card p-5 flex flex-col items-center gap-3">
+              <button
+                class="group/button inline-flex shrink-0 items-center justify-center border border-transparent text-sm font-semibold tracking-wide uppercase whitespace-nowrap select-none h-8 gap-1.5 px-2.5"
+                style="background: oklch(0.44 0.24 305 / 90%); color: oklch(0.95 0.008 310);"
+              >
+                Hover
+              </button>
+              <span class="text-[0.6rem] font-mono text-muted-foreground/60 text-center">bg-primary/90</span>
+            </div>
+            <!-- Focus -->
+            <div class="border-2 border-border bg-card p-5 flex flex-col items-center gap-3">
+              <button
+                class="group/button inline-flex shrink-0 items-center justify-center border border-transparent text-sm font-semibold tracking-wide uppercase whitespace-nowrap select-none h-8 gap-1.5 px-2.5 ring-2 ring-offset-2"
+                style="background: oklch(0.44 0.24 305); color: oklch(0.95 0.008 310); --tw-ring-color: oklch(0.55 0.22 305); --tw-ring-offset-color: oklch(0.07 0.015 320);"
+              >
+                Focus
+              </button>
+              <span class="text-[0.6rem] font-mono text-muted-foreground/60 text-center">ring-2 ring-ring<br />ring-offset-2</span>
+            </div>
+            <!-- Active -->
+            <div class="border-2 border-border bg-card p-5 flex flex-col items-center gap-3">
+              <button
+                class="group/button inline-flex shrink-0 items-center justify-center border border-transparent text-sm font-semibold tracking-wide uppercase whitespace-nowrap select-none h-8 gap-1.5 px-2.5"
+                style="background: oklch(0.44 0.24 305); color: oklch(0.95 0.008 310); transform: scale(0.98);"
+              >
+                Active
+              </button>
+              <span class="text-[0.6rem] font-mono text-muted-foreground/60 text-center">transform: scale(0.98)</span>
+            </div>
+            <!-- Disabled -->
+            <div class="border-2 border-border bg-card p-5 flex flex-col items-center gap-3">
+              <Button client:load size="default" disabled className="text-sm tracking-wide uppercase font-semibold">
+                Disabled
+              </Button>
+              <span class="text-[0.6rem] font-mono text-muted-foreground/60 text-center">opacity: 0.5<br />pointer-events: none</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Secondary buttons (amber outline) -->
+        <div class="mb-12">
+          <p class="text-xs font-semibold uppercase tracking-wide text-foreground/60 mb-5">Secondary (Amber Outline)</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            <!-- Default -->
+            <div class="border-2 border-border bg-card p-5 flex flex-col items-center gap-3">
+              <Button client:load variant="outline" size="default" className="text-sm tracking-wide uppercase font-semibold border-secondary text-secondary hover:bg-secondary/10">
+                Default
+              </Button>
+              <span class="text-[0.6rem] font-mono text-muted-foreground/60 text-center">border-secondary<br />text-secondary</span>
+            </div>
+            <!-- Hover -->
+            <div class="border-2 border-border bg-card p-5 flex flex-col items-center gap-3">
+              <button
+                class="group/button inline-flex shrink-0 items-center justify-center text-sm font-semibold tracking-wide uppercase whitespace-nowrap select-none h-8 gap-1.5 px-2.5"
+                style="border: 1px solid oklch(0.72 0.18 55); color: oklch(0.72 0.18 55); background: oklch(0.72 0.18 55 / 10%);"
+              >
+                Hover
+              </button>
+              <span class="text-[0.6rem] font-mono text-muted-foreground/60 text-center">bg-secondary/10</span>
+            </div>
+            <!-- Focus -->
+            <div class="border-2 border-border bg-card p-5 flex flex-col items-center gap-3">
+              <button
+                class="group/button inline-flex shrink-0 items-center justify-center text-sm font-semibold tracking-wide uppercase whitespace-nowrap select-none h-8 gap-1.5 px-2.5 ring-2 ring-offset-2"
+                style="border: 1px solid oklch(0.72 0.18 55); color: oklch(0.72 0.18 55); --tw-ring-color: oklch(0.55 0.22 305); --tw-ring-offset-color: oklch(0.07 0.015 320);"
+              >
+                Focus
+              </button>
+              <span class="text-[0.6rem] font-mono text-muted-foreground/60 text-center">ring-2 ring-ring<br />ring-offset-2</span>
+            </div>
+            <!-- Active -->
+            <div class="border-2 border-border bg-card p-5 flex flex-col items-center gap-3">
+              <button
+                class="group/button inline-flex shrink-0 items-center justify-center text-sm font-semibold tracking-wide uppercase whitespace-nowrap select-none h-8 gap-1.5 px-2.5"
+                style="border: 1px solid oklch(0.72 0.18 55); color: oklch(0.72 0.18 55); transform: scale(0.98);"
+              >
+                Active
+              </button>
+              <span class="text-[0.6rem] font-mono text-muted-foreground/60 text-center">transform: scale(0.98)</span>
+            </div>
+            <!-- Disabled -->
+            <div class="border-2 border-border bg-card p-5 flex flex-col items-center gap-3">
+              <Button client:load variant="outline" size="default" disabled className="text-sm tracking-wide uppercase font-semibold border-secondary text-secondary">
+                Disabled
+              </Button>
+              <span class="text-[0.6rem] font-mono text-muted-foreground/60 text-center">opacity: 0.5<br />pointer-events: none</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ghost buttons -->
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wide text-foreground/60 mb-5">Ghost</p>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl">
+            <div class="border-2 border-border bg-card p-5 flex flex-col items-center gap-3">
+              <Button client:load variant="ghost" size="default" className="text-sm tracking-wide uppercase font-semibold">
+                Default
+              </Button>
+              <span class="text-[0.6rem] font-mono text-muted-foreground/60 text-center">bg-transparent<br />text-foreground</span>
+            </div>
+            <div class="border-2 border-border bg-card p-5 flex flex-col items-center gap-3">
+              <button
+                class="group/button inline-flex shrink-0 items-center justify-center border border-transparent text-sm font-semibold tracking-wide uppercase whitespace-nowrap select-none h-8 gap-1.5 px-2.5"
+                style="background: oklch(0.15 0.015 320); color: oklch(0.92 0.008 55);"
+              >
+                Hover
+              </button>
+              <span class="text-[0.6rem] font-mono text-muted-foreground/60 text-center">bg-muted<br />text-foreground</span>
+            </div>
+            <div class="border-2 border-border bg-card p-5 flex flex-col items-center gap-3">
+              <button
+                class="group/button inline-flex shrink-0 items-center justify-center border border-transparent text-sm font-semibold tracking-wide uppercase whitespace-nowrap select-none h-8 gap-1.5 px-2.5 ring-2 ring-offset-2"
+                style="color: oklch(0.92 0.008 55); --tw-ring-color: oklch(0.55 0.22 305); --tw-ring-offset-color: oklch(0.07 0.015 320);"
+              >
+                Focus
+              </button>
+              <span class="text-[0.6rem] font-mono text-muted-foreground/60 text-center">ring-2 ring-ring</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 6b. Input States ───────────────────────────────────── -->
+      <div class="on-scroll mb-20" style="--d: 160ms">
+        <p class="text-[0.6875rem] text-muted-foreground/70 uppercase tracking-wider mb-10">6b · Input States</p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          <!-- Default -->
+          <div class="border-2 border-border bg-card p-5 flex flex-col gap-2">
+            <span class="text-[0.6rem] font-semibold uppercase tracking-widest text-muted-foreground/60 mb-1">Default</span>
+            <input
+              type="text"
+              placeholder="founder@deeptech.com"
+              readonly
+              class="w-full h-10 px-3 border-2 border-input bg-background text-sm text-foreground placeholder:text-muted-foreground"
+              style="font-family: var(--font-body)"
+            />
+          </div>
+          <!-- Focused -->
+          <div class="border-2 border-border bg-card p-5 flex flex-col gap-2">
+            <span class="text-[0.6rem] font-semibold uppercase tracking-widest text-muted-foreground/60 mb-1">Focused</span>
+            <input
+              type="text"
+              placeholder="founder@deeptech.com"
+              readonly
+              class="w-full h-10 px-3 border-2 bg-background text-sm text-foreground placeholder:text-muted-foreground ring-2 ring-offset-2"
+              style="font-family: var(--font-body); border-color: oklch(0.55 0.22 305); --tw-ring-color: oklch(0.55 0.22 305); --tw-ring-offset-color: oklch(0.07 0.015 320);"
+            />
+          </div>
+          <!-- Filled -->
+          <div class="border-2 border-border bg-card p-5 flex flex-col gap-2">
+            <span class="text-[0.6rem] font-semibold uppercase tracking-widest text-muted-foreground/60 mb-1">Filled</span>
+            <input
+              type="text"
+              value="enrique@404tf.com"
+              readonly
+              class="w-full h-10 px-3 border-2 border-input bg-background text-sm text-foreground"
+              style="font-family: var(--font-body)"
+            />
+          </div>
+          <!-- Error -->
+          <div class="border-2 border-border bg-card p-5 flex flex-col gap-2">
+            <span class="text-[0.6rem] font-semibold uppercase tracking-widest text-muted-foreground/60 mb-1">Error</span>
+            <input
+              type="text"
+              value="invalid-email"
+              readonly
+              class="w-full h-10 px-3 border-2 bg-background text-sm text-foreground"
+              style="font-family: var(--font-body); border-color: oklch(0.55 0.22 27);"
+            />
+            <span class="text-[0.6875rem]" style="color: oklch(0.55 0.22 27)">Invalid email address</span>
+          </div>
+          <!-- Disabled -->
+          <div class="border-2 border-border bg-card p-5 flex flex-col gap-2">
+            <span class="text-[0.6rem] font-semibold uppercase tracking-widest text-muted-foreground/60 mb-1">Disabled</span>
+            <input
+              type="text"
+              placeholder="Not available"
+              disabled
+              class="w-full h-10 px-3 border-2 border-input bg-background text-sm text-foreground placeholder:text-muted-foreground opacity-50 cursor-not-allowed"
+              style="font-family: var(--font-body)"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 6c. Card Hover ─────────────────────────────────────── -->
+      <div class="on-scroll mb-20" style="--d: 200ms">
+        <p class="text-[0.6875rem] text-muted-foreground/70 uppercase tracking-wider mb-10">6c · Card Hover</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl">
+          <!-- Default state -->
+          <div>
+            <p class="text-[0.6rem] font-semibold uppercase tracking-widest text-muted-foreground/60 mb-3">Default</p>
+            <div class="border-2 border-border bg-card p-6">
+              <h4 class="text-sm font-bold uppercase tracking-wide mb-2">Card Title</h4>
+              <p class="text-[0.8125rem] text-muted-foreground leading-relaxed">Content sits on the surface. Border declares edges. No shadow.</p>
+            </div>
+          </div>
+          <!-- Hover state -->
+          <div>
+            <p class="text-[0.6rem] font-semibold uppercase tracking-widest text-muted-foreground/60 mb-3">Hover</p>
+            <div class="border-2 bg-card p-6" style="border-color: oklch(0.44 0.24 305 / 30%); box-shadow: 0 0 0 1px oklch(0.44 0.24 305 / 10%);">
+              <h4 class="text-sm font-bold uppercase tracking-wide mb-2">Card Title</h4>
+              <p class="text-[0.8125rem] text-muted-foreground leading-relaxed">Purple border reveals intent. Subtle outer glow, not a shadow. Elevation through color, not depth.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 max-w-2xl">
+          <div class="spec-row">
+            <span class="spec-label">Default border</span>
+            <span class="spec-value">border-border (oklch(1 0.008 310 / 8%))</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">Hover border</span>
+            <span class="spec-value">oklch(0.44 0.24 305 / 30%)</span>
+          </div>
+          <div class="spec-row" style="border-bottom: none">
+            <span class="spec-label">Glow</span>
+            <span class="spec-value">box-shadow: 0 0 0 1px oklch(0.44 0.24 305 / 10%)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 6d. Link States ────────────────────────────────────── -->
+      <div class="on-scroll" style="--d: 240ms">
+        <p class="text-[0.6875rem] text-muted-foreground/70 uppercase tracking-wider mb-10">6d · Link States</p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-3xl">
+          <div class="border-2 border-border bg-card p-5 flex flex-col items-center gap-3">
+            <span class="text-[0.6rem] font-semibold uppercase tracking-widest text-muted-foreground/60">Default</span>
+            <span class="text-sm font-medium" style="color: oklch(0.72 0.18 55)">View Report</span>
+            <span class="text-[0.6rem] font-mono text-muted-foreground/60">Amber, no underline</span>
+          </div>
+          <div class="border-2 border-border bg-card p-5 flex flex-col items-center gap-3">
+            <span class="text-[0.6rem] font-semibold uppercase tracking-widest text-muted-foreground/60">Hover</span>
+            <span class="text-sm font-medium underline underline-offset-4" style="color: oklch(0.72 0.18 55)">View Report</span>
+            <span class="text-[0.6rem] font-mono text-muted-foreground/60">Amber, underline</span>
+          </div>
+          <div class="border-2 border-border bg-card p-5 flex flex-col items-center gap-3">
+            <span class="text-[0.6rem] font-semibold uppercase tracking-widest text-muted-foreground/60">Visited</span>
+            <span class="text-sm font-medium" style="color: oklch(0.65 0.12 55)">View Report</span>
+            <span class="text-[0.6rem] font-mono text-muted-foreground/60">Muted amber</span>
+          </div>
+          <div class="border-2 border-border bg-card p-5 flex flex-col items-center gap-3">
+            <span class="text-[0.6rem] font-semibold uppercase tracking-widest text-muted-foreground/60">Focus</span>
+            <span class="text-sm font-medium ring-2 ring-offset-2 px-1" style="color: oklch(0.72 0.18 55); --tw-ring-color: oklch(0.55 0.22 305); --tw-ring-offset-color: oklch(0.07 0.015 320);">View Report</span>
+            <span class="text-[0.6rem] font-mono text-muted-foreground/60">Purple ring</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider-gradient mx-6 md:mx-12 lg:mx-20"></div>
+
+
+  <!-- ═══ SECTION 7: COMPONENT LIBRARY ══════════════════════════════ -->
+  <section class="relative px-6 md:px-12 lg:px-20 pt-28 md:pt-40 pb-20 md:pb-28 overflow-hidden">
+    <span class="section-number">07</span>
+
+    <div class="relative z-10">
+      <p class="on-scroll label mb-4">Section 07</p>
+      <h2 class="on-scroll text-[clamp(2rem,5vw,4rem)] font-black leading-[0.9] uppercase mb-6" style="font-family: var(--font-display)">
+        Component Library
+      </h2>
+      <p class="on-scroll text-sm text-muted-foreground max-w-lg mb-20" style="--d: 80ms">
+        Industrial-grade components. No rounded corners. No decorative shadows.
+        Each piece is forged for function, branded by structure.
+      </p>
+
+      <!-- ── 7a. Buttons — Full Matrix ──────────────────────────── -->
+      <div class="on-scroll mb-24" style="--d: 120ms">
+        <p class="text-[0.6875rem] text-muted-foreground/70 uppercase tracking-wider mb-10">7a · Buttons</p>
+
+        <!-- Sizes -->
+        <div class="mb-10">
+          <p class="text-xs font-semibold uppercase tracking-wide text-foreground/60 mb-5">Sizes</p>
+          <div class="flex flex-wrap items-end gap-3">
+            <Button client:load size="xs" className="text-xs tracking-wide uppercase font-semibold">XS Button</Button>
+            <Button client:load size="sm" className="text-sm tracking-wide uppercase font-semibold">SM Button</Button>
+            <Button client:load size="default" className="text-sm tracking-wide uppercase font-semibold">Default</Button>
+            <Button client:load size="lg" className="text-sm tracking-wide uppercase font-semibold">LG Button</Button>
+          </div>
+        </div>
+
+        <!-- Variants -->
+        <div class="mb-10">
+          <p class="text-xs font-semibold uppercase tracking-wide text-foreground/60 mb-5">Variants</p>
+          <div class="flex flex-wrap items-center gap-3">
+            <Button client:load className="text-sm tracking-wide uppercase font-semibold">Primary</Button>
+            <Button client:load variant="outline" className="text-sm tracking-wide uppercase font-semibold border-secondary text-secondary hover:bg-secondary/10">Secondary</Button>
+            <Button client:load variant="outline" className="text-sm tracking-wide uppercase font-semibold">Outline</Button>
+            <Button client:load variant="ghost" className="text-sm tracking-wide uppercase font-semibold">Ghost</Button>
+            <Button client:load variant="destructive" className="text-sm tracking-wide uppercase font-semibold">Destructive</Button>
+          </div>
+        </div>
+
+        <!-- With icons -->
+        <div class="mb-10">
+          <p class="text-xs font-semibold uppercase tracking-wide text-foreground/60 mb-5">With Icons</p>
+          <div class="flex flex-wrap items-center gap-3">
+            <Button client:load className="text-sm tracking-wide uppercase font-semibold gap-2">
+              Enter the Foundry
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
+            </Button>
+            <Button client:load variant="outline" className="text-sm tracking-wide uppercase font-semibold border-secondary text-secondary hover:bg-secondary/10 gap-2">
+              Explore
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
+            </Button>
+          </div>
+        </div>
+
+        <!-- The Foundry Pair -->
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-wide text-foreground/60 mb-5">The Foundry Pair — Purple + Amber</p>
+          <div class="border-2 border-border bg-card p-8 inline-flex gap-3">
+            <Button client:load size="lg" className="text-sm px-8 tracking-wide uppercase font-semibold">
+              Apply Now
+            </Button>
+            <Button client:load variant="outline" size="lg" className="text-sm px-8 tracking-wide uppercase font-semibold border-secondary text-secondary hover:bg-secondary/10">
+              Learn More
+            </Button>
+          </div>
+          <p class="text-[0.6875rem] text-muted-foreground/60 mt-3">Primary action in purple. Secondary in amber outline. Always this order.</p>
+        </div>
+      </div>
+
+      <!-- ── 7b. Tags / Badges ──────────────────────────────────── -->
+      <div class="on-scroll mb-24" style="--d: 160ms">
+        <p class="text-[0.6875rem] text-muted-foreground/70 uppercase tracking-wider mb-10">7b · Tags / Badges</p>
+
+        <div class="space-y-8">
+          <!-- Amber tags (default) -->
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-wide text-foreground/60 mb-4">Amber (Default)</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-[0.6rem] font-semibold uppercase tracking-widest px-3 py-1" style="background: oklch(0.72 0.18 55 / 15%); color: oklch(0.72 0.18 55);">Deep Tech</span>
+              <span class="text-[0.6rem] font-semibold uppercase tracking-widest px-3 py-1" style="background: oklch(0.72 0.18 55 / 15%); color: oklch(0.72 0.18 55);">LATAM</span>
+              <span class="text-[0.6rem] font-semibold uppercase tracking-widest px-3 py-1" style="background: oklch(0.72 0.18 55 / 15%); color: oklch(0.72 0.18 55);">Pre-Incubator</span>
+              <span class="text-[0.6rem] font-semibold uppercase tracking-widest px-3 py-1" style="background: oklch(0.72 0.18 55 / 15%); color: oklch(0.72 0.18 55);">404</span>
+            </div>
+          </div>
+
+          <!-- Purple tags -->
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-wide text-foreground/60 mb-4">Purple</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-[0.6rem] font-semibold uppercase tracking-widest px-3 py-1" style="background: oklch(0.44 0.24 305 / 15%); color: oklch(0.65 0.22 305);">Cohort II</span>
+              <span class="text-[0.6rem] font-semibold uppercase tracking-widest px-3 py-1" style="background: oklch(0.44 0.24 305 / 15%); color: oklch(0.65 0.22 305);">Foundry</span>
+              <span class="text-[0.6rem] font-semibold uppercase tracking-widest px-3 py-1" style="background: oklch(0.44 0.24 305 / 15%); color: oklch(0.65 0.22 305);">Research</span>
+            </div>
+          </div>
+
+          <!-- House tags -->
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-wide text-foreground/60 mb-4">House Colors</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-[0.6rem] font-semibold uppercase tracking-widest px-3 py-1" style="background: oklch(0.65 0.20 348 / 15%); color: oklch(0.65 0.20 348);">House AI</span>
+              <span class="text-[0.6rem] font-semibold uppercase tracking-widest px-3 py-1" style="background: oklch(0.70 0.17 152 / 15%); color: oklch(0.70 0.17 152);">House Biotech</span>
+              <span class="text-[0.6rem] font-semibold uppercase tracking-widest px-3 py-1" style="background: oklch(0.82 0.15 80 / 15%); color: oklch(0.82 0.15 80);">House Hardware</span>
+            </div>
+          </div>
+
+          <!-- Status tags -->
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-wide text-foreground/60 mb-4">Status</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-[0.6rem] font-semibold uppercase tracking-widest px-3 py-1" style="background: oklch(0.70 0.17 152 / 15%); color: oklch(0.70 0.17 152);">Active</span>
+              <span class="text-[0.6rem] font-semibold uppercase tracking-widest px-3 py-1" style="background: oklch(0.72 0.18 55 / 15%); color: oklch(0.72 0.18 55);">Pending</span>
+              <span class="text-[0.6rem] font-semibold uppercase tracking-widest px-3 py-1" style="background: oklch(0.52 0.018 315 / 15%); color: oklch(0.52 0.018 315);">Closed</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 7c. Cards ──────────────────────────────────────────── -->
+      <div class="on-scroll mb-24" style="--d: 200ms">
+        <p class="text-[0.6875rem] text-muted-foreground/70 uppercase tracking-wider mb-10">7c · Cards</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Content card -->
+          <div class="border-2 border-border bg-card p-6 flex flex-col hover-demo duration-200 hover:border-primary/30" style="transition-property: border-color, box-shadow;">
+            <p class="text-[0.6rem] font-semibold uppercase tracking-widest text-muted-foreground/50 mb-4">Content Card</p>
+            <h4 class="text-base font-bold uppercase tracking-wide mb-3" style="font-family: var(--font-display)">Quantum-Resistant Encryption for IoT</h4>
+            <p class="text-[0.8125rem] text-muted-foreground leading-relaxed mb-5 flex-1">
+              A Peruvian team developing post-quantum cryptographic protocols optimized for resource-constrained embedded devices.
+            </p>
+            <div class="flex flex-wrap gap-1.5 mb-5">
+              <span class="text-[0.55rem] font-semibold uppercase tracking-widest px-2 py-0.5" style="background: oklch(0.82 0.15 80 / 15%); color: oklch(0.82 0.15 80);">Hardware</span>
+              <span class="text-[0.55rem] font-semibold uppercase tracking-widest px-2 py-0.5" style="background: oklch(0.65 0.20 348 / 15%); color: oklch(0.65 0.20 348);">AI</span>
+            </div>
+            <a href="#" class="text-xs font-semibold uppercase tracking-wider hover:underline underline-offset-4" style="color: oklch(0.72 0.18 55)">
+              Read case study
+              <span class="inline-block ml-1">&rarr;</span>
+            </a>
+          </div>
+
+          <!-- Stat card -->
+          <div class="border-2 border-border bg-card p-6 flex flex-col">
+            <p class="text-[0.6rem] font-semibold uppercase tracking-widest text-muted-foreground/50 mb-4">Stat Card</p>
+            <span class="text-[clamp(2.5rem,5vw,3.5rem)] font-black leading-none mb-2" style="font-family: var(--font-display); color: oklch(0.72 0.18 55);">404</span>
+            <span class="text-xs font-semibold uppercase tracking-wider text-foreground/70 mb-2">Applications Received</span>
+            <p class="text-[0.8125rem] text-muted-foreground leading-relaxed mt-auto">
+              Cohort II attracted 404 applications across 12 LATAM countries. 18 teams selected.
+            </p>
+          </div>
+
+          <!-- Team card -->
+          <div class="border-2 border-border bg-card p-6 flex flex-col items-start">
+            <p class="text-[0.6rem] font-semibold uppercase tracking-widest text-muted-foreground/50 mb-4">Team Card</p>
+            <!-- Avatar placeholder -->
+            <div class="w-16 h-16 border-2 border-border bg-accent/50 mb-4 flex items-center justify-center">
+              <span class="text-lg font-bold text-muted-foreground/40" style="font-family: var(--font-display)">EF</span>
+            </div>
+            <h4 class="text-sm font-bold uppercase tracking-wide" style="font-family: var(--font-display)">Enrique Flores</h4>
+            <p class="text-[0.8125rem] text-muted-foreground mb-4">Co-Founder & CTO</p>
+            <span class="text-[0.55rem] font-semibold uppercase tracking-widest px-2 py-0.5" style="background: oklch(0.65 0.20 348 / 15%); color: oklch(0.65 0.20 348);">House AI</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 7d. Banners / Alerts ───────────────────────────────── -->
+      <div class="on-scroll mb-24" style="--d: 240ms">
+        <p class="text-[0.6875rem] text-muted-foreground/70 uppercase tracking-wider mb-10">7d · Banners / Alerts</p>
+
+        <div class="space-y-4 max-w-2xl">
+          <!-- Info (purple) -->
+          <div class="border-2 bg-primary/[0.04] p-5 flex items-start gap-3" style="border-color: oklch(0.44 0.24 305 / 30%);">
+            <div class="w-8 h-8 bg-primary/15 flex items-center justify-center shrink-0 mt-0.5">
+              <svg class="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-foreground">Cohort II is open</p>
+              <p class="text-[0.8125rem] text-muted-foreground mt-1">18 teams. 12 weeks. Applications close March 30.</p>
+            </div>
+          </div>
+
+          <!-- Success (biotech green) -->
+          <div class="border-2 p-5 flex items-start gap-3" style="border-color: oklch(0.70 0.17 152 / 30%); background: oklch(0.70 0.17 152 / 4%);">
+            <div class="w-8 h-8 flex items-center justify-center shrink-0 mt-0.5" style="background: oklch(0.70 0.17 152 / 15%)">
+              <svg class="w-4 h-4" style="color: oklch(0.70 0.17 152)" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+              </svg>
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-foreground">Application submitted</p>
+              <p class="text-[0.8125rem] text-muted-foreground mt-1">Your application has been received. We'll review it within 5 business days.</p>
+            </div>
+          </div>
+
+          <!-- Warning (amber) -->
+          <div class="border-2 p-5 flex items-start gap-3" style="border-color: oklch(0.72 0.18 55 / 30%); background: oklch(0.72 0.18 55 / 4%);">
+            <div class="w-8 h-8 flex items-center justify-center shrink-0 mt-0.5" style="background: oklch(0.72 0.18 55 / 15%)">
+              <svg class="w-4 h-4" style="color: oklch(0.72 0.18 55)" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+              </svg>
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-foreground">Deadline approaching</p>
+              <p class="text-[0.8125rem] text-muted-foreground mt-1">Applications for Cohort II close in 48 hours. Complete your submission.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 7e. Navigation Pattern ─────────────────────────────── -->
+      <div class="on-scroll mb-24" style="--d: 280ms">
+        <p class="text-[0.6875rem] text-muted-foreground/70 uppercase tracking-wider mb-10">7e · Navigation</p>
+
+        <div class="border-2 border-border bg-card">
+          <nav class="flex items-center justify-between gap-4 px-6 py-3 overflow-x-auto">
+            <div class="flex items-center gap-2 shrink-0" style="font-family: var(--font-display)">
+              <span class="text-xl font-black tracking-[-0.02em]" style="color: oklch(0.72 0.18 55);">404</span>
+              <span class="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Tech Found</span>
+            </div>
+
+            <div class="hidden md:flex items-center gap-6" style="font-family: var(--font-body)">
+              <a href="#" class="text-xs font-medium uppercase tracking-wider text-foreground/70 hover:text-foreground transition-colors relative pb-2" style="border-bottom: 2px solid oklch(0.44 0.24 305);">Founders</a>
+              <a href="#" class="text-xs font-medium uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors pb-2 border-b-2 border-transparent">Houses</a>
+              <a href="#" class="text-xs font-medium uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors pb-2 border-b-2 border-transparent">Events</a>
+              <a href="#" class="text-xs font-medium uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors pb-2 border-b-2 border-transparent">Blog</a>
+              <a href="#" class="text-xs font-medium uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors pb-2 border-b-2 border-transparent">Report</a>
+            </div>
+
+            <div class="shrink-0">
+              <Button client:load size="sm" className="text-xs tracking-wider uppercase font-semibold">Apply</Button>
+            </div>
+          </nav>
+        </div>
+
+        <div class="mt-4 space-y-0">
+          <div class="spec-row">
+            <span class="spec-label">Active indicator</span>
+            <span class="spec-value">2px solid primary (purple underline)</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">Logo</span>
+            <span class="spec-value">"404" in amber, "TECH FOUND" in muted</span>
+          </div>
+          <div class="spec-row" style="border-bottom: none">
+            <span class="spec-label">CTA</span>
+            <span class="spec-value">Primary button, always rightmost</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 7f. Dividers ───────────────────────────────────────── -->
+      <div class="on-scroll mb-24" style="--d: 320ms">
+        <p class="text-[0.6875rem] text-muted-foreground/70 uppercase tracking-wider mb-10">7f · Dividers</p>
+
+        <div class="space-y-10 max-w-3xl">
+          <!-- Standard -->
+          <div>
+            <p class="text-[0.6rem] font-semibold uppercase tracking-widest text-muted-foreground/60 mb-4">Standard</p>
+            <div class="h-[2px] bg-border"></div>
+            <div class="spec-row">
+              <span class="spec-label">Spec</span>
+              <span class="spec-value">2px solid border</span>
+            </div>
+          </div>
+
+          <!-- Gradient -->
+          <div>
+            <p class="text-[0.6rem] font-semibold uppercase tracking-widest text-muted-foreground/60 mb-4">Gradient — The Foundry Signature</p>
+            <div class="divider-gradient"></div>
+            <div class="spec-row">
+              <span class="spec-label">Spec</span>
+              <span class="spec-value">linear-gradient(to right, primary/60%, secondary/60%, transparent)</span>
+            </div>
+          </div>
+
+          <!-- Section divider with label -->
+          <div>
+            <p class="text-[0.6rem] font-semibold uppercase tracking-widest text-muted-foreground/60 mb-4">Section — With Label</p>
+            <div class="flex items-center gap-4">
+              <div class="flex-1 h-[2px] bg-border"></div>
+              <span class="text-[0.6rem] font-semibold uppercase tracking-widest text-muted-foreground/50 shrink-0" style="font-family: var(--font-body)">Programme Houses</span>
+              <div class="flex-1 h-[2px] bg-border"></div>
+            </div>
+            <div class="spec-row">
+              <span class="spec-label">Spec</span>
+              <span class="spec-value">Full-width 2px borders + centered label text</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 7g. Form Group ─────────────────────────────────────── -->
+      <div class="on-scroll" style="--d: 360ms">
+        <p class="text-[0.6875rem] text-muted-foreground/70 uppercase tracking-wider mb-10">7g · Form Group</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl">
+          <!-- Label + Input + Helper -->
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-foreground/70 mb-2" style="font-family: var(--font-body)">Email</label>
+            <input
+              type="email"
+              placeholder="founder@deeptech.com"
+              class="w-full h-10 px-3 border-2 border-input bg-background text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+              style="font-family: var(--font-body)"
+            />
+            <p class="text-[0.6875rem] text-muted-foreground/60 mt-2">We'll never share your email with anyone.</p>
+          </div>
+
+          <!-- Label + Input + Error -->
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-foreground/70 mb-2" style="font-family: var(--font-body)">Company Name</label>
+            <input
+              type="text"
+              value="A"
+              class="w-full h-10 px-3 border-2 bg-background text-sm text-foreground focus:outline-none"
+              style="font-family: var(--font-body); border-color: oklch(0.55 0.22 27);"
+            />
+            <p class="text-[0.6875rem] mt-2" style="color: oklch(0.55 0.22 27)">Company name must be at least 2 characters.</p>
+          </div>
+
+          <!-- Label + Textarea -->
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-foreground/70 mb-2" style="font-family: var(--font-body)">Project Description</label>
+            <textarea
+              placeholder="Tell us about your deep-tech project..."
+              rows="4"
+              class="w-full px-3 py-2 border-2 border-input bg-background text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none"
+              style="font-family: var(--font-body)"
+            ></textarea>
+          </div>
+
+          <!-- Checkbox / Toggle -->
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-foreground/70 mb-4" style="font-family: var(--font-body)">Preferences</label>
+            <div class="space-y-3">
+              <label class="flex items-center gap-3 cursor-pointer group">
+                <div class="w-5 h-5 border-2 border-border bg-background flex items-center justify-center group-hover:border-primary/50 transition-colors">
+                  <svg class="w-3 h-3 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                  </svg>
+                </div>
+                <span class="text-sm text-foreground/80" style="font-family: var(--font-body)">Receive updates about new cohorts</span>
+              </label>
+              <label class="flex items-center gap-3 cursor-pointer group">
+                <div class="w-5 h-5 border-2 border-border bg-background flex items-center justify-center group-hover:border-primary/50 transition-colors">
+                </div>
+                <span class="text-sm text-foreground/80" style="font-family: var(--font-body)">Subscribe to the 404 newsletter</span>
+              </label>
+              <label class="flex items-center gap-3 cursor-pointer group">
+                <div class="w-5 h-5 border-2 border-border bg-background flex items-center justify-center group-hover:border-primary/50 transition-colors">
+                </div>
+                <span class="text-sm text-foreground/80" style="font-family: var(--font-body)">Share data with programme partners</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider-gradient mx-6 md:mx-12 lg:mx-20"></div>
+
+
+  <!-- ═══ SECTION 8: SURFACES & ELEVATION ═══════════════════════════ -->
+  <section class="relative px-6 md:px-12 lg:px-20 pt-28 md:pt-40 pb-20 md:pb-28 overflow-hidden">
+    <span class="section-number">08</span>
+
+    <div class="relative z-10">
+      <p class="on-scroll label mb-4">Section 08</p>
+      <h2 class="on-scroll text-[clamp(2rem,5vw,4rem)] font-black leading-[0.9] uppercase mb-6" style="font-family: var(--font-display)">
+        Surfaces & Elevation
+      </h2>
+      <p class="on-scroll text-sm text-muted-foreground max-w-lg mb-20" style="--d: 80ms">
+        Depth without shadows. The Foundry elevates through color shift and border.
+        Darker purple chroma = higher plane. The void is always beneath.
+      </p>
+
+      <!-- Nested elevation rectangles -->
+      <div class="on-scroll mb-16" style="--d: 120ms">
+        <div class="relative p-8 md:p-12" style="background: oklch(0.07 0.015 320);">
+          <span class="text-[0.6rem] font-mono text-muted-foreground/40 absolute top-3 left-4">Level 0 — Background</span>
+          <span class="text-[0.6rem] font-mono text-muted-foreground/30 absolute top-3 right-4">oklch(0.07 0.015 320)</span>
+
+          <div class="relative p-8 md:p-10 mt-6" style="background: oklch(0.11 0.018 315);">
+            <span class="text-[0.6rem] font-mono text-muted-foreground/50 absolute top-3 left-4">Level 1 — Card</span>
+            <span class="text-[0.6rem] font-mono text-muted-foreground/40 absolute top-3 right-4">oklch(0.11 0.018 315)</span>
+
+            <div class="relative p-8 mt-6" style="background: oklch(0.16 0.030 310);">
+              <span class="text-[0.6rem] font-mono text-muted-foreground/60 absolute top-3 left-4">Level 2 — Accent</span>
+              <span class="text-[0.6rem] font-mono text-muted-foreground/50 absolute top-3 right-4">oklch(0.16 0.030 310)</span>
+
+              <div class="relative p-6 mt-6 border-2" style="background: oklch(0.11 0.018 315); border-color: oklch(1 0.008 310 / 8%);">
+                <span class="text-[0.6rem] font-mono text-muted-foreground/60 absolute top-3 left-4">Level 3 — Popover</span>
+                <span class="text-[0.6rem] font-mono text-muted-foreground/50 absolute top-3 right-4">oklch(0.11 0.018 315) + border-2</span>
+                <div class="h-8"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Elevation labels -->
+      <div class="on-scroll grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-16" style="--d: 160ms">
+        <div class="border-2 border-border p-5" style="background: oklch(0.07 0.015 320);">
+          <p class="text-xs font-bold uppercase tracking-wide mb-1" style="color: oklch(0.72 0.18 55)">Level 0</p>
+          <p class="text-[0.8125rem] text-muted-foreground">The void. Page background. Where everything begins.</p>
+        </div>
+        <div class="border-2 border-border p-5" style="background: oklch(0.11 0.018 315);">
+          <p class="text-xs font-bold uppercase tracking-wide mb-1" style="color: oklch(0.72 0.18 55)">Level 1</p>
+          <p class="text-[0.8125rem] text-muted-foreground">The surface. Cards, panels, content containers.</p>
+        </div>
+        <div class="border-2 border-border p-5" style="background: oklch(0.16 0.030 310);">
+          <p class="text-xs font-bold uppercase tracking-wide mb-1" style="color: oklch(0.72 0.18 55)">Level 2</p>
+          <p class="text-[0.8125rem] text-muted-foreground">The emphasis. Hover states, selected rows, badges.</p>
+        </div>
+        <div class="border-2 p-5" style="background: oklch(0.11 0.018 315); border-color: oklch(1 0.008 310 / 8%);">
+          <p class="text-xs font-bold uppercase tracking-wide mb-1" style="color: oklch(0.72 0.18 55)">Level 3</p>
+          <p class="text-[0.8125rem] text-muted-foreground">The overlay. Popovers, dropdowns, modals. Border declares it.</p>
+        </div>
+      </div>
+
+      <!-- Rules -->
+      <div class="on-scroll max-w-2xl border-t-2 border-border" style="--d: 200ms">
+        <div class="border-b-2 border-border py-6 flex gap-6">
+          <span class="text-[0.6875rem] font-mono text-primary/60 shrink-0 pt-0.5 w-6 text-right">01</span>
+          <div>
+            <p class="text-sm font-semibold text-foreground/90">No shadows. Ever. Depth = color shift + border.</p>
+            <p class="text-[0.8125rem] text-muted-foreground leading-relaxed mt-1">The Foundry doesn't fake depth with painted shadows. Surfaces are differentiated by their lightness and chroma values in OKLCH space.</p>
+          </div>
+        </div>
+        <div class="border-b-2 border-border py-6 flex gap-6">
+          <span class="text-[0.6875rem] font-mono text-primary/60 shrink-0 pt-0.5 w-6 text-right">02</span>
+          <div>
+            <p class="text-sm font-semibold text-foreground/90">Deeper purple chroma = higher elevation</p>
+            <p class="text-[0.8125rem] text-muted-foreground leading-relaxed mt-1">Background sits at chroma 0.015. Card at 0.018. Accent at 0.030. The purple intensifies as the surface rises.</p>
+          </div>
+        </div>
+        <div class="py-6 flex gap-6">
+          <span class="text-[0.6875rem] font-mono text-primary/60 shrink-0 pt-0.5 w-6 text-right">03</span>
+          <div>
+            <p class="text-sm font-semibold text-foreground/90">All borders: 2px. Never 1px. Intentional, not incidental.</p>
+            <p class="text-[0.8125rem] text-muted-foreground leading-relaxed mt-1">A 1px border disappears on high-DPI screens. 2px is the minimum for a border that feels structural, not accidental.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider-gradient mx-6 md:mx-12 lg:mx-20"></div>
+
+
+  <!-- ═══ SECTION 9: TEXTURE & ATMOSPHERE ═══════════════════════════ -->
+  <section class="relative px-6 md:px-12 lg:px-20 pt-28 md:pt-40 pb-20 md:pb-28 overflow-hidden">
+    <span class="section-number">09</span>
+
+    <div class="relative z-10">
+      <p class="on-scroll label mb-4">Section 09</p>
+      <h2 class="on-scroll text-[clamp(2rem,5vw,4rem)] font-black leading-[0.9] uppercase mb-6" style="font-family: var(--font-display)">
+        Texture & Atmosphere
+      </h2>
+      <p class="on-scroll text-sm text-muted-foreground max-w-lg mb-20" style="--d: 80ms">
+        The four layers that make a flat screen feel like a space you're inside.
+        Grain. Light. Weight. Ghosts.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- 1. Film grain -->
+        <div class="on-scroll" style="--d: 120ms">
+          <p class="text-xs font-semibold uppercase tracking-wide mb-4" style="color: oklch(0.72 0.18 55)">01 — Film Grain</p>
+          <div class="relative h-48 border-2 border-border overflow-hidden" style="background: oklch(0.07 0.015 320);">
+            <div
+              class="absolute inset-0 pointer-events-none"
+              style="opacity: 0.08; mix-blend-mode: overlay; background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E&quot;); background-size: 256px 256px;"
+            ></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <span class="text-xs font-mono text-muted-foreground/50">SVG feTurbulence · opacity 0.025 · overlay blend</span>
+            </div>
+          </div>
+          <p class="text-[0.8125rem] text-muted-foreground leading-relaxed mt-3">
+            Fractal noise at 0.025 opacity, overlay blend. Adds analog warmth to the digital substrate. Shown here at 8x opacity for visibility.
+          </p>
+        </div>
+
+        <!-- 2. Atmospheric gradient -->
+        <div class="on-scroll" style="--d: 200ms">
+          <p class="text-xs font-semibold uppercase tracking-wide mb-4" style="color: oklch(0.72 0.18 55)">02 — Atmospheric Gradient</p>
+          <div class="relative h-48 border-2 border-border overflow-hidden" style="background: oklch(0.07 0.015 320);">
+            <div
+              class="absolute inset-0 pointer-events-none"
+              style="background: radial-gradient(ellipse 80% 45% at 20% 110%, oklch(0.14 0.08 305 / 35%), transparent 65%), radial-gradient(ellipse 40% 35% at 85% 10%, oklch(0.12 0.06 310 / 20%), transparent 55%);"
+            ></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <span class="text-xs font-mono text-muted-foreground/50">Two radial gradients · purple-shifted</span>
+            </div>
+          </div>
+          <p class="text-[0.8125rem] text-muted-foreground leading-relaxed mt-3">
+            Two purple-shifted radial gradients. Lower-left origin at 20% 110% creates the primary pool. Upper-right at 85% 10% adds depth. Fixed position, always present.
+          </p>
+        </div>
+
+        <!-- 3. Watermark -->
+        <div class="on-scroll" style="--d: 280ms">
+          <p class="text-xs font-semibold uppercase tracking-wide mb-4" style="color: oklch(0.72 0.18 55)">03 — Watermark</p>
+          <div class="relative h-48 border-2 border-border overflow-hidden" style="background: oklch(0.07 0.015 320);">
+            <span
+              class="absolute -right-[5%] top-1/2 -translate-y-1/2"
+              style="font-family: var(--font-display); font-size: 10rem; font-weight: 900; line-height: 0.8; text-transform: uppercase; color: oklch(0.44 0.24 305 / 3%); pointer-events: none; user-select: none;"
+            >404</span>
+            <div class="absolute inset-0 flex items-end p-4">
+              <span class="text-xs font-mono text-muted-foreground/50">Display font · 3% opacity · purple</span>
+            </div>
+          </div>
+          <p class="text-[0.8125rem] text-muted-foreground leading-relaxed mt-3">
+            The giant "404" at 3% opacity in primary purple. Absolute positioned, never interfering with content. A ghost in the foundry.
+          </p>
+        </div>
+
+        <!-- 4. Gradient divider -->
+        <div class="on-scroll" style="--d: 360ms">
+          <p class="text-xs font-semibold uppercase tracking-wide mb-4" style="color: oklch(0.72 0.18 55)">04 — Gradient Divider</p>
+          <div class="relative h-48 border-2 border-border overflow-hidden flex items-center px-8" style="background: oklch(0.07 0.015 320);">
+            <div class="w-full">
+              <div class="divider-gradient mb-6"></div>
+              <div class="h-[2px]" style="background: linear-gradient(to right, oklch(0.72 0.18 55 / 60%), oklch(0.44 0.24 305 / 60%), transparent);"></div>
+            </div>
+            <div class="absolute bottom-4 left-4">
+              <span class="text-xs font-mono text-muted-foreground/50">purple → amber → transparent</span>
+            </div>
+          </div>
+          <p class="text-[0.8125rem] text-muted-foreground leading-relaxed mt-3">
+            The Foundry signature line. Purple at 60% flowing to amber at 60% dissolving to transparent. Separates major sections. 2px height.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider-gradient mx-6 md:mx-12 lg:mx-20"></div>
+
+
+  <!-- ═══ SECTION 10: RESPONSIVE REFERENCE ══════════════════════════ -->
+  <section class="relative px-6 md:px-12 lg:px-20 pt-28 md:pt-40 pb-20 md:pb-28 overflow-hidden">
+    <span class="section-number">10</span>
+
+    <div class="relative z-10">
+      <p class="on-scroll label mb-4">Section 10</p>
+      <h2 class="on-scroll text-[clamp(2rem,5vw,4rem)] font-black leading-[0.9] uppercase mb-6" style="font-family: var(--font-display)">
+        Responsive Reference
+      </h2>
+      <p class="on-scroll text-sm text-muted-foreground max-w-lg mb-20" style="--d: 80ms">
+        The Foundry scales with intention. Every breakpoint has a reason.
+        Content density increases as the viewport earns it.
+      </p>
+
+      <!-- Breakpoints visual -->
+      <div class="on-scroll mb-16" style="--d: 120ms">
+        <p class="text-[0.6875rem] text-muted-foreground/70 uppercase tracking-wider mb-8">Breakpoints</p>
+
+        <div class="space-y-3 max-w-3xl">
+          <div class="flex items-center gap-4">
+            <span class="text-xs font-bold uppercase tracking-wide w-8 shrink-0" style="color: oklch(0.72 0.18 55)">sm</span>
+            <div class="flex-1 h-3 bg-card border-2 border-border relative overflow-hidden">
+              <div class="absolute inset-y-0 left-0 bg-primary/20" style="width: 50%"></div>
+            </div>
+            <span class="text-[0.6875rem] font-mono text-muted-foreground w-16 text-right shrink-0">640px</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <span class="text-xs font-bold uppercase tracking-wide w-8 shrink-0" style="color: oklch(0.72 0.18 55)">md</span>
+            <div class="flex-1 h-3 bg-card border-2 border-border relative overflow-hidden">
+              <div class="absolute inset-y-0 left-0 bg-primary/25" style="width: 60%"></div>
+            </div>
+            <span class="text-[0.6875rem] font-mono text-muted-foreground w-16 text-right shrink-0">768px</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <span class="text-xs font-bold uppercase tracking-wide w-8 shrink-0" style="color: oklch(0.72 0.18 55)">lg</span>
+            <div class="flex-1 h-3 bg-card border-2 border-border relative overflow-hidden">
+              <div class="absolute inset-y-0 left-0 bg-primary/30" style="width: 80%"></div>
+            </div>
+            <span class="text-[0.6875rem] font-mono text-muted-foreground w-16 text-right shrink-0">1024px</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <span class="text-xs font-bold uppercase tracking-wide w-8 shrink-0" style="color: oklch(0.72 0.18 55)">xl</span>
+            <div class="flex-1 h-3 bg-card border-2 border-border relative overflow-hidden">
+              <div class="absolute inset-y-0 left-0 bg-primary/40" style="width: 100%"></div>
+            </div>
+            <span class="text-[0.6875rem] font-mono text-muted-foreground w-16 text-right shrink-0">1280px</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Adaptation rules table -->
+      <div class="on-scroll" style="--d: 200ms">
+        <p class="text-[0.6875rem] text-muted-foreground/70 uppercase tracking-wider mb-8">Adaptation Rules</p>
+
+        <div class="border-2 border-border overflow-x-auto">
+          <table class="w-full text-sm" style="font-family: var(--font-body);">
+            <thead>
+              <tr class="border-b-2 border-border">
+                <th class="text-left p-4 text-[0.6875rem] font-semibold uppercase tracking-wider text-muted-foreground/70">Element</th>
+                <th class="text-left p-4 text-[0.6875rem] font-semibold uppercase tracking-wider text-muted-foreground/70">Mobile (&lt;640)</th>
+                <th class="text-left p-4 text-[0.6875rem] font-semibold uppercase tracking-wider text-muted-foreground/70">Tablet (640-1024)</th>
+                <th class="text-left p-4 text-[0.6875rem] font-semibold uppercase tracking-wider text-muted-foreground/70">Desktop (&gt;1024)</th>
+              </tr>
+            </thead>
+            <tbody class="font-mono text-[0.75rem]">
+              <tr class="border-b border-border/50">
+                <td class="p-4 text-foreground/70 font-sans text-[0.8125rem] font-medium">Page margin</td>
+                <td class="p-4 text-muted-foreground">1.5rem</td>
+                <td class="p-4 text-muted-foreground">3rem</td>
+                <td class="p-4 text-muted-foreground">5rem</td>
+              </tr>
+              <tr class="border-b border-border/50">
+                <td class="p-4 text-foreground/70 font-sans text-[0.8125rem] font-medium">Section gap</td>
+                <td class="p-4 text-muted-foreground">4rem</td>
+                <td class="p-4 text-muted-foreground">5rem</td>
+                <td class="p-4 text-muted-foreground">7rem</td>
+              </tr>
+              <tr class="border-b border-border/50">
+                <td class="p-4 text-foreground/70 font-sans text-[0.8125rem] font-medium">Hero text</td>
+                <td class="p-4 text-muted-foreground">10rem</td>
+                <td class="p-4 text-muted-foreground">18vw</td>
+                <td class="p-4 text-muted-foreground">24rem</td>
+              </tr>
+              <tr class="border-b border-border/50">
+                <td class="p-4 text-foreground/70 font-sans text-[0.8125rem] font-medium">Grid cols</td>
+                <td class="p-4 text-muted-foreground">1</td>
+                <td class="p-4 text-muted-foreground">2</td>
+                <td class="p-4 text-muted-foreground">3-4</td>
+              </tr>
+              <tr>
+                <td class="p-4 text-foreground/70 font-sans text-[0.8125rem] font-medium">Nav</td>
+                <td class="p-4 text-muted-foreground">Hamburger</td>
+                <td class="p-4 text-muted-foreground">Full</td>
+                <td class="p-4 text-muted-foreground">Full</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider-gradient mx-6 md:mx-12 lg:mx-20"></div>
+
+
+  <!-- ═══ FOOTER ════════════════════════════════════════════════════ -->
+  <footer class="px-6 md:px-12 lg:px-20 py-14 border-t-2 border-border">
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+      <div class="flex items-baseline gap-2" style="font-family: var(--font-display)">
+        <span class="text-3xl font-black tracking-[-0.02em] uppercase" style="color: oklch(0.72 0.18 55);">404</span>
+        <span class="text-sm text-muted-foreground/80 tracking-wider uppercase font-semibold">Tech Found</span>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-x-6 gap-y-2" style="font-family: var(--font-body)">
+        <a
+          href="/foundry"
+          class="text-[0.6875rem] uppercase tracking-[0.15em] text-muted-foreground/70 hover:text-secondary transition-colors duration-200"
+        >
+          Foundry Showcase
+        </a>
+        <span class="text-muted-foreground/20 text-[0.5rem]">/</span>
+        <a
+          href="/"
+          class="text-[0.6875rem] uppercase tracking-[0.15em] text-muted-foreground/70 hover:text-secondary transition-colors duration-200"
+        >
+          All Proposals
+        </a>
+      </div>
+    </div>
+    <p class="text-[0.6875rem] text-muted-foreground/40 mt-6" style="font-family: var(--font-body)">
+      Foundry Design System · Part II: Motion & Components · Not a production page
+    </p>
+  </footer>
+
+  <!-- Scroll reveal -->
+  <script>
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("revealed");
+            observer.unobserve(entry.target);
+          }
+        }
+      },
+      { threshold: 0.08, rootMargin: "0px 0px -30px 0px" }
+    );
+    document.querySelectorAll(".on-scroll").forEach((el) => observer.observe(el));
+  </script>
+</body>
+</html>
