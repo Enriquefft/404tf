@@ -86,18 +86,16 @@ SpecHack is being retired from the monorepo. Keep `apps/spechack/` code intact (
 
 ---
 
-## Phase 1: Landing Design System
+## Phase 1: Landing Design System — ✅ COMPLETE
 
-Define the landing page's own visual direction, built on top of `@404tf/brand` tokens. Current design is functional but not memorable — the goal is **bold, maverick, deeptech identity**. This is separate from the report app's design.
+Foundry design system built, critiqued, and applied to landing app.
 
-**Depends on:** Phase 0b (brand package complete — logo system, org tokens, moodboard).
+- [x] **Visual audit** — 3-agent critique (visual, brand, motion) + post-fix audit
+- [x] **Design tokens** — Foundry OKLCH palette, purple/amber framework, 4 house colors, tinted neutrals
+- [x] **Motion language** — Easing curves, duration scale, stagger patterns, reduced-motion support
+- [x] **Component library direction** — Buttons, inputs, cards, banners, tags, nav, dividers, forms
 
-- [ ] **Visual audit** — Document what works and what doesn't in the current landing design
-- [ ] **Design tokens** — Landing-specific: expanded color palette, spacing scale, border/radius system, shadows
-- [ ] **Motion language** — Define animation patterns (transitions, hover states, scroll effects, micro-interactions)
-- [ ] **Component library direction** — Establish the visual vocabulary (card styles, buttons, section layouts)
-
-Deliverable: Landing design system documented as CSS variables + Tailwind config + reference examples.
+Deliverable: Foundry design system spec at `/foundry-system` + `/foundry-motion` in proposals app. Tokens migrated to `packages/brand/src/tokens.ts`. Landing app CSS, fonts, and 14 components updated.
 
 ---
 
@@ -122,15 +120,15 @@ Separate Next.js app in the monorepo, deployed to `blog.404tf.com`.
 - [ ] **Deployment** — Vercel project for `blog.404tf.com`
 - [ ] **API for landing** — Expose endpoint for landing page to fetch featured/recent posts
 
-### 2b. LATAM Deeptech Map — `apps/map/`
+### 2b. LATAM Deeptech Map — `apps/map/` ← CURRENT PRIORITY
 
 Astro app with React islands, deployed to `map.404tf.com`. Full implementation spec lives in `apps/map/implementation.md` (12-step build order) with design tokens in `apps/map/design-spec.jsonc`.
 
-Has its own design system (deep plum / Bricolage Grotesque), separate from landing.
+Has its own design system (deep plum / Bricolage Grotesque / Space Grotesk), separate from but complementary to landing. House colors synced to Foundry values (2026-03-25). See `apps/map/todo.md`.
 
-**Depends on:** Phase 0a (startup portfolio data for seeding), Phase 0b (brand package for org logos).
+**Depends on:** Phase 0a (startup portfolio data for seeding), Phase 0b ~~(brand package for org logos)~~ ✅ complete.
 
-**Must complete before:** Phase 3f (landing's ecosystem section links to `report.404tf.com`).
+**Must complete before:** Phase 3f (landing's ecosystem section links to `map.404tf.com`).
 
 ---
 
