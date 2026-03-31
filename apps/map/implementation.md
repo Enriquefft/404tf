@@ -256,8 +256,10 @@ Create a seed file (JSON or SQL) with initial data. At build time, query the dat
    - Click dot: scroll to and highlight corresponding card in grid
    - Click country region: filter grid to that country
    - When grid filters active: non-matching dots fade to low opacity (don't disappear)
-   - Dot clusters: numbered cluster when 3+ overlap, click to fan out
+   - ~~Dot clusters: numbered cluster when 3+ overlap, click to fan out~~ DEFERRED — complexity vs value is bad
    - Subtle country labels for each LATAM country
+
+> **Decision (2026-03-25):** Full custom dot-grid (Option A) for both hero and directory. The dot-grid IS the product story — a continent made of dots communicates the ecosystem mapping instantly. Directory map keeps hover tooltips, click-to-card, country-click-to-filter. Cut: dot clustering, drag-to-resize panel. Mobile: map collapses with "View map" toggle — don't force touch on dots.
 
 2. **Filter Bar** (sticky below map when scrolling)
    - Search input: full width, prominent, placeholder "Search by name, technology, or problem..."
@@ -375,8 +377,9 @@ Create a seed file (JSON or SQL) with initial data. At build time, query the dat
 8. **PDF Download Gate**
    - Elevated card.
    - "Download the Full Report" + trust signal "Joined by 200+ innovation leaders"
-   - Inline form: Name + Email (row 1), Organization + Role dropdown (row 2), submit button (row 3).
-   - All required except Role. Inline validation. Email format check.
+   - Inline form: Name + Email (single row) + submit button.
+   - Both required. Inline validation. Email format check.
+   > **Decision (2026-03-25):** Reduced from 4 fields to 2 (name + email). Each extra field drops conversion ~10%. Organization/role are nice-to-have data, not worth the lead loss.
    - On submit: store lead in database, send notification via Resend, trigger download.
    - Privacy note below form.
 
@@ -461,16 +464,15 @@ Trigger points:
 - 404 Mapped logo + "Find Your Deeptech Solution"
 - Three-step process bar: Understand -> Analyze -> Pilot (numbered circles, current step highlighted)
 
-**Multi-step form (3 steps):**
+**Multi-step form (2 steps):**
 
 Step 1 — "Tell us about you":
 Name, Email, Company, Role (dropdown: Innovation Director, CTO/VP Engineering, Procurement, Strategy, Government Official, VC/Investor, Other)
 
 Step 2 — "What are you looking for?":
-Industry (dropdown: Mining, Energy, Agriculture, Manufacturing, Financial Services, Healthcare, Logistics, Retail, Telecommunications, Government/Public Sector, Other), Challenge description (textarea, placeholder: "e.g., We need to reduce water usage in our mining operations by 30% within 18 months"), Timeline (dropdown: Exploring, 1-3 months, 3-6, 6-12)
+Industry (dropdown: Mining, Energy, Agriculture, Manufacturing, Financial Services, Healthcare, Logistics, Retail, Telecommunications, Government/Public Sector, Other), Challenge description (textarea, placeholder: "e.g., We need to reduce water usage in our mining operations by 30% within 18 months"), Timeline (dropdown: Exploring, 1-3 months, 3-6, 6-12), Additional notes (optional textarea)
 
-Step 3 — "Almost done":
-Budget range (optional dropdown: Not defined, Under $50K, $50K-$200K, $200K-$500K, $500K+), Verticals of interest (multi-select chips with vertical colors), Additional notes (optional textarea)
+> **Decision (2026-03-25):** Reduced from 3 steps to 2. Step 3 (budget, verticals chips) was conversion friction — corporates don't share budget cold. Fewer fields = more leads. Verticals of interest are inferred from context (which startup/page triggered the modal).
 
 **Success state:** Checkmark animation + "We got your request" + "Our team will review and get back within 2 business days" + "Done" button closes modal.
 
@@ -580,12 +582,24 @@ Build in this exact order. Each step builds on the previous. Do not skip ahead.
 - Verify the Drizzle + Neon Postgres connection works
 - Set up PostHog snippet
 
-#### Step 2: Database schema
-- Create all tables in Drizzle (startups, corporate_leads, startup_applications, startup_program_inquiries, report_downloads)
-- Create seed file with 15-20 sample startups (realistic deeptech data for development)
-- Run seed, verify data
+#### Step 2: Data preparation
+- Clean & validate the 60-startup CSV (`data.csv`)
+- Map CSV columns to schema fields (see Data Model, §5)
+- Map verticals: free-text → enum values (ai_ml, biotech, etc.)
+- Map maturity levels: "Scale-up" → revenue, "Pre-Seed" → prototype, etc.
+- AI-translate all Spanish text fields to English (one_liner, tech_description, problem_statement, business_model, key_results)
+- Geocode cities → lat/lng (country centroids for MVP, city-level later)
+- Strip PII into separate hidden fields (contact_name, contact_email, contact_phone)
+- Output: clean JSON seed file ready for DB import
 
-#### Step 3: Shared components
+#### Step 3: Database schema
+- Create all tables in Drizzle (startups, corporate_leads, startup_applications, startup_program_inquiries, report_downloads)
+- Create maturity_level and vertical enums
+- Run db:push to create tables in Neon
+- Import seed JSON (all 60 startups)
+- Verify data in DB
+
+#### Step 4: Shared components
 - Build the component library matching the design spec:
   - Button (primary, secondary, ghost)
   - Input (text, email, textarea, select, multi-select chips)
@@ -597,19 +611,19 @@ Build in this exact order. Each step builds on the previous. Do not skip ahead.
   - Modal (generic animated modal container)
 - These are reused across every page. Get them right.
 
-#### Step 4: Corporate Modal
-- Build as standalone React component
+#### Step 5: Corporate Modal
+- Build as standalone React component (2-step form, not 3)
 - Wire to /api/leads/corporate (Zod validation + Drizzle insert + Resend notification)
-- Test all 3 form steps + success state + contextual variant
+- Test both form steps + success state + contextual variant
 - This unblocks every page since they all reference it
 
-#### Step 5: Landing Page
+#### Step 6: Landing Page
 - Build section by section per spec in 6.1
 - The dot-grid map is the hardest part. Build it as its own React island.
 - For the map: use a precalculated array of lat/lng points forming the Americas landmass outline. Render as SVG circles. Layer startup dots on top.
 - Wire CTAs to corporate modal and /startups route
 
-#### Step 6: Directory Page
+#### Step 7: Directory Page
 - Build the interactive map (reuse/extend the landing map component, add interactivity)
 - Build filter bar + card grid as a React island
 - Load all startup data as JSON at build time, embed in page
@@ -617,36 +631,36 @@ Build in this exact order. Each step builds on the previous. Do not skip ahead.
 - Wire card clicks to /startup/[slug]
 - Wire floating CTA to corporate modal
 
-#### Step 7: Startup Profile Page
+#### Step 8: Startup Profile Page
 - Build [slug] dynamic route
 - Query startup data at build time, prerender all profiles
 - Handle empty fields gracefully (collapse sections, show claim prompt if sparse)
 - Wire sidebar CTA to corporate modal with contextual startup info
 - Build related startups query (same vertical, exclude current)
 
-#### Step 8: Insights Page
+#### Step 9: Insights Page
 - Build each chart section as a React island
 - Use Recharts for all visualizations
 - Make every data point clickable (link to directory with filter)
 - Build the PDF download gate form, wire to /api/leads/report-download (Zod + Drizzle + Resend)
 - Chart data will be placeholder during development, replaced with real analysis data in Phase C
 
-#### Step 9: For Startups Page
+#### Step 10: For Startups Page
 - Build both form sections
 - Wire to respective API endpoints (Zod + Drizzle + Resend)
 - Both forms need validation + success states
 
-#### Step 10: About / Methodology
+#### Step 11: About / Methodology
 - Mostly static content, simplest page
 - Team cards, methodology timeline, logo grid
 
-#### Step 11: Claim Flow (minimal v1)
+#### Step 12: Claim Flow
 - "Claim this profile" on startup pages links to a simple form
 - Form: name, role, email, proof of association (textarea)
 - Stores in database via API endpoint + Resend notification
 - 404tf reviews manually (no admin UI in v1, just check DB)
 
-#### Step 12: Polish
+#### Step 13: Polish
 - Animation pass: ensure all scroll-triggered animations work
 - Responsive pass: test all pages at 480px, 768px, 1024px, 1440px
 - i18n pass: verify all ES translations
@@ -655,24 +669,27 @@ Build in this exact order. Each step builds on the previous. Do not skip ahead.
 - Accessibility: WCAG 2.1 AA, keyboard navigation, screen reader testing
 - PostHog pass: verify all events fire correctly
 
-### Phase B: Data Recopilation
-- Organize existing startup data
-- Acquire additional data to reach 100+ startups
-- Populate database with complete startup records
-- This is a research/data task, not a code task
+### Phase B: Data Expansion (parallel to Steps 6-9)
+- Source 40+ additional startups to reach 100+ total
+- Use same CSV format, run through Step 2 pipeline (clean → translate → geocode → seed)
+- Re-seed database with expanded dataset
+- Rebuild static pages with new data
 
-### Phase C: Analysis & Statistics
-- Analyze the collected data to find insights
-- Compute all statistics for the Insights page charts
+> **Decision (2026-03-25):** "100+" is the launch target. Initial 60 startups from data.csv are seeded in Step 2. Additional startups are sourced in parallel and added incrementally. EN translations are AI-generated via Claude, manually reviewed.
+
+### Phase C: Analysis & Statistics (after Phase B, before Step 13)
+- Analyze the full 100+ dataset to find insights
+- Compute all statistics for the Insights page charts (geographic distribution, vertical breakdown, funding landscape, maturity distribution, founding timeline)
 - Generate findings and key takeaways
 - Update Insights page with real computed data (replace development placeholders)
 - Create the PDF report from the analysis
 - Place PDF in public/ directory
 
-### Phase D: Images & Final Polish
-- Collect/create startup logos and hero images
+### Phase D: Images & Final Polish (parallel to Phase C)
+- Collect/create startup logos (use colored-initial placeholders where missing)
+- Collect founder photos where available
 - Populate image fields in the database
-- Generate OG images for social sharing
+- Generate OG images for social sharing (one per startup profile)
 - Final visual QA pass
 
 ---
@@ -700,6 +717,16 @@ These decisions were made during planning. Do not revisit them during implementa
 9. **Image strategy for profiles:** 3 strictly typed visual slots (hero image, founder headshots max 3, partner logos max 6) + optional video URL. No generic gallery. No carousel. Images stored in repo for v1.
 
 10. **Seeding:** Launch with enriched data from recopilation phase. Design handles sparse profiles gracefully but the goal is 100+ reasonably complete profiles at launch.
+
+11. **Corporate modal is 2 steps, not 3.** Budget range and vertical chips were removed — they're conversion friction. Verticals of interest are inferred from context (which startup/page triggered the modal). (Decision 2026-03-25)
+
+12. **Dot-grid map: full custom SVG, both hero and directory.** The continent made of dots IS the product story. Directory keeps hover/click/filter interactions. Cut: dot clustering, drag-to-resize. Mobile: map collapses behind toggle. (Decision 2026-03-25)
+
+13. **PDF download gate: 2 fields only.** Name + email. Organization and role removed — each extra field drops conversion ~10%. (Decision 2026-03-25)
+
+14. **AI translations for launch.** All 60 Spanish startup profiles translated to English via Claude. Manually reviewed before launch. (Decision 2026-03-25)
+
+15. **Data pipeline: CSV → clean JSON → DB seed.** Step 2 handles enum mapping, geocoding, PII separation, and translation. Outputs a seed file that can be re-run when new startups are added. (Decision 2026-03-25)
 
 ---
 
