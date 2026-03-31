@@ -42,7 +42,7 @@ export const POST: APIRoute = async ({ request }) => {
 		});
 
 		// Send notification email via Resend (non-blocking, non-failing)
-		await sendNotificationEmail(data).catch((err: unknown) => {
+		sendNotificationEmail(data).catch((err: unknown) => {
 			console.warn("[corporate-lead] Email notification failed:", err);
 		});
 

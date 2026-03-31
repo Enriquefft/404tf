@@ -26,7 +26,7 @@ export const POST: APIRoute = async ({ request }) => {
 		}
 
 		// Send notification email via Resend (non-blocking, non-failing)
-		await sendClaimNotification(data).catch((err: unknown) => {
+		sendClaimNotification(data).catch((err: unknown) => {
 			console.warn("[claim] Email notification failed:", err);
 		});
 

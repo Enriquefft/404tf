@@ -32,7 +32,7 @@ export const POST: APIRoute = async ({ request }) => {
 			email: data.email,
 		});
 
-		await sendNotificationEmail(data).catch((err: unknown) => {
+		sendNotificationEmail(data).catch((err: unknown) => {
 			console.warn("[report-download] Email notification failed:", err);
 		});
 

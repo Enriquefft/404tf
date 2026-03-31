@@ -1,5 +1,6 @@
 import {
 	boolean,
+	index,
 	integer,
 	jsonb,
 	real,
@@ -112,7 +113,11 @@ export const mapStartups = schema.table("map_startups", {
 	updatedAt: timestamp("updated_at", { withTimezone: true })
 		.defaultNow()
 		.notNull(),
-});
+}, (table) => [
+	index("idx_map_startups_country").on(table.country),
+	index("idx_map_startups_maturity").on(table.maturityLevel),
+	index("idx_map_startups_created").on(table.createdAt),
+]);
 
 export type MapStartup = typeof mapStartups.$inferSelect;
 export type NewMapStartup = typeof mapStartups.$inferInsert;
@@ -135,7 +140,10 @@ export const mapCorporateLeads = schema.table("map_corporate_leads", {
 	createdAt: timestamp("created_at", { withTimezone: true })
 		.defaultNow()
 		.notNull(),
-});
+}, (table) => [
+	index("idx_map_corp_leads_email").on(table.email),
+	index("idx_map_corp_leads_created").on(table.createdAt),
+]);
 
 export type MapCorporateLead = typeof mapCorporateLeads.$inferSelect;
 export type NewMapCorporateLead = typeof mapCorporateLeads.$inferInsert;
@@ -160,7 +168,10 @@ export const mapStartupApplications = schema.table("map_startup_applications", {
 	createdAt: timestamp("created_at", { withTimezone: true })
 		.defaultNow()
 		.notNull(),
-});
+}, (table) => [
+	index("idx_map_apps_email").on(table.email),
+	index("idx_map_apps_created").on(table.createdAt),
+]);
 
 export type MapStartupApplication = typeof mapStartupApplications.$inferSelect;
 export type NewMapStartupApplication =
@@ -184,6 +195,10 @@ export const mapStartupProgramInquiries = schema.table(
 			.defaultNow()
 			.notNull(),
 	},
+	(table) => [
+		index("idx_map_prog_inq_email").on(table.email),
+		index("idx_map_prog_inq_created").on(table.createdAt),
+	],
 );
 
 export type MapStartupProgramInquiry =
@@ -202,7 +217,10 @@ export const mapReportDownloads = schema.table("map_report_downloads", {
 	createdAt: timestamp("created_at", { withTimezone: true })
 		.defaultNow()
 		.notNull(),
-});
+}, (table) => [
+	index("idx_map_downloads_email").on(table.email),
+	index("idx_map_downloads_created").on(table.createdAt),
+]);
 
 export type MapReportDownload = typeof mapReportDownloads.$inferSelect;
 export type NewMapReportDownload = typeof mapReportDownloads.$inferInsert;
