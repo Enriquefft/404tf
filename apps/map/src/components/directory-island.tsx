@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { CorporateModal } from "@/components/corporate-modal";
 import type { Locale } from "@/i18n/translations";
 import { COUNTRY_FLAGS } from "@/lib/countries";
@@ -29,8 +29,18 @@ type StartupData = {
 	funding_received: string | null;
 };
 
+type MapPoint = {
+	slug: string;
+	lat: number;
+	lng: number;
+	verticals: VerticalKey[];
+	country: string;
+};
+
 type DirectoryIslandProps = {
-	startups: StartupData[];
+	initialStartups: StartupData[];
+	totalCount: number;
+	mapPoints: MapPoint[];
 	locale: Locale;
 	labels: {
 		searchPlaceholder: string;
@@ -99,7 +109,9 @@ const MAP_H = 500;
 // ---- Component ----
 
 export function DirectoryIsland({
-	startups,
+	initialStartups,
+	totalCount,
+	mapPoints,
 	locale,
 	labels,
 	startupBaseHref,
@@ -114,6 +126,13 @@ export function DirectoryIsland({
 	const [hoveredStartup, setHoveredStartup] = useState<string | null>(null);
 	const [tooltipPos, setTooltipPos] = useState<{ x: number; y: number } | null>(null);
 	const [corporateOpen, setCorporateOpen] = useState(false);
+
+	// API-driven state
+	const [startups, setStartups] = useState<StartupData[]>(initialStartups);
+	const [total, setTotal] = useState(totalCount);
+	const [page, setPage] = useState(1);
+	const [loading, setLoading] = useState(false);
+	const abortRef = useRef<AbortController | null>(null);
 
 	const searchTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 	const [debouncedSearch, setDebouncedSearch] = useState("");
@@ -131,75 +150,92 @@ export function DirectoryIsland({
 		}, 300);
 	}, []);
 
-	// ---- Derived data ----
+	// ---- Fetch from API when filters change ----
 
-	const countries = useMemo(() => {
-		const set = new Set(startups.map((s) => s.country));
-		return Array.from(set).sort();
-	}, [startups]);
+	const hasFiltersActive =
+		debouncedSearch !== "" ||
+		selectedVerticals.size > 0 ||
+		selectedCountry !== "" ||
+		selectedMaturity !== "";
 
-	const verticalKeys = useMemo(() => Object.keys(VERTICAL_CONFIG) as VerticalKey[], []);
+	useEffect(() => {
+		// On initial load with no filters, use the embedded data
+		if (!hasFiltersActive && sort === "az" && page === 1) {
+			setStartups(initialStartups);
+			setTotal(totalCount);
+			return;
+		}
 
-	const maturityKeys = useMemo(() => Object.keys(MATURITY_CONFIG) as MaturityKey[], []);
+		abortRef.current?.abort();
+		const controller = new AbortController();
+		abortRef.current = controller;
 
-	// ---- Filtering ----
+		setLoading(true);
 
-	const filtered = useMemo(() => {
-		const lowerSearch = debouncedSearch.toLowerCase();
-		let result = startups;
+		const params = new URLSearchParams();
+		if (debouncedSearch) params.set("q", debouncedSearch);
+		if (selectedVerticals.size > 0) params.set("vertical", [...selectedVerticals][0]);
+		if (selectedCountry) params.set("country", selectedCountry);
+		if (selectedMaturity) params.set("maturity", selectedMaturity);
+		params.set("sort", sort);
+		params.set("page", String(page));
+		params.set("limit", "20");
+		params.set("locale", locale);
 
-		if (lowerSearch) {
-			result = result.filter((s) => {
-				const text = locale === "en" ? s.one_liner_en : s.one_liner;
-				return (
-					s.name.toLowerCase().includes(lowerSearch) ||
-					text.toLowerCase().includes(lowerSearch) ||
-					s.verticals.some((v) => {
-						const label = VERTICAL_CONFIG[v]?.label[locale] ?? "";
-						return label.toLowerCase().includes(lowerSearch);
-					})
-				);
+		fetch(`/api/directory?${params}`, { signal: controller.signal })
+			.then((res) => res.json())
+			.then((json: { data: StartupData[]; total: number }) => {
+				if (page === 1) {
+					setStartups(json.data);
+				} else {
+					setStartups((prev) => [...prev, ...json.data]);
+				}
+				setTotal(json.total);
+				setLoading(false);
+			})
+			.catch((err: unknown) => {
+				if (err instanceof DOMException && err.name === "AbortError") return;
+				setLoading(false);
 			});
-		}
 
-		if (selectedVerticals.size > 0) {
-			result = result.filter((s) => s.verticals.some((v) => selectedVerticals.has(v)));
-		}
-
-		if (selectedCountry) {
-			result = result.filter((s) => s.country === selectedCountry);
-		}
-
-		if (selectedMaturity) {
-			result = result.filter((s) => s.maturity_level === selectedMaturity);
-		}
-
-		// Sort
-		const sorted = [...result];
-		if (sort === "az") {
-			sorted.sort((a, b) => a.name.localeCompare(b.name));
-		} else {
-			sorted.sort((a, b) => b.founding_year - a.founding_year);
-		}
-
-		return sorted;
+		return () => controller.abort();
 	}, [
-		startups,
 		debouncedSearch,
 		selectedVerticals,
 		selectedCountry,
 		selectedMaturity,
 		sort,
+		page,
 		locale,
+		hasFiltersActive,
+		initialStartups,
+		totalCount,
 	]);
+
+	// Reset to page 1 when filters change — deps are intentional trigger conditions
+	// biome-ignore lint/correctness/useExhaustiveDependencies: filter values are triggers, not consumed
+	useEffect(() => {
+		setPage(1);
+	}, [debouncedSearch, selectedVerticals, selectedCountry, selectedMaturity, sort]);
+
+	// ---- Derived data ----
+
+	const countries = useMemo(() => {
+		const set = new Set(mapPoints.map((s) => s.country));
+		return Array.from(set).sort();
+	}, [mapPoints]);
+
+	const verticalKeys = useMemo(() => Object.keys(VERTICAL_CONFIG) as VerticalKey[], []);
+
+	const maturityKeys = useMemo(() => Object.keys(MATURITY_CONFIG) as MaturityKey[], []);
+
+	// ---- Filtered results (now comes from API) ----
+
+	const filtered = startups;
 
 	const filteredSlugs = useMemo(() => new Set(filtered.map((s) => s.slug)), [filtered]);
 
-	const hasFilters =
-		debouncedSearch !== "" ||
-		selectedVerticals.size > 0 ||
-		selectedCountry !== "" ||
-		selectedMaturity !== "";
+	const hasFilters = hasFiltersActive;
 
 	function clearAllFilters() {
 		setSearch("");
@@ -275,13 +311,13 @@ export function DirectoryIsland({
 
 	const startupMapDots = useMemo(
 		() =>
-			startups.map((s) => {
+			mapPoints.map((s) => {
 				const pos = projectToSvg(s.lat, s.lng, MAP_W, MAP_H);
 				const color = getVColor(s.verticals[0] ?? "other");
 				const isFiltered = filteredSlugs.has(s.slug);
-				return { ...pos, color, slug: s.slug, name: s.name, isFiltered };
+				return { ...pos, color, slug: s.slug, name: s.slug, isFiltered };
 			}),
-		[startups, filteredSlugs],
+		[mapPoints, filteredSlugs],
 	);
 
 	const countryLabels = useMemo(
@@ -295,7 +331,9 @@ export function DirectoryIsland({
 
 	// ---- Hovered startup data ----
 
-	const hoveredData = hoveredStartup ? startups.find((s) => s.slug === hoveredStartup) : null;
+	const hoveredData = hoveredStartup
+		? (startups.find((s) => s.slug === hoveredStartup) ?? null)
+		: null;
 
 	// ---- Render ----
 
@@ -592,7 +630,7 @@ export function DirectoryIsland({
 						>
 							{labels.showingOf
 								.replace("{count}", String(filtered.length))
-								.replace("{total}", String(startups.length))}
+								.replace("{total}", String(total))}
 						</span>
 
 						{/* Active filter pills */}
@@ -810,6 +848,24 @@ export function DirectoryIsland({
 							</a>
 						);
 					})}
+					{filtered.length < total && (
+						<div className="col-span-full flex justify-center pt-6">
+							<button
+								type="button"
+								onClick={() => setPage((p) => p + 1)}
+								disabled={loading}
+								className="cursor-pointer rounded-lg border px-6 py-3 text-sm font-medium transition-colors duration-150 disabled:opacity-50"
+								style={{
+									fontFamily: "var(--font-heading)",
+									color: "var(--foreground)",
+									borderColor: "var(--border-subtle)",
+									background: "var(--card)",
+								}}
+							>
+								{loading ? "..." : `Load more (${filtered.length}/${total})`}
+							</button>
+						</div>
+					)}
 				</div>
 			) : (
 				/* Empty state */

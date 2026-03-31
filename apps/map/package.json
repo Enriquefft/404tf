@@ -5,7 +5,7 @@
 	"private": true,
 	"scripts": {
 		"dev": "astro dev",
-		"build": "astro build",
+		"build": "bun run scripts/generate-seed.ts && astro build",
 		"preview": "astro preview",
 		"check": "astro check",
 		"lint": "biome check --fix ."
@@ -17,6 +17,7 @@
 		"@astrojs/vercel": "^9.0.5",
 		"@solar-icons/react": "^1.1.0",
 		"astro": "^5",
+		"drizzle-orm": "^0.45.2",
 		"posthog-js": "^1.364.4",
 		"react": "^19.2.4",
 		"react-dom": "^19.2.4",

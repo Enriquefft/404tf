@@ -79,6 +79,18 @@ bun run db:generate  # Drizzle migration
 bun run db:push      # Apply to Neon
 ```
 
+## Deploy Hook
+
+After DB changes (new startups, edits), trigger a rebuild without pushing code:
+- **Dashboard:** Vercel → 404tf-report → Settings → Git → Deploy Hooks
+- **API:** `POST /api/admin/rebuild` with `Authorization: Bearer $ADMIN_REBUILD_TOKEN`
+- **Env vars:** `ADMIN_REBUILD_TOKEN`, `VERCEL_DEPLOY_HOOK_URL`
+
+## Build Pipeline
+
+`bun run build` runs: `generate-seed.ts` (DB → seed.json) → `astro build` (seed.json → static HTML).
+Database is the single source of truth. seed.json is a build artifact.
+
 ## Gotchas
 
 - Tailwind v4 pinned `~4.0.0` — v4.1+ breaks with Astro/Vite

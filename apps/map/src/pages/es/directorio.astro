@@ -9,7 +9,7 @@ const locale = "es" as const;
 const t = getTranslations(locale);
 const startups = seedData as unknown as Startup[];
 
-const directoryStartups = startups.map((s) => ({
+const toCard = (s: Startup) => ({
 	slug: s.slug,
 	name: s.name,
 	one_liner: s.one_liner,
@@ -23,6 +23,16 @@ const directoryStartups = startups.map((s) => ({
 	maturity_level: s.maturity_level,
 	founding_year: s.founding_year,
 	funding_received: s.funding_received,
+});
+
+const initialStartups = startups.slice(0, 20).map(toCard);
+const totalCount = startups.length;
+const mapPoints = startups.map((s) => ({
+	slug: s.slug,
+	lat: s.lat,
+	lng: s.lng,
+	verticals: s.verticals,
+	country: s.country,
 }));
 ---
 
@@ -30,7 +40,9 @@ const directoryStartups = startups.map((s) => ({
 	<section class="py-8">
 		<DirectoryIsland
 			client:load
-			startups={directoryStartups}
+			initialStartups={initialStartups}
+			totalCount={totalCount}
+			mapPoints={mapPoints}
 			locale={locale}
 			labels={{
 				searchPlaceholder: t.directory.searchPlaceholder,
