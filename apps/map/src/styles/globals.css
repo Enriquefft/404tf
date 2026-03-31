@@ -92,8 +92,6 @@
 	--v-materials: #a78bfa;
 	--v-aerospace: #38bdf8;
 	--v-quantum: #d946ef;
-	--v-fintech: #6366f1;
-	--v-blockchain: #22d3ee;
 	--v-other: #94a3b8;
 
 	/* ---- Fonts ---- */
@@ -147,8 +145,6 @@
 	--color-v-materials: var(--v-materials);
 	--color-v-aerospace: var(--v-aerospace);
 	--color-v-quantum: var(--v-quantum);
-	--color-v-fintech: var(--v-fintech);
-	--color-v-blockchain: var(--v-blockchain);
 	--color-v-other: var(--v-other);
 }
 

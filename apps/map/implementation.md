@@ -1,4 +1,4 @@
-# 404 Mapped — Implementation Handoff
+# 404 Mapped — Implementation
 
 **"Deeptech, finally in scope."**
 
@@ -154,10 +154,11 @@ verticals:
   - healthtech         "MedDevices / HealthTech"          "Dispositivos Medicos / HealthTech"
   - advanced_materials "Advanced Materials / Nano"         "Materiales Avanzados / Nano"
   - aerospace          "Aerospace / Space Tech"           "Aeroespacial / Space Tech"
-  - quantum            "Quantum Computing"                "Computacion Cuantica"
-  - blockchain         "Blockchain / Web3 (deep protocol)""Blockchain / Web3 (protocolo)"
+  - quantum            "Quantum Computing"                "Computación Cuántica"
   - other              "Other"                            "Otro"
 ```
+
+> **Decision (2026-03-25):** Removed "Blockchain / Web3" and "Fintech" from taxonomy. Neither is deeptech — including them dilutes the scientific rigor positioning. Startups combining blockchain with deeptech (e.g., quantum-safe cryptography) classify under their primary deeptech vertical. 9 verticals total.
 
 Each vertical has an assigned color in the design spec.
 
@@ -376,7 +377,7 @@ Create a seed file (JSON or SQL) with initial data. At build time, query the dat
 
 8. **PDF Download Gate**
    - Elevated card.
-   - "Download the Full Report" + trust signal "Joined by 200+ innovation leaders"
+   - "Download the Full Report" + trust signal "First edition, 2026"
    - Inline form: Name + Email (single row) + submit button.
    - Both required. Inline validation. Email format check.
    > **Decision (2026-03-25):** Reduced from 4 fields to 2 (name + email). Each extra field drops conversion ~10%. Organization/role are nice-to-have data, not worth the lead loss.
@@ -480,6 +481,21 @@ Industry (dropdown: Mining, Energy, Agriculture, Manufacturing, Financial Servic
 
 On submit: store in database + send notification via Resend to 404tf team.
 
+**Shareable URL fallback:** The modal is the primary UX, but a `/contact` page also exists as a standalone form (same fields, same API endpoint). This allows:
+- Bookmarking for later
+- Sharing with colleagues ("fill out this form")
+- Deep-linking from marketing campaigns (`/en/contact?startup=novabio`)
+- Search engine indexing
+The modal and the page share the same React form component.
+
+> **Decision (2026-03-25):** Added `/contact` as a shareable page alongside the modal. Modals can't be bookmarked or shared — a procurement director who wants to discuss with their team needs a URL.
+
+### Route addition
+
+| Page | EN | ES |
+|------|----|----|
+| Contact | /en/contact | /es/contacto |
+
 ---
 
 ## 7. Data Layer
@@ -529,6 +545,7 @@ All endpoints: validate input with Zod, store in database via Drizzle, send noti
 | Startup Profile | /en/startup/[slug] | /es/startup/[slug] |
 | Insights | /en/insights | /es/perspectivas |
 | For Startups | /en/startups | /es/startups |
+| Contact | /en/contact | /es/contacto |
 | About | /en/about | /es/nosotros |
 
 ---
@@ -727,6 +744,20 @@ These decisions were made during planning. Do not revisit them during implementa
 14. **AI translations for launch.** All 60 Spanish startup profiles translated to English via Claude. Manually reviewed before launch. (Decision 2026-03-25)
 
 15. **Data pipeline: CSV → clean JSON → DB seed.** Step 2 handles enum mapping, geocoding, PII separation, and translation. Outputs a seed file that can be re-run when new startups are added. (Decision 2026-03-25)
+
+16. **Contact page as modal fallback.** `/en/contact` and `/es/contacto` render the same corporate form as a standalone page. Allows bookmarking, sharing, deep-linking from campaigns, and search indexing. Modal remains primary in-context UX. (Decision 2026-03-25)
+
+17. **No fabricated trust signals.** "Joined by 200+ innovation leaders" removed at launch. Use "First edition, 2026" to position as fresh, not popular. Add real numbers when they exist. (Decision 2026-03-25)
+
+18. **9 verticals, not 11.** Blockchain/Web3 and Fintech removed from taxonomy. Neither is deeptech. Startups combining blockchain with deeptech classify under their primary vertical. (Decision 2026-03-25)
+
+19. **3 audiences, 1 UX priority.** Corporates are primary (revenue driver). Startups are secondary (product growth via applications). VCs are tertiary (no custom UX, they use directory as-is). All CTAs and visual weight favor the corporate path. (Decision 2026-03-25)
+
+20. **Map time-box: 16 hours.** If the custom dot-grid isn't working at 16 hours, ship a static pre-rendered SVG and iterate post-launch. A broken map is worse than a simple one. (Decision 2026-03-25)
+
+21. **City-level geocoding for Peru from day one.** 33/60 startups are Peru — country centroids make the map useless. Use location field to differentiate at least Lima vs Arequipa vs other cities. Other countries can use centroids. (Decision 2026-03-25)
+
+22. **Separate DB schema prefix.** Map tables use `map_` prefix (map_startups, map_corporate_leads, etc.) to avoid interleaving with landing's `landing_` prefix. Same Neon database, separate namespaces. (Decision 2026-03-25)
 
 ---
 
