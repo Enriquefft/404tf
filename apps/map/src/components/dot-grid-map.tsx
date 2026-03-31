@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { AMERICAS_POINTS, LATAM_POINTS, projectToSvg } from "@/lib/map-points";
-import { VERTICAL_CONFIG, type VerticalKey } from "@/lib/verticals";
+import type { VerticalKey } from "@/lib/verticals";
 
 type StartupDot = {
 	slug: string;
