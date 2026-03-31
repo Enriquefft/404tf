@@ -1,6 +1,0 @@
-{
-	"buildCommand": "cd ../.. && bun run build:map",
-	"installCommand": "cd ../.. && bun install",
-	"framework": "astro",
-	"ignoreCommand": "git diff HEAD^ HEAD --quiet -- . ../../packages/"
-}
