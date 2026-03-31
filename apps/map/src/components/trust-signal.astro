@@ -1,0 +1,28 @@
+---
+type Props = {
+	label: string;
+};
+
+const { label } = Astro.props;
+---
+
+<div
+	class="flex items-center gap-2 text-sm"
+	style="font-family: var(--font-body); color: var(--text-tertiary);"
+>
+	<svg
+		xmlns="http://www.w3.org/2000/svg"
+		width="16"
+		height="16"
+		viewBox="0 0 24 24"
+		fill="none"
+		stroke="var(--success)"
+		stroke-width="1.5"
+		stroke-linecap="round"
+		stroke-linejoin="round"
+		aria-hidden="true"
+	>
+		<path d="M5 13l4 4L19 7" />
+	</svg>
+	<span>{label}</span>
+</div>

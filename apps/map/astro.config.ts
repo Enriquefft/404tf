@@ -4,7 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 
 export default defineConfig({
-	output: "hybrid",
+	site: "https://map.404tf.com",
 	adapter: vercel(),
 	integrations: [react()],
 	vite: {

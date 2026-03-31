@@ -1,0 +1,445 @@
+---
+import { ClaimForm } from "@/components/claim-form";
+import CorporateCta from "@/components/corporate-cta.astro";
+import Badge from "@/components/ui/badge.astro";
+import Card from "@/components/ui/card.astro";
+import SectionLabel from "@/components/ui/section-label.astro";
+import StartupCard from "@/components/ui/startup-card.astro";
+import { getTranslations } from "@/i18n/translations";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getCountryFlag } from "@/lib/countries";
+import type { KeyResult, SeedStartup } from "@/lib/seed-types";
+import type { VerticalKey } from "@/lib/verticals";
+import { MATURITY_CONFIG, VERTICAL_CONFIG } from "@/lib/verticals";
+
+const locale = "en" as const;
+const t = getTranslations(locale);
+
+export async function getStaticPaths() {
+	const startups = await import("@/data/seed.json");
+	return startups.default.map((s) => ({
+		params: { slug: s.slug },
+		props: { startup: s },
+	}));
+}
+
+type Props = { startup: SeedStartup };
+const { startup } = Astro.props;
+
+// i18n field selection: EN fields with fallback to ES (base)
+const oneLiner = startup.one_liner_en ?? startup.one_liner;
+const techDescription = startup.tech_description_en ?? startup.tech_description;
+const keyResults = (startup.key_results_en ?? startup.key_results) as KeyResult[] | null;
+const problemStatement = startup.problem_statement_en ?? startup.problem_statement;
+const businessModel = startup.business_model_en ?? startup.business_model;
+const displayCountry = startup.country;
+
+const flag = getCountryFlag(startup.country);
+const firstVertical = startup.verticals[0] as VerticalKey | undefined;
+const initialsColor = firstVertical
+	? (VERTICAL_CONFIG[firstVertical]?.color ?? "var(--v-other)")
+	: "var(--v-other)";
+const initial = startup.name.charAt(0).toUpperCase();
+
+const maturityLabel =
+	MATURITY_CONFIG[startup.maturity_level as keyof typeof MATURITY_CONFIG]?.label.en ??
+	startup.maturity_level;
+
+// Related startups: same primary vertical, excluding self
+const allStartups = (await import("@/data/seed.json")).default;
+const related = allStartups
+	.filter((s) => s.slug !== startup.slug && firstVertical && s.verticals.includes(firstVertical))
+	.slice(0, 3);
+
+const verticalLabel = firstVertical
+	? (VERTICAL_CONFIG[firstVertical]?.label.en ?? firstVertical)
+	: "";
+
+// Determine if profile is mostly empty
+const hasContent = Boolean(
+	techDescription || (keyResults && keyResults.length > 0) || problemStatement || businessModel,
+);
+
+const RESULT_ICONS: Record<string, string> = {
+	product: "M9.5 2h5l.5 2H20v14H4V4h5.5l.5-2Zm1 2l-.5 2h4l-.5-2h-3Z",
+	metric: "M3 3v18h18M7 14l4-4 4 4 5-5",
+	partnership: "M2.5 12.5l4-4 3 3 5-5 3 3 4-4",
+	award: "M12 2l3 6 6 1-4.5 4L18 20l-6-3-6 3 1.5-7L3 9l6-1z",
+	patent: "M9 2v2H7v16h10V4h-2V2H9ZM11 8h2v2h-2V8Zm0 4h2v2h-2v-2Z",
+	publication: "M4 4h16v16H4V4Zm2 4h12M6 12h12M6 16h8",
+};
+
+// JSON-LD Organization schema
+const jsonLd = {
+	"@context": "https://schema.org",
+	"@type": "Organization",
+	name: startup.name,
+	description: oneLiner ?? undefined,
+	foundingDate: String(startup.founding_year),
+	url: startup.website_url ?? undefined,
+	address: {
+		"@type": "PostalAddress",
+		addressLocality: startup.city,
+		addressCountry: startup.country,
+	},
+};
+---
+
+<BaseLayout
+	title={`${startup.name} — ${t.meta.siteTitle}`}
+	description={oneLiner}
+	locale={locale}
+	jsonLd={jsonLd}
+>
+	<div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+		<!-- Breadcrumb -->
+		<nav
+			class="mb-8 flex items-center gap-2 text-sm text-muted-foreground"
+			style="font-family: var(--font-body);"
+			aria-label="Breadcrumb"
+		>
+			<a
+				href="/en/directory"
+				class="hover:text-foreground transition-colors duration-150"
+			>
+				{t.profile.breadcrumbDirectory}
+			</a>
+			<span aria-hidden="true">
+				<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l6 7-6 7"/></svg>
+			</span>
+			<span class="text-foreground">{startup.name}</span>
+		</nav>
+
+		<div class="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_300px]">
+			<!-- Main content -->
+			<div class="min-w-0">
+				<!-- Hero Section -->
+				<section class="ds-section mb-12">
+					<div class="flex items-start gap-5">
+						<div
+							class="flex h-16 w-16 shrink-0 items-center justify-center rounded-full text-2xl font-bold text-white"
+							style={`background: ${initialsColor}; font-family: var(--font-display);`}
+						>
+							{initial}
+						</div>
+						<div class="flex-1 min-w-0">
+							<h1
+								class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
+								style="font-family: var(--font-display);"
+							>
+								{startup.name}
+							</h1>
+							{oneLiner && (
+								<p
+									class="mt-2 text-lg text-muted-foreground leading-relaxed"
+									style="font-family: var(--font-body);"
+								>
+									{oneLiner}
+								</p>
+							)}
+						</div>
+					</div>
+
+					<!-- Metadata row -->
+					<div class="mt-6 flex flex-wrap items-center gap-3">
+						<span
+							class="inline-flex items-center gap-1.5 text-sm text-muted-foreground"
+							style="font-family: var(--font-body);"
+						>
+							{flag && <span aria-hidden="true">{flag}</span>}
+							{startup.city}, {displayCountry}
+						</span>
+
+						<span class="text-[var(--border-strong)]" aria-hidden="true">&middot;</span>
+
+						<span
+							class="text-sm text-muted-foreground"
+							style="font-family: var(--font-body);"
+						>
+							{t.profile.founded} {startup.founding_year}
+						</span>
+
+						<span class="text-[var(--border-strong)]" aria-hidden="true">&middot;</span>
+
+						<Badge variant="maturity" value={startup.maturity_level} locale={locale} />
+
+						{startup.team_size && (
+							<>
+								<span class="text-[var(--border-strong)]" aria-hidden="true">&middot;</span>
+								<span
+									class="text-sm text-muted-foreground"
+									style="font-family: var(--font-body);"
+								>
+									{startup.team_size} {t.profile.people}
+								</span>
+							</>
+						)}
+
+						{startup.funding_received && (
+							<>
+								<span class="text-[var(--border-strong)]" aria-hidden="true">&middot;</span>
+								<span
+									class="text-sm font-medium"
+									style="font-family: var(--font-mono); color: var(--success);"
+								>
+									{startup.funding_received}
+								</span>
+							</>
+						)}
+					</div>
+
+					<!-- Vertical tags -->
+					<div class="mt-4 flex flex-wrap gap-2">
+						{startup.verticals.map((v) => (
+							<Badge variant="vertical" value={v} locale={locale} />
+						))}
+					</div>
+
+					{startup.website_url && (
+						<div class="mt-4">
+							<a
+								href={startup.website_url}
+								target="_blank"
+								rel="noopener noreferrer"
+								class="inline-flex items-center gap-1.5 text-sm text-primary hover:underline"
+								style="font-family: var(--font-body);"
+							>
+								{t.profile.visitWebsite}
+								<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg>
+							</a>
+						</div>
+					)}
+				</section>
+
+				{!hasContent && (
+					<section class="ds-section mb-12">
+						<Card variant="featured">
+							<div class="flex items-start gap-4">
+								<div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[var(--warning-muted)]">
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--warning)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+								</div>
+								<div>
+									<p class="text-foreground" style="font-family: var(--font-body);">
+										{t.profile.incompleteProfile}
+									</p>
+									<a
+										href="#claim"
+										class="mt-2 inline-flex items-center gap-1.5 text-sm text-primary hover:underline"
+										style="font-family: var(--font-heading);"
+									>
+										{t.profile.claimButton}
+										<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+									</a>
+								</div>
+							</div>
+						</Card>
+					</section>
+				)}
+
+				<!-- Technology -->
+				{techDescription && (
+					<section class="ds-section mb-12">
+						<SectionLabel text={t.profile.technology} />
+						<div
+							class="mt-4 text-base leading-relaxed text-foreground/90"
+							style="font-family: var(--font-body);"
+						>
+							<p>{techDescription}</p>
+						</div>
+					</section>
+				)}
+
+				<!-- Key Results -->
+				{keyResults && keyResults.length > 0 && (
+					<section class="ds-section mb-12">
+						<SectionLabel text={t.profile.keyResults} />
+						<div class="mt-4 grid gap-4 sm:grid-cols-2">
+							{keyResults.map((result) => {
+								const iconPath = RESULT_ICONS[result.type] ?? RESULT_ICONS.metric;
+								return (
+									<Card>
+										<div class="flex items-start gap-3">
+											<div
+												class="flex h-9 w-9 shrink-0 items-center justify-center rounded-[var(--radius-md)]"
+												style="background: var(--primary-8);"
+											>
+												<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={iconPath}/></svg>
+											</div>
+											<div class="min-w-0">
+												<h4
+													class="text-sm font-semibold text-foreground"
+													style="font-family: var(--font-heading);"
+												>
+													{result.title}
+												</h4>
+												<p
+													class="mt-1 text-sm text-muted-foreground leading-relaxed"
+													style="font-family: var(--font-body);"
+												>
+													{result.description}
+												</p>
+											</div>
+										</div>
+									</Card>
+								);
+							})}
+						</div>
+					</section>
+				)}
+
+				<!-- The Problem -->
+				{problemStatement && (
+					<section class="ds-section mb-12">
+						<SectionLabel text={t.profile.theProblem} />
+						<div
+							class="mt-4 text-base leading-relaxed text-foreground/90"
+							style="font-family: var(--font-body);"
+						>
+							<p>{problemStatement}</p>
+						</div>
+					</section>
+				)}
+
+				<!-- Business Model -->
+				{businessModel && (
+					<section class="ds-section mb-12">
+						<SectionLabel text={t.profile.businessModel} />
+						<div
+							class="mt-4 text-base leading-relaxed text-foreground/90"
+							style="font-family: var(--font-body);"
+						>
+							<p>{businessModel}</p>
+						</div>
+					</section>
+				)}
+
+				<!-- Related Startups -->
+				{related.length > 0 && (
+					<section class="ds-section mb-12">
+						<SectionLabel
+							text={`${t.profile.moreIn} ${verticalLabel}`}
+						/>
+						<div class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+							{related.map((s) => (
+								<StartupCard
+									startup={{
+										slug: s.slug,
+										name: s.name,
+										one_liner: s.one_liner_en ?? s.one_liner,
+										country: s.country,
+										country_es: s.country_es,
+										city: s.city,
+										verticals: s.verticals,
+										maturity_level: s.maturity_level,
+										funding_received: s.funding_received,
+									}}
+									locale={locale}
+									href={`/en/startup/${s.slug}`}
+								/>
+							))}
+						</div>
+					</section>
+				)}
+
+				<!-- Claim Form -->
+				<section class="ds-section mb-12" id="claim">
+					<Card>
+						<ClaimForm
+							client:visible
+							startupSlug={startup.slug}
+							startupName={startup.name}
+							translations={{
+								title: t.profile.claimTitle,
+								nameLabel: t.profile.claimNameLabel,
+								namePlaceholder: t.profile.claimNamePlaceholder,
+								roleLabel: t.profile.claimRoleLabel,
+								rolePlaceholder: t.profile.claimRolePlaceholder,
+								emailLabel: t.profile.claimEmailLabel,
+								emailPlaceholder: t.profile.claimEmailPlaceholder,
+								proofLabel: t.profile.claimProofLabel,
+								proofPlaceholder: t.profile.claimProofPlaceholder,
+								submit: t.profile.claimSubmit,
+								submitting: t.profile.claimSubmitting,
+								success: t.profile.claimSuccess,
+								required: t.profile.claimRequired,
+								invalidEmail: t.profile.claimInvalidEmail,
+								submitError: t.profile.claimSubmitError,
+							}}
+						/>
+					</Card>
+				</section>
+			</div>
+
+			<!-- Sidebar (desktop: sticky right column) -->
+			<aside class="hidden lg:block">
+				<div class="sticky top-24">
+					<Card variant="featured">
+						<h3
+							class="text-base font-semibold text-foreground"
+							style="font-family: var(--font-heading);"
+						>
+							{t.profile.sidebarTitle}
+						</h3>
+
+						<!-- 3-step process -->
+						<div class="mt-5 space-y-4">
+							{[t.profile.sidebarStep1, t.profile.sidebarStep2, t.profile.sidebarStep3].map((step, i) => (
+								<div class="flex items-start gap-3">
+									<div
+										class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-bold"
+										style="background: var(--primary-15); color: var(--primary-light); font-family: var(--font-mono);"
+									>
+										{i + 1}
+									</div>
+									<span
+										class="text-sm text-muted-foreground leading-snug pt-0.5"
+										style="font-family: var(--font-body);"
+									>
+										{step}
+									</span>
+								</div>
+							))}
+						</div>
+
+						<div class="mt-6">
+							<CorporateCta
+								locale={locale}
+								label={t.common.ctaTalk}
+								contextStartup={{
+									slug: startup.slug,
+									name: startup.name,
+									vertical: firstVertical ?? "",
+								}}
+							/>
+						</div>
+
+						<p
+							class="mt-4 text-xs text-[var(--text-tertiary)]"
+							style="font-family: var(--font-body);"
+						>
+							{t.profile.sidebarExplore}
+						</p>
+					</Card>
+				</div>
+			</aside>
+		</div>
+	</div>
+
+	<!-- Mobile sticky bottom bar -->
+	<div
+		class="fixed bottom-0 left-0 right-0 z-30 border-t bg-card p-3 lg:hidden"
+		style="border-color: var(--border-subtle);"
+	>
+		<div class="mx-auto flex max-w-7xl items-center justify-center">
+			<CorporateCta
+				locale={locale}
+				label={t.common.ctaTalk}
+				contextStartup={{
+					slug: startup.slug,
+					name: startup.name,
+					vertical: firstVertical ?? "",
+				}}
+			/>
+		</div>
+	</div>
+</BaseLayout>

@@ -3,17 +3,47 @@
 // Data
 // ---------------------------------------------------------------------------
 const BG_SWATCHES = [
-	{ name: "background", var: "--background", hex: "#0A0710", desc: "Page background" },
+	{
+		name: "background",
+		var: "--background",
+		hex: "#0A0710",
+		desc: "Page background",
+	},
 	{ name: "card", var: "--card", hex: "#110E18", desc: "Cards, panels" },
-	{ name: "popover", var: "--popover", hex: "#1A1622", desc: "Modals, popovers" },
+	{
+		name: "popover",
+		var: "--popover",
+		hex: "#1A1622",
+		desc: "Modals, popovers",
+	},
 	{ name: "muted", var: "--muted", hex: "#231E2D", desc: "Hover states" },
 ];
 
 const TEXT_LEVELS = [
-	{ name: "foreground", var: "--foreground", hex: "#ECEEF4", desc: "Headings, body" },
-	{ name: "muted-fg", var: "--muted-foreground", hex: "#928BA8", desc: "Labels, captions" },
-	{ name: "tertiary", var: "--text-tertiary", hex: "#635C78", desc: "Metadata, hints" },
-	{ name: "disabled", var: "--text-disabled", hex: "#433D56", desc: "Disabled elements" },
+	{
+		name: "foreground",
+		var: "--foreground",
+		hex: "#ECEEF4",
+		desc: "Headings, body",
+	},
+	{
+		name: "muted-fg",
+		var: "--muted-foreground",
+		hex: "#928BA8",
+		desc: "Labels, captions",
+	},
+	{
+		name: "tertiary",
+		var: "--text-tertiary",
+		hex: "#635C78",
+		desc: "Metadata, hints",
+	},
+	{
+		name: "disabled",
+		var: "--text-disabled",
+		hex: "#433D56",
+		desc: "Disabled elements",
+	},
 ];
 
 const PURPLE_SCALE = [
@@ -103,10 +133,26 @@ const SECTIONS = [
 const BAR_MAX = Math.max(...BAR_DATA.map((b) => b.value));
 
 const MATURITY_COLORS = {
-	seed: { bg: "var(--warning-muted)", text: "var(--warning)", border: "rgba(245,158,11,0.3)" },
-	seriesA: { bg: "var(--info-muted)", text: "var(--info)", border: "rgba(61,165,217,0.3)" },
-	seriesB: { bg: "rgba(167,139,250,0.12)", text: "#A78BFA", border: "rgba(167,139,250,0.3)" },
-	growth: { bg: "var(--success-muted)", text: "var(--success)", border: "rgba(34,197,94,0.3)" },
+	seed: {
+		bg: "var(--warning-muted)",
+		text: "var(--warning)",
+		border: "rgba(245,158,11,0.3)",
+	},
+	seriesA: {
+		bg: "var(--info-muted)",
+		text: "var(--info)",
+		border: "rgba(61,165,217,0.3)",
+	},
+	seriesB: {
+		bg: "rgba(167,139,250,0.12)",
+		text: "#A78BFA",
+		border: "rgba(167,139,250,0.3)",
+	},
+	growth: {
+		bg: "var(--success-muted)",
+		text: "var(--success)",
+		border: "rgba(34,197,94,0.3)",
+	},
 };
 ---
 

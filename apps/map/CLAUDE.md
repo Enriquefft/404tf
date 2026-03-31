@@ -36,6 +36,15 @@ Full spec: `implementation.md` (what to build). Design tokens: `design-spec.json
 - **Never `biome-ignore`** unless genuinely no fix. Fix the code.
 - Zero errors before any step is done.
 
+## Icons
+
+- **Single source of truth:** [Solar Icons](https://solar-icons.vercel.app/) — no other icon library.
+- **Package:** `@solar-icons/react` (installed, for use inside React islands only).
+- **Styles available:** Bold, Linear, Outline. Prefer **Linear** for UI, **Bold** for emphasis/CTAs.
+- **In .astro files (preferred):** Copy SVG markup from Solar Icons site into inline `<svg>`. Create reusable `.astro` icon components in `src/components/icons/` when used more than once.
+- **In .tsx React islands:** `import { IconName } from "@solar-icons/react/linear"`. Only when the component is already a React island for interactivity.
+- **Never** wrap an icon in a React island just to use the React package. Icons are static.
+
 ## Code Conventions
 
 - Named exports only (except Astro pages + config files).

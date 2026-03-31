@@ -48,8 +48,8 @@
 	// What EVOLVES (report voice):
 	// - Backgrounds: neutral gray → deep plum (signals "analytical product")
 	// - Accent: landing's purple → deeper brand purple (institutional authority)
-	// - Typography: Orbitron/Inter → Bricolage Grotesque/Space Grotesk/Plus Jakarta
-	//   (editorial grotesque + tech sans, not gaming display)
+	// - Typography: Orbitron/Inter → Bricolage Grotesque + system stack
+	//   (editorial grotesque + native body, not gaming display)
 	// - Radii: 12px base → 8px base (tighter = more data-professional)
 	// - Motion: spring physics → ease-out curves (nothing bounces here)
 	//
@@ -65,9 +65,9 @@
 	// │ --house-bio: #00CD4E    │ --v-biotech: #00CD4E          │
 	// │ --house-hw: #FF4834     │ --v-hardware: #FF4834         │
 	// │ --house-space: #00A0F0  │ --v-space: #00A0F0            │
-	// │ Big Shoulders (headings) │ Space Grotesk (headings)      │
-	// │ Barlow Semi Cond (body)  │ Plus Jakarta Sans (body)      │
-	// │ —                        │ Bricolage Grotesque (display) │
+	// │ Big Shoulders (headings) │ Bricolage Grotesque (display) │
+	// │ Barlow Semi Cond (body)  │ system-ui stack (body)        │
+	// │ —                        │ Bricolage Grotesque (heading) │
 	// │ system mono              │ JetBrains Mono (data)         │
 	// │ --radius: 0.75rem       │ --radius: 0.5rem              │
 	// │ .text-glow-purple        │ --glow-primary                │
@@ -298,51 +298,40 @@
 	// 2. TYPOGRAPHY
 	// ==========================================================================
 	//
-	// The landing uses Orbitron (headings) + Inter (body). Orbitron is geometric,
-	// futuristic, gaming-adjacent — it says "tech community." Inter is the
-	// default safe choice, invisible by design.
+	// Two-family strategy + system stack. Self-hosted WOFF2, zero external requests.
 	//
-	// The report needs a different voice: editorial authority + data precision.
-	// Both products are dark-mode-first, but the landing speaks to a 20-something
-	// dev community while the report speaks to corporate innovation directors.
+	// 1. Bricolage Grotesque (variable, 200-800) — Display + heading voice.
+	//    Hero stats, section titles, subheads, nav, UI labels, card titles.
+	//    Variable optical sizing (12-96) differentiates display vs heading
+	//    sizes automatically. Absorbs Space Grotesk's former role. Self-hosted
+	//    from public/fonts/bricolage-grotesque-var.woff2 (41KB, latin subset).
 	//
-	// Four-voice system:
+	// 2. JetBrains Mono (static, 400 + 600) — Data voice.
+	//    Stats, table numbers, code, IDs, metrics. Tabular figures, clear at
+	//    small sizes. Two WOFF2 files: 400 regular (21KB) + 600 semibold (22KB).
 	//
-	// 1. Bricolage Grotesque — Display voice. Hero stats, section titles, pull
-	//    quotes. Variable optical sizing (12–96), 200–800 weight range. Has the
-	//    editorial gravitas of a serif with the tech-forward feel of a grotesque.
-	//    Says "research publication, not startup blog."
+	// 3. Body text — System font stack (no download).
+	//    system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial.
+	//    Instant rendering, zero CLS, zero download. Replaces Plus Jakarta Sans.
 	//
-	// 2. Space Grotesk — Heading voice. Subheads, nav, UI labels, card titles.
-	//    Geometric sans with a technical edge — the closest relative to Orbitron's
-	//    geometric DNA, but grown up. Provides brand continuity at a subconscious
-	//    level (both are geometric, monoline, tech-forward).
-	//
-	// 3. Plus Jakarta Sans — Body voice. Paragraphs, descriptions, form labels.
-	//    Excellent readability across weights. Full italic set for emphasis.
-	//    Works well in both Spanish and English. Where Inter is invisible,
-	//    Plus Jakarta Sans has just enough personality to feel deliberate.
-	//
-	// 4. JetBrains Mono — Data voice. Stats, table numbers, code, IDs, metrics.
-	//    Tabular figures, clear at small sizes. The landing uses system mono;
-	//    we upgrade to a specific face because data is a first-class citizen here.
+	// Total font payload: ~84KB (3 WOFF2 files). Down from 4 external families.
 	// ==========================================================================
 	"typography": {
 		"fonts": {
-			"display": "'Bricolage Grotesque', 'Arial', sans-serif",
-			"heading": "'Space Grotesk', 'Arial', sans-serif",
-			"body": "'Plus Jakarta Sans', 'Helvetica Neue', 'Arial', sans-serif",
-			"mono": "'JetBrains Mono', 'SF Mono', 'Consolas', monospace"
+			"display": "'Bricolage Grotesque', Georgia, serif",
+			"heading": "'Bricolage Grotesque', Georgia, serif",
+			"body": "system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+			"mono": "'JetBrains Mono', ui-monospace, 'SF Mono', 'Cascadia Mono', Consolas, monospace"
 		},
 
-		// Google Fonts URL. Preconnect to fonts.googleapis.com + fonts.gstatic.com.
-		"googleFontsUrl": "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:ital,wght@0,300..700;1,400;1,500&family=Space+Grotesk:wght@300..700&display=swap",
+		// Self-hosted WOFF2 in public/fonts/. No external font requests.
+		// Files: bricolage-grotesque-var.woff2, jetbrains-mono-400.woff2, jetbrains-mono-600.woff2
 
 		// --------------------------------------------------------------------------
 		// 2a. Font weights
 		// --------------------------------------------------------------------------
 		"weights": {
-			"light": 300, // Space Grotesk + Plus Jakarta Sans only.
+			"light": 300, // Bricolage Grotesque only.
 			"regular": 400, // All fonts. Default body weight.
 			"medium": 500, // UI labels, table headers, emphasis.
 			"semibold": 600, // Subheads, card titles, nav items, display.
@@ -417,19 +406,19 @@
 				"style": "normal"
 			},
 
-			// Headings — Space Grotesk. Structural, tech-forward.
+			// Headings — Bricolage Grotesque at heading sizes. Structural, tech-forward.
 			"h1": { "font": "heading", "size": "3xl", "weight": "bold" },
 			"h2": { "font": "heading", "size": "2xl", "weight": "semibold" },
 			"h3": { "font": "heading", "size": "xl", "weight": "semibold" },
 			"h4": { "font": "heading", "size": "lg", "weight": "medium" },
 
-			// Body — Plus Jakarta Sans.
+			// Body — System font stack. Instant rendering, zero CLS.
 			"bodyLg": { "font": "body", "size": "md", "weight": "regular" },
 			"body": { "font": "body", "size": "base", "weight": "regular" },
 			"bodySm": { "font": "body", "size": "sm", "weight": "regular" },
 			"bodyXs": { "font": "body", "size": "xs", "weight": "regular" },
 
-			// Labels — Space Grotesk at small sizes.
+			// Labels — Bricolage Grotesque at small sizes.
 			"label": { "font": "heading", "size": "sm", "weight": "medium" },
 			"labelSm": { "font": "heading", "size": "xs", "weight": "medium" },
 			"overline": {

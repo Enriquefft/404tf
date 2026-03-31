@@ -1,0 +1,306 @@
+---
+import { StartupApplyForm } from "@/components/startup-apply-form";
+import { StartupProgramForm } from "@/components/startup-program-form";
+import Card from "@/components/ui/card.astro";
+import SectionLabel from "@/components/ui/section-label.astro";
+import { getTranslations } from "@/i18n/translations";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { COUNTRY_FLAGS } from "@/lib/countries";
+import { MATURITY_CONFIG, VERTICAL_CONFIG } from "@/lib/verticals";
+
+const locale = "en" as const;
+const t = getTranslations(locale);
+
+const countryOptions = Object.keys(COUNTRY_FLAGS).map((c) => ({
+	value: c,
+	label: c,
+}));
+
+const verticalOptions = Object.entries(VERTICAL_CONFIG).map(([key, cfg]) => ({
+	value: key,
+	label: cfg.label.en,
+}));
+
+const maturityOptions = Object.entries(MATURITY_CONFIG).map(([key, cfg]) => ({
+	value: key,
+	label: cfg.label.en,
+}));
+
+const tierOptions = [
+	{ value: "assess", label: t.startupsPage.tierAssess },
+	{ value: "prepare", label: t.startupsPage.tierPrepare },
+	{ value: "connect", label: t.startupsPage.tierConnect },
+	{ value: "not_sure", label: t.startupsPage.tierNotSure },
+];
+
+const valuePropIcons = [
+	"M15 12a3 3 0 11-6 0 3 3 0 016 0zM2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12z",
+	"M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
+	"M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z",
+];
+
+const tierIcons = [
+	"M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4",
+	"M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4",
+	"M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1",
+];
+---
+
+<BaseLayout
+	title={`${t.nav.startups} — ${t.meta.siteTitle}`}
+	description={t.meta.startupsDesc}
+	locale={locale}
+>
+	<!-- Section 1: Get on the Map -->
+	<section class="ds-section mx-auto max-w-4xl px-4 py-20 sm:px-6 lg:px-8">
+		<div class="text-center">
+			<h1
+				class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl"
+				style="font-family: var(--font-display);"
+			>
+				{t.startupsPage.getOnMapTitle}
+			</h1>
+			<p
+				class="mt-4 text-lg text-muted-foreground"
+				style="font-family: var(--font-body);"
+			>
+				{t.startupsPage.getOnMapSubtitle}
+			</p>
+		</div>
+
+		<!-- Value props -->
+		<div class="mt-12 grid gap-6 sm:grid-cols-3">
+			{[
+				{
+					title: t.startupsPage.valuePropVisibility,
+					desc: t.startupsPage.valuePropVisibilityDesc,
+				},
+				{
+					title: t.startupsPage.valuePropCredibility,
+					desc: t.startupsPage.valuePropCredibilityDesc,
+				},
+				{
+					title: t.startupsPage.valuePropConnections,
+					desc: t.startupsPage.valuePropConnectionsDesc,
+				},
+			].map((prop, i) => (
+				<div class="flex flex-col items-center text-center sm:items-start sm:text-left">
+					<div
+						class="flex h-12 w-12 items-center justify-center rounded-full"
+						style="background: var(--primary-10);"
+					>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="24"
+							height="24"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="var(--primary-light)"
+							stroke-width="1.5"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							aria-hidden="true"
+						>
+							<path d={valuePropIcons[i]} />
+						</svg>
+					</div>
+					<h3
+						class="mt-4 text-base font-semibold text-foreground"
+						style="font-family: var(--font-heading);"
+					>
+						{prop.title}
+					</h3>
+					<p
+						class="mt-2 text-sm text-muted-foreground leading-relaxed"
+						style="font-family: var(--font-body);"
+					>
+						{prop.desc}
+					</p>
+				</div>
+			))}
+		</div>
+
+		<!-- Who qualifies -->
+		<div class="mt-12">
+			<h3
+				class="text-base font-semibold text-foreground"
+				style="font-family: var(--font-heading);"
+			>
+				{t.startupsPage.qualifiesTitle}
+			</h3>
+			<p
+				class="mt-2 text-sm text-muted-foreground leading-relaxed"
+				style="font-family: var(--font-body);"
+			>
+				{t.startupsPage.qualifiesDesc}
+			</p>
+		</div>
+
+		<!-- Application form -->
+		<div class="mt-10">
+			<Card variant="featured">
+				<StartupApplyForm
+					client:load
+					translations={{
+						step1Title: t.startupsPage.applyStep1Title,
+						step2Title: t.startupsPage.applyStep2Title,
+						stepOf: t.startupsPage.applyStepOf,
+						startupName: t.startupsPage.applyStartupName,
+						startupNamePlaceholder: t.startupsPage.applyStartupNamePlaceholder,
+						website: t.startupsPage.applyWebsite,
+						websitePlaceholder: t.startupsPage.applyWebsitePlaceholder,
+						yourName: t.startupsPage.applyYourName,
+						yourNamePlaceholder: t.startupsPage.applyYourNamePlaceholder,
+						yourRole: t.startupsPage.applyYourRole,
+						yourRolePlaceholder: t.startupsPage.applyYourRolePlaceholder,
+						email: t.startupsPage.applyEmail,
+						emailPlaceholder: t.startupsPage.applyEmailPlaceholder,
+						country: t.startupsPage.applyCountry,
+						countryPlaceholder: t.startupsPage.applyCountryPlaceholder,
+						vertical: t.startupsPage.applyVertical,
+						verticalPlaceholder: t.startupsPage.applyVerticalPlaceholder,
+						maturity: t.startupsPage.applyMaturity,
+						maturityPlaceholder: t.startupsPage.applyMaturityPlaceholder,
+						oneLiner: t.startupsPage.applyOneLiner,
+						oneLinerPlaceholder: t.startupsPage.applyOneLinerPlaceholder,
+						why: t.startupsPage.applyWhy,
+						whyPlaceholder: t.startupsPage.applyWhyPlaceholder,
+						back: t.common.back,
+						next: t.common.next,
+						submit: t.common.submit,
+						success: t.startupsPage.applySuccess,
+						required: t.startupsPage.required,
+						invalidEmail: t.startupsPage.invalidEmail,
+						submitError: t.startupsPage.submitError,
+					}}
+					countries={countryOptions}
+					verticals={verticalOptions}
+					maturities={maturityOptions}
+				/>
+			</Card>
+		</div>
+	</section>
+
+	<!-- Visual divider -->
+	<div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+		<div
+			class="h-px"
+			style="background: linear-gradient(to right, transparent, var(--border-strong), transparent);"
+		/>
+	</div>
+
+	<!-- Section 2: Sell to Corporates -->
+	<section class="ds-section mx-auto max-w-4xl px-4 py-20 sm:px-6 lg:px-8">
+		<div class="text-center">
+			<h2
+				class="text-2xl font-bold tracking-tight text-foreground sm:text-3xl lg:text-4xl"
+				style="font-family: var(--font-display);"
+			>
+				{t.startupsPage.programTitle}
+			</h2>
+			<p
+				class="mt-4 text-lg text-muted-foreground"
+				style="font-family: var(--font-body);"
+			>
+				{t.startupsPage.programSubtitle}
+			</p>
+		</div>
+
+		<!-- Tier cards -->
+		<div class="mt-12 grid gap-6 sm:grid-cols-3">
+			{[
+				{
+					title: t.startupsPage.tierAssess,
+					desc: t.startupsPage.tierAssessDesc,
+				},
+				{
+					title: t.startupsPage.tierPrepare,
+					desc: t.startupsPage.tierPrepareDesc,
+				},
+				{
+					title: t.startupsPage.tierConnect,
+					desc: t.startupsPage.tierConnectDesc,
+				},
+			].map((tier, i) => (
+				<Card>
+					<div class="flex items-start gap-3">
+						<div
+							class="flex h-10 w-10 shrink-0 items-center justify-center rounded-[var(--radius-md)]"
+							style="background: var(--primary-10);"
+						>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								width="20"
+								height="20"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="var(--primary-light)"
+								stroke-width="1.5"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								aria-hidden="true"
+							>
+								<path d={tierIcons[i]} />
+							</svg>
+						</div>
+						<div>
+							<h3
+								class="text-base font-semibold text-foreground"
+								style="font-family: var(--font-heading);"
+							>
+								{tier.title}
+							</h3>
+							<p
+								class="mt-2 text-sm text-muted-foreground leading-relaxed"
+								style="font-family: var(--font-body);"
+							>
+								{tier.desc}
+							</p>
+						</div>
+					</div>
+				</Card>
+			))}
+		</div>
+
+		<!-- Program form -->
+		<div class="mt-10">
+			<Card variant="featured">
+				<StartupProgramForm
+					client:visible
+					translations={{
+						startupName: t.startupsPage.programStartupName,
+						yourName: t.startupsPage.programYourName,
+						email: t.startupsPage.programEmail,
+						tier: t.startupsPage.programTier,
+						tierPlaceholder: t.startupsPage.programTierPlaceholder,
+						description: t.startupsPage.programDescription,
+						descriptionPlaceholder: t.startupsPage.programDescriptionPlaceholder,
+						submit: t.common.submit,
+						success: t.startupsPage.programSuccess,
+						required: t.startupsPage.required,
+						invalidEmail: t.startupsPage.invalidEmail,
+						submitError: t.startupsPage.submitError,
+					}}
+					tiers={tierOptions}
+				/>
+			</Card>
+		</div>
+	</section>
+
+	<!-- Footer note -->
+	<section class="mx-auto max-w-4xl px-4 pb-16 text-center sm:px-6 lg:px-8">
+		<p
+			class="text-sm text-muted-foreground"
+			style="font-family: var(--font-body);"
+		>
+			{t.startupsPage.footerNote}{" "}
+			<a
+				href="#"
+				class="text-primary hover:underline"
+				style="font-family: var(--font-heading);"
+			>
+				{t.startupsPage.footerClaimLink}
+			</a>
+		</p>
+	</section>
+</BaseLayout>

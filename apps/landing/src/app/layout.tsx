@@ -5,7 +5,11 @@ import { PostHogPageView } from "@/lib/analytics/posthog-pageview";
 import { PHProvider } from "@/lib/analytics/posthog-provider";
 import { WebVitals } from "@/lib/analytics/web-vitals";
 import { cn } from "@/lib/utils";
-import { barlowSemiCondensed, bigShouldersDisplay, jetbrainsMono } from "@/styles/fonts";
+import {
+	barlowSemiCondensed,
+	bigShouldersDisplay,
+	jetbrainsMono,
+} from "@/styles/fonts";
 
 type Props = {
 	children: React.ReactNode;

@@ -1,0 +1,201 @@
+---
+import Button from "@/components/ui/button.astro";
+import Card from "@/components/ui/card.astro";
+import SectionLabel from "@/components/ui/section-label.astro";
+import { getTranslations } from "@/i18n/translations";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const locale = "es" as const;
+const t = getTranslations(locale);
+
+const team = [
+	{
+		name: "Enrique Flores",
+		role: "Co-Fundador & CTO",
+		initials: "EF",
+		color: "var(--v-ai)",
+	},
+	{
+		name: "Oscar Castro",
+		role: "Co-Fundador",
+		initials: "OC",
+		color: "var(--v-hardware)",
+	},
+	{
+		name: "Alejandra Vera",
+		role: "Estrategia y Alianzas",
+		initials: "AV",
+		color: "var(--v-biotech)",
+	},
+];
+
+const methodology = [
+	{
+		step: "01",
+		title: t.about.methodStep1Title,
+		desc: t.about.methodStep1Desc,
+	},
+	{
+		step: "02",
+		title: t.about.methodStep2Title,
+		desc: t.about.methodStep2Desc,
+	},
+	{
+		step: "03",
+		title: t.about.methodStep3Title,
+		desc: t.about.methodStep3Desc,
+	},
+	{
+		step: "04",
+		title: t.about.methodStep4Title,
+		desc: t.about.methodStep4Desc,
+	},
+];
+---
+
+<BaseLayout
+	title={`${t.nav.about} — ${t.meta.siteTitle}`}
+	description={t.meta.aboutDesc}
+	locale={locale}
+>
+	<!-- About Section -->
+	<section class="ds-section mx-auto max-w-3xl px-4 py-20 sm:px-6 lg:px-8">
+		<h1
+			class="text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
+			style="font-family: var(--font-display);"
+		>
+			{t.about.aboutTitle}
+		</h1>
+		<div
+			class="mt-8 space-y-5 text-base leading-relaxed text-foreground/90"
+			style="font-family: var(--font-body);"
+		>
+			<p>{t.about.aboutP1}</p>
+			<p>{t.about.aboutP2}</p>
+			<p>{t.about.aboutP3}</p>
+		</div>
+	</section>
+
+	<!-- Team -->
+	<section class="ds-section mx-auto max-w-3xl px-4 pb-20 sm:px-6 lg:px-8">
+		<SectionLabel text={t.about.teamTitle} />
+		<div class="mt-6 grid gap-6 sm:grid-cols-3">
+			{team.map((member) => (
+				<Card>
+					<div class="flex flex-col items-center text-center">
+						<div
+							class="flex h-16 w-16 items-center justify-center rounded-full text-xl font-bold text-white"
+							style={`background: ${member.color}; font-family: var(--font-display);`}
+						>
+							{member.initials}
+						</div>
+						<h3
+							class="mt-4 text-base font-semibold text-foreground"
+							style="font-family: var(--font-heading);"
+						>
+							{member.name}
+						</h3>
+						<p
+							class="mt-1 text-sm text-muted-foreground"
+							style="font-family: var(--font-body);"
+						>
+							{member.role}
+						</p>
+						<div class="mt-3">
+							<span
+								class="inline-flex h-8 w-8 items-center justify-center rounded-full transition-colors duration-150"
+								style="background: var(--border-subtle);"
+							>
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--muted-foreground)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+									<path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
+									<circle cx="4" cy="4" r="2"/>
+								</svg>
+							</span>
+						</div>
+					</div>
+				</Card>
+			))}
+		</div>
+	</section>
+
+	<!-- Methodology -->
+	<section class="ds-section mx-auto max-w-3xl px-4 pb-20 sm:px-6 lg:px-8">
+		<SectionLabel text={t.about.methodologyTitle} />
+		<div class="mt-6 space-y-0">
+			{methodology.map((item, i) => (
+				<div class="relative flex gap-6 pb-10 last:pb-0">
+					{i < methodology.length - 1 && (
+						<div
+							class="absolute left-[18px] top-10 bottom-0 w-px"
+							style="background: var(--border-subtle);"
+						/>
+					)}
+					<div
+						class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-xs font-bold"
+						style="background: var(--primary-15); color: var(--primary-light); font-family: var(--font-mono);"
+					>
+						{item.step}
+					</div>
+					<div>
+						<h3
+							class="text-base font-semibold text-foreground"
+							style="font-family: var(--font-heading);"
+						>
+							{item.title}
+						</h3>
+						<p
+							class="mt-1.5 text-sm text-muted-foreground leading-relaxed"
+							style="font-family: var(--font-body);"
+						>
+							{item.desc}
+						</p>
+					</div>
+				</div>
+			))}
+		</div>
+	</section>
+
+	<!-- Collaborators -->
+	<section class="ds-section mx-auto max-w-3xl px-4 pb-20 sm:px-6 lg:px-8">
+		<SectionLabel text={t.about.collaboratorsTitle} />
+		<div class="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+			{Array.from({ length: 8 }).map(() => (
+				<div
+					class="flex h-20 items-center justify-center rounded-[var(--radius-md)] border border-dashed"
+					style="border-color: var(--border-subtle); background: var(--card);"
+				>
+					<span
+						class="text-xs text-[var(--text-tertiary)]"
+						style="font-family: var(--font-heading);"
+					>
+						{t.about.collaboratorPlaceholder}
+					</span>
+				</div>
+			))}
+		</div>
+	</section>
+
+	<!-- Soft CTA -->
+	<section class="ds-section mx-auto max-w-3xl px-4 pb-20 text-center sm:px-6 lg:px-8">
+		<h2
+			class="text-2xl font-bold text-foreground"
+			style="font-family: var(--font-display);"
+		>
+			{t.about.ctaTitle}
+		</h2>
+		<p class="mt-4">
+			<a
+				href={`mailto:${t.about.ctaEmail}`}
+				class="text-primary hover:underline"
+				style="font-family: var(--font-mono);"
+			>
+				{t.about.ctaEmail}
+			</a>
+		</p>
+		<div class="mt-6">
+			<Button href="/es/contacto">
+				{t.footer.talkToUs}
+			</Button>
+		</div>
+	</section>
+</BaseLayout>

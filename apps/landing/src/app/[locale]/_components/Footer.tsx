@@ -19,7 +19,9 @@ export async function Footer() {
 				<div className="flex flex-col md:flex-row items-start justify-between gap-10">
 					<div>
 						<Logo className="text-lg mb-3" />
-						<p className="text-sm text-muted-foreground font-mono-accent">{t("tagline")}</p>
+						<p className="text-sm text-muted-foreground font-mono-accent">
+							{t("tagline")}
+						</p>
 					</div>
 
 					<div className="flex flex-wrap gap-6">

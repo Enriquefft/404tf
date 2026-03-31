@@ -1,21 +1,77 @@
 ---
+import Footer from "@/components/footer.astro";
+import Nav from "@/components/nav.astro";
+import type { Locale } from "@/i18n/translations";
+import { getAlternateLocale, getAlternateLocalePath } from "@/i18n/utils";
+import { getPostHogScript } from "@/lib/analytics";
 import "@/styles/globals.css";
 
 type Props = {
 	title: string;
+	description?: string;
+	locale: Locale;
+	jsonLd?: Record<string, unknown>;
 };
 
-const { title } = Astro.props;
+const { title, description, locale, jsonLd } = Astro.props;
+const posthogScript = getPostHogScript();
+
+const siteUrl = import.meta.env.SITE ?? "https://map.404tf.com";
+const currentPath = Astro.url.pathname;
+const canonicalUrl = `${siteUrl}${currentPath}`;
+
+const altLocale = getAlternateLocale(locale);
+const altPath = getAlternateLocalePath(currentPath, altLocale);
+const esUrl = locale === "es" ? canonicalUrl : `${siteUrl}${altPath}`;
+const enUrl = locale === "en" ? canonicalUrl : `${siteUrl}${altPath}`;
+const ogLocale = locale === "es" ? "es_ES" : "en_US";
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={locale}>
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>{title}</title>
+		{description && <meta name="description" content={description} />}
+
+		<!-- Canonical & hreflang -->
+		<link rel="canonical" href={canonicalUrl} />
+		<link rel="alternate" hreflang="es" href={esUrl} />
+		<link rel="alternate" hreflang="en" href={enUrl} />
+
+		<!-- Open Graph -->
+		<meta property="og:title" content={title} />
+		{description && <meta property="og:description" content={description} />}
+		<meta property="og:type" content="website" />
+		<meta property="og:locale" content={ogLocale} />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:site_name" content="404 Mapped" />
+
+		<!-- Preload critical font (above fold) -->
+		<link rel="preload" href="/fonts/bricolage-grotesque-var.woff2" as="font" type="font/woff2" crossorigin />
+
+		<!-- JSON-LD structured data -->
+		{jsonLd && (
+			<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+		)}
+
+		<!-- PostHog (conditional) -->
+		{posthogScript && <Fragment set:html={posthogScript} />}
 	</head>
-	<body>
-		<slot />
+	<body class="ds-root ds-grain min-h-screen bg-background text-foreground">
+		<!-- Skip to content -->
+		<a
+			href="#main-content"
+			class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:rounded-[var(--radius-md)] focus:px-4 focus:py-2 focus:text-sm focus:font-medium"
+			style="background: var(--primary); color: var(--primary-foreground);"
+		>
+			{locale === "es" ? "Saltar al contenido" : "Skip to content"}
+		</a>
+		<Nav locale={locale} />
+		<main id="main-content" class="pt-14">
+			<slot />
+		</main>
+		<Footer locale={locale} />
 	</body>
 </html>

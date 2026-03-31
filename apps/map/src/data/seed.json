@@ -1,0 +1,3018 @@
+[
+	{
+		"slug": "bio-natural-solutions-sac",
+		"name": "Bio Natural Solutions SAC",
+		"one_liner": "Transformación de residuos agroindustriales en recubrimientos orgánicos para extender la vida útil de productos frescos.",
+		"one_liner_en": "Turning agroindustrial waste into organic coatings that extend the shelf life of fresh produce.",
+		"country": "Peru",
+		"country_es": "Perú",
+		"city": "Lima",
+		"lat": -12.0464,
+		"lng": -77.0428,
+		"verticals": ["agritech", "cleantech"],
+		"maturity_level": "revenue",
+		"founding_year": 2017,
+		"tech_description": "Extracción de polímeros naturales de residuos agroindustriales (cáscaras y corontas) para crear recubrimientos líquidos (LifeCoPro®) que actúan como una barrera contra el oxígeno.",
+		"tech_description_en": "Extraction of natural polymers from agroindustrial waste (husks and corncobs) to create liquid coatings (LifeCoPro®) that act as an oxygen barrier.",
+		"key_results": [
+			{
+				"type": "product",
+				"title": "LifeCoPro®",
+				"description": "Lanzamiento de su tecnología LifeCoPro® para agroexportadores."
+			},
+			{
+				"type": "metric",
+				"title": "Ventas internacionales",
+				"description": "Ventas consolidadas en Perú y Centroamérica; exportación de tecnología a Europa."
+			},
+			{
+				"type": "partnership",
+				"title": "Universidad de Cambridge",
+				"description": "Alianza con la Universidad de Cambridge para nuevos desarrollos."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "product",
+				"title": "LifeCoPro®",
+				"description": "Launch of LifeCoPro® technology for agricultural exporters."
+			},
+			{
+				"type": "metric",
+				"title": "International sales",
+				"description": "Consolidated sales in Peru and Central America; technology exported to Europe."
+			},
+			{
+				"type": "partnership",
+				"title": "University of Cambridge",
+				"description": "Partnership with the University of Cambridge for new developments."
+			}
+		],
+		"problem_statement": "El desperdicio de alimentos (40% de frutas se pierden post-cosecha) y la contaminación por ceras sintéticas derivadas del petróleo.",
+		"problem_statement_en": "Food waste (40% of fruits are lost post-harvest) and pollution from petroleum-derived synthetic waxes.",
+		"business_model": "B2B (Venta directa de galones de recubrimiento a plantas empacadoras y agroexportadoras).",
+		"business_model_en": "B2B (Direct sale of coating gallons to packing plants and agricultural exporters).",
+		"funding_received": null,
+		"team_size": null,
+		"website_url": "https://bionatsolutions.com",
+		"social_links": null,
+		"contact_name": "Miguel Malnati Ramos",
+		"contact_role": "CEO",
+		"contact_email": null,
+		"contact_phone": null,
+		"contact_linkedin": null,
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "bioleather-lab",
+		"name": "Bioleather Lab",
+		"one_liner": "Primera biorrefinería del Perú que transforma residuos agroindustriales en biocueros veganos sostenibles con bajo impacto ambiental.",
+		"one_liner_en": "Peru's first biorefinery turning agroindustrial waste into sustainable vegan bio-leather with low environmental impact.",
+		"country": "Peru",
+		"country_es": "Perú",
+		"city": "Lima",
+		"lat": -12.0464,
+		"lng": -77.0428,
+		"verticals": ["biotech", "advanced_materials"],
+		"maturity_level": "prototype",
+		"founding_year": 2017,
+		"tech_description": "Proceso de fermentación utilizando microorganismos para transformar residuos de café y piña en una membrana de celulosa con textura de cuero.",
+		"tech_description_en": "Fermentation process using microorganisms to transform coffee and pineapple waste into a cellulose membrane with a leather-like texture.",
+		"key_results": [
+			{
+				"type": "award",
+				"title": "Reconocimiento internacional",
+				"description": "Reconocimiento en Brasil y España (2025) por sus prácticas de economía circular."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "award",
+				"title": "International recognition",
+				"description": "Recognized in Brazil and Spain (2025) for circular economy practices."
+			}
+		],
+		"problem_statement": "La alta huella hídrica y química del cuero animal y la contaminación por microplásticos del cuero sintético.",
+		"problem_statement_en": "The high water and chemical footprint of animal leather and microplastic pollution from synthetic leather.",
+		"business_model": "B2B: Venta del biomaterial por metros a emprendedores y marcas de moda (marroquinería y calzado).",
+		"business_model_en": "B2B: Selling biomaterial by the meter to entrepreneurs and fashion brands (leather goods and footwear).",
+		"funding_received": null,
+		"team_size": null,
+		"website_url": "https://www.bioleatherlab.com/",
+		"social_links": null,
+		"contact_name": "Gustavo Castillo",
+		"contact_role": "CEO",
+		"contact_email": null,
+		"contact_phone": null,
+		"contact_linkedin": null,
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "ciclo",
+		"name": "CICLO",
+		"one_liner": "Transformación de residuos de construcción y demolición (RCD) en materiales de construcción sostenibles y certificados.",
+		"one_liner_en": "Transforming construction and demolition waste into certified sustainable building materials.",
+		"country": "Peru",
+		"country_es": "Perú",
+		"city": "Lima",
+		"lat": -12.0464,
+		"lng": -77.0428,
+		"verticals": ["cleantech"],
+		"maturity_level": "revenue",
+		"founding_year": 2015,
+		"tech_description": "Operan una planta de tratamiento que procesa escombros (concreto, ladrillo) para producir agregados reciclados, ladrillos, adoquines y bloques de concreto con ecoetiqueta EPD.",
+		"tech_description_en": "They operate a treatment plant that processes rubble (concrete, brick) to produce recycled aggregates, bricks, pavers, and concrete blocks with EPD eco-labels.",
+		"key_results": [
+			{
+				"type": "award",
+				"title": "Premio Avonni 2025",
+				"description": "Ganadores del Premio Avonni 2025."
+			},
+			{
+				"type": "product",
+				"title": "Certificación EPD",
+				"description": "Primera empresa en Latinoamérica en certificar adoquines con Declaración Ambiental de Producto."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "award",
+				"title": "Avonni Award 2025",
+				"description": "Winners of the Avonni Award 2025."
+			},
+			{
+				"type": "product",
+				"title": "EPD Certification",
+				"description": "First company in Latin America to certify pavers with an Environmental Product Declaration."
+			}
+		],
+		"problem_statement": "La gestión informal de los residuos de construcción en Lima (que terminan en ríos o playas) y la escasez de materiales de construcción ecoamigables.",
+		"problem_statement_en": "Informal management of construction waste in Lima (ending up in rivers or beaches) and the scarcity of eco-friendly building materials.",
+		"business_model": "B2B (Venta de materiales a constructoras y proyectos de infraestructura pública/privada).",
+		"business_model_en": "B2B (Selling materials to construction companies and public/private infrastructure projects).",
+		"funding_received": null,
+		"team_size": null,
+		"website_url": "https://ciclo.com.pe",
+		"social_links": null,
+		"contact_name": "Roger Zevallos",
+		"contact_role": "CEO",
+		"contact_email": null,
+		"contact_phone": null,
+		"contact_linkedin": null,
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "horus-prosthetics",
+		"name": "Horus Prosthetics",
+		"one_liner": "Democratización del acceso a prótesis de pierna de alta tecnología mediante escaneo 3D y manufactura digital a bajo costo.",
+		"one_liner_en": "Democratizing access to high-tech leg prosthetics through 3D scanning and low-cost digital manufacturing.",
+		"country": "Peru",
+		"country_es": "Perú",
+		"city": "Lima",
+		"lat": -12.0464,
+		"lng": -77.0428,
+		"verticals": ["healthtech"],
+		"maturity_level": "pilot",
+		"founding_year": 2019,
+		"tech_description": "Utilizan escaneo 3D y evaluación digital para fabricar prótesis personalizadas que pueden producirse en contenedores móviles (talleres portátiles) sin necesidad de grandes hospitales.",
+		"tech_description_en": "They use 3D scanning and digital assessment to manufacture custom prosthetics that can be produced in mobile containers (portable workshops) without the need for large hospitals.",
+		"key_results": [
+			{
+				"type": "metric",
+				"title": "Ventas 2024",
+				"description": "Ventas por más de USD 237,000 en 2024 (crecimiento del 384%)."
+			},
+			{
+				"type": "partnership",
+				"title": "Alianza financiera",
+				"description": "Alianza con Efectiva Tu Financiera para créditos de prótesis; socios de la AHK Perú (Cámara Peruano-Alemana)."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "metric",
+				"title": "2024 Sales",
+				"description": "Over USD 237,000 in sales in 2024 (384% growth)."
+			},
+			{
+				"type": "partnership",
+				"title": "Financial alliance",
+				"description": "Partnership with Efectiva Tu Financiera for prosthetic financing; members of AHK Peru (Peruvian-German Chamber)."
+			}
+		],
+		"problem_statement": "La exclusión de millones de personas amputadas que no pueden pagar prótesis tradicionales (que cuestan hasta 10 veces más) y la falta de centros de rehabilitación en zonas rurales.",
+		"problem_statement_en": "The exclusion of millions of amputees who cannot afford traditional prosthetics (costing up to 10x more) and the lack of rehabilitation centers in rural areas.",
+		"business_model": "B2B2C: Venta directa a precios accesibles (desde S/ 2,500) y alianzas con entidades financieras para pagos en cuotas.",
+		"business_model_en": "B2B2C: Direct sales at affordable prices (from S/ 2,500) and partnerships with financial institutions for installment payments.",
+		"funding_received": null,
+		"team_size": null,
+		"website_url": "https://horus-peru.com",
+		"social_links": null,
+		"contact_name": "Eduardo Sotelo",
+		"contact_role": "CEO",
+		"contact_email": null,
+		"contact_phone": null,
+		"contact_linkedin": null,
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "mobi",
+		"name": "Mobi",
+		"one_liner": "Startup de movilidad eléctrica que exporta hardware y software de micromovilidad.",
+		"one_liner_en": "Electric mobility startup exporting micromobility hardware and software.",
+		"country": "Bolivia",
+		"country_es": "Bolivia",
+		"city": "La Paz",
+		"lat": -16.4897,
+		"lng": -68.1193,
+		"verticals": ["cleantech"],
+		"maturity_level": "pilot",
+		"founding_year": 2020,
+		"tech_description": "Desarrollan sus propios vehículos eléctricos (motos/bicis) y el software de gestión para flotas compartidas.",
+		"tech_description_en": "They develop their own electric vehicles (motorcycles/bikes) and fleet management software for shared mobility.",
+		"key_results": [],
+		"key_results_en": [],
+		"problem_statement": "Contaminación y falta de transporte eficiente en ciudades de Latam mediante micromovilidad eléctrica.",
+		"problem_statement_en": "Pollution and lack of efficient urban transport in LATAM cities through electric micromobility.",
+		"business_model": "B2C (Alquiler de vehículos) y B2B (Soluciones para repartidores y logística).",
+		"business_model_en": "B2C (Vehicle rental) and B2B (Solutions for delivery drivers and logistics).",
+		"funding_received": "US$ 4.5M",
+		"team_size": null,
+		"website_url": "https://mobi.lat/",
+		"social_links": null,
+		"contact_name": "Ariel Revollo",
+		"contact_role": "CEO",
+		"contact_email": null,
+		"contact_phone": null,
+		"contact_linkedin": null,
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "greenfluidics",
+		"name": "Greenfluidics",
+		"one_liner": "Biopaneles de microalgas que generan oxígeno, capturan CO2 y producen energía para edificios sustentables.",
+		"one_liner_en": "Microalgae biopanels that generate oxygen, capture CO2, and produce energy for sustainable buildings.",
+		"country": "Mexico",
+		"country_es": "México",
+		"city": "Mexico City",
+		"lat": 19.4326,
+		"lng": -99.1332,
+		"verticals": ["biotech", "cleantech"],
+		"maturity_level": "pilot",
+		"founding_year": null,
+		"tech_description": "Fachadas inteligentes que usan la fotosíntesis de microalgas y nanofluidos para regular la temperatura y limpiar el aire.",
+		"tech_description_en": "Smart facades that use microalgae photosynthesis and nanofluids to regulate temperature and purify air.",
+		"key_results": [
+			{
+				"type": "product",
+				"title": "Biopaneles 3.ª generación",
+				"description": "Desarrollo de biopaneles inteligentes de tercera generación con microalgas y nanofluidos de carbono."
+			},
+			{
+				"type": "award",
+				"title": "Startup World Cup",
+				"description": "Ganadores de la Startup World Cup Mexico y múltiples reconocimientos internacionales de innovación."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "product",
+				"title": "3rd-gen biopanels",
+				"description": "Development of third-generation smart biopanels with microalgae and carbon nanofluids."
+			},
+			{
+				"type": "award",
+				"title": "Startup World Cup",
+				"description": "Winners of the Startup World Cup Mexico and multiple international innovation awards."
+			}
+		],
+		"problem_statement": "La crisis climática y la ineficiencia energética en edificios urbanos. Ataca las altas emisiones de CO2 del sector construcción y la dependencia de sistemas de climatización costosos que consumen mucha electricidad.",
+		"problem_statement_en": "The climate crisis and energy inefficiency in urban buildings. Tackling high CO2 emissions from the construction sector and dependence on costly, electricity-intensive HVAC systems.",
+		"business_model": "B2B (Licenciamiento e instalación para desarrolladores inmobiliarios).",
+		"business_model_en": "B2B (Licensing and installation for real estate developers).",
+		"funding_received": null,
+		"team_size": null,
+		"website_url": "https://greenfluidics.com",
+		"social_links": null,
+		"contact_name": "Adán Ramírez",
+		"contact_role": "CEO",
+		"contact_email": null,
+		"contact_phone": null,
+		"contact_linkedin": null,
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "notco",
+		"name": "NotCo",
+		"one_liner": "IA para reinventar la alimentación global.",
+		"one_liner_en": "AI to reinvent global food.",
+		"country": "Chile",
+		"country_es": "Chile",
+		"city": "Santiago",
+		"lat": -33.4489,
+		"lng": -70.6693,
+		"verticals": ["agritech", "ai_ml"],
+		"maturity_level": "revenue",
+		"founding_year": 2015,
+		"tech_description": "Giuseppe, un algoritmo de IA que analiza alimentos a nivel molecular para replicarlos usando solo plantas.",
+		"tech_description_en": "Giuseppe, an AI algorithm that analyzes food at the molecular level to replicate it using only plants.",
+		"key_results": [
+			{
+				"type": "funding",
+				"title": "Valoración unicornio",
+				"description": "Valoración de US$ 1,500 millones."
+			},
+			{
+				"type": "partnership",
+				"title": "Kraft Heinz",
+				"description": "Alianza masiva con Kraft Heinz."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "funding",
+				"title": "Unicorn valuation",
+				"description": "Valuation of US$ 1.5 billion."
+			},
+			{
+				"type": "partnership",
+				"title": "Kraft Heinz",
+				"description": "Major partnership with Kraft Heinz."
+			}
+		],
+		"problem_statement": "Impacto ambiental de la industria alimentaria tradicional y la ineficiencia de la producción animal.",
+		"problem_statement_en": "Environmental impact of the traditional food industry and the inefficiency of animal production.",
+		"business_model": "B2C (Venta retail) y B2B (Licenciamiento de su IA y co-branding).",
+		"business_model_en": "B2C (Retail sales) and B2B (AI licensing and co-branding).",
+		"funding_received": "US$ 420M",
+		"team_size": null,
+		"website_url": "https://notco.com",
+		"social_links": null,
+		"contact_name": "Matías Muchnick",
+		"contact_role": "CEO",
+		"contact_email": null,
+		"contact_phone": null,
+		"contact_linkedin": null,
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "fungi-life",
+		"name": "Fungi Life",
+		"one_liner": "Biorremediación y producción de biosurfactantes sostenibles a partir de hongos para descontaminar suelos y agua.",
+		"one_liner_en": "Bioremediation and sustainable biosurfactant production from fungi to decontaminate soil and water.",
+		"country": "Colombia",
+		"country_es": "Colombia",
+		"city": "Bogotá",
+		"lat": 4.711,
+		"lng": -74.0721,
+		"verticals": ["biotech"],
+		"maturity_level": "pilot",
+		"founding_year": 2021,
+		"tech_description": "Plataforma biotecnológica que usa hongos para degradar contaminantes industriales y producir moléculas limpias (biosurfactantes).",
+		"tech_description_en": "Biotechnology platform that uses fungi to degrade industrial contaminants and produce clean molecules (biosurfactants).",
+		"key_results": [
+			{
+				"type": "pilot",
+				"title": "Biorremediación petrolera",
+				"description": "Ejecución de proyectos de biorremediación de suelos impactados por petróleo en zonas como Aipe (Huila)."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "pilot",
+				"title": "Oil bioremediation",
+				"description": "Execution of soil bioremediation projects in petroleum-impacted areas such as Aipe (Huila)."
+			}
+		],
+		"problem_statement": "La contaminación industrial por hidrocarburos y metales pesados en suelos y fuentes hídricas. Buscan reemplazar métodos químicos costosos y agresivos por soluciones biológicas naturales (biorremediación).",
+		"problem_statement_en": "Industrial contamination from hydrocarbons and heavy metals in soil and water sources. They seek to replace costly, aggressive chemical methods with natural biological solutions (bioremediation).",
+		"business_model": "B2B (Servicios de remediación y venta de insumos biotecnológicos).",
+		"business_model_en": "B2B (Remediation services and sale of biotech inputs).",
+		"funding_received": null,
+		"team_size": null,
+		"website_url": "https://fungilife.net/",
+		"social_links": null,
+		"contact_name": "Sebastián Trabalón",
+		"contact_role": "CEO",
+		"contact_email": null,
+		"contact_phone": null,
+		"contact_linkedin": null,
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "fungipor",
+		"name": "Fungipor",
+		"one_liner": "Empaques y embalajes 100% compostables cultivados a partir de micelio de hongos y residuos agrícolas locales.",
+		"one_liner_en": "100% compostable packaging grown from fungal mycelium and local agricultural waste.",
+		"country": "Argentina",
+		"country_es": "Argentina",
+		"city": "Buenos Aires",
+		"lat": -34.6037,
+		"lng": -58.3816,
+		"verticals": ["biotech", "cleantech"],
+		"maturity_level": "pilot",
+		"founding_year": 2019,
+		"tech_description": "Biofabricación que utiliza el micelio (raíz de hongo) como aglutinante natural sobre paja de poroto para crear bloques de embalaje resistentes.",
+		"tech_description_en": "Biofabrication using mycelium (fungal root) as a natural binder on bean straw to create durable packaging blocks.",
+		"key_results": [
+			{
+				"type": "award",
+				"title": "Premio Arcor",
+				"description": "Ganadores del Premio Arcor a la Innovación."
+			},
+			{
+				"type": "award",
+				"title": "Sellos de calidad",
+				"description": "Sello Buen Diseño y Sello Bioproducto; reemplazo efectivo del poliestireno expandido (telgopor)."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "award",
+				"title": "Arcor Award",
+				"description": "Winners of the Arcor Innovation Award."
+			},
+			{
+				"type": "award",
+				"title": "Quality seals",
+				"description": "Good Design Seal and Bioproduct Seal; effective replacement for expanded polystyrene (EPS)."
+			}
+		],
+		"problem_statement": "Contaminación por plásticos de un solo uso y quema de residuos agrícolas (paja de poroto) en el Valle de Lerma.",
+		"problem_statement_en": "Single-use plastic pollution and burning of agricultural waste (bean straw) in the Lerma Valley.",
+		"business_model": "B2B (Venta de soluciones de embalaje a medida y línea estándar para industrias como cosmética, agro y tecnología).",
+		"business_model_en": "B2B (Custom and standard packaging solutions for industries such as cosmetics, agriculture, and technology).",
+		"funding_received": null,
+		"team_size": null,
+		"website_url": "https://fungipor.com/",
+		"social_links": null,
+		"contact_name": "Ayelén Malgraf",
+		"contact_role": "CEO",
+		"contact_email": null,
+		"contact_phone": null,
+		"contact_linkedin": null,
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "mycorium-biotech",
+		"name": "Mycorium Biotech",
+		"one_liner": "Producción de biomateriales a partir de micelio de hongos y residuos orgánicos para la industria de la moda.",
+		"one_liner_en": "Producing biomaterials from fungal mycelium and organic waste for the fashion industry.",
+		"country": "Argentina",
+		"country_es": "Argentina",
+		"city": "Buenos Aires",
+		"lat": -34.6037,
+		"lng": -58.3816,
+		"verticals": ["biotech", "cleantech"],
+		"maturity_level": "pilot",
+		"founding_year": 2022,
+		"tech_description": "Plataforma de biosíntesis que utiliza fermentación en estado sólido para alimentar hongos con residuos y crear un material biodegradable similar al cuero en solo 10 días.",
+		"tech_description_en": "Biosynthesis platform using solid-state fermentation to feed fungi with waste and create a biodegradable leather-like material in just 10 days.",
+		"key_results": [
+			{
+				"type": "funding",
+				"title": "Ronda pre-seed",
+				"description": "Levantamiento de más de US$ 500k en rondas pre-seed (2025)."
+			},
+			{
+				"type": "award",
+				"title": "Entrepreneurship World Cup",
+				"description": "Ganadores del Top 4 nacional en la Entrepreneurship World Cup 2025."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "funding",
+				"title": "Pre-seed round",
+				"description": "Raised over US$ 500K in pre-seed rounds (2025)."
+			},
+			{
+				"type": "award",
+				"title": "Entrepreneurship World Cup",
+				"description": "National Top 4 winners at the Entrepreneurship World Cup 2025."
+			}
+		],
+		"problem_statement": "La huella de carbono e hídrica de la industria del cuero animal y sintético ofreciendo una alternativa 100% compostable.",
+		"problem_statement_en": "The carbon and water footprint of the animal and synthetic leather industry, offering a 100% compostable alternative.",
+		"business_model": "B2B (Provisión de biomateriales a marcas de marroquinería, calzado y sector automotriz).",
+		"business_model_en": "B2B (Supplying biomaterials to leather goods, footwear, and automotive brands).",
+		"funding_received": "US$ 0.5M",
+		"team_size": null,
+		"website_url": "https://mycoriumbiotech.com",
+		"social_links": null,
+		"contact_name": "Agustín Schiavio",
+		"contact_role": "CEO",
+		"contact_email": null,
+		"contact_phone": null,
+		"contact_linkedin": null,
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "eywa-bio",
+		"name": "Eywa Bio",
+		"one_liner": "Producción escalable de compuestos psicodélicos de grado farmacéutico mediante biotecnología para salud mental.",
+		"one_liner_en": "Scalable production of pharmaceutical-grade psychedelic compounds via biotechnology for mental health.",
+		"country": "Uruguay",
+		"country_es": "Uruguay",
+		"city": "Montevideo",
+		"lat": -34.9011,
+		"lng": -56.1645,
+		"verticals": ["biotech", "healthtech"],
+		"maturity_level": "pilot",
+		"founding_year": 2021,
+		"tech_description": "Plataforma de biosíntesis que permite producir moléculas como la psilocibina de forma pura, con dosis exactas y sin depender del cultivo tradicional de hongos.",
+		"tech_description_en": "Biosynthesis platform that produces molecules such as psilocybin in pure form, with exact dosing, without relying on traditional mushroom cultivation.",
+		"key_results": [
+			{
+				"type": "funding",
+				"title": "Tim Draper",
+				"description": "Respaldo del inversor Tim Draper tras ganar el programa Meet the Drapers."
+			},
+			{
+				"type": "funding",
+				"title": "Ronda 2025",
+				"description": "Levantaron US$ 2.5 millones en 2025."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "funding",
+				"title": "Tim Draper",
+				"description": "Backed by investor Tim Draper after winning the Meet the Drapers program."
+			},
+			{
+				"type": "funding",
+				"title": "2025 Round",
+				"description": "Raised US$ 2.5 million in 2025."
+			}
+		],
+		"problem_statement": "La crisis global de salud mental y la falta de tratamientos efectivos para la depresión resistente, reduciendo el estigma con evidencia científica.",
+		"problem_statement_en": "The global mental health crisis and the lack of effective treatments for treatment-resistant depression, reducing stigma through scientific evidence.",
+		"business_model": "B2B (Provisión de compuestos psicodélicos biosintéticos de alta pureza para farmacéuticas y ensayos clínicos).",
+		"business_model_en": "B2B (Supplying high-purity biosynthetic psychedelic compounds to pharmaceutical companies and clinical trials).",
+		"funding_received": "US$ 2.55M",
+		"team_size": null,
+		"website_url": "https://www.eywa.bio/",
+		"social_links": null,
+		"contact_name": "Victoria Costa Paz",
+		"contact_role": "CEO",
+		"contact_email": null,
+		"contact_phone": null,
+		"contact_linkedin": null,
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "celunova",
+		"name": "Celunova",
+		"one_liner": "Transformación de residuos de piña en biomateriales de celulosa biodegradables.",
+		"one_liner_en": "Transforming pineapple waste into biodegradable cellulose biomaterials.",
+		"country": "Mexico",
+		"country_es": "México",
+		"city": "Mexico City",
+		"lat": 19.4326,
+		"lng": -99.1332,
+		"verticals": ["biotech", "advanced_materials"],
+		"maturity_level": "prototype",
+		"founding_year": 2023,
+		"tech_description": "Proceso biotecnológico para extraer celulosa de alta pureza del rastrojo de piña, creando un material con 30% más capacidad de absorción que requiere menos químicos.",
+		"tech_description_en": "Biotechnological process to extract high-purity cellulose from pineapple crop residue, creating a material with 30% higher absorption capacity that requires fewer chemicals.",
+		"key_results": [
+			{
+				"type": "award",
+				"title": "Santander X & Hult Prize",
+				"description": "Ganadores del reto Santander X y finalistas globales del Hult Prize."
+			},
+			{
+				"type": "metric",
+				"title": "Demanda industrial",
+				"description": "Cartas de intención por 10,000 toneladas mensuales."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "award",
+				"title": "Santander X & Hult Prize",
+				"description": "Winners of the Santander X challenge and global finalists of the Hult Prize."
+			},
+			{
+				"type": "metric",
+				"title": "Industrial demand",
+				"description": "Letters of intent for 10,000 tonnes per month."
+			}
+		],
+		"problem_statement": "Gestión de 11 millones de toneladas de residuos de piña que usualmente se queman, reduciendo el uso de plásticos y agua en la agricultura.",
+		"problem_statement_en": "Managing 11 million tonnes of pineapple waste that is usually burned, while reducing plastic and water use in agriculture.",
+		"business_model": "B2B (Venta de insumos industriales y materiales biodegradables a gran escala).",
+		"business_model_en": "B2B (Large-scale sale of industrial inputs and biodegradable materials).",
+		"funding_received": "US$ 110K",
+		"team_size": null,
+		"website_url": "https://celunova.com.mx",
+		"social_links": null,
+		"contact_name": "Adolfo Martin Vidal Ruiz",
+		"contact_role": "CEO",
+		"contact_email": null,
+		"contact_phone": null,
+		"contact_linkedin": null,
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "stamm",
+		"name": "Stämm",
+		"one_liner": "Biomanufactura escalable mediante microfluídica e impresión 3D.",
+		"one_liner_en": "Scalable biomanufacturing through microfluidics and 3D printing.",
+		"country": "Argentina",
+		"country_es": "Argentina",
+		"city": "Buenos Aires",
+		"lat": -34.6037,
+		"lng": -58.3816,
+		"verticals": ["biotech"],
+		"maturity_level": "revenue",
+		"founding_year": 2016,
+		"tech_description": "Miniaturizan instalaciones de bioprocesamiento industrial utilizando microfluídica y manufactura aditiva (impresión 3D), permitiendo una producción continua y descentralizada de productos biológicos.",
+		"tech_description_en": "They miniaturize industrial bioprocessing facilities using microfluidics and additive manufacturing (3D printing), enabling continuous, decentralized production of biological products.",
+		"key_results": [
+			{
+				"type": "metric",
+				"title": "Reducción 200x",
+				"description": "Reducción de 200x en el espacio físico de producción."
+			},
+			{
+				"type": "partnership",
+				"title": "SuperMeat",
+				"description": "Alianza con SuperMeat para carne cultivada."
+			},
+			{
+				"type": "patent",
+				"title": "Patentes",
+				"description": "Múltiples patentes de diseño de biorreactores."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "metric",
+				"title": "200x reduction",
+				"description": "200x reduction in physical production space."
+			},
+			{
+				"type": "partnership",
+				"title": "SuperMeat",
+				"description": "Partnership with SuperMeat for cultivated meat."
+			},
+			{
+				"type": "patent",
+				"title": "Patents",
+				"description": "Multiple bioreactor design patents."
+			}
+		],
+		"problem_statement": "Los altos costos y la ineficiencia de la manufactura biológica tradicional (lotes gigantes e inestables).",
+		"problem_statement_en": "The high costs and inefficiency of traditional biological manufacturing (large, unstable batches).",
+		"business_model": "B2B (Licenciamiento de tecnología y provisión de infraestructura de bioprocesamiento).",
+		"business_model_en": "B2B (Technology licensing and supply of bioprocessing infrastructure).",
+		"funding_received": "US$ 20M",
+		"team_size": null,
+		"website_url": "https://www.stamm.bio/",
+		"social_links": null,
+		"contact_name": "Federico D'Alvia Vegh",
+		"contact_role": "CEO",
+		"contact_email": null,
+		"contact_phone": null,
+		"contact_linkedin": null,
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "michroma",
+		"name": "Michroma",
+		"one_liner": "Producción de colorantes y sabores naturales mediante fermentación de precisión con hongos.",
+		"one_liner_en": "Producing natural colors and flavors through precision fermentation with fungi.",
+		"country": "Argentina",
+		"country_es": "Argentina",
+		"city": "Buenos Aires",
+		"lat": -34.6037,
+		"lng": -58.3816,
+		"verticals": ["agritech", "biotech"],
+		"maturity_level": "pilot",
+		"founding_year": 2019,
+		"tech_description": "Fermentación de precisión usando hongos para producir pigmentos naturales como alternativa a colorantes sintéticos.",
+		"tech_description_en": "Precision fermentation using fungi to produce natural pigments as an alternative to synthetic colorants.",
+		"key_results": [
+			{
+				"type": "product",
+				"title": "Colorante termoestable",
+				"description": "Desarrollaron un colorante rojo a base de hongos que no se degrada con el calor (horneado o pasteurización), superando las limitaciones de opciones naturales como la remolacha."
+			},
+			{
+				"type": "funding",
+				"title": "Ronda semilla récord",
+				"description": "En 2023, cerró una ronda de inversión de $6.4 millones, la ronda semilla más importante en biotecnología para una empresa de origen latinoamericano."
+			},
+			{
+				"type": "partnership",
+				"title": "Alianzas industriales",
+				"description": "Alianzas con industria alimentaria y levantamiento de capital VC."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "product",
+				"title": "Heat-stable colorant",
+				"description": "Developed a fungi-based red colorant that withstands heat (baking or pasteurization), surpassing limitations of natural options like beet."
+			},
+			{
+				"type": "funding",
+				"title": "Record seed round",
+				"description": "In 2023, closed a $6.4 million investment round, the largest seed round in biotech for a Latin American-origin company."
+			},
+			{
+				"type": "partnership",
+				"title": "Industry partnerships",
+				"description": "Partnerships with the food industry and VC capital raises."
+			}
+		],
+		"problem_statement": "Dependencia de colorantes sintéticos con impacto en salud y sostenibilidad.",
+		"problem_statement_en": "Dependence on synthetic colorants with negative impacts on health and sustainability.",
+		"business_model": "B2B (ingredientes para industria alimentaria).",
+		"business_model_en": "B2B (Ingredients for the food industry).",
+		"funding_received": "US$ 7.47M",
+		"team_size": null,
+		"website_url": "https://www.michroma.com",
+		"social_links": null,
+		"contact_name": "Ricky Cassini",
+		"contact_role": "CEO",
+		"contact_email": null,
+		"contact_phone": null,
+		"contact_linkedin": null,
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "beeflow",
+		"name": "BeeFlow",
+		"one_liner": "Optimización de polinización agrícola mediante ciencia y tecnología en abejas.",
+		"one_liner_en": "Optimizing agricultural pollination through bee science and technology.",
+		"country": "Argentina",
+		"country_es": "Argentina",
+		"city": "Buenos Aires",
+		"lat": -34.6037,
+		"lng": -58.3816,
+		"verticals": ["agritech", "biotech", "cleantech"],
+		"maturity_level": "revenue",
+		"founding_year": 2016,
+		"tech_description": "Modificación del comportamiento de abejas mediante estímulos naturales + modelos de machine learning para optimizar patrones de polinización.",
+		"tech_description_en": "Modifying bee behavior through natural stimuli combined with machine learning models to optimize pollination patterns.",
+		"key_results": [
+			{
+				"type": "metric",
+				"title": "Incremento de rendimiento",
+				"description": "Incremento significativo en rendimiento de cultivos (almendras, berries, etc.)."
+			},
+			{
+				"type": "metric",
+				"title": "Operaciones internacionales",
+				"description": "Operaciones en múltiples países."
+			},
+			{
+				"type": "funding",
+				"title": "Serie A",
+				"description": "Levantamiento de capital (Serie A)."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "metric",
+				"title": "Yield increase",
+				"description": "Significant crop yield increase (almonds, berries, etc.)."
+			},
+			{
+				"type": "metric",
+				"title": "International operations",
+				"description": "Operations in multiple countries."
+			},
+			{
+				"type": "funding",
+				"title": "Series A",
+				"description": "Series A capital raise."
+			}
+		],
+		"problem_statement": "Baja eficiencia en polinización → impacto directo en productividad agrícola global.",
+		"problem_statement_en": "Low pollination efficiency with a direct impact on global agricultural productivity.",
+		"business_model": "B2B (servicio a productores agrícolas).",
+		"business_model_en": "B2B (Service for agricultural producers).",
+		"funding_received": "US$ 15M",
+		"team_size": null,
+		"website_url": "https://beeflow.com",
+		"social_links": null,
+		"contact_name": "Ignacio Flores",
+		"contact_role": "CEO",
+		"contact_email": null,
+		"contact_phone": null,
+		"contact_linkedin": null,
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "oncoprecision",
+		"name": "OncoPrecision",
+		"one_liner": "Medicina de precisión mediante microfluídica para predecir la respuesta a tratamientos oncológicos.",
+		"one_liner_en": "Precision medicine via microfluidics to predict response to cancer treatments.",
+		"country": "Argentina",
+		"country_es": "Argentina",
+		"city": "Buenos Aires",
+		"lat": -34.6037,
+		"lng": -58.3816,
+		"verticals": ["biotech", "healthtech"],
+		"maturity_level": "pilot",
+		"founding_year": 2020,
+		"tech_description": "Plataforma PMT (Patient-Model Therapy): utiliza microfluídica y visión por computadora para testear cientos de fármacos en células vivas del paciente fuera de su cuerpo (ex vivo).",
+		"tech_description_en": "PMT (Patient-Model Therapy) platform: uses microfluidics and computer vision to test hundreds of drugs on live patient cells outside the body (ex vivo).",
+		"key_results": [
+			{
+				"type": "patent",
+				"title": "Patentes EE. UU.",
+				"description": "Patentes presentadas en EE. UU."
+			},
+			{
+				"type": "publication",
+				"title": "Nature",
+				"description": "Publicaciones en revistas como Nature."
+			},
+			{
+				"type": "partnership",
+				"title": "Hospitales de élite",
+				"description": "Alianzas con hospitales de élite (Mount Sinai, Weill Cornell)."
+			},
+			{
+				"type": "award",
+				"title": "Premios en NY",
+				"description": "Ganadores de premios de innovación en NY."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "patent",
+				"title": "US Patents",
+				"description": "Patents filed in the United States."
+			},
+			{
+				"type": "publication",
+				"title": "Nature",
+				"description": "Publications in journals such as Nature."
+			},
+			{
+				"type": "partnership",
+				"title": "Elite hospitals",
+				"description": "Partnerships with elite hospitals (Mount Sinai, Weill Cornell)."
+			},
+			{
+				"type": "award",
+				"title": "NY Innovation Awards",
+				"description": "Innovation award winners in New York."
+			}
+		],
+		"problem_statement": "La baja tasa de éxito de la quimioterapia tradicional; buscan evitar tratamientos ineficaces y tóxicos eligiendo el fármaco exacto para cada paciente.",
+		"problem_statement_en": "The low success rate of traditional chemotherapy; they aim to avoid ineffective and toxic treatments by selecting the precise drug for each patient.",
+		"business_model": "B2B con farmacéuticas (descubrimiento de fármacos) y B2C/B2B2C con centros de salud (guía de tratamiento para pacientes).",
+		"business_model_en": "B2B with pharmaceuticals (drug discovery) and B2C/B2B2C with healthcare centers (patient treatment guidance).",
+		"funding_received": "US$ 5-6M",
+		"team_size": null,
+		"website_url": "https://www.oncoprecision.bio/",
+		"social_links": null,
+		"contact_name": "Gerardo Gatti",
+		"contact_role": "CEO",
+		"contact_email": null,
+		"contact_phone": null,
+		"contact_linkedin": null,
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "puna-bio",
+		"name": "Puna Bio",
+		"one_liner": "Bioinsumos basados en extremófilos para restaurar suelos y aumentar rendimientos.",
+		"one_liner_en": "Extremophile-based bioinputs to restore soils and boost crop yields.",
+		"country": "Argentina",
+		"country_es": "Argentina",
+		"city": "Buenos Aires",
+		"lat": -34.6037,
+		"lng": -58.3816,
+		"verticals": ["agritech", "biotech"],
+		"maturity_level": "pilot",
+		"founding_year": 2020,
+		"tech_description": "Utilizan microorganismos \"extremófilos\" (que viven en condiciones extremas en la Puna) para desarrollar tratamientos de semillas que permiten cultivar en suelos degradados o con estrés hídrico.",
+		"tech_description_en": "They use \"extremophile\" microorganisms (living in extreme conditions in the Puna highlands) to develop seed treatments that enable farming in degraded or water-stressed soils.",
+		"key_results": [
+			{
+				"type": "patent",
+				"title": "Patentes EE. UU.",
+				"description": "Patentes en EE. UU."
+			},
+			{
+				"type": "product",
+				"title": "Kunza Soja",
+				"description": "Lanzaron Kunza Soja (primer producto comercial)."
+			},
+			{
+				"type": "metric",
+				"title": "Ensayos exitosos",
+				"description": "Ensayos exitosos con aumento de rinde del 10-15%."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "patent",
+				"title": "US Patents",
+				"description": "Patents in the United States."
+			},
+			{
+				"type": "product",
+				"title": "Kunza Soja",
+				"description": "Launched Kunza Soja (first commercial product)."
+			},
+			{
+				"type": "metric",
+				"title": "Successful trials",
+				"description": "Successful trials with 10-15% yield increase."
+			}
+		],
+		"problem_statement": "Degradación de suelos y seguridad alimentaria frente al cambio climático.",
+		"problem_statement_en": "Soil degradation and food security in the face of climate change.",
+		"business_model": "B2B (Venta de bioinsumos a través de distribuidores y empresas de semillas).",
+		"business_model_en": "B2B (Selling bioinputs through distributors and seed companies).",
+		"funding_received": "US$ 20-24M",
+		"team_size": null,
+		"website_url": "https://www.puna.bio/",
+		"social_links": null,
+		"contact_name": "Franco Martínez Levis",
+		"contact_role": "CEO",
+		"contact_email": null,
+		"contact_phone": null,
+		"contact_linkedin": null,
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "ekova",
+		"name": "ekova",
+		"one_liner": "Plataforma de biofabricación que transforma residuos en materiales, pigmentos y derivados usando sistemas vivos.",
+		"one_liner_en": "Biofabrication platform that transforms waste into materials, pigments, and derivatives using living systems.",
+		"country": "Peru",
+		"country_es": "Perú",
+		"city": "Lima",
+		"lat": -12.0464,
+		"lng": -77.0428,
+		"verticals": ["biotech"],
+		"maturity_level": "prototype",
+		"founding_year": 2025,
+		"tech_description": "Ekova desarrolla una plataforma de biofabricación basada en sistemas vivos que permite transformar residuos orgánicos en materiales y bioproductos funcionales. Integramos distintos sistemas biológicos —como hongos, microorganismos, plantas y algas— para diseñar y producir soluciones aplicadas, incluyendo biomateriales, empaques biodegradables, objetos funcionales y biopigmentos. Este enfoque combina biodiseño y biotecnología para habilitar nuevas formas de producción más sostenibles y descentralizadas.",
+		"tech_description_en": "Ekova develops a biofabrication platform based on living systems that transforms organic waste into functional materials and bioproducts. It integrates various biological systems — including fungi, microorganisms, plants, and algae — to design and produce applied solutions such as biomaterials, biodegradable packaging, functional objects, and biopigments. This approach combines biodesign and biotechnology to enable new, more sustainable and decentralized forms of production.",
+		"key_results": [
+			{
+				"type": "metric",
+				"title": "Ventas y exhibición",
+				"description": "Ventas iniciales y exhibición."
+			},
+			{
+				"type": "funding",
+				"title": "Startup Perú & Catal15t",
+				"description": "Financiamiento en programas como Startup Perú y Catal15t."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "metric",
+				"title": "Sales and exhibitions",
+				"description": "Initial sales and exhibitions."
+			},
+			{
+				"type": "funding",
+				"title": "Startup Peru & Catal15t",
+				"description": "Funding from programs such as Startup Peru and Catal15t."
+			}
+		],
+		"problem_statement": "La industria global de materiales y químicos depende de insumos sintéticos y procesos intensivos en recursos que generan altos niveles de contaminación y residuos.",
+		"problem_statement_en": "The global materials and chemicals industry relies on synthetic inputs and resource-intensive processes that generate high levels of pollution and waste.",
+		"business_model": "B2B",
+		"business_model_en": "B2B",
+		"funding_received": null,
+		"team_size": null,
+		"website_url": "https://ekova.bio",
+		"social_links": null,
+		"contact_name": "Alejandra Vera",
+		"contact_role": "CEO",
+		"contact_email": null,
+		"contact_phone": null,
+		"contact_linkedin": null,
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "ento-piruw",
+		"name": "Ento Piruw",
+		"one_liner": "Producción de hierro y proteínas de alta calidad mediante la crianza de insectos para combatir la anemia.",
+		"one_liner_en": "Producing high-quality iron and proteins through insect farming to combat anemia.",
+		"country": "Peru",
+		"country_es": "Perú",
+		"city": "Lima",
+		"lat": -12.0464,
+		"lng": -77.0428,
+		"verticals": ["agritech"],
+		"maturity_level": "pilot",
+		"founding_year": 2018,
+		"tech_description": "Procesamiento de larvas de Tenebrio molitor y grillos para extraer harina con altas concentraciones de hierro hemínico y aminoácidos esenciales.",
+		"tech_description_en": "Processing Tenebrio molitor larvae and crickets to extract flour with high concentrations of heme iron and essential amino acids.",
+		"key_results": [
+			{
+				"type": "product",
+				"title": "Marca Demolitor",
+				"description": "Marca Demolitor en supermercados."
+			},
+			{
+				"type": "award",
+				"title": "MIT Innovators Under 35",
+				"description": "Premio MIT Innovators Under 35."
+			},
+			{
+				"type": "award",
+				"title": "Startup Perú 7G",
+				"description": "Ganador de Startup Perú 7G."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "product",
+				"title": "Demolitor brand",
+				"description": "Demolitor brand in supermarkets."
+			},
+			{
+				"type": "award",
+				"title": "MIT Innovators Under 35",
+				"description": "MIT Innovators Under 35 award."
+			},
+			{
+				"type": "award",
+				"title": "Startup Peru 7G",
+				"description": "Winner of Startup Peru 7G."
+			}
+		],
+		"problem_statement": "La alta tasa de anemia infantil en el Perú y la insostenibilidad de las proteínas cárnicas tradicionales.",
+		"problem_statement_en": "The high rate of childhood anemia in Peru and the unsustainability of traditional meat-based proteins.",
+		"business_model": "B2C (Venta directa de productos finales como barras y snacks) y B2B (Venta de harina de insecto como insumo para otras industrias).",
+		"business_model_en": "B2C (Direct sale of end products such as bars and snacks) and B2B (Sale of insect flour as an input for other industries).",
+		"funding_received": null,
+		"team_size": null,
+		"website_url": null,
+		"social_links": {
+			"linkedin": "https://pe.linkedin.com/company/entopiruw"
+		},
+		"contact_name": "Eduardo Lama",
+		"contact_role": "CEO",
+		"contact_email": null,
+		"contact_phone": null,
+		"contact_linkedin": null,
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "hope-biocuero",
+		"name": "HOPE BIOCUERO",
+		"one_liner": "Transformación de residuos de café y aguaymanto en biocuero sostenible.",
+		"one_liner_en": "Transforming coffee and golden berry waste into sustainable bio-leather.",
+		"country": "Peru",
+		"country_es": "Perú",
+		"city": "Huanuco",
+		"lat": -9.93,
+		"lng": -76.2422,
+		"verticals": ["advanced_materials", "cleantech"],
+		"maturity_level": "prototype",
+		"founding_year": 2024,
+		"tech_description": "Utilizan maquinaria ultrasónica para transformar el gabazo de café y el cáliz de aguaymanto en un material textil resistente, flexible y antitranspirante.",
+		"tech_description_en": "They use ultrasonic machinery to transform coffee grounds and golden berry calyx into a durable, flexible, and breathable textile material.",
+		"key_results": [
+			{
+				"type": "award",
+				"title": "StartUp 11G",
+				"description": "Ganadores de StartUp 11G."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "award",
+				"title": "StartUp 11G",
+				"description": "Winners of StartUp 11G."
+			}
+		],
+		"problem_statement": "El impacto ambiental de las curtiembres y la falta de aprovechamiento de residuos agrícolas en Huánuco.",
+		"problem_statement_en": "The environmental impact of tanneries and the underutilization of agricultural waste in Huanuco.",
+		"business_model": "B2B (Venta de rollos de material a marcas de moda) y B2C (Venta de accesorios propios como carteras y billeteras).",
+		"business_model_en": "B2B (Selling material rolls to fashion brands) and B2C (Selling own accessories such as bags and wallets).",
+		"funding_received": null,
+		"team_size": null,
+		"website_url": null,
+		"social_links": null,
+		"contact_name": "Daniel Claudio Sánchez",
+		"contact_role": "CEO",
+		"contact_email": null,
+		"contact_phone": null,
+		"contact_linkedin": null,
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "natek-systems",
+		"name": "Natek Systems",
+		"one_liner": "Sistemas de monitoreo hídrico no intrusivos y de bajo costo en tiempo real.",
+		"one_liner_en": "Non-intrusive, low-cost, real-time water monitoring systems.",
+		"country": "Peru",
+		"country_es": "Perú",
+		"city": "Lima",
+		"lat": -12.0464,
+		"lng": -77.0428,
+		"verticals": ["cleantech"],
+		"maturity_level": "prototype",
+		"founding_year": 2021,
+		"tech_description": "Utilizan sensores ultrasónicos y cámaras con IA (sistema N-FLOW) para medir nivel y caudal de agua sin contacto directo, evitando la alteración del entorno y reduciendo costos de mantenimiento.",
+		"tech_description_en": "They use ultrasonic sensors and AI-powered cameras (N-FLOW system) to measure water level and flow without direct contact, avoiding environmental disruption and reducing maintenance costs.",
+		"key_results": [
+			{
+				"type": "award",
+				"title": "StartUp Perú Cambio Climático 2G",
+				"description": "Ganadores de StartUp Perú Cambio Climático 2G (2025)."
+			},
+			{
+				"type": "award",
+				"title": "BioStartup Climatech",
+				"description": "Ganadores de BioStartup Climatech Edition de USIL Ventures (2024)."
+			},
+			{
+				"type": "award",
+				"title": "Deep Tech Geeks 2025",
+				"description": "Selección en el Deep Tech Geeks 2025."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "award",
+				"title": "StartUp Peru Climate Change 2G",
+				"description": "Winners of StartUp Peru Climate Change 2G (2025)."
+			},
+			{
+				"type": "award",
+				"title": "BioStartup Climatech",
+				"description": "Winners of BioStartup Climatech Edition by USIL Ventures (2024)."
+			},
+			{
+				"type": "award",
+				"title": "Deep Tech Geeks 2025",
+				"description": "Selected for Deep Tech Geeks 2025."
+			}
+		],
+		"problem_statement": "El alto riesgo de estrés hídrico y la falta de datos precisos para la gestión sostenible del agua sin alterar ecosistemas.",
+		"problem_statement_en": "The high risk of water stress and the lack of accurate data for sustainable water management without disrupting ecosystems.",
+		"business_model": "B2B",
+		"business_model_en": "B2B",
+		"funding_received": null,
+		"team_size": null,
+		"website_url": "https://natek.lat/",
+		"social_links": null,
+		"contact_name": "José Velarde Espinoza",
+		"contact_role": "CEO",
+		"contact_email": null,
+		"contact_phone": null,
+		"contact_linkedin": null,
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "yakufil",
+		"name": "YAKUFIL",
+		"one_liner": "Sistemas de tratamiento de aguas grises mediante jardines verticales para crear ciudades sostenibles.",
+		"one_liner_en": "Greywater treatment systems using vertical gardens to create sustainable cities.",
+		"country": "Peru",
+		"country_es": "Perú",
+		"city": "Arequipa",
+		"lat": -16.409,
+		"lng": -71.5375,
+		"verticals": ["cleantech", "hardware_robotics"],
+		"maturity_level": "prototype",
+		"founding_year": 2021,
+		"tech_description": "Biofiltros y jardines verticales de fitorremediación que reciclan aguas grises (duchas, lavabos) para riego de áreas verdes, eliminando olores y contaminantes sin químicos.",
+		"tech_description_en": "Biofilters and phytoremediation vertical gardens that recycle greywater (showers, sinks) for green area irrigation, eliminating odors and contaminants without chemicals.",
+		"key_results": [
+			{
+				"type": "award",
+				"title": "Premio Orgullo Emprendedor 2024",
+				"description": "Ganadora del Premio Orgullo Emprendedor 2024 de Caja Arequipa."
+			},
+			{
+				"type": "award",
+				"title": "Premio Nacional Cultura del Agua",
+				"description": "Premio Nacional Cultura del Agua (ANA)."
+			},
+			{
+				"type": "award",
+				"title": "Halcyon Fellowship",
+				"description": "Seleccionada por la aceleradora Toilet Board Coalition. Seleccionada para la cohorte del Halcyon Fellowship."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "award",
+				"title": "Entrepreneurial Pride Award 2024",
+				"description": "Winner of the Entrepreneurial Pride Award 2024 by Caja Arequipa."
+			},
+			{
+				"type": "award",
+				"title": "National Water Culture Award",
+				"description": "National Water Culture Award (ANA)."
+			},
+			{
+				"type": "award",
+				"title": "Halcyon Fellowship",
+				"description": "Selected by the Toilet Board Coalition accelerator. Selected for the Halcyon Fellowship cohort."
+			}
+		],
+		"problem_statement": "El desperdicio de agua potable y la falta de áreas verdes en zonas con escasez hídrica.",
+		"problem_statement_en": "The waste of potable water and the lack of green areas in water-scarce regions.",
+		"business_model": "B2B y B2C (Instalación de sistemas de tratamiento para empresas, hoteles y hogares).",
+		"business_model_en": "B2B and B2C (Installation of treatment systems for businesses, hotels, and homes).",
+		"funding_received": null,
+		"team_size": null,
+		"website_url": "https://www.yakufil.com/",
+		"social_links": null,
+		"contact_name": "Jenyfer Pineda",
+		"contact_role": "CEO",
+		"contact_email": null,
+		"contact_phone": null,
+		"contact_linkedin": null,
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "alveoprol",
+		"name": "Alveoprol",
+		"one_liner": "Alveoprol aplica nanotecnología a biomateriales naturales para ofrecer una solución eficaz y biocompatible en la salud dental.",
+		"one_liner_en": "Alveoprol applies nanotechnology to natural biomaterials for effective, biocompatible dental health solutions.",
+		"country": "Peru",
+		"country_es": "Perú",
+		"city": "Arequipa",
+		"lat": -16.409,
+		"lng": -71.5375,
+		"verticals": ["biotech", "advanced_materials"],
+		"maturity_level": "prototype",
+		"founding_year": 2024,
+		"tech_description": "Alveoprol desarrolla productos de laboratorio diseñados para escalar al mercado, basados en nanotecnología y formulados con ingredientes naturales como propóleo y sangre de grado. La tecnología de nanoencapsulación permite la liberación controlada de compuestos cicatrizantes y antimicrobianos, acelerando la recuperación post-extracción dental, garantizando biocompatibilidad, eficacia y seguridad clínica.",
+		"tech_description_en": "Alveoprol develops lab-grade products designed to scale to market, based on nanotechnology and formulated with natural ingredients such as propolis and dragon's blood. The nanoencapsulation technology enables controlled release of healing and antimicrobial compounds, accelerating post-extraction dental recovery while ensuring biocompatibility, efficacy, and clinical safety.",
+		"key_results": [
+			{
+				"type": "product",
+				"title": "Hidrogel nanoencapsulado",
+				"description": "Prototipo funcional del hidrogel nanoencapsulado, validado en laboratorio (TRL 3)."
+			},
+			{
+				"type": "pilot",
+				"title": "Pruebas clínicas",
+				"description": "Pruebas piloto iniciales en clínicas odontológicas demostrando eficacia en cicatrización y prevención de infecciones."
+			},
+			{
+				"type": "funding",
+				"title": "Startup Peru 11G",
+				"description": "Apoyo de Startup Peru 11G de PROINNOVATE para escalamiento."
+			},
+			{
+				"type": "award",
+				"title": "INNICIA & WISE",
+				"description": "Participación en programas de incubación y aceleración: INNICIA (En Órbita) y WISE 6G como embajadora STEM."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "product",
+				"title": "Nanoencapsulated hydrogel",
+				"description": "Functional prototype of nanoencapsulated hydrogel, validated in laboratory (TRL 3)."
+			},
+			{
+				"type": "pilot",
+				"title": "Clinical trials",
+				"description": "Initial pilot tests in dental clinics demonstrating efficacy in healing and infection prevention."
+			},
+			{
+				"type": "funding",
+				"title": "Startup Peru 11G",
+				"description": "Support from Startup Peru 11G by PROINNOVATE for scaling."
+			},
+			{
+				"type": "award",
+				"title": "INNICIA & WISE",
+				"description": "Participation in incubation and acceleration programs: INNICIA (En Orbita) and WISE 6G as STEM ambassador."
+			}
+		],
+		"problem_statement": "Alveoprol busca resolver la alta incidencia de complicaciones post-extracción dental, como infecciones y cicatrización lenta, que afecta a miles de pacientes en Perú y otros países con acceso limitado a tratamientos odontológicos efectivos.",
+		"problem_statement_en": "Alveoprol aims to solve the high incidence of post-extraction dental complications, such as infections and slow healing, affecting thousands of patients in Peru and other countries with limited access to effective dental treatments.",
+		"business_model": "B2B",
+		"business_model_en": "B2B",
+		"funding_received": null,
+		"team_size": null,
+		"website_url": "https://dentonatura.my.canva.site/dentoprol",
+		"social_links": null,
+		"contact_name": "Dayana Ticona Tiña",
+		"contact_role": "CEO",
+		"contact_email": "dayana.ticona.29@gmail.com",
+		"contact_phone": "952374000",
+		"contact_linkedin": "https://www.linkedin.com/in/dayana-ticona-ti%C3%B1a/",
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "umalliy",
+		"name": "Umalliy",
+		"one_liner": "Nuestra meta es crear trabajo decente y crecimiento económico sostenible para miles de agentes de seguridad y sus familias en Perú y Latinoamérica.",
+		"one_liner_en": "Creating decent work and sustainable economic growth for thousands of security agents and their families across Peru and Latin America.",
+		"country": "Peru",
+		"country_es": "Perú",
+		"city": "Lima",
+		"lat": -12.0464,
+		"lng": -77.0428,
+		"verticals": ["ai_ml"],
+		"maturity_level": "prototype",
+		"founding_year": 2024,
+		"tech_description": "IA + scrapy + modelo de datos conversacional + whatsapp.",
+		"tech_description_en": "AI + Scrapy + conversational data model + WhatsApp integration.",
+		"key_results": [
+			{
+				"type": "metric",
+				"title": "Reclutamiento rápido",
+				"description": "170 Candidatos reclutados en 20 días."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "metric",
+				"title": "Rapid recruitment",
+				"description": "170 candidates recruited in 20 days."
+			}
+		],
+		"problem_statement": "Formalidad laboral en el sector de seguridad.",
+		"problem_statement_en": "Labor formalization in the security sector.",
+		"business_model": "B2B",
+		"business_model_en": "B2B",
+		"funding_received": null,
+		"team_size": null,
+		"website_url": "https://www.umalliy.com",
+		"social_links": null,
+		"contact_name": "Edward Zevallos Valdivia",
+		"contact_role": "Growth",
+		"contact_email": "Ezevallos@zeira.com.pe",
+		"contact_phone": "51943916375",
+		"contact_linkedin": "https://www.linkedin.com/in/edwardzevallos",
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "eolic-wall",
+		"name": "Eolic Wall",
+		"one_liner": "An advanced, modular, contactless wind energy system to make on-site wind power as accessible and scalable as solar panels.",
+		"one_liner_en": "An advanced, modular, contactless wind energy system to make on-site wind power as accessible and scalable as solar panels.",
+		"country": "Peru",
+		"country_es": "Perú",
+		"city": "Lima",
+		"lat": -12.0464,
+		"lng": -77.0428,
+		"verticals": ["cleantech"],
+		"maturity_level": "prototype",
+		"founding_year": 2019,
+		"tech_description": "Eolic Wall leverages wind acceleration, magnetic levitation and a state-of-the-art generation system to convert wind power into electricity in one single step, with no mechanical loss and minimal maintenance, maximizing efficiency and enabling utility-scale energy costs at a small scale.",
+		"tech_description_en": "Eolic Wall leverages wind acceleration, magnetic levitation, and a state-of-the-art generation system to convert wind power into electricity in a single step, with no mechanical loss and minimal maintenance, maximizing efficiency and enabling utility-scale energy costs at a small scale.",
+		"key_results": [
+			{
+				"type": "publication",
+				"title": "Publicaciones",
+				"description": "3 publicaciones científicas."
+			},
+			{
+				"type": "patent",
+				"title": "Patentes",
+				"description": "+10 patentes otorgadas y varias en trámite."
+			},
+			{
+				"type": "product",
+				"title": "Prototipos",
+				"description": "4 prototipos funcionales."
+			},
+			{
+				"type": "pilot",
+				"title": "Pilotos",
+				"description": "Acuerdos de pilotaje."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "publication",
+				"title": "Publications",
+				"description": "3 scientific publications."
+			},
+			{
+				"type": "patent",
+				"title": "Patents",
+				"description": "10+ patents granted and several pending."
+			},
+			{
+				"type": "product",
+				"title": "Prototypes",
+				"description": "4 functional prototypes."
+			},
+			{
+				"type": "pilot",
+				"title": "Pilots",
+				"description": "Pilot agreements."
+			}
+		],
+		"problem_statement": "La ausencia de energía eólica en la generación distribuida (casas, empresas, comunidades).",
+		"problem_statement_en": "The absence of wind energy in distributed generation (homes, businesses, communities).",
+		"business_model": "B2B",
+		"business_model_en": "B2B",
+		"funding_received": null,
+		"team_size": null,
+		"website_url": "https://www.eolicwall.com/",
+		"social_links": null,
+		"contact_name": "Natalia Cardenas",
+		"contact_role": "CEO",
+		"contact_email": "natalia.cardenas@eolicwall.com",
+		"contact_phone": "998967505",
+		"contact_linkedin": "https://www.linkedin.com/in/nataliacardenas18/",
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "nonhuman",
+		"name": "NONHUMAN",
+		"one_liner": "Hacemos robots inteligentes que entienden y actúan en el mundo físico.",
+		"one_liner_en": "We build intelligent robots that understand and act in the physical world.",
+		"country": "Peru",
+		"country_es": "Perú",
+		"city": "Lima",
+		"lat": -12.0464,
+		"lng": -77.0428,
+		"verticals": ["ai_ml", "hardware_robotics"],
+		"maturity_level": "rd",
+		"founding_year": 2025,
+		"tech_description": "En NONHUMAN desarrollamos tecnología de Embodied AI que integra percepción, planeamiento y control para otorgar autonomía a robots de propósito general. Nuestra plataforma está diseñada para automatizar tareas que demandan destreza similar a la humana, donde la robótica y el control clásico no logran imitar la complejidad del entorno real.",
+		"tech_description_en": "At NONHUMAN we develop Embodied AI technology that integrates perception, planning, and control to grant autonomy to general-purpose robots. Our platform is designed to automate tasks that demand human-like dexterity, where classical robotics and control fail to replicate the complexity of real-world environments.",
+		"key_results": [
+			{
+				"type": "funding",
+				"title": "Inversión ángel",
+				"description": "Levantaron S/50,000 de un inversionista ángel para impulsar el proyecto."
+			},
+			{
+				"type": "product",
+				"title": "BiMan",
+				"description": "Trabajamos en BiMan, el primer asistente doméstico de propósito general desarrollado en LATAM."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "funding",
+				"title": "Angel investment",
+				"description": "Raised S/50,000 from an angel investor to advance the project."
+			},
+			{
+				"type": "product",
+				"title": "BiMan",
+				"description": "Working on BiMan, the first general-purpose domestic assistant developed in LATAM."
+			}
+		],
+		"problem_statement": "Buscamos resolver la falta de soluciones robóticas capaces de ejecutar tareas que requieren destreza humana, precisión y flexibilidad, en entornos reales donde los métodos de robótica clásica fallan.",
+		"problem_statement_en": "We aim to solve the lack of robotic solutions capable of executing tasks requiring human dexterity, precision, and flexibility in real-world environments where classical robotics methods fail.",
+		"business_model": "B2B",
+		"business_model_en": "B2B",
+		"funding_received": null,
+		"team_size": null,
+		"website_url": "https://www.nonhuman.site",
+		"social_links": {
+			"linkedin": "https://www.linkedin.com/company/nonhumansite"
+		},
+		"contact_name": "Leonardo Wilson Pérez Nestares",
+		"contact_role": "CEO",
+		"contact_email": "leonardo.perez@nonhuman.site",
+		"contact_phone": "960367183",
+		"contact_linkedin": "https://www.linkedin.com/in/leonardo-perez-nestares/",
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "deep-skill",
+		"name": "Deep Skill",
+		"one_liner": "Escuela enfocada en algoritmos, estructuras de datos y system design. Entrenamos para superar pruebas técnicas BigTech.",
+		"one_liner_en": "School focused on algorithms, data structures, and system design. Training to pass BigTech technical interviews.",
+		"country": "Peru",
+		"country_es": "Perú",
+		"city": "Lima",
+		"lat": -12.0464,
+		"lng": -77.0428,
+		"verticals": ["ai_ml"],
+		"maturity_level": "rd",
+		"founding_year": 2023,
+		"tech_description": "Centro de entrenamiento en conocimientos base de desarrollos Deep Tech.",
+		"tech_description_en": "Training center in foundational knowledge for Deep Tech development.",
+		"key_results": [
+			{
+				"type": "metric",
+				"title": "Comunidad",
+				"description": "Comunidad de +50 profesionales en BigTechs."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "metric",
+				"title": "Community",
+				"description": "Community of 50+ professionals at BigTech companies."
+			}
+		],
+		"problem_statement": "La dependencia tecnológica de la región: Latinoamérica.",
+		"problem_statement_en": "The region's technological dependency: Latin America.",
+		"business_model": "B2C",
+		"business_model_en": "B2C",
+		"funding_received": null,
+		"team_size": null,
+		"website_url": null,
+		"social_links": {
+			"linkedin": "https://www.linkedin.com/company/deep-skill/"
+		},
+		"contact_name": "Victor Jean Pierre Mandujano Gutierrez",
+		"contact_role": "Founder",
+		"contact_email": "jeanpierre.mandujano@deepskill.space",
+		"contact_phone": "992565203",
+		"contact_linkedin": "https://www.linkedin.com/in/jean-pierre-mandujano/",
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "bylogic-sac",
+		"name": "BYLOGIC S.A.C.",
+		"one_liner": "Centro de Desarrollo I+D+i especializado en soluciones de IA-Física (Robótica, Telecomunicaciones, Ing. Biomédica).",
+		"one_liner_en": "R&D center specializing in Physical AI solutions (Robotics, Telecommunications, Biomedical Engineering).",
+		"country": "Peru",
+		"country_es": "Perú",
+		"city": "Arequipa",
+		"lat": -16.409,
+		"lng": -71.5375,
+		"verticals": ["ai_ml", "hardware_robotics"],
+		"maturity_level": "pilot",
+		"founding_year": 2013,
+		"tech_description": "Soluciones en Industria 4.0, principalmente aquellas de aplicaciones de IA-Física, Inteligencia Artificial aplicada al mundo real a través del desarrollo de soluciones robóticas para la automatización en industria (textil, agroindustrial, cueros, etc.).",
+		"tech_description_en": "Industry 4.0 solutions, primarily Physical AI applications — Artificial Intelligence applied to the real world through robotic solutions for industrial automation (textiles, agribusiness, leather, etc.).",
+		"key_results": [
+			{
+				"type": "funding",
+				"title": "ProInnóvate",
+				"description": "Ganadores de fondo de Proinnóvate, proyecto: 112-PROINNOVATE-PIMEN-2025."
+			},
+			{
+				"type": "product",
+				"title": "Ares3 Cobot",
+				"description": "Desarrollo de Ares3, cobot de fácil instalación, configuración y uso, accesible para empresas del sector manufacturero."
+			},
+			{
+				"type": "publication",
+				"title": "Publicaciones Q1",
+				"description": "Publicaciones científicas en Revistas de Alto Nivel, Q1."
+			},
+			{
+				"type": "patent",
+				"title": "Solicitudes de patente",
+				"description": "2 solicitudes de patentes."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "funding",
+				"title": "ProInnovate",
+				"description": "Winners of ProInnovate fund, project: 112-PROINNOVATE-PIMEN-2025."
+			},
+			{
+				"type": "product",
+				"title": "Ares3 Cobot",
+				"description": "Development of Ares3, an easy-to-install, configure, and use cobot accessible to manufacturing sector companies."
+			},
+			{
+				"type": "publication",
+				"title": "Q1 Publications",
+				"description": "Scientific publications in high-impact Q1 journals."
+			},
+			{
+				"type": "patent",
+				"title": "Patent applications",
+				"description": "2 patent applications."
+			}
+		],
+		"problem_statement": "Las pequeñas y medianas empresas no tienen acceso a la tecnología de vanguardia debido a los altos costos de implementación y mantenimiento. Buscamos acercar tecnología de vanguardia a las necesidades de la industria local.",
+		"problem_statement_en": "Small and medium enterprises lack access to cutting-edge technology due to high implementation and maintenance costs. We aim to bring cutting-edge technology to the needs of local industry.",
+		"business_model": "B2B",
+		"business_model_en": "B2B",
+		"funding_received": null,
+		"team_size": null,
+		"website_url": "https://www.bylogic.tech",
+		"social_links": null,
+		"contact_name": "Elvis Diego Supo Colquehuanca",
+		"contact_role": "CEO",
+		"contact_email": "esupo@bylogic.tech",
+		"contact_phone": "985001446",
+		"contact_linkedin": "https://www.linkedin.com/in/elvis-diego-supo-colquehuanca-pmp-016aa193/",
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "goo",
+		"name": "GOO",
+		"one_liner": "Plataforma inmobiliaria B2C enfocada en video y potenciada con IA.",
+		"one_liner_en": "B2C real estate platform focused on video and powered by AI.",
+		"country": "Peru",
+		"country_es": "Perú",
+		"city": "Lima",
+		"lat": -12.0464,
+		"lng": -77.0428,
+		"verticals": ["ai_ml"],
+		"maturity_level": "pilot",
+		"founding_year": 2025,
+		"tech_description": "Utilizamos un modelo de video streaming IA como agente vendedor en tiempo real, un buscador de lenguaje natural y un modelo de ML para mejorar los resultados de búsqueda según se realiza una navegación.",
+		"tech_description_en": "We use an AI video-streaming model as a real-time sales agent, a natural language search engine, and an ML model that improves search results based on user navigation behavior.",
+		"key_results": [
+			{
+				"type": "award",
+				"title": "Startup Perú 12G",
+				"description": "Ganadores de Startup Perú 12G, incubados por Emprende Up."
+			},
+			{
+				"type": "metric",
+				"title": "70+ clientes",
+				"description": "Más de 70 clientes en lo que va del año, plataforma 100% terminada."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "award",
+				"title": "Startup Peru 12G",
+				"description": "Winners of Startup Peru 12G, incubated by Emprende Up."
+			},
+			{
+				"type": "metric",
+				"title": "70+ clients",
+				"description": "Over 70 clients year-to-date, platform 100% complete."
+			}
+		],
+		"problem_statement": "Falta de confianza por propiedades abandonadas, contenido insuficiente, agilidad de respuesta y automatización en procesos de información.",
+		"problem_statement_en": "Lack of trust due to abandoned properties, insufficient content, response agility, and automation in information processes.",
+		"business_model": "B2C",
+		"business_model_en": "B2C",
+		"funding_received": null,
+		"team_size": null,
+		"website_url": "https://goo.com.pe/",
+		"social_links": null,
+		"contact_name": "Juan Carlos Gonzales Quispe",
+		"contact_role": "CEO",
+		"contact_email": "juancarlos@pattern.pe",
+		"contact_phone": "982729118",
+		"contact_linkedin": "https://www.linkedin.com/in/juangonzaq/",
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "nereuz",
+		"name": "Nereuz",
+		"one_liner": "Nereuz desarrolla tecnología inteligente para automatizar el monitoreo de especies y ecosistemas mediante inteligencia artificial, visión por computador e IoT.",
+		"one_liner_en": "Nereuz develops smart technology to automate species and ecosystem monitoring through AI, computer vision, and IoT.",
+		"country": "Peru",
+		"country_es": "Perú",
+		"city": "Lima",
+		"lat": -12.0464,
+		"lng": -77.0428,
+		"verticals": ["ai_ml", "cleantech", "hardware_robotics"],
+		"maturity_level": "revenue",
+		"founding_year": 2022,
+		"tech_description": "Nereuz desarrolla soluciones deep tech para el monitoreo automatizado de especies y ecosistemas, integrando inteligencia artificial, visión por computador y sensores IoT. Su tecnología principal, Sampling AI, permite recolectar datos confiables en tiempo real, sin intervención humana directa, incluso en zonas remotas o sensibles.",
+		"tech_description_en": "Nereuz develops deep tech solutions for automated species and ecosystem monitoring, integrating artificial intelligence, computer vision, and IoT sensors. Its core technology, Sampling AI, enables reliable real-time data collection without direct human intervention, even in remote or sensitive areas.",
+		"key_results": [
+			{
+				"type": "product",
+				"title": "Plataforma Sampling AI",
+				"description": "Plataforma propia para monitoreo y control (Sampling AI), con múltiples prototipos tecnológicos validados (ROVs, SmartFrame)."
+			},
+			{
+				"type": "metric",
+				"title": "Ventas US$ 125K",
+				"description": "Ventas acumuladas por $125,000 USD en el último año con proyección de superar los $300,000 USD en 2025."
+			},
+			{
+				"type": "patent",
+				"title": "5 solicitudes de patente",
+				"description": "5 solicitudes de patente en proceso (nacionales e internacionales), derechos de autor registrados."
+			},
+			{
+				"type": "funding",
+				"title": "Financiamiento I+D+i",
+				"description": "Más de $490,000 USD en financiamiento no reembolsable para I+D+i."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "product",
+				"title": "Sampling AI Platform",
+				"description": "Proprietary monitoring and control platform (Sampling AI), with multiple validated technology prototypes (ROVs, SmartFrame)."
+			},
+			{
+				"type": "metric",
+				"title": "US$ 125K in sales",
+				"description": "Cumulative sales of $125,000 USD in the last year with a projection to exceed $300,000 USD in 2025."
+			},
+			{
+				"type": "patent",
+				"title": "5 patent applications",
+				"description": "5 patent applications in process (national and international), registered copyrights."
+			},
+			{
+				"type": "funding",
+				"title": "R&D funding",
+				"description": "Over $490,000 USD in non-reimbursable R&D funding."
+			}
+		],
+		"problem_statement": "Abordamos la falta de datos confiables sobre biodiversidad y ecosistemas en zonas vulnerables, lo que limita la conservación y producción sostenible.",
+		"problem_statement_en": "We address the lack of reliable data on biodiversity and ecosystems in vulnerable areas, which limits conservation and sustainable production.",
+		"business_model": "B2B",
+		"business_model_en": "B2B",
+		"funding_received": null,
+		"team_size": null,
+		"website_url": "https://nereuz.veox.tech/",
+		"social_links": null,
+		"contact_name": "Rosa María Ventura Vásquez",
+		"contact_role": "CFO",
+		"contact_email": "rventura@veox.tech",
+		"contact_phone": "959762410",
+		"contact_linkedin": "https://www.linkedin.com/in/rosamariavv/",
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "artificio",
+		"name": "Artificio",
+		"one_liner": "Licensing driving and mapping data for Autonomous Vehicles.",
+		"one_liner_en": "Licensing driving and mapping data for Autonomous Vehicles.",
+		"country": "Peru",
+		"country_es": "Perú",
+		"city": "Lima",
+		"lat": -12.0464,
+		"lng": -77.0428,
+		"verticals": ["ai_ml", "hardware_robotics"],
+		"maturity_level": "pilot",
+		"founding_year": 2022,
+		"tech_description": "Sensor Integrado que recoge video, LIDAR, GPS + Acelerómetro de carros manejando.",
+		"tech_description_en": "Integrated sensor that captures video, LIDAR, GPS, and accelerometer data from driving vehicles.",
+		"key_results": [
+			{
+				"type": "publication",
+				"title": "CVPR 2025",
+				"description": "Publicación en CVPR 2025 Workshop: Robusto-1 Dataset Comparing Humans and VLMs on real out-of-distribution Autonomous Driving."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "publication",
+				"title": "CVPR 2025",
+				"description": "Publication at CVPR 2025 Workshop: Robusto-1 Dataset Comparing Humans and VLMs on real out-of-distribution Autonomous Driving."
+			}
+		],
+		"problem_statement": "Conducción Autónoma.",
+		"problem_statement_en": "Autonomous driving — enabling safe self-driving in LATAM road conditions.",
+		"business_model": "B2B",
+		"business_model_en": "B2B",
+		"funding_received": null,
+		"team_size": null,
+		"website_url": null,
+		"social_links": {
+			"linkedin": "https://www.linkedin.com/company/artificioorg/"
+		},
+		"contact_name": "Arturo Deza",
+		"contact_role": "CEO",
+		"contact_email": "deza@artificio.org",
+		"contact_phone": "973878457",
+		"contact_linkedin": "https://www.linkedin.com/in/arturo-deza-9b12324a/",
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "yuyay-ai-lab",
+		"name": "Yuyay AI Lab",
+		"one_liner": "AI Research Lab para Ingeniería Civil.",
+		"one_liner_en": "AI Research Lab for Civil Engineering.",
+		"country": "Peru",
+		"country_es": "Perú",
+		"city": "Cusco",
+		"lat": -13.532,
+		"lng": -71.9675,
+		"verticals": ["ai_ml", "hardware_robotics", "quantum"],
+		"maturity_level": "rd",
+		"founding_year": 2025,
+		"tech_description": "Agentes LLM y colaboraciones tecnológicas con empresas/academia.",
+		"tech_description_en": "LLM agents and technological collaborations with companies and academia.",
+		"key_results": [
+			{
+				"type": "publication",
+				"title": "Conferencias internacionales",
+				"description": "Prototipado y participaciones en conferencias internacionales (2 posters a ser publicados en Octubre)."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "publication",
+				"title": "International conferences",
+				"description": "Prototyping and participation in international conferences (2 posters to be published in October)."
+			}
+		],
+		"problem_statement": "Brecha tecnológica en ingeniería.",
+		"problem_statement_en": "The technology gap in engineering.",
+		"business_model": "B2B",
+		"business_model_en": "B2B",
+		"funding_received": null,
+		"team_size": null,
+		"website_url": null,
+		"social_links": {
+			"linkedin": "https://www.linkedin.com/feed/"
+		},
+		"contact_name": "Kurt Soncco Sinchi",
+		"contact_role": "CEO",
+		"contact_email": "kurt.soncco@gmail.com",
+		"contact_phone": "+12179740919",
+		"contact_linkedin": "https://www.linkedin.com/in/kurtsonccosinchi/",
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "biochalllwa",
+		"name": "Biochalllwa",
+		"one_liner": "BioChalllwa: biofertilizante líquido a base de residuos de pescado para una agricultura sostenible y productiva.",
+		"one_liner_en": "Liquid biofertilizer made from fish waste for sustainable and productive agriculture.",
+		"country": "Peru",
+		"country_es": "Perú",
+		"city": "Huancayo",
+		"lat": -12.0651,
+		"lng": -75.2049,
+		"verticals": ["biotech", "cleantech"],
+		"maturity_level": "pilot",
+		"founding_year": 2024,
+		"tech_description": "Desarrollamos un biofertilizante líquido innovador a partir de residuos de pescado, formulado con tecnología biotecnológica que optimiza el reciclaje de nutrientes y mejora la fertilidad de los suelos.",
+		"tech_description_en": "We develop an innovative liquid biofertilizer from fish waste, formulated with biotechnology that optimizes nutrient recycling and improves soil fertility.",
+		"key_results": [
+			{
+				"type": "publication",
+				"title": "Publicaciones científicas",
+				"description": "Publicaciones de investigación en revistas especializadas relacionadas con biofertilizantes y sostenibilidad."
+			},
+			{
+				"type": "product",
+				"title": "Prototipos validados",
+				"description": "Prototipos de biofertilizante líquido en proceso de validación con agricultores."
+			},
+			{
+				"type": "metric",
+				"title": "Tracción inicial",
+				"description": "Proyecto en fase de introducción al mercado, generando interés y primeras experiencias con usuarios."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "publication",
+				"title": "Scientific publications",
+				"description": "Research publications in specialized journals related to biofertilizers and sustainability."
+			},
+			{
+				"type": "product",
+				"title": "Validated prototypes",
+				"description": "Liquid biofertilizer prototypes in the validation process with farmers."
+			},
+			{
+				"type": "metric",
+				"title": "Initial traction",
+				"description": "Project in market introduction phase, generating interest and first user experiences."
+			}
+		],
+		"problem_statement": "La contaminación por residuos pesqueros y el alto costo de fertilizantes químicos afectan la sostenibilidad agrícola.",
+		"problem_statement_en": "Pollution from fishing waste and the high cost of chemical fertilizers affect agricultural sustainability.",
+		"business_model": "B2B y B2C",
+		"business_model_en": "B2B and B2C",
+		"funding_received": null,
+		"team_size": null,
+		"website_url": null,
+		"social_links": null,
+		"contact_name": "Luis Giapierre Gutierrez Reyes",
+		"contact_role": "CEO",
+		"contact_email": "luisgutierrezreyes2@gmail.com",
+		"contact_phone": "973787531",
+		"contact_linkedin": "https://www.linkedin.com/in/luis-gutierrez-reyes",
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "paqari-openlab",
+		"name": "Paqari OpenLab",
+		"one_liner": "Aprende, experimenta y crea: llevando la química, la biotecnología y la nanotecnología al alcance de todos.",
+		"one_liner_en": "Learn, experiment, and create: making chemistry, biotechnology, and nanotechnology accessible to everyone.",
+		"country": "Peru",
+		"country_es": "Perú",
+		"city": "Lima",
+		"lat": -12.0464,
+		"lng": -77.0428,
+		"verticals": ["biotech", "cleantech", "advanced_materials"],
+		"maturity_level": "pilot",
+		"founding_year": 2022,
+		"tech_description": "Software y hardware que permite experimentar para aprender y desarrollar proyectos de química, biotecnología y nanotecnología aplicadas a campos como energía, medio ambiente e industria.",
+		"tech_description_en": "Software and hardware that enables experimentation for learning and developing projects in chemistry, biotechnology, and nanotechnology applied to fields such as energy, environment, and industry.",
+		"key_results": [
+			{
+				"type": "product",
+				"title": "Publicaciones y prototipos",
+				"description": "Publicaciones, prototipos, pilotos y ventas."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "product",
+				"title": "Publications and prototypes",
+				"description": "Publications, prototypes, pilots, and sales."
+			}
+		],
+		"problem_statement": "Falta de acceso a educación práctica en química, biotecnología y nanotecnología, clave para resolver retos en energía, medio ambiente e industria.",
+		"problem_statement_en": "Lack of access to hands-on education in chemistry, biotechnology, and nanotechnology — essential for solving challenges in energy, environment, and industry.",
+		"business_model": "B2B/B2C",
+		"business_model_en": "B2B/B2C",
+		"funding_received": null,
+		"team_size": null,
+		"website_url": null,
+		"social_links": {
+			"linkedin": "https://www.linkedin.com/company/paqari-opelab/"
+		},
+		"contact_name": "Victor Raul Jauja Ccana",
+		"contact_role": "CEO",
+		"contact_email": "vrauljc054@gmail.com",
+		"contact_phone": "948071317",
+		"contact_linkedin": "https://www.linkedin.com/in/victorjauja/",
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "xofi-ai",
+		"name": "Xofi.ai",
+		"one_liner": "Gestión de cobranzas con IA: predicción precisa, acción rápida y pagos seguros.",
+		"one_liner_en": "AI-powered collections management: precise prediction, rapid action, and secure payments.",
+		"country": "Peru",
+		"country_es": "Perú",
+		"city": "Lima",
+		"lat": -12.0464,
+		"lng": -77.0428,
+		"verticals": ["ai_ml"],
+		"maturity_level": "pilot",
+		"founding_year": 2025,
+		"tech_description": "Agentes de IA para cada sector financiero.",
+		"tech_description_en": "AI agents for each financial sector.",
+		"key_results": [
+			{
+				"type": "pilot",
+				"title": "Pilotos y clientes",
+				"description": "Varios Pilotos y 3 clientes (Cooperativas con miles de usuarios)."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "pilot",
+				"title": "Pilots and clients",
+				"description": "Multiple pilots and 3 clients (cooperatives with thousands of users)."
+			}
+		],
+		"problem_statement": "Automatización de cobranzas y autogestión en instituciones financieras con tecnologías legadas.",
+		"problem_statement_en": "Automating collections and self-management in financial institutions with legacy technology.",
+		"business_model": "B2B",
+		"business_model_en": "B2B",
+		"funding_received": null,
+		"team_size": null,
+		"website_url": null,
+		"social_links": {
+			"linkedin": "https://www.linkedin.com/company/xofi-ai/"
+		},
+		"contact_name": "Marco Antonio Carranza González",
+		"contact_role": "CTO",
+		"contact_email": "marco@xofi.pe",
+		"contact_phone": "+56954543390",
+		"contact_linkedin": "https://www.linkedin.com/in/marcocarranza/",
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "gestoria",
+		"name": "GestorIA",
+		"one_liner": "Agentes de Inteligencia artificial para ventas.",
+		"one_liner_en": "AI agents for sales.",
+		"country": "Peru",
+		"country_es": "Perú",
+		"city": "Lima",
+		"lat": -12.0464,
+		"lng": -77.0428,
+		"verticals": ["ai_ml"],
+		"maturity_level": "revenue",
+		"founding_year": 2025,
+		"tech_description": "Agentes de Inteligencia artificial para ventas multimedia y brindamos tiendas virtuales con carrito de compras. Integración en 10min.",
+		"tech_description_en": "AI agents for multimedia sales with virtual stores featuring shopping carts. 10-minute integration.",
+		"key_results": [
+			{
+				"type": "metric",
+				"title": "Ventas a Pymes",
+				"description": "Ventas a Pymes."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "metric",
+				"title": "SME sales",
+				"description": "Sales to SMEs."
+			}
+		],
+		"problem_statement": "Las Mypes puedan alcanzar tecnologías de inteligencia artificial para comercializar sus productos y acceder a nuevas tecnologías como videos IA.",
+		"problem_statement_en": "Enabling micro and small businesses to access AI technologies for marketing their products, including AI-generated videos.",
+		"business_model": "B2B",
+		"business_model_en": "B2B",
+		"funding_received": null,
+		"team_size": null,
+		"website_url": "https://gestorianegocios.com/",
+		"social_links": null,
+		"contact_name": "David Tarazona",
+		"contact_role": "CEO",
+		"contact_email": "ddtarazona@gmail.com",
+		"contact_phone": "+13322485936",
+		"contact_linkedin": "https://www.linkedin.com/in/david-tarazona-b6743827/",
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "satellites-on-fire",
+		"name": "Satellites on Fire",
+		"one_liner": "Detección temprana de incendios con IA.",
+		"one_liner_en": "Early wildfire detection with AI.",
+		"country": "Argentina",
+		"country_es": "Argentina",
+		"city": "Buenos Aires",
+		"lat": -34.6037,
+		"lng": -58.3816,
+		"verticals": ["cleantech", "aerospace", "ai_ml"],
+		"maturity_level": "pilot",
+		"founding_year": 2020,
+		"tech_description": "IA y datos satelitales para detectar incendios forestales tempranamente.",
+		"tech_description_en": "AI and satellite data for early forest fire detection.",
+		"key_results": [
+			{
+				"type": "pilot",
+				"title": "Pilotos LATAM",
+				"description": "Pilotos en LATAM."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "pilot",
+				"title": "LATAM pilots",
+				"description": "Pilots across LATAM."
+			}
+		],
+		"problem_statement": "Prevención incendios forestales.",
+		"problem_statement_en": "Preventing forest fires through early satellite-based detection.",
+		"business_model": "SaaS monitoreo ambiental.",
+		"business_model_en": "SaaS environmental monitoring.",
+		"funding_received": "US$ 0.9M",
+		"team_size": null,
+		"website_url": "https://satellitesonfire.com",
+		"social_links": null,
+		"contact_name": null,
+		"contact_role": "Founder",
+		"contact_email": null,
+		"contact_phone": null,
+		"contact_linkedin": null,
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "protera",
+		"name": "Protera",
+		"one_liner": "AI-driven protein engineering for food ingredients.",
+		"one_liner_en": "AI-driven protein engineering for food ingredients.",
+		"country": "Chile",
+		"country_es": "Chile",
+		"city": "Santiago",
+		"lat": -33.4489,
+		"lng": -70.6693,
+		"verticals": ["biotech", "agritech", "ai_ml"],
+		"maturity_level": "pilot",
+		"founding_year": 2015,
+		"tech_description": "Plataforma de ingeniería de proteínas impulsada por IA (MADI) que diseña proteínas funcionales producidas mediante fermentación.",
+		"tech_description_en": "AI-powered protein engineering platform (MADI) that designs functional proteins produced through fermentation.",
+		"key_results": [
+			{
+				"type": "funding",
+				"title": "Serie A",
+				"description": "Serie A ~USD 10M."
+			},
+			{
+				"type": "partnership",
+				"title": "Alianzas alimentarias",
+				"description": "Colaboración con empresas alimentarias globales; desarrollo de ingredientes proteicos."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "funding",
+				"title": "Series A",
+				"description": "Series A ~USD 10M."
+			},
+			{
+				"type": "partnership",
+				"title": "Food industry alliances",
+				"description": "Collaboration with global food companies; protein ingredient development."
+			}
+		],
+		"problem_statement": "Reducir desperdicio alimentario y reemplazar ingredientes químicos con proteínas sostenibles.",
+		"problem_statement_en": "Reducing food waste and replacing chemical ingredients with sustainable proteins.",
+		"business_model": "Licenciamiento de ingredientes y B2B con industria alimentaria.",
+		"business_model_en": "Ingredient licensing and B2B with the food industry.",
+		"funding_received": "US$ 10M",
+		"team_size": null,
+		"website_url": "https://www.proterabio.com",
+		"social_links": null,
+		"contact_name": "Leonardo Álvarez",
+		"contact_role": "CEO",
+		"contact_email": "info@proterabio.com",
+		"contact_phone": null,
+		"contact_linkedin": null,
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "instacrops",
+		"name": "Instacrops",
+		"one_liner": "Agricultura de precisión basada en sensores.",
+		"one_liner_en": "Sensor-based precision agriculture.",
+		"country": "Chile",
+		"country_es": "Chile",
+		"city": "Santiago",
+		"lat": -33.4489,
+		"lng": -70.6693,
+		"verticals": ["agritech", "ai_ml"],
+		"maturity_level": "pilot",
+		"founding_year": 2014,
+		"tech_description": "Sensores IoT y análisis de datos para optimizar cultivos.",
+		"tech_description_en": "IoT sensors and data analytics to optimize crops.",
+		"key_results": [
+			{
+				"type": "metric",
+				"title": "Clientes internacionales",
+				"description": "Clientes internacionales; expansión LATAM."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "metric",
+				"title": "International clients",
+				"description": "International clients; LATAM expansion."
+			}
+		],
+		"problem_statement": "Optimizar productividad agrícola.",
+		"problem_statement_en": "Optimizing agricultural productivity.",
+		"business_model": "SaaS agrícola.",
+		"business_model_en": "Agricultural SaaS.",
+		"funding_received": null,
+		"team_size": null,
+		"website_url": "https://instacrops.com",
+		"social_links": null,
+		"contact_name": null,
+		"contact_role": "Founder",
+		"contact_email": null,
+		"contact_phone": null,
+		"contact_linkedin": null,
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "bybug",
+		"name": "ByBug",
+		"one_liner": "Producción de proteínas con insectos editados.",
+		"one_liner_en": "Producing proteins with engineered insects.",
+		"country": "Chile",
+		"country_es": "Chile",
+		"city": "Coquimbo",
+		"lat": -29.9533,
+		"lng": -71.3395,
+		"verticals": ["biotech"],
+		"maturity_level": "pilot",
+		"founding_year": 2022,
+		"tech_description": "Uso de insectos como biofábricas para producir proteínas recombinantes.",
+		"tech_description_en": "Using insects as biofactories to produce recombinant proteins.",
+		"key_results": [
+			{
+				"type": "funding",
+				"title": "Ronda seed",
+				"description": "Ronda seed."
+			},
+			{
+				"type": "product",
+				"title": "Investigación biotech",
+				"description": "Investigación biotech."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "funding",
+				"title": "Seed round",
+				"description": "Seed round."
+			},
+			{
+				"type": "product",
+				"title": "Biotech research",
+				"description": "Biotech research."
+			}
+		],
+		"problem_statement": "Producción sostenible de proteínas.",
+		"problem_statement_en": "Sustainable protein production.",
+		"business_model": "Licenciamiento biotecnológico.",
+		"business_model_en": "Biotech licensing.",
+		"funding_received": "US$ 1.4M",
+		"team_size": null,
+		"website_url": "https://bybug.bio",
+		"social_links": null,
+		"contact_name": null,
+		"contact_role": "CEO",
+		"contact_email": null,
+		"contact_phone": null,
+		"contact_linkedin": null,
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "arkangel-ai",
+		"name": "Arkangel AI",
+		"one_liner": "AI-as-a-service platform for healthcare.",
+		"one_liner_en": "AI-as-a-service platform for healthcare.",
+		"country": "Colombia",
+		"country_es": "Colombia",
+		"city": "Bogotá",
+		"lat": 4.711,
+		"lng": -74.0721,
+		"verticals": ["healthtech", "ai_ml"],
+		"maturity_level": "prototype",
+		"founding_year": 2020,
+		"tech_description": "Plataforma AI-as-a-Service que permite transformar datos médicos en modelos predictivos para diagnóstico temprano.",
+		"tech_description_en": "AI-as-a-Service platform that transforms medical data into predictive models for early diagnosis.",
+		"key_results": [
+			{
+				"type": "metric",
+				"title": "Impacto 70M personas",
+				"description": "Impacto en ~70M personas en 18 países."
+			},
+			{
+				"type": "award",
+				"title": "Premio Everis Global",
+				"description": "Premio Everis Global."
+			},
+			{
+				"type": "partnership",
+				"title": "Novartis",
+				"description": "Clientes como Novartis."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "metric",
+				"title": "Impact on 70M people",
+				"description": "Impact on ~70 million people in 18 countries."
+			},
+			{
+				"type": "award",
+				"title": "Everis Global Award",
+				"description": "Everis Global Award."
+			},
+			{
+				"type": "partnership",
+				"title": "Novartis",
+				"description": "Clients including Novartis."
+			}
+		],
+		"problem_statement": "Mejorar diagnóstico temprano y acceso a tecnologías de salud.",
+		"problem_statement_en": "Improving early diagnosis and access to health technologies.",
+		"business_model": "SaaS para hospitales, farmacéuticas y aseguradoras.",
+		"business_model_en": "SaaS for hospitals, pharmaceuticals, and insurers.",
+		"funding_received": "US$ 70K",
+		"team_size": null,
+		"website_url": "https://arkangel.ai",
+		"social_links": null,
+		"contact_name": "José Zea",
+		"contact_role": "CEO",
+		"contact_email": null,
+		"contact_phone": null,
+		"contact_linkedin": null,
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "galia-charger",
+		"name": "Galia Charger",
+		"one_liner": "Generador eléctrico a partir de movimiento humano.",
+		"one_liner_en": "Electric generator powered by human movement.",
+		"country": "Peru",
+		"country_es": "Perú",
+		"city": "Lima",
+		"lat": -12.0464,
+		"lng": -77.0428,
+		"verticals": ["cleantech"],
+		"maturity_level": "prototype",
+		"founding_year": 2020,
+		"tech_description": "Dispositivo que convierte movimiento rotatorio en electricidad con app de monitoreo.",
+		"tech_description_en": "Device that converts rotary motion into electricity with a monitoring app.",
+		"key_results": [
+			{
+				"type": "product",
+				"title": "Prototipo funcional",
+				"description": "Prototipo funcional; concurso Energízate."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "product",
+				"title": "Functional prototype",
+				"description": "Functional prototype; Energizate competition."
+			}
+		],
+		"problem_statement": "Aprovechamiento energía humana.",
+		"problem_statement_en": "Harnessing human kinetic energy for electricity generation.",
+		"business_model": "Venta hardware energético.",
+		"business_model_en": "Energy hardware sales.",
+		"funding_received": null,
+		"team_size": null,
+		"website_url": null,
+		"social_links": null,
+		"contact_name": "Valeria Boner",
+		"contact_role": "Co-founder",
+		"contact_email": null,
+		"contact_phone": null,
+		"contact_linkedin": null,
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "maqu",
+		"name": "MAQU",
+		"one_liner": "Automatización industrial o maquinaria inteligente.",
+		"one_liner_en": "Industrial automation and intelligent machinery.",
+		"country": "Peru",
+		"country_es": "Perú",
+		"city": "Lima",
+		"lat": -12.0464,
+		"lng": -77.0428,
+		"verticals": ["hardware_robotics"],
+		"maturity_level": "prototype",
+		"founding_year": 2021,
+		"tech_description": "Desarrollo de maquinaria automatizada.",
+		"tech_description_en": "Development of automated machinery.",
+		"key_results": [
+			{
+				"type": "product",
+				"title": "Prototipo",
+				"description": "Prototipo."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "product",
+				"title": "Prototype",
+				"description": "Prototype."
+			}
+		],
+		"problem_statement": "Automatización industrial.",
+		"problem_statement_en": "Industrial automation — bringing smart machinery to local manufacturers.",
+		"business_model": "Venta maquinaria.",
+		"business_model_en": "Machinery sales.",
+		"funding_received": null,
+		"team_size": null,
+		"website_url": null,
+		"social_links": null,
+		"contact_name": null,
+		"contact_role": "Founder",
+		"contact_email": null,
+		"contact_phone": null,
+		"contact_linkedin": null,
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "nanopharm-corporation",
+		"name": "Nanopharm Corporation",
+		"one_liner": "Nanotecnología para salud y farmacéutica.",
+		"one_liner_en": "Nanotechnology for healthcare and pharmaceuticals.",
+		"country": "Peru",
+		"country_es": "Perú",
+		"city": "Lima",
+		"lat": -12.0464,
+		"lng": -77.0428,
+		"verticals": ["biotech", "advanced_materials"],
+		"maturity_level": "rd",
+		"founding_year": 2020,
+		"tech_description": "Uso de nanopartículas para mejorar formulaciones farmacéuticas.",
+		"tech_description_en": "Use of nanoparticles to improve pharmaceutical formulations.",
+		"key_results": [
+			{
+				"type": "publication",
+				"title": "Investigación académica",
+				"description": "Investigación académica."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "publication",
+				"title": "Academic research",
+				"description": "Academic research."
+			}
+		],
+		"problem_statement": "Mejorar eficacia de medicamentos.",
+		"problem_statement_en": "Improving drug efficacy through nanoscale formulation.",
+		"business_model": "Licenciamiento tecnología.",
+		"business_model_en": "Technology licensing.",
+		"funding_received": null,
+		"team_size": null,
+		"website_url": null,
+		"social_links": null,
+		"contact_name": null,
+		"contact_role": "Founder",
+		"contact_email": null,
+		"contact_phone": null,
+		"contact_linkedin": null,
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "novogas",
+		"name": "Novogas",
+		"one_liner": "Soluciones energéticas alternativas.",
+		"one_liner_en": "Alternative energy solutions.",
+		"country": "Peru",
+		"country_es": "Perú",
+		"city": "Lima",
+		"lat": -12.0464,
+		"lng": -77.0428,
+		"verticals": ["cleantech"],
+		"maturity_level": "prototype",
+		"founding_year": 2021,
+		"tech_description": "Tecnología para generación o almacenamiento energético.",
+		"tech_description_en": "Technology for energy generation or storage.",
+		"key_results": [
+			{
+				"type": "pilot",
+				"title": "Proyecto piloto",
+				"description": "Proyecto piloto universitario."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "pilot",
+				"title": "Pilot project",
+				"description": "University pilot project."
+			}
+		],
+		"problem_statement": "Acceso a energía eficiente.",
+		"problem_statement_en": "Access to efficient energy.",
+		"business_model": "Venta tecnología energética.",
+		"business_model_en": "Energy technology sales.",
+		"funding_received": null,
+		"team_size": null,
+		"website_url": null,
+		"social_links": null,
+		"contact_name": null,
+		"contact_role": "Founder",
+		"contact_email": null,
+		"contact_phone": null,
+		"contact_linkedin": null,
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "nutriera",
+		"name": "Nutriera",
+		"one_liner": "Nutrición avanzada y alimentos funcionales.",
+		"one_liner_en": "Advanced nutrition and functional foods.",
+		"country": "Peru",
+		"country_es": "Perú",
+		"city": "Lima",
+		"lat": -12.0464,
+		"lng": -77.0428,
+		"verticals": ["agritech", "biotech"],
+		"maturity_level": "prototype",
+		"founding_year": 2021,
+		"tech_description": "Desarrollo de suplementos o alimentos funcionales basados en investigación nutricional.",
+		"tech_description_en": "Development of supplements or functional foods based on nutritional research.",
+		"key_results": [
+			{
+				"type": "product",
+				"title": "Prototipos en desarrollo",
+				"description": "Prototipos en desarrollo."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "product",
+				"title": "Prototypes in development",
+				"description": "Prototypes in development."
+			}
+		],
+		"problem_statement": "Malnutrición y dietas deficientes.",
+		"problem_statement_en": "Malnutrition and deficient diets.",
+		"business_model": "Venta productos alimenticios.",
+		"business_model_en": "Food product sales.",
+		"funding_received": null,
+		"team_size": null,
+		"website_url": null,
+		"social_links": null,
+		"contact_name": null,
+		"contact_role": "Founder",
+		"contact_email": null,
+		"contact_phone": null,
+		"contact_linkedin": null,
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "orgaliado",
+		"name": "Orgaliado",
+		"one_liner": "Valorización de residuos orgánicos.",
+		"one_liner_en": "Organic waste valorization.",
+		"country": "Peru",
+		"country_es": "Perú",
+		"city": "Lima",
+		"lat": -12.0464,
+		"lng": -77.0428,
+		"verticals": ["cleantech"],
+		"maturity_level": "prototype",
+		"founding_year": 2021,
+		"tech_description": "Transformación de residuos orgánicos en fertilizantes o bioproductos.",
+		"tech_description_en": "Transforming organic waste into fertilizers or bioproducts.",
+		"key_results": [
+			{
+				"type": "product",
+				"title": "Prototipo piloto",
+				"description": "Prototipo piloto."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "product",
+				"title": "Pilot prototype",
+				"description": "Pilot prototype."
+			}
+		],
+		"problem_statement": "Gestión de residuos orgánicos.",
+		"problem_statement_en": "Organic waste management.",
+		"business_model": "Venta fertilizantes.",
+		"business_model_en": "Fertilizer sales.",
+		"funding_received": null,
+		"team_size": null,
+		"website_url": null,
+		"social_links": null,
+		"contact_name": null,
+		"contact_role": "Founder",
+		"contact_email": null,
+		"contact_phone": null,
+		"contact_linkedin": null,
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "tumi-robotics",
+		"name": "Tumi Robotics",
+		"one_liner": "Robots autónomos para inspección industrial.",
+		"one_liner_en": "Autonomous robots for industrial inspection.",
+		"country": "Peru",
+		"country_es": "Perú",
+		"city": "Lima",
+		"lat": -12.0464,
+		"lng": -77.0428,
+		"verticals": ["hardware_robotics", "ai_ml"],
+		"maturity_level": "pilot",
+		"founding_year": 2016,
+		"tech_description": "Robots terrestres y drones para inspección minera y de infraestructura.",
+		"tech_description_en": "Ground robots and drones for mining and infrastructure inspection.",
+		"key_results": [
+			{
+				"type": "partnership",
+				"title": "Clientes mineros",
+				"description": "Clientes mineros."
+			},
+			{
+				"type": "award",
+				"title": "Aceleradora HAX",
+				"description": "Aceleradora HAX; premios innovación."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "partnership",
+				"title": "Mining clients",
+				"description": "Mining clients."
+			},
+			{
+				"type": "award",
+				"title": "HAX Accelerator",
+				"description": "HAX Accelerator; innovation awards."
+			}
+		],
+		"problem_statement": "Seguridad en operaciones industriales.",
+		"problem_statement_en": "Safety in industrial operations.",
+		"business_model": "B2B robótica industrial.",
+		"business_model_en": "B2B industrial robotics.",
+		"funding_received": "US$ 250K",
+		"team_size": null,
+		"website_url": "https://tumirobotics.com",
+		"social_links": {
+			"linkedin": "https://linkedin.com/in/franciscocuellar"
+		},
+		"contact_name": "Francisco Cuellar",
+		"contact_role": "CEO",
+		"contact_email": null,
+		"contact_phone": null,
+		"contact_linkedin": "https://linkedin.com/in/franciscocuellar",
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "blume",
+		"name": "Blume",
+		"one_liner": "Ocean monitoring using robotics and AI.",
+		"one_liner_en": "Ocean monitoring using robotics and AI.",
+		"country": "Peru",
+		"country_es": "Perú",
+		"city": "Lima",
+		"lat": -12.0464,
+		"lng": -77.0428,
+		"verticals": ["cleantech", "ai_ml", "hardware_robotics"],
+		"maturity_level": "prototype",
+		"founding_year": 2023,
+		"tech_description": "Uso de robots submarinos, sensores y algoritmos de IA para recolectar y analizar datos oceánicos y biomasa marina.",
+		"tech_description_en": "Using underwater robots, sensors, and AI algorithms to collect and analyze ocean data and marine biomass.",
+		"key_results": [
+			{
+				"type": "product",
+				"title": "Tecnología activa",
+				"description": "Startup activa con tecnología para monitoreo de ecosistemas marinos y pesca sostenible."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "product",
+				"title": "Active technology",
+				"description": "Active startup with technology for marine ecosystem monitoring and sustainable fishing."
+			}
+		],
+		"problem_statement": "Falta de datos y monitoreo tecnológico en ecosistemas marinos y pesquerías.",
+		"problem_statement_en": "Lack of data and technology-based monitoring in marine ecosystems and fisheries.",
+		"business_model": "B2B tecnología para monitoreo marino y análisis de datos.",
+		"business_model_en": "B2B technology for marine monitoring and data analytics.",
+		"funding_received": null,
+		"team_size": null,
+		"website_url": "https://www.blume.pe",
+		"social_links": {
+			"linkedin": "https://pe.linkedin.com/company/blume-pe"
+		},
+		"contact_name": "Oscar Castro",
+		"contact_role": "CEO",
+		"contact_email": null,
+		"contact_phone": null,
+		"contact_linkedin": null,
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	},
+	{
+		"slug": "maki-robotics",
+		"name": "MAKI ROBOTICS",
+		"one_liner": "Low-cost bionic prosthetics using AI and 3D printing.",
+		"one_liner_en": "Low-cost bionic prosthetics using AI and 3D printing.",
+		"country": "Peru",
+		"country_es": "Perú",
+		"city": "Cerro de Pasco",
+		"lat": -10.6868,
+		"lng": -76.2617,
+		"verticals": ["hardware_robotics", "healthtech"],
+		"maturity_level": "prototype",
+		"founding_year": 2021,
+		"tech_description": "Prótesis mecánicas y mioeléctricas personalizadas creadas con escaneo 3D, impresión 3D y sensores que interpretan impulsos musculares mediante IA.",
+		"tech_description_en": "Custom mechanical and myoelectric prosthetics created with 3D scanning, 3D printing, and sensors that interpret muscle impulses via AI.",
+		"key_results": [
+			{
+				"type": "award",
+				"title": "Desafío Innovación Pasco",
+				"description": "Ganador del Desafío de Innovación Pasco."
+			},
+			{
+				"type": "product",
+				"title": "Prótesis funcionales",
+				"description": "Desarrollo de múltiples prótesis funcionales."
+			},
+			{
+				"type": "funding",
+				"title": "ProInnóvate",
+				"description": "Financiamiento de ProInnóvate."
+			}
+		],
+		"key_results_en": [
+			{
+				"type": "award",
+				"title": "Pasco Innovation Challenge",
+				"description": "Winner of the Pasco Innovation Challenge."
+			},
+			{
+				"type": "product",
+				"title": "Functional prosthetics",
+				"description": "Development of multiple functional prosthetics."
+			},
+			{
+				"type": "funding",
+				"title": "ProInnovate",
+				"description": "ProInnovate funding."
+			}
+		],
+		"problem_statement": "Acceso limitado a prótesis funcionales y asequibles para personas con amputaciones.",
+		"problem_statement_en": "Limited access to functional and affordable prosthetics for amputees.",
+		"business_model": "Venta de prótesis personalizadas y proyectos de innovación médica.",
+		"business_model_en": "Custom prosthetics sales and medical innovation projects.",
+		"funding_received": "S/ 60,000",
+		"team_size": null,
+		"website_url": "https://makirobotics.com",
+		"social_links": null,
+		"contact_name": "Miguel Borja Parra",
+		"contact_role": "Founder",
+		"contact_email": null,
+		"contact_phone": null,
+		"contact_linkedin": null,
+		"claimed": false,
+		"logo_path": null,
+		"hero_image_path": null,
+		"founder_photos": null,
+		"partner_logos": null,
+		"video_url": null,
+		"video_label": null
+	}
+]

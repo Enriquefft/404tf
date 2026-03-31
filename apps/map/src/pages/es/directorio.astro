@@ -1,0 +1,56 @@
+---
+import { DirectoryIsland } from "@/components/directory-island";
+import seedData from "@/data/seed.json";
+import { getTranslations } from "@/i18n/translations";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import type { Startup } from "@/lib/types";
+
+const locale = "es" as const;
+const t = getTranslations(locale);
+const startups = seedData as unknown as Startup[];
+
+const directoryStartups = startups.map((s) => ({
+	slug: s.slug,
+	name: s.name,
+	one_liner: s.one_liner,
+	one_liner_en: s.one_liner_en,
+	country: s.country,
+	country_es: s.country_es,
+	city: s.city,
+	lat: s.lat,
+	lng: s.lng,
+	verticals: s.verticals,
+	maturity_level: s.maturity_level,
+	founding_year: s.founding_year,
+	funding_received: s.funding_received,
+}));
+---
+
+<BaseLayout title={`${t.nav.directory} — ${t.meta.siteTitle}`} description={t.meta.directoryDesc} locale={locale}>
+	<section class="py-8">
+		<DirectoryIsland
+			client:load
+			startups={directoryStartups}
+			locale={locale}
+			labels={{
+				searchPlaceholder: t.directory.searchPlaceholder,
+				filterCountry: t.directory.filterCountry,
+				filterCountryAll: t.directory.filterCountryAll,
+				filterMaturity: t.directory.filterMaturity,
+				filterMaturityAll: t.directory.filterMaturityAll,
+				clearAll: t.directory.clearAll,
+				showingOf: t.directory.showingOf,
+				sortLabel: t.directory.sortLabel,
+				sortAZ: t.directory.sortAZ,
+				sortNewest: t.directory.sortNewest,
+				emptyTitle: t.directory.emptyTitle,
+				emptyMessage: t.directory.emptyMessage,
+				showMap: t.directory.showMap,
+				hideMap: t.directory.hideMap,
+				mapTooltipIn: t.directory.mapTooltipIn,
+				ctaFindSolution: t.common.ctaFindSolution,
+			}}
+			startupBaseHref={`/${locale}/startup/`}
+		/>
+	</section>
+</BaseLayout>

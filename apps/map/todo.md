@@ -10,6 +10,7 @@
 - **AI translations** — Claude translates ES→EN, manual review before launch
 - **100+ target** — launch with 60, expand to 100+ in Phase B (parallel)
 - **One sprint** — all 6 pages + all phases, no v2 deferrals
+- **Solar Icons only** — `@solar-icons/react` is the single icon library. Linear for UI, Bold for emphasis. No other icon sets.
 
 ## Build Order (13 steps + 3 phases)
 
@@ -17,19 +18,19 @@
 
 | Step | What | Status | Blocker |
 |------|------|--------|---------|
-| 1 | Project scaffolding (nav, footer, i18n, PostHog) | 50% | None |
-| 2 | Data preparation (CSV→JSON, translate, geocode, enum map) | 0% | None |
-| 3 | Database schema (5 tables, enums, seed 60 startups) | 0% | Step 2 |
-| 4 | Shared components (Button, Input, Card, Badge, Modal, etc.) | 0% | Step 1 |
-| 5 | Corporate modal (2-step form + API + Resend) | 0% | Steps 3, 4 |
-| 6 | Landing page (dot-grid hero, featured startups, data preview, dual conversion) | 0% | Steps 3, 4, 5 |
-| 7 | Directory page (interactive map, filters, card grid) | 0% | Steps 3, 5, 6 |
-| 8 | Startup profile page (dynamic [slug], sidebar CTA, related startups) | 0% | Steps 3, 5 |
-| 9 | Insights page (charts, PDF gate, data story) | 0% | Steps 3, 5 |
-| 10 | For Startups page (2 forms, 2 API endpoints) | 0% | Steps 3, 4 |
-| 11 | About / Methodology (static content, team cards) | 0% | Step 4 |
-| 12 | Claim flow (form + API + Resend notification) | 0% | Steps 3, 8 |
-| 13 | Polish (responsive, a11y, SEO, perf, analytics, i18n pass) | 0% | All |
+| 1 | Project scaffolding (nav, footer, i18n, PostHog) | DONE | None |
+| 2 | Data preparation (CSV→JSON, translate, geocode, enum map) | DONE | None |
+| 3 | Database schema (5 tables, enums, seed 60 startups) | DONE | Step 2 |
+| 4 | Shared components (Button, Input, Card, Badge, Modal, etc.) | DONE | Step 1 |
+| 5 | Corporate modal (2-step form + API + Resend) | DONE | Steps 3, 4 |
+| 6 | Landing page (dot-grid hero, featured startups, data preview, dual conversion) | DONE | Steps 3, 4, 5 |
+| 7 | Directory page (interactive map, filters, card grid) | DONE | Steps 3, 5, 6 |
+| 8 | Startup profile page (dynamic [slug], sidebar CTA, related startups) | DONE | Steps 3, 5 |
+| 9 | Insights page (charts, PDF gate, data story) | DONE | Steps 3, 5 |
+| 10 | For Startups page (2 forms, 2 API endpoints) | DONE | Steps 3, 4 |
+| 11 | About / Methodology (static content, team cards) | DONE | Step 4 |
+| 12 | Claim flow (form + API + Resend notification) | DONE | Steps 3, 8 |
+| 13 | Polish (responsive, a11y, SEO, perf, analytics, i18n pass) | DONE | All |
 
 ### Parallel Phases
 

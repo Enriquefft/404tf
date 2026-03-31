@@ -1,0 +1,26 @@
+---
+type Props = {
+	class?: string;
+	size?: number;
+};
+
+const { class: className = "", size = 20 } = Astro.props;
+---
+
+<!-- Solar: Close Circle Linear -->
+<svg
+	xmlns="http://www.w3.org/2000/svg"
+	width={size}
+	height={size}
+	viewBox="0 0 24 24"
+	fill="none"
+	stroke="currentColor"
+	stroke-width="1.5"
+	stroke-linecap="round"
+	stroke-linejoin="round"
+	class={className}
+	aria-hidden="true"
+>
+	<path d="M14.5 9.5l-5 5m0-5l5 5" />
+	<circle cx="12" cy="12" r="10" />
+</svg>

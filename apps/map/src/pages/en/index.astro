@@ -1,0 +1,107 @@
+---
+import CorporateCTA from "@/components/corporate-cta.astro";
+import DataPreview from "@/components/data-preview.astro";
+import DualConversion from "@/components/dual-conversion.astro";
+import FeaturedStartups from "@/components/featured-startups.astro";
+import { HeroIsland } from "@/components/hero-island";
+import seedData from "@/data/seed.json";
+import { getTranslations } from "@/i18n/translations";
+import { getRouteHref } from "@/i18n/utils";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import type { Startup } from "@/lib/types";
+
+const locale = "en" as const;
+const t = getTranslations(locale);
+const startups = seedData as unknown as Startup[];
+
+const uniqueCountries = new Set(startups.map((s) => s.country));
+const uniqueVerticals = new Set(startups.flatMap((s) => s.verticals));
+
+const heroStartups = startups.map((s) => ({
+	slug: s.slug,
+	name: s.name,
+	lat: s.lat,
+	lng: s.lng,
+	verticals: s.verticals as string[],
+}));
+
+const directoryHref = getRouteHref("directory", locale);
+const insightsHref = getRouteHref("insights", locale);
+const startupsHref = getRouteHref("startups", locale);
+---
+
+<BaseLayout title={t.meta.siteTitle} description={t.meta.tagline} locale={locale}>
+	<!-- Hero Section -->
+	<section class="relative">
+		<HeroIsland
+			client:load
+			startups={heroStartups}
+			locale={locale}
+			statsData={{
+				startupCount: startups.length,
+				countryCount: uniqueCountries.size,
+				verticalCount: uniqueVerticals.size,
+			}}
+			labels={{
+				heroSubtitle: t.landing.heroSubtitle,
+				heroSecondary: t.landing.heroSecondary,
+				statsStartups: t.landing.statsStartups,
+				statsCountries: t.landing.statsCountries,
+				statsVerticals: t.landing.statsVerticals,
+				scrollToExplore: t.landing.scrollToExplore,
+				ctaFindSolution: t.common.ctaFindSolution,
+				ctaGetOnMap: t.common.ctaGetOnMap,
+			}}
+			directoryHref={directoryHref}
+			startupsHref={startupsHref}
+		/>
+		<!-- Corporate CTA overlaid on hero -->
+		<div class="absolute bottom-[120px] left-1/2 z-20 -translate-x-1/2 sm:bottom-[130px]">
+			<div class="flex items-center gap-3">
+				<CorporateCTA locale={locale} variant="primary" />
+			</div>
+		</div>
+	</section>
+
+	<!-- Featured Startups -->
+	<FeaturedStartups
+		startups={startups}
+		locale={locale}
+		label={t.landing.featuredLabel}
+		headline={t.landing.featuredHeadline}
+		linkText={t.landing.featuredLink}
+		directoryHref={directoryHref}
+	/>
+
+	<!-- Data Preview -->
+	<DataPreview
+		locale={locale}
+		label={t.landing.dataLabel}
+		headline={t.landing.dataHeadline}
+		topCountriesLabel={t.landing.dataTopCountries}
+		linkText={t.landing.dataLink}
+		insightsHref={insightsHref}
+		statBiotechOrAi={t.landing.dataBiotechOrAi}
+		statPilotStage={t.landing.dataPilotStage}
+		statFromPeru={t.landing.dataFromPeru}
+	/>
+
+	<!-- Dual Conversion -->
+	<DualConversion
+		locale={locale}
+		label={t.landing.conversionLabel}
+		headline={t.landing.conversionHeadline}
+		corporateTitle={t.landing.corporateTitle}
+		corporateDesc={t.landing.corporateDesc}
+		corporateSteps={[
+			t.landing.corporateStep1,
+			t.landing.corporateStep2,
+			t.landing.corporateStep3,
+		]}
+		startupTitle={t.landing.startupTitle}
+		startupDesc={t.landing.startupDesc}
+		startupSteps={[t.landing.startupStep1, t.landing.startupStep2]}
+		ctaGetOnMap={t.common.ctaGetOnMap}
+		startupsHref={startupsHref}
+	/>
+</BaseLayout>

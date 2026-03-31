@@ -1,0 +1,29 @@
+---
+import { CorporateCTAIsland } from "@/components/corporate-cta-island";
+import { getTranslations, type Locale } from "@/i18n/translations";
+
+type ContextStartup = {
+	slug: string;
+	name: string;
+	vertical: string;
+};
+
+type Props = {
+	locale: Locale;
+	variant?: "primary" | "secondary";
+	contextStartup?: ContextStartup;
+	label?: string;
+};
+
+const { locale, variant = "primary", contextStartup, label } = Astro.props;
+const t = getTranslations(locale);
+const buttonLabel = label ?? t.common.ctaFindSolution;
+---
+
+<CorporateCTAIsland
+	client:load
+	locale={locale}
+	label={buttonLabel}
+	variant={variant}
+	contextStartup={contextStartup ?? null}
+/>

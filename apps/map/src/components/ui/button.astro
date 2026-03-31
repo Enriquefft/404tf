@@ -1,0 +1,66 @@
+---
+type Props = {
+	variant?: "primary" | "secondary" | "ghost";
+	size?: "default" | "sm";
+	href?: string;
+	class?: string;
+	type?: "button" | "submit";
+};
+
+const {
+	variant = "primary",
+	size = "default",
+	href,
+	class: className = "",
+	type = "button",
+	...rest
+} = Astro.props;
+
+const variantStyles: Record<string, string> = {
+	primary: "bg-primary text-primary-foreground hover:bg-[var(--primary-light)]",
+	secondary: "bg-transparent border border-primary text-primary hover:bg-[var(--primary-8)]",
+	ghost:
+		"bg-transparent text-muted-foreground hover:bg-[var(--border-subtle)] hover:text-foreground",
+};
+
+const sizeStyles: Record<string, string> = {
+	default: "px-5 py-2.5",
+	sm: "px-3.5 py-1.5 text-sm",
+};
+
+const baseStyles = [
+	"inline-flex items-center justify-center gap-2",
+	"font-semibold",
+	"transition-all duration-150 ease-out",
+	"min-h-11",
+	"cursor-pointer",
+	"focus-visible:outline-none",
+	variantStyles[variant],
+	sizeStyles[size],
+	className,
+].join(" ");
+
+const Tag = href ? "a" : "button";
+---
+
+{
+	href ? (
+		<a
+			href={href}
+			class={baseStyles}
+			style={`font-family: var(--font-heading); border-radius: var(--radius-md);`}
+			{...rest}
+		>
+			<slot />
+		</a>
+	) : (
+		<button
+			type={type}
+			class={baseStyles}
+			style={`font-family: var(--font-heading); border-radius: var(--radius-md);`}
+			{...rest}
+		>
+			<slot />
+		</button>
+	)
+}

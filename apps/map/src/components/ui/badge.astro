@@ -1,0 +1,75 @@
+---
+import type { Locale } from "@/i18n/translations";
+import type { MaturityKey, VerticalKey } from "@/lib/verticals";
+import { MATURITY_CONFIG, VERTICAL_CONFIG } from "@/lib/verticals";
+
+type Props = {
+	variant: "vertical" | "maturity" | "status";
+	value: string;
+	label?: string;
+	locale?: Locale;
+};
+
+const { variant, value, label, locale = "es" } = Astro.props;
+
+function getVerticalStyles(key: string): {
+	bg: string;
+	color: string;
+	dot: string;
+} {
+	const config = VERTICAL_CONFIG[key as VerticalKey];
+	if (!config) {
+		return {
+			bg: VERTICAL_CONFIG.other.muted,
+			color: VERTICAL_CONFIG.other.color,
+			dot: VERTICAL_CONFIG.other.color,
+		};
+	}
+	return { bg: config.muted, color: config.color, dot: config.color };
+}
+
+function getVerticalLabel(key: string): string {
+	if (label) return label;
+	const config = VERTICAL_CONFIG[key as VerticalKey];
+	return config?.label[locale] ?? key;
+}
+
+function getMaturityLabel(key: string): string {
+	if (label) return label;
+	const config = MATURITY_CONFIG[key as MaturityKey];
+	return config?.label[locale] ?? key;
+}
+
+const isVertical = variant === "vertical";
+const isMaturity = variant === "maturity";
+
+const verticalStyles = isVertical ? getVerticalStyles(value) : null;
+const displayLabel = isVertical
+	? getVerticalLabel(value)
+	: isMaturity
+		? getMaturityLabel(value)
+		: (label ?? value);
+---
+
+{
+	isVertical && verticalStyles ? (
+		<span
+			class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium"
+			style={`font-family: var(--font-heading); background: ${verticalStyles.bg}; color: ${verticalStyles.color};`}
+		>
+			<span
+				class="inline-block h-1.5 w-1.5 rounded-full shrink-0"
+				style={`background: ${verticalStyles.dot};`}
+				aria-hidden="true"
+			/>
+			{displayLabel}
+		</span>
+	) : (
+		<span
+			class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-muted text-muted-foreground"
+			style="font-family: var(--font-heading);"
+		>
+			{displayLabel}
+		</span>
+	)
+}

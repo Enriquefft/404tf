@@ -11,7 +11,11 @@ export const size = {
 // biome-ignore lint/style/useComponentExportOnlyModules: Next.js opengraph-image convention requires exporting metadata
 export const contentType = "image/png";
 
-export default async function Image({ params }: { params: Promise<{ locale: string }> }) {
+export default async function Image({
+	params,
+}: {
+	params: Promise<{ locale: string }>;
+}) {
 	const { locale } = await params;
 	const t = await getTranslations({ locale, namespace: "metadata" });
 

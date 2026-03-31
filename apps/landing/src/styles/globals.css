@@ -31,7 +31,7 @@
 }
 
 :root {
-	--background: oklch(0.07 0.020 315);
+	--background: oklch(0.07 0.02 315);
 	--foreground: oklch(0.92 0.008 55);
 	--card: oklch(0.11 0.028 312);
 	--card-foreground: oklch(0.92 0.008 55);
@@ -40,8 +40,8 @@
 	--primary: oklch(0.53 0.24 305);
 	--primary-foreground: oklch(0.97 0.008 310);
 	--secondary: oklch(0.72 0.18 55);
-	--secondary-foreground: oklch(0.07 0.020 315);
-	--muted: oklch(0.15 0.020 315);
+	--secondary-foreground: oklch(0.07 0.02 315);
+	--muted: oklch(0.15 0.02 315);
 	--muted-foreground: oklch(0.52 0.018 315);
 	--accent: oklch(0.16 0.035 310);
 	--accent-foreground: oklch(0.92 0.008 55);
@@ -54,7 +54,7 @@
 	--house-ai: oklch(0.68 0.26 358);
 	--house-biotech: oklch(0.73 0.23 150);
 	--house-hardware: oklch(0.68 0.23 30);
-	--house-space: oklch(0.65 0.20 230);
+	--house-space: oklch(0.65 0.2 230);
 }
 
 @layer base {
@@ -72,18 +72,20 @@
 	h4,
 	h5,
 	h6 {
-		font-family: var(--font-display, "Big Shoulders Display Variable"), sans-serif;
+		font-family:
+			var(--font-display, "Big Shoulders Display Variable"), sans-serif;
 	}
 }
 
 @layer utilities {
 	.font-display {
-		font-family: var(--font-display, "Big Shoulders Display Variable"), sans-serif;
+		font-family:
+			var(--font-display, "Big Shoulders Display Variable"), sans-serif;
 	}
 	.font-mono-accent {
 		font-family:
-			ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
-			monospace;
+			ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+			"Courier New", monospace;
 		letter-spacing: 0.05em;
 	}
 }

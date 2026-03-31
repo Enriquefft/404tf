@@ -1,0 +1,14 @@
+---
+type Props = {
+	text: string;
+};
+
+const { text } = Astro.props;
+---
+
+<span
+	class="text-xs font-semibold uppercase text-muted-foreground"
+	style="font-family: var(--font-heading); letter-spacing: 0.08em;"
+>
+	{text}
+</span>

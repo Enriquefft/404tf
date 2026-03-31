@@ -1,0 +1,87 @@
+---
+type SelectOption = {
+	value: string;
+	label: string;
+};
+
+type Props = {
+	label: string;
+	name: string;
+	options: SelectOption[];
+	placeholder?: string;
+	required?: boolean;
+	error?: string;
+	id?: string;
+};
+
+const { label, name, options, placeholder, required = false, error, id } = Astro.props;
+
+const selectId = id ?? `select-${name}`;
+const hasError = Boolean(error);
+---
+
+<div class="flex flex-col">
+	<label
+		for={selectId}
+		class="mb-1.5 text-sm font-medium text-muted-foreground"
+		style="font-family: var(--font-heading);"
+	>
+		{label}
+		{required && <span class="text-destructive ml-0.5">*</span>}
+	</label>
+	<div class="relative">
+		<select
+			id={selectId}
+			name={name}
+			required={required}
+			class:list={[
+				"w-full appearance-none bg-[var(--background)] border rounded-[var(--radius-md)] px-3.5 py-2.5 pr-10",
+				"text-foreground",
+				"transition-colors duration-150",
+				"focus:border-primary focus:ring-2 focus:ring-[var(--primary-25)] focus:outline-none",
+				hasError ? "border-destructive" : "border-input",
+			]}
+			style="font-family: var(--font-body);"
+		>
+			{
+				placeholder && (
+					<option value="" disabled selected class="text-[var(--text-tertiary)]">
+						{placeholder}
+					</option>
+				)
+			}
+			{
+				options.map((option) => (
+					<option value={option.value}>{option.label}</option>
+				))
+			}
+		</select>
+		<!-- Solar: Alt Arrow Down Linear -->
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			width="16"
+			height="16"
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			stroke-width="1.5"
+			stroke-linecap="round"
+			stroke-linejoin="round"
+			class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+			aria-hidden="true"
+		>
+			<path d="M19 9l-7 6-7-6" />
+		</svg>
+	</div>
+	{
+		error && (
+			<p
+				class="mt-1 text-sm text-destructive"
+				style="font-family: var(--font-body);"
+				role="alert"
+			>
+				{error}
+			</p>
+		)
+	}
+</div>

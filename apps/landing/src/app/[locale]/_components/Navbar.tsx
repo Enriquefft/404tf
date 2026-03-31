@@ -120,7 +120,12 @@ export function Navbar({ locale, translations }: NavbarProps) {
 
 				{/* Mobile toggle */}
 				<div className="md:hidden">
-					<Hamburger toggled={isOpen} toggle={setIsOpen} size={20} color="var(--foreground)" />
+					<Hamburger
+						toggled={isOpen}
+						toggle={setIsOpen}
+						size={20}
+						color="var(--foreground)"
+					/>
 				</div>
 			</div>
 

@@ -1,0 +1,19 @@
+---
+type Props = {
+	class?: string;
+};
+
+const { class: className = "" } = Astro.props;
+---
+
+<div
+	class:list={[
+		"border-l-[3px] border-l-primary pl-5 py-4 rounded-r-[var(--radius-md)]",
+		"bg-[var(--primary-4)]",
+		className,
+	]}
+>
+	<div class="text-base leading-relaxed text-foreground" style="font-family: var(--font-body);">
+		<slot />
+	</div>
+</div>

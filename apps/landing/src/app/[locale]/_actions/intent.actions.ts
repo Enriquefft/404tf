@@ -1,8 +1,8 @@
 "use server";
 
-import { z } from "zod";
 import { db } from "@404tf/database";
 import { intentSubmissions } from "@404tf/database/schema";
+import { z } from "zod";
 
 const intentSchema = z.object({
 	intent: z.enum(["build", "collaborate", "connect"]),
@@ -21,7 +21,10 @@ export type FormState = {
 	};
 } | null;
 
-export async function submitIntent(_prevState: FormState, formData: FormData): Promise<FormState> {
+export async function submitIntent(
+	_prevState: FormState,
+	formData: FormData,
+): Promise<FormState> {
 	try {
 		// Parse formData fields
 		const rawData = {

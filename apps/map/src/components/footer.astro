@@ -1,0 +1,104 @@
+---
+import type { Locale } from "@/i18n/translations";
+import { getTranslations } from "@/i18n/translations";
+import { getAlternateLocale, getAlternateLocalePath, getRouteHref } from "@/i18n/utils";
+
+type Props = {
+	locale: Locale;
+};
+
+const { locale } = Astro.props;
+const t = getTranslations(locale);
+const altLocale = getAlternateLocale(locale);
+const currentPath = Astro.url.pathname;
+const altPath = getAlternateLocalePath(currentPath, altLocale);
+
+const navLinks = [
+	{ label: t.footer.methodology, href: getRouteHref("about", locale) },
+	{ label: t.nav.directory, href: getRouteHref("directory", locale) },
+	{ label: t.nav.insights, href: getRouteHref("insights", locale) },
+	{ label: t.nav.startups, href: getRouteHref("startups", locale) },
+	{ label: t.nav.contact, href: getRouteHref("contact", locale) },
+] as const;
+---
+
+<footer class="border-t border-border-subtle bg-card">
+	<div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+		<div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+			<!-- Column 1: Brand -->
+			<div>
+				<p
+					class="text-lg font-semibold text-foreground"
+					style="font-family: var(--font-display);"
+				>
+					404 Mapped
+				</p>
+				<p class="mt-1 text-xs text-muted-foreground">{t.footer.byLine}</p>
+				<p class="mt-3 max-w-xs text-sm leading-relaxed text-muted-foreground">
+					{t.footer.description}
+				</p>
+			</div>
+
+			<!-- Column 2: Navigation -->
+			<div>
+				<p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+					{t.footer.navHeading}
+				</p>
+				<ul class="mt-3 space-y-2">
+					{
+						navLinks.map((link) => (
+							<li>
+								<a
+									href={link.href}
+									class="text-sm text-muted-foreground transition-colors duration-150 hover:text-foreground"
+								>
+									{link.label}
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</div>
+
+			<!-- Column 3: Contact -->
+			<div>
+				<p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+					{t.footer.contactHeading}
+				</p>
+				<ul class="mt-3 space-y-2">
+					<li>
+						<a
+							href="mailto:hello@404tf.com"
+							class="text-sm text-muted-foreground transition-colors duration-150 hover:text-foreground"
+						>
+							hello@404tf.com
+						</a>
+					</li>
+					<li>
+						<a
+							href={getRouteHref("contact", locale)}
+							class="text-sm text-primary transition-colors duration-150 hover:text-foreground"
+						>
+							{t.footer.talkToUs} &rarr;
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<!-- Bottom bar -->
+		<div
+			class="mt-10 flex flex-col items-center justify-between gap-3 border-t border-border-subtle pt-6 sm:flex-row"
+		>
+			<p class="text-xs text-muted-foreground">
+				&copy; {t.footer.copyright}
+			</p>
+			<a
+				href={altPath}
+				class="text-xs font-medium uppercase tracking-wider text-muted-foreground transition-colors duration-150 hover:text-foreground"
+			>
+				{locale === "es" ? "EN — English" : "ES — Español"}
+			</a>
+		</div>
+	</div>
+</footer>
