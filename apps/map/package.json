@@ -14,7 +14,7 @@
 		"@404tf/brand": "workspace:*",
 		"@404tf/database": "workspace:*",
 		"@astrojs/check": "^0.9.7",
-		"@astrojs/vercel": "^9.0.5",
+		"@astrojs/vercel": "^10.0.4",
 		"@solar-icons/react": "^1.1.0",
 		"@t3-oss/env-nextjs": "^0.13.11",
 		"astro": "^5",
