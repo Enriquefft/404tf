@@ -4,13 +4,14 @@ import type { Locale } from "@/i18n/translations";
 import { COUNTRY_FLAGS } from "@/lib/countries";
 import { directoryResponseSchema } from "@/lib/directory-query-schema";
 import { AMERICAS_POINTS, COUNTRY_LABELS, LATAM_POINTS, projectToSvg } from "@/lib/map-points";
-import { track } from "@/lib/track";
 import {
-	MATURITY_CONFIG,
+	MATURITY_KEYS,
 	type MaturityKey,
-	VERTICAL_CONFIG,
+	VERTICAL_KEYS,
 	type VerticalKey,
-} from "@/lib/verticals";
+} from "@/lib/seed-schema";
+import { track } from "@/lib/track";
+import { MATURITY_CONFIG, VERTICAL_CONFIG } from "@/lib/verticals";
 
 // ---- Types ----
 
@@ -94,6 +95,12 @@ function getVMuted(key: string): string {
 
 const MAP_W = 900;
 const MAP_H = 500;
+
+// ---- Type guards (avoid `as` casts at index sites) ----
+
+function isMaturityKey(k: string): k is MaturityKey {
+	return Object.hasOwn(MATURITY_CONFIG, k);
+}
 
 // ---- Component ----
 
@@ -251,9 +258,8 @@ export function DirectoryIsland({
 		return Array.from(set).sort();
 	}, [mapPoints]);
 
-	const verticalKeys = useMemo(() => Object.keys(VERTICAL_CONFIG) as VerticalKey[], []);
-
-	const maturityKeys = useMemo(() => Object.keys(MATURITY_CONFIG) as MaturityKey[], []);
+	const verticalKeys: readonly VerticalKey[] = VERTICAL_KEYS;
+	const maturityKeys: readonly MaturityKey[] = MATURITY_KEYS;
 
 	// ---- Filtered results (now comes from API) ----
 
@@ -629,7 +635,11 @@ export function DirectoryIsland({
 						</span>
 						<select
 							value={sort}
-							onChange={(e) => setSort(e.target.value as SortKey)}
+							onChange={(e) => {
+								if (e.target.value === "az" || e.target.value === "newest") {
+									setSort(e.target.value);
+								}
+							}}
 							className="h-8 cursor-pointer rounded-md border bg-transparent px-2 text-xs outline-none"
 							style={{
 								fontFamily: "var(--font-heading)",
@@ -705,8 +715,9 @@ export function DirectoryIsland({
 									fontFamily: "var(--font-heading)",
 								}}
 							>
-								{MATURITY_CONFIG[selectedMaturity as MaturityKey]?.label[locale] ??
-									selectedMaturity}
+								{isMaturityKey(selectedMaturity)
+									? MATURITY_CONFIG[selectedMaturity].label[locale]
+									: selectedMaturity}
 								<span aria-hidden="true">&times;</span>
 							</button>
 						)}

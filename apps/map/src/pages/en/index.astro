@@ -4,15 +4,13 @@ import DataPreview from "@/components/data-preview.astro";
 import DualConversion from "@/components/dual-conversion.astro";
 import FeaturedStartups from "@/components/featured-startups.astro";
 import { HeroIsland } from "@/components/hero-island";
-import seedData from "@/data/seed.json";
 import { getTranslations } from "@/i18n/translations";
 import { getRouteHref } from "@/i18n/utils";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import type { Startup } from "@/lib/types";
+import { startups } from "@/lib/seed";
 
 const locale = "en" as const;
 const t = getTranslations(locale);
-const startups = seedData as unknown as Startup[];
 
 const uniqueCountries = new Set(startups.map((s) => s.country));
 const uniqueVerticals = new Set(startups.flatMap((s) => s.verticals));
@@ -22,7 +20,7 @@ const heroStartups = startups.map((s) => ({
 	name: s.name,
 	lat: s.lat,
 	lng: s.lng,
-	verticals: s.verticals as string[],
+	verticals: s.verticals,
 }));
 
 const directoryHref = getRouteHref("directory", locale);

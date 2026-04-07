@@ -1,4 +1,27 @@
-export const VERTICAL_CONFIG = {
+import {
+	MATURITY_KEYS,
+	type MaturityKey,
+	VERTICAL_KEYS,
+	type VerticalKey,
+} from "@/lib/seed-schema";
+
+export type { MaturityKey, VerticalKey };
+// Re-export the DB-derived enum values and types so existing consumers can
+// keep importing from "@/lib/verticals" without churn. The literal values
+// themselves come from the Drizzle pgEnum (single source of truth).
+export { MATURITY_KEYS, VERTICAL_KEYS };
+
+type VerticalConfig = {
+	color: string;
+	muted: string;
+	label: { en: string; es: string };
+};
+
+type MaturityConfig = {
+	label: { en: string; es: string };
+};
+
+export const VERTICAL_CONFIG: Record<VerticalKey, VerticalConfig> = {
 	ai_ml: {
 		color: "var(--v-ai)",
 		muted: "rgba(255, 102, 179, 0.15)",
@@ -49,11 +72,9 @@ export const VERTICAL_CONFIG = {
 		muted: "rgba(148, 163, 184, 0.15)",
 		label: { en: "Other", es: "Otro" },
 	},
-} as const;
+};
 
-export type VerticalKey = keyof typeof VERTICAL_CONFIG;
-
-export const MATURITY_CONFIG = {
+export const MATURITY_CONFIG: Record<MaturityKey, MaturityConfig> = {
 	rd: {
 		label: { en: "R&D", es: "I+D" },
 	},
@@ -66,6 +87,4 @@ export const MATURITY_CONFIG = {
 	revenue: {
 		label: { en: "Revenue", es: "Ingresos" },
 	},
-} as const;
-
-export type MaturityKey = keyof typeof MATURITY_CONFIG;
+};

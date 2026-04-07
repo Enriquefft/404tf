@@ -3,10 +3,10 @@ import FadeInSection from "@/components/fade-in-section.astro";
 import SectionLabel from "@/components/ui/section-label.astro";
 import StartupCard from "@/components/ui/startup-card.astro";
 import type { Locale } from "@/i18n/translations";
-import type { Startup } from "@/lib/types";
+import type { SeedStartup } from "@/lib/seed-schema";
 
 type Props = {
-	startups: Startup[];
+	startups: readonly SeedStartup[];
 	locale: Locale;
 	label: string;
 	headline: string;
@@ -30,7 +30,7 @@ const FEATURED_SLUGS = [
 ] as const;
 
 const featured = FEATURED_SLUGS.map((slug) => startups.find((s) => s.slug === slug)).filter(
-	(s): s is Startup => s !== undefined,
+	(s): s is SeedStartup => s !== undefined,
 );
 ---
 

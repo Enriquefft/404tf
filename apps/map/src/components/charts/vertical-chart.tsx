@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Bar, BarChart, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { z } from "zod";
+
+const verticalEntrySchema = z.object({ vertical: z.string() });
 
 type VerticalChartProps = {
 	data: Array<{
@@ -111,9 +114,10 @@ export function VerticalChart({ data, locale, directoryPath }: VerticalChartProp
 								fontSize: 13,
 							}}
 							style={{ cursor: "pointer" }}
-							onClick={(entry) => {
-								const vertical = (entry as unknown as { vertical: string }).vertical;
-								window.location.href = `${directoryPath}?vertical=${encodeURIComponent(vertical)}`;
+							onClick={(entry: unknown) => {
+								const parsed = verticalEntrySchema.safeParse(entry);
+								if (!parsed.success) return;
+								window.location.href = `${directoryPath}?verticals=${encodeURIComponent(parsed.data.vertical)}`;
 							}}
 						>
 							{chartData.map((entry) => (

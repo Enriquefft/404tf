@@ -1,19 +1,19 @@
 ---
 import { CorporateFormStandalone } from "@/components/corporate-form-standalone";
 import TrustSignal from "@/components/trust-signal.astro";
-import seedData from "@/data/seed.json";
 import { getTranslations } from "@/i18n/translations";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import { startups as allStartups } from "@/lib/seed";
 
 const locale = "es" as const;
 const t = getTranslations(locale);
 const c = t.corporate;
 
 // Minimal startup data for context matching via ?startup= query param
-const startups = seedData.map((s) => ({
+const startups = allStartups.map((s) => ({
 	slug: s.slug,
 	name: s.name,
-	vertical: s.verticals?.[0] ?? "other",
+	vertical: s.verticals[0] ?? "other",
 }));
 ---
 

@@ -1,6 +1,6 @@
 ---
 import type { Locale } from "@/i18n/translations";
-import type { MaturityKey, VerticalKey } from "@/lib/verticals";
+import type { MaturityKey, VerticalKey } from "@/lib/seed-schema";
 import { MATURITY_CONFIG, VERTICAL_CONFIG } from "@/lib/verticals";
 
 type Props = {
@@ -12,32 +12,40 @@ type Props = {
 
 const { variant, value, label, locale = "es" } = Astro.props;
 
+function isVerticalKey(k: string): k is VerticalKey {
+	return Object.hasOwn(VERTICAL_CONFIG, k);
+}
+
+function isMaturityKey(k: string): k is MaturityKey {
+	return Object.hasOwn(MATURITY_CONFIG, k);
+}
+
 function getVerticalStyles(key: string): {
 	bg: string;
 	color: string;
 	dot: string;
 } {
-	const config = VERTICAL_CONFIG[key as VerticalKey];
-	if (!config) {
+	if (!isVerticalKey(key)) {
 		return {
 			bg: VERTICAL_CONFIG.other.muted,
 			color: VERTICAL_CONFIG.other.color,
 			dot: VERTICAL_CONFIG.other.color,
 		};
 	}
+	const config = VERTICAL_CONFIG[key];
 	return { bg: config.muted, color: config.color, dot: config.color };
 }
 
 function getVerticalLabel(key: string): string {
 	if (label) return label;
-	const config = VERTICAL_CONFIG[key as VerticalKey];
-	return config?.label[locale] ?? key;
+	if (!isVerticalKey(key)) return key;
+	return VERTICAL_CONFIG[key].label[locale];
 }
 
 function getMaturityLabel(key: string): string {
 	if (label) return label;
-	const config = MATURITY_CONFIG[key as MaturityKey];
-	return config?.label[locale] ?? key;
+	if (!isMaturityKey(key)) return key;
+	return MATURITY_CONFIG[key].label[locale];
 }
 
 const isVertical = variant === "vertical";

@@ -1,5 +1,5 @@
 import { useCallback, useRef, useState } from "react";
-import type { ZodError } from "zod";
+import { type ZodError, z } from "zod";
 import type { Locale } from "@/i18n/translations";
 import { getTranslations } from "@/i18n/translations";
 import {
@@ -10,6 +10,8 @@ import {
 	TIMELINE_OPTIONS,
 } from "@/lib/corporate-schema";
 import { track } from "@/lib/track";
+
+const responseSchema = z.object({ success: z.boolean() });
 
 type ContextStartup = {
 	slug: string;
@@ -182,12 +184,8 @@ export function CorporateForm({ locale, contextStartup, onSuccess }: CorporateFo
 				}
 
 				const data: unknown = await response.json();
-				if (
-					typeof data === "object" &&
-					data !== null &&
-					"success" in data &&
-					(data as Record<string, unknown>).success === true
-				) {
+				const parsed = responseSchema.safeParse(data);
+				if (parsed.success && parsed.data.success) {
 					setSuccess(true);
 					track("corporate_lead_submitted", {
 						industry: form.industry,

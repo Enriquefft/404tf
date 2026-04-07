@@ -8,16 +8,15 @@ import StartupCard from "@/components/ui/startup-card.astro";
 import { getTranslations } from "@/i18n/translations";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { getCountryFlag } from "@/lib/countries";
-import type { KeyResult, SeedStartup } from "@/lib/seed-types";
-import type { VerticalKey } from "@/lib/verticals";
+import { startups } from "@/lib/seed";
+import type { SeedStartup } from "@/lib/seed-schema";
 import { MATURITY_CONFIG, VERTICAL_CONFIG } from "@/lib/verticals";
 
 const locale = "en" as const;
 const t = getTranslations(locale);
 
 export async function getStaticPaths() {
-	const startups = await import("@/data/seed.json");
-	return startups.default.map((s) => ({
+	return startups.map((s) => ({
 		params: { slug: s.slug },
 		props: { startup: s },
 	}));
@@ -29,25 +28,22 @@ const { startup } = Astro.props;
 // i18n field selection: EN fields with fallback to ES (base)
 const oneLiner = startup.one_liner_en ?? startup.one_liner;
 const techDescription = startup.tech_description_en ?? startup.tech_description;
-const keyResults = (startup.key_results_en ?? startup.key_results) as KeyResult[] | null;
+const keyResults = startup.key_results_en ?? startup.key_results;
 const problemStatement = startup.problem_statement_en ?? startup.problem_statement;
 const businessModel = startup.business_model_en ?? startup.business_model;
 const displayCountry = startup.country;
 
 const flag = getCountryFlag(startup.country);
-const firstVertical = startup.verticals[0] as VerticalKey | undefined;
+const firstVertical = startup.verticals[0];
 const initialsColor = firstVertical
 	? (VERTICAL_CONFIG[firstVertical]?.color ?? "var(--v-other)")
 	: "var(--v-other)";
 const initial = startup.name.charAt(0).toUpperCase();
 
-const maturityLabel =
-	MATURITY_CONFIG[startup.maturity_level as keyof typeof MATURITY_CONFIG]?.label.en ??
-	startup.maturity_level;
+const maturityLabel = MATURITY_CONFIG[startup.maturity_level]?.label.en ?? startup.maturity_level;
 
 // Related startups: same primary vertical, excluding self
-const allStartups = (await import("@/data/seed.json")).default;
-const related = allStartups
+const related = startups
 	.filter((s) => s.slug !== startup.slug && firstVertical && s.verticals.includes(firstVertical))
 	.slice(0, 3);
 

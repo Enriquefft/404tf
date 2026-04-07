@@ -1,21 +1,29 @@
-import seedData from "@/data/seed.json";
 import type { Locale } from "@/i18n/translations";
 import { getCountryFlag } from "@/lib/countries";
-import type { VerticalKey } from "@/lib/verticals";
+import { startups } from "@/lib/seed";
+import { MATURITY_KEYS, type MaturityKey, type VerticalKey } from "@/lib/seed-schema";
 import { MATURITY_CONFIG, VERTICAL_CONFIG } from "@/lib/verticals";
 
 // ---------------------------------------------------------------------------
 // Computed stats (all build-time, no runtime DB reads)
 // ---------------------------------------------------------------------------
 
-export const totalStartups = seedData.length;
+function isVerticalKey(k: string): k is VerticalKey {
+	return Object.hasOwn(VERTICAL_CONFIG, k);
+}
 
-const uniqueCountries = [...new Set(seedData.map((s) => s.country))];
+function isMaturityKey(k: string): k is MaturityKey {
+	return Object.hasOwn(MATURITY_CONFIG, k);
+}
+
+export const totalStartups = startups.length;
+
+const uniqueCountries = [...new Set(startups.map((s) => s.country))];
 export const countryCount = uniqueCountries.length;
 
 // Country distribution sorted descending by count
 export const countryDistribution = Object.entries(
-	seedData.reduce<Record<string, number>>((acc, s) => {
+	startups.reduce<Record<string, number>>((acc, s) => {
 		acc[s.country] = (acc[s.country] ?? 0) + 1;
 		return acc;
 	}, {}),
@@ -29,38 +37,36 @@ export const countryDistribution = Object.entries(
 
 // Vertical distribution (a startup can have multiple verticals)
 export const verticalDistribution = Object.entries(
-	seedData.reduce<Record<string, number>>((acc, s) => {
+	startups.reduce<Record<string, number>>((acc, s) => {
 		for (const v of s.verticals) {
 			acc[v] = (acc[v] ?? 0) + 1;
 		}
 		return acc;
 	}, {}),
 )
-	.map(([vertical, count]) => ({
-		vertical,
-		count,
-		label: VERTICAL_CONFIG[vertical as VerticalKey]?.label ?? {
-			en: vertical,
-			es: vertical,
-		},
-		color: VERTICAL_CONFIG[vertical as VerticalKey]?.color ?? "var(--v-other)",
-	}))
+	.map(([vertical, count]) => {
+		const config = isVerticalKey(vertical) ? VERTICAL_CONFIG[vertical] : null;
+		return {
+			vertical,
+			count,
+			label: config?.label ?? { en: vertical, es: vertical },
+			color: config?.color ?? "var(--v-other)",
+		};
+	})
 	.sort((a, b) => b.count - a.count);
 
 // Maturity distribution
-export const maturityDistribution = (["rd", "prototype", "pilot", "revenue"] as const).map(
-	(key) => ({
-		key,
-		label: MATURITY_CONFIG[key].label,
-		count: seedData.filter((s) => s.maturity_level === key).length,
-		percentage: Math.round(
-			(seedData.filter((s) => s.maturity_level === key).length / seedData.length) * 100,
-		),
-	}),
-);
+export const maturityDistribution = MATURITY_KEYS.map((key) => ({
+	key,
+	label: MATURITY_CONFIG[key].label,
+	count: startups.filter((s) => s.maturity_level === key).length,
+	percentage: Math.round(
+		(startups.filter((s) => s.maturity_level === key).length / startups.length) * 100,
+	),
+}));
 
 // Founding year timeline
-const yearCounts = seedData.reduce<Record<number, number>>((acc, s) => {
+const yearCounts = startups.reduce<Record<number, number>>((acc, s) => {
 	if (s.founding_year) {
 		acc[s.founding_year] = (acc[s.founding_year] ?? 0) + 1;
 	}
@@ -93,7 +99,7 @@ function parseFunding(raw: string | null): number | null {
 	return value;
 }
 
-const fundedStartups = seedData.filter((s) => s.funding_received !== null);
+const fundedStartups = startups.filter((s) => s.funding_received !== null);
 const fundingAmounts = fundedStartups
 	.map((s) => parseFunding(s.funding_received))
 	.filter((v): v is number => v !== null);
@@ -101,7 +107,7 @@ const fundingAmounts = fundedStartups
 export const fundingStats = {
 	totalDisclosed: fundingAmounts.reduce((a, b) => a + b, 0),
 	withFunding: fundedStartups.length,
-	withFundingPct: Math.round((fundedStartups.length / seedData.length) * 100),
+	withFundingPct: Math.round((fundedStartups.length / startups.length) * 100),
 	avgFunded:
 		fundingAmounts.length > 0
 			? fundingAmounts.reduce((a, b) => a + b, 0) / fundingAmounts.length
@@ -120,12 +126,12 @@ export function formatCurrency(value: number): string {
 
 // Vertical label helper for charts
 export function getVerticalLabel(key: string, locale: Locale): string {
-	const config = VERTICAL_CONFIG[key as VerticalKey];
-	return config?.label[locale] ?? key;
+	if (!isVerticalKey(key)) return key;
+	return VERTICAL_CONFIG[key].label[locale];
 }
 
 // Maturity label helper
 export function getMaturityLabel(key: string, locale: Locale): string {
-	const config = MATURITY_CONFIG[key as keyof typeof MATURITY_CONFIG];
-	return config?.label[locale] ?? key;
+	if (!isMaturityKey(key)) return key;
+	return MATURITY_CONFIG[key].label[locale];
 }

@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const startupApplyStep1Schema = z.object({
 	startupName: z.string().min(1, "required"),
-	website: z.string().url("invalid_url").or(z.literal("")),
+	website: z.url("invalid_url").or(z.literal("")),
 	contactName: z.string().min(1, "required"),
 	contactRole: z.string().optional(),
 	email: z.email("invalid_email"),

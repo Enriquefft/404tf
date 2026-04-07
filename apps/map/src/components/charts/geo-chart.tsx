@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Bar, BarChart, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { z } from "zod";
+
+const countryEntrySchema = z.object({ country: z.string() });
 
 type GeoChartProps = {
 	data: Array<{ country: string; count: number; flag: string }>;
@@ -106,9 +109,10 @@ export function GeoChart({ data, directoryPath }: GeoChartProps) {
 								fontSize: 13,
 							}}
 							style={{ cursor: "pointer" }}
-							onClick={(entry) => {
-								const country = (entry as unknown as { country: string }).country;
-								window.location.href = `${directoryPath}?country=${encodeURIComponent(country)}`;
+							onClick={(entry: unknown) => {
+								const parsed = countryEntrySchema.safeParse(entry);
+								if (!parsed.success) return;
+								window.location.href = `${directoryPath}?country=${encodeURIComponent(parsed.data.country)}`;
 							}}
 						>
 							{data.map((entry, index) => (

@@ -1,13 +1,14 @@
 import { DotGridMap } from "@/components/dot-grid-map";
 import { HeroStats } from "@/components/hero-stats";
 import type { Locale } from "@/i18n/translations";
+import type { VerticalKey } from "@/lib/seed-schema";
 
 type StartupDot = {
 	slug: string;
 	name: string;
 	lat: number;
 	lng: number;
-	verticals: string[];
+	verticals: readonly VerticalKey[];
 };
 
 type HeroIslandProps = {

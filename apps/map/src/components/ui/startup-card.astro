@@ -3,18 +3,18 @@ import Badge from "@/components/ui/badge.astro";
 import Card from "@/components/ui/card.astro";
 import type { Locale } from "@/i18n/translations";
 import { getCountryFlag } from "@/lib/countries";
-import type { VerticalKey } from "@/lib/verticals";
+import type { MaturityKey, VerticalKey } from "@/lib/seed-schema";
 import { VERTICAL_CONFIG } from "@/lib/verticals";
 
 type StartupData = {
 	slug: string;
 	name: string;
-	one_liner: string;
+	one_liner: string | null;
 	country: string;
 	country_es: string;
 	city: string;
-	verticals: string[];
-	maturity_level: string;
+	verticals: readonly VerticalKey[];
+	maturity_level: MaturityKey;
 	funding_received: string | null;
 };
 
@@ -26,7 +26,7 @@ type Props = {
 
 const { startup, locale, href } = Astro.props;
 
-const firstVertical = startup.verticals[0] as VerticalKey | undefined;
+const firstVertical: VerticalKey | undefined = startup.verticals[0];
 const initialsColor = firstVertical
 	? (VERTICAL_CONFIG[firstVertical]?.color ?? "var(--v-other)")
 	: "var(--v-other)";

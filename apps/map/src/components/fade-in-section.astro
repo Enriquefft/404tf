@@ -2,13 +2,14 @@
 type Props = {
 	class?: string;
 	tag?: "section" | "div";
+	style?: string;
 };
 
-const { class: className = "", tag = "section" } = Astro.props;
+const { class: className = "", tag = "section", style } = Astro.props;
 const Tag = tag;
 ---
 
-<Tag class={`fade-in-section ${className}`} data-fade-in>
+<Tag class={`fade-in-section ${className}`} data-fade-in style={style}>
 	<slot />
 </Tag>
 

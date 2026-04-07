@@ -70,7 +70,7 @@ export function StartupProgramForm({ translations: t, tiers }: StartupProgramFor
 				return;
 			}
 			setStatus("success");
-			track("startup_program_submitted", { tier: formData.tier });
+			track("startup_program_submitted", { tier: formData.tierInterest });
 		} catch {
 			setStatus("error");
 		}

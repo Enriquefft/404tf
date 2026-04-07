@@ -1,23 +1,23 @@
 import { useMemo } from "react";
 import { AMERICAS_POINTS, LATAM_POINTS, projectToSvg } from "@/lib/map-points";
-import type { VerticalKey } from "@/lib/verticals";
+import type { VerticalKey } from "@/lib/seed-schema";
 
 type StartupDot = {
 	slug: string;
 	name: string;
 	lat: number;
 	lng: number;
-	verticals: string[];
+	verticals: readonly VerticalKey[];
 };
 
 type DotGridMapProps = {
-	startups: StartupDot[];
+	startups: readonly StartupDot[];
 	width?: number;
 	height?: number;
 };
 
 /** CSS-variable-aware color lookup for inline styles */
-const VERTICAL_RAW_COLORS: Record<string, string> = {
+const VERTICAL_RAW_COLORS: Record<VerticalKey, string> = {
 	ai_ml: "#ff2898",
 	biotech: "#00cd4e",
 	hardware_robotics: "#ff4834",
@@ -30,12 +30,9 @@ const VERTICAL_RAW_COLORS: Record<string, string> = {
 	other: "#94a3b8",
 };
 
-function getStartupColor(verticals: string[]): string {
-	const first = verticals[0] as VerticalKey | undefined;
-	if (first && first in VERTICAL_RAW_COLORS) {
-		return VERTICAL_RAW_COLORS[first];
-	}
-	return VERTICAL_RAW_COLORS.other;
+function getStartupColor(verticals: readonly VerticalKey[]): string {
+	const first = verticals[0];
+	return first ? VERTICAL_RAW_COLORS[first] : VERTICAL_RAW_COLORS.other;
 }
 
 const SVG_W = 900;
