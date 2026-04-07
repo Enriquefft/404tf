@@ -9,6 +9,7 @@
  * Runs automatically before `astro build` via the build script.
  */
 
+import { spawnSync } from "node:child_process";
 import { writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -91,6 +92,18 @@ async function generate() {
 
 	writeFileSync(OUTPUT_PATH, JSON.stringify(seed, null, "\t"), "utf-8");
 	console.log(`Wrote ${seed.length} startups to ${OUTPUT_PATH}`);
+
+	// Format with Biome so the generated file matches the project's formatter
+	// rules (single source of truth for formatting). Without this, biome check
+	// complains on every run because JSON.stringify always writes multi-line
+	// arrays while biome collapses short arrays to a single line.
+	const result = spawnSync("bunx", ["biome", "format", "--write", OUTPUT_PATH], {
+		cwd: join(__dirname, ".."),
+		stdio: "inherit",
+	});
+	if (result.status !== 0) {
+		throw new Error(`Biome format failed for ${OUTPUT_PATH} (exit ${result.status})`);
+	}
 }
 
 generate().catch((error: unknown) => {

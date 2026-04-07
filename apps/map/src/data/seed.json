@@ -9,10 +9,7 @@
 		"city": "Arequipa",
 		"lat": -16.409,
 		"lng": -71.5375,
-		"verticals": [
-			"biotech",
-			"advanced_materials"
-		],
+		"verticals": ["biotech", "advanced_materials"],
 		"maturity_level": "prototype",
 		"founding_year": 2024,
 		"tech_description": "Alveoprol desarrolla productos de laboratorio diseñados para escalar al mercado, basados en nanotecnología y formulados con ingredientes naturales como propóleo y sangre de grado. La tecnología de nanoencapsulación permite la liberación controlada de compuestos cicatrizantes y antimicrobianos, acelerando la recuperación post-extracción dental, garantizando biocompatibilidad, eficacia y seguridad clínica.",
@@ -92,10 +89,7 @@
 		"city": "Bogotá",
 		"lat": 4.711,
 		"lng": -74.0721,
-		"verticals": [
-			"healthtech",
-			"ai_ml"
-		],
+		"verticals": ["healthtech", "ai_ml"],
 		"maturity_level": "prototype",
 		"founding_year": 2020,
 		"tech_description": "Plataforma AI-as-a-Service que permite transformar datos médicos en modelos predictivos para diagnóstico temprano.",
@@ -165,10 +159,7 @@
 		"city": "Lima",
 		"lat": -12.0464,
 		"lng": -77.0428,
-		"verticals": [
-			"ai_ml",
-			"hardware_robotics"
-		],
+		"verticals": ["ai_ml", "hardware_robotics"],
 		"maturity_level": "pilot",
 		"founding_year": 2022,
 		"tech_description": "Sensor Integrado que recoge video, LIDAR, GPS + Acelerómetro de carros manejando.",
@@ -220,11 +211,7 @@
 		"city": "Buenos Aires",
 		"lat": -34.6037,
 		"lng": -58.3816,
-		"verticals": [
-			"agritech",
-			"biotech",
-			"cleantech"
-		],
+		"verticals": ["agritech", "biotech", "cleantech"],
 		"maturity_level": "revenue",
 		"founding_year": 2016,
 		"tech_description": "Modificación del comportamiento de abejas mediante estímulos naturales + modelos de machine learning para optimizar patrones de polinización.",
@@ -294,10 +281,7 @@
 		"city": "Lima",
 		"lat": -12.0464,
 		"lng": -77.0428,
-		"verticals": [
-			"agritech",
-			"cleantech"
-		],
+		"verticals": ["agritech", "cleantech"],
 		"maturity_level": "revenue",
 		"founding_year": 2017,
 		"tech_description": "Extracción de polímeros naturales de residuos agroindustriales (cáscaras y corontas) para crear recubrimientos líquidos (LifeCoPro®) que actúan como una barrera contra el oxígeno.",
@@ -367,10 +351,7 @@
 		"city": "Huancayo",
 		"lat": -12.0651,
 		"lng": -75.2049,
-		"verticals": [
-			"biotech",
-			"cleantech"
-		],
+		"verticals": ["biotech", "cleantech"],
 		"maturity_level": "pilot",
 		"founding_year": 2024,
 		"tech_description": "Desarrollamos un biofertilizante líquido innovador a partir de residuos de pescado, formulado con tecnología biotecnológica que optimiza el reciclaje de nutrientes y mejora la fertilidad de los suelos.",
@@ -440,10 +421,7 @@
 		"city": "Lima",
 		"lat": -12.0464,
 		"lng": -77.0428,
-		"verticals": [
-			"biotech",
-			"advanced_materials"
-		],
+		"verticals": ["biotech", "advanced_materials"],
 		"maturity_level": "prototype",
 		"founding_year": 2017,
 		"tech_description": "Proceso de fermentación utilizando microorganismos para transformar residuos de café y piña en una membrana de celulosa con textura de cuero.",
@@ -493,11 +471,7 @@
 		"city": "Lima",
 		"lat": -12.0464,
 		"lng": -77.0428,
-		"verticals": [
-			"cleantech",
-			"ai_ml",
-			"hardware_robotics"
-		],
+		"verticals": ["cleantech", "ai_ml", "hardware_robotics"],
 		"maturity_level": "prototype",
 		"founding_year": 2023,
 		"tech_description": "Uso de robots submarinos, sensores y algoritmos de IA para recolectar y analizar datos oceánicos y biomasa marina.",
@@ -549,9 +523,7 @@
 		"city": "Coquimbo",
 		"lat": -29.9533,
 		"lng": -71.3395,
-		"verticals": [
-			"biotech"
-		],
+		"verticals": ["biotech"],
 		"maturity_level": "pilot",
 		"founding_year": 2022,
 		"tech_description": "Uso de insectos como biofábricas para producir proteínas recombinantes.",
@@ -611,10 +583,7 @@
 		"city": "Arequipa",
 		"lat": -16.409,
 		"lng": -71.5375,
-		"verticals": [
-			"ai_ml",
-			"hardware_robotics"
-		],
+		"verticals": ["ai_ml", "hardware_robotics"],
 		"maturity_level": "pilot",
 		"founding_year": 2013,
 		"tech_description": "Soluciones en Industria 4.0, principalmente aquellas de aplicaciones de IA-Física, Inteligencia Artificial aplicada al mundo real a través del desarrollo de soluciones robóticas para la automatización en industria (textil, agroindustrial, cueros, etc.).",
@@ -694,10 +663,7 @@
 		"city": "Mexico City",
 		"lat": 19.4326,
 		"lng": -99.1332,
-		"verticals": [
-			"biotech",
-			"advanced_materials"
-		],
+		"verticals": ["biotech", "advanced_materials"],
 		"maturity_level": "prototype",
 		"founding_year": 2023,
 		"tech_description": "Proceso biotecnológico para extraer celulosa de alta pureza del rastrojo de piña, creando un material con 30% más capacidad de absorción que requiere menos químicos.",
@@ -757,9 +723,7 @@
 		"city": "Lima",
 		"lat": -12.0464,
 		"lng": -77.0428,
-		"verticals": [
-			"cleantech"
-		],
+		"verticals": ["cleantech"],
 		"maturity_level": "revenue",
 		"founding_year": 2015,
 		"tech_description": "Operan una planta de tratamiento que procesa escombros (concreto, ladrillo) para producir agregados reciclados, ladrillos, adoquines y bloques de concreto con ecoetiqueta EPD.",
@@ -819,9 +783,7 @@
 		"city": "Lima",
 		"lat": -12.0464,
 		"lng": -77.0428,
-		"verticals": [
-			"ai_ml"
-		],
+		"verticals": ["ai_ml"],
 		"maturity_level": "rd",
 		"founding_year": 2023,
 		"tech_description": "Centro de entrenamiento en conocimientos base de desarrollos Deep Tech.",
@@ -873,9 +835,7 @@
 		"city": "Lima",
 		"lat": -12.0464,
 		"lng": -77.0428,
-		"verticals": [
-			"biotech"
-		],
+		"verticals": ["biotech"],
 		"maturity_level": "prototype",
 		"founding_year": 2025,
 		"tech_description": "Ekova desarrolla una plataforma de biofabricación basada en sistemas vivos que permite transformar residuos orgánicos en materiales y bioproductos funcionales. Integramos distintos sistemas biológicos —como hongos, microorganismos, plantas y algas— para diseñar y producir soluciones aplicadas, incluyendo biomateriales, empaques biodegradables, objetos funcionales y biopigmentos. Este enfoque combina biodiseño y biotecnología para habilitar nuevas formas de producción más sostenibles y descentralizadas.",
@@ -935,9 +895,7 @@
 		"city": "Lima",
 		"lat": -12.0464,
 		"lng": -77.0428,
-		"verticals": [
-			"agritech"
-		],
+		"verticals": ["agritech"],
 		"maturity_level": "pilot",
 		"founding_year": 2018,
 		"tech_description": "Procesamiento de larvas de Tenebrio molitor y grillos para extraer harina con altas concentraciones de hierro hemínico y aminoácidos esenciales.",
@@ -1009,9 +967,7 @@
 		"city": "Lima",
 		"lat": -12.0464,
 		"lng": -77.0428,
-		"verticals": [
-			"cleantech"
-		],
+		"verticals": ["cleantech"],
 		"maturity_level": "prototype",
 		"founding_year": 2019,
 		"tech_description": "Eolic Wall leverages wind acceleration, magnetic levitation and a state-of-the-art generation system to convert wind power into electricity in one single step, with no mechanical loss and minimal maintenance, maximizing efficiency and enabling utility-scale energy costs at a small scale.",
@@ -1091,10 +1047,7 @@
 		"city": "Montevideo",
 		"lat": -34.9011,
 		"lng": -56.1645,
-		"verticals": [
-			"biotech",
-			"healthtech"
-		],
+		"verticals": ["biotech", "healthtech"],
 		"maturity_level": "pilot",
 		"founding_year": 2021,
 		"tech_description": "Plataforma de biosíntesis que permite producir moléculas como la psilocibina de forma pura, con dosis exactas y sin depender del cultivo tradicional de hongos.",
@@ -1154,9 +1107,7 @@
 		"city": "Bogotá",
 		"lat": 4.711,
 		"lng": -74.0721,
-		"verticals": [
-			"biotech"
-		],
+		"verticals": ["biotech"],
 		"maturity_level": "pilot",
 		"founding_year": 2021,
 		"tech_description": "Plataforma biotecnológica que usa hongos para degradar contaminantes industriales y producir moléculas limpias (biosurfactantes).",
@@ -1206,10 +1157,7 @@
 		"city": "Buenos Aires",
 		"lat": -34.6037,
 		"lng": -58.3816,
-		"verticals": [
-			"biotech",
-			"cleantech"
-		],
+		"verticals": ["biotech", "cleantech"],
 		"maturity_level": "pilot",
 		"founding_year": 2019,
 		"tech_description": "Biofabricación que utiliza el micelio (raíz de hongo) como aglutinante natural sobre paja de poroto para crear bloques de embalaje resistentes.",
@@ -1269,9 +1217,7 @@
 		"city": "Lima",
 		"lat": -12.0464,
 		"lng": -77.0428,
-		"verticals": [
-			"cleantech"
-		],
+		"verticals": ["cleantech"],
 		"maturity_level": "prototype",
 		"founding_year": 2020,
 		"tech_description": "Dispositivo que convierte movimiento rotatorio en electricidad con app de monitoreo.",
@@ -1321,9 +1267,7 @@
 		"city": "Lima",
 		"lat": -12.0464,
 		"lng": -77.0428,
-		"verticals": [
-			"ai_ml"
-		],
+		"verticals": ["ai_ml"],
 		"maturity_level": "revenue",
 		"founding_year": 2025,
 		"tech_description": "Agentes de Inteligencia artificial para ventas multimedia y brindamos tiendas virtuales con carrito de compras. Integración en 10min.",
@@ -1373,9 +1317,7 @@
 		"city": "Lima",
 		"lat": -12.0464,
 		"lng": -77.0428,
-		"verticals": [
-			"ai_ml"
-		],
+		"verticals": ["ai_ml"],
 		"maturity_level": "pilot",
 		"founding_year": 2025,
 		"tech_description": "Utilizamos un modelo de video streaming IA como agente vendedor en tiempo real, un buscador de lenguaje natural y un modelo de ML para mejorar los resultados de búsqueda según se realiza una navegación.",
@@ -1435,10 +1377,7 @@
 		"city": "Mexico City",
 		"lat": 19.4326,
 		"lng": -99.1332,
-		"verticals": [
-			"biotech",
-			"cleantech"
-		],
+		"verticals": ["biotech", "cleantech"],
 		"maturity_level": "pilot",
 		"founding_year": 0,
 		"tech_description": "Fachadas inteligentes que usan la fotosíntesis de microalgas y nanofluidos para regular la temperatura y limpiar el aire.",
@@ -1498,10 +1437,7 @@
 		"city": "Huanuco",
 		"lat": -9.93,
 		"lng": -76.2422,
-		"verticals": [
-			"advanced_materials",
-			"cleantech"
-		],
+		"verticals": ["advanced_materials", "cleantech"],
 		"maturity_level": "prototype",
 		"founding_year": 2024,
 		"tech_description": "Utilizan maquinaria ultrasónica para transformar el gabazo de café y el cáliz de aguaymanto en un material textil resistente, flexible y antitranspirante.",
@@ -1551,9 +1487,7 @@
 		"city": "Lima",
 		"lat": -12.0464,
 		"lng": -77.0428,
-		"verticals": [
-			"healthtech"
-		],
+		"verticals": ["healthtech"],
 		"maturity_level": "pilot",
 		"founding_year": 2019,
 		"tech_description": "Utilizan escaneo 3D y evaluación digital para fabricar prótesis personalizadas que pueden producirse en contenedores móviles (talleres portátiles) sin necesidad de grandes hospitales.",
@@ -1613,10 +1547,7 @@
 		"city": "Santiago",
 		"lat": -33.4489,
 		"lng": -70.6693,
-		"verticals": [
-			"agritech",
-			"ai_ml"
-		],
+		"verticals": ["agritech", "ai_ml"],
 		"maturity_level": "pilot",
 		"founding_year": 2014,
 		"tech_description": "Sensores IoT y análisis de datos para optimizar cultivos.",
@@ -1666,10 +1597,7 @@
 		"city": "Cerro de Pasco",
 		"lat": -10.6868,
 		"lng": -76.2617,
-		"verticals": [
-			"hardware_robotics",
-			"healthtech"
-		],
+		"verticals": ["hardware_robotics", "healthtech"],
 		"maturity_level": "prototype",
 		"founding_year": 2021,
 		"tech_description": "Prótesis mecánicas y mioeléctricas personalizadas creadas con escaneo 3D, impresión 3D y sensores que interpretan impulsos musculares mediante IA.",
@@ -1739,9 +1667,7 @@
 		"city": "Lima",
 		"lat": -12.0464,
 		"lng": -77.0428,
-		"verticals": [
-			"hardware_robotics"
-		],
+		"verticals": ["hardware_robotics"],
 		"maturity_level": "prototype",
 		"founding_year": 2021,
 		"tech_description": "Desarrollo de maquinaria automatizada.",
@@ -1791,10 +1717,7 @@
 		"city": "Buenos Aires",
 		"lat": -34.6037,
 		"lng": -58.3816,
-		"verticals": [
-			"agritech",
-			"biotech"
-		],
+		"verticals": ["agritech", "biotech"],
 		"maturity_level": "pilot",
 		"founding_year": 2019,
 		"tech_description": "Fermentación de precisión usando hongos para producir pigmentos naturales como alternativa a colorantes sintéticos.",
@@ -1864,9 +1787,7 @@
 		"city": "La Paz",
 		"lat": -16.4897,
 		"lng": -68.1193,
-		"verticals": [
-			"cleantech"
-		],
+		"verticals": ["cleantech"],
 		"maturity_level": "pilot",
 		"founding_year": 2020,
 		"tech_description": "Desarrollan sus propios vehículos eléctricos (motos/bicis) y el software de gestión para flotas compartidas.",
@@ -1904,10 +1825,7 @@
 		"city": "Buenos Aires",
 		"lat": -34.6037,
 		"lng": -58.3816,
-		"verticals": [
-			"biotech",
-			"cleantech"
-		],
+		"verticals": ["biotech", "cleantech"],
 		"maturity_level": "pilot",
 		"founding_year": 2022,
 		"tech_description": "Plataforma de biosíntesis que utiliza fermentación en estado sólido para alimentar hongos con residuos y crear un material biodegradable similar al cuero en solo 10 días.",
@@ -1967,10 +1885,7 @@
 		"city": "Lima",
 		"lat": -12.0464,
 		"lng": -77.0428,
-		"verticals": [
-			"biotech",
-			"advanced_materials"
-		],
+		"verticals": ["biotech", "advanced_materials"],
 		"maturity_level": "rd",
 		"founding_year": 2020,
 		"tech_description": "Uso de nanopartículas para mejorar formulaciones farmacéuticas.",
@@ -2020,9 +1935,7 @@
 		"city": "Lima",
 		"lat": -12.0464,
 		"lng": -77.0428,
-		"verticals": [
-			"cleantech"
-		],
+		"verticals": ["cleantech"],
 		"maturity_level": "prototype",
 		"founding_year": 2021,
 		"tech_description": "Utilizan sensores ultrasónicos y cámaras con IA (sistema N-FLOW) para medir nivel y caudal de agua sin contacto directo, evitando la alteración del entorno y reduciendo costos de mantenimiento.",
@@ -2092,11 +2005,7 @@
 		"city": "Lima",
 		"lat": -12.0464,
 		"lng": -77.0428,
-		"verticals": [
-			"ai_ml",
-			"cleantech",
-			"hardware_robotics"
-		],
+		"verticals": ["ai_ml", "cleantech", "hardware_robotics"],
 		"maturity_level": "revenue",
 		"founding_year": 2022,
 		"tech_description": "Nereuz desarrolla soluciones deep tech para el monitoreo automatizado de especies y ecosistemas, integrando inteligencia artificial, visión por computador y sensores IoT. Su tecnología principal, Sampling AI, permite recolectar datos confiables en tiempo real, sin intervención humana directa, incluso en zonas remotas o sensibles.",
@@ -2176,10 +2085,7 @@
 		"city": "Lima",
 		"lat": -12.0464,
 		"lng": -77.0428,
-		"verticals": [
-			"ai_ml",
-			"hardware_robotics"
-		],
+		"verticals": ["ai_ml", "hardware_robotics"],
 		"maturity_level": "rd",
 		"founding_year": 2025,
 		"tech_description": "En NONHUMAN desarrollamos tecnología de Embodied AI que integra percepción, planeamiento y control para otorgar autonomía a robots de propósito general. Nuestra plataforma está diseñada para automatizar tareas que demandan destreza similar a la humana, donde la robótica y el control clásico no logran imitar la complejidad del entorno real.",
@@ -2241,10 +2147,7 @@
 		"city": "Santiago",
 		"lat": -33.4489,
 		"lng": -70.6693,
-		"verticals": [
-			"agritech",
-			"ai_ml"
-		],
+		"verticals": ["agritech", "ai_ml"],
 		"maturity_level": "revenue",
 		"founding_year": 2015,
 		"tech_description": "Giuseppe, un algoritmo de IA que analiza alimentos a nivel molecular para replicarlos usando solo plantas.",
@@ -2304,9 +2207,7 @@
 		"city": "Lima",
 		"lat": -12.0464,
 		"lng": -77.0428,
-		"verticals": [
-			"cleantech"
-		],
+		"verticals": ["cleantech"],
 		"maturity_level": "prototype",
 		"founding_year": 2021,
 		"tech_description": "Tecnología para generación o almacenamiento energético.",
@@ -2356,10 +2257,7 @@
 		"city": "Lima",
 		"lat": -12.0464,
 		"lng": -77.0428,
-		"verticals": [
-			"agritech",
-			"biotech"
-		],
+		"verticals": ["agritech", "biotech"],
 		"maturity_level": "prototype",
 		"founding_year": 2021,
 		"tech_description": "Desarrollo de suplementos o alimentos funcionales basados en investigación nutricional.",
@@ -2409,10 +2307,7 @@
 		"city": "Buenos Aires",
 		"lat": -34.6037,
 		"lng": -58.3816,
-		"verticals": [
-			"biotech",
-			"healthtech"
-		],
+		"verticals": ["biotech", "healthtech"],
 		"maturity_level": "pilot",
 		"founding_year": 2020,
 		"tech_description": "Plataforma PMT (Patient-Model Therapy): utiliza microfluídica y visión por computadora para testear cientos de fármacos en células vivas del paciente fuera de su cuerpo (ex vivo).",
@@ -2492,9 +2387,7 @@
 		"city": "Lima",
 		"lat": -12.0464,
 		"lng": -77.0428,
-		"verticals": [
-			"cleantech"
-		],
+		"verticals": ["cleantech"],
 		"maturity_level": "prototype",
 		"founding_year": 2021,
 		"tech_description": "Transformación de residuos orgánicos en fertilizantes o bioproductos.",
@@ -2544,11 +2437,7 @@
 		"city": "Lima",
 		"lat": -12.0464,
 		"lng": -77.0428,
-		"verticals": [
-			"biotech",
-			"cleantech",
-			"advanced_materials"
-		],
+		"verticals": ["biotech", "cleantech", "advanced_materials"],
 		"maturity_level": "pilot",
 		"founding_year": 2022,
 		"tech_description": "Software y hardware que permite experimentar para aprender y desarrollar proyectos de química, biotecnología y nanotecnología aplicadas a campos como energía, medio ambiente e industria.",
@@ -2600,11 +2489,7 @@
 		"city": "Santiago",
 		"lat": -33.4489,
 		"lng": -70.6693,
-		"verticals": [
-			"biotech",
-			"agritech",
-			"ai_ml"
-		],
+		"verticals": ["biotech", "agritech", "ai_ml"],
 		"maturity_level": "pilot",
 		"founding_year": 2015,
 		"tech_description": "Plataforma de ingeniería de proteínas impulsada por IA (MADI) que diseña proteínas funcionales producidas mediante fermentación.",
@@ -2664,10 +2549,7 @@
 		"city": "Buenos Aires",
 		"lat": -34.6037,
 		"lng": -58.3816,
-		"verticals": [
-			"agritech",
-			"biotech"
-		],
+		"verticals": ["agritech", "biotech"],
 		"maturity_level": "pilot",
 		"founding_year": 2020,
 		"tech_description": "Utilizan microorganismos \"extremófilos\" (que viven en condiciones extremas en la Puna) para desarrollar tratamientos de semillas que permiten cultivar en suelos degradados o con estrés hídrico.",
@@ -2737,11 +2619,7 @@
 		"city": "Buenos Aires",
 		"lat": -34.6037,
 		"lng": -58.3816,
-		"verticals": [
-			"cleantech",
-			"aerospace",
-			"ai_ml"
-		],
+		"verticals": ["cleantech", "aerospace", "ai_ml"],
 		"maturity_level": "pilot",
 		"founding_year": 2020,
 		"tech_description": "IA y datos satelitales para detectar incendios forestales tempranamente.",
@@ -2791,9 +2669,7 @@
 		"city": "Buenos Aires",
 		"lat": -34.6037,
 		"lng": -58.3816,
-		"verticals": [
-			"biotech"
-		],
+		"verticals": ["biotech"],
 		"maturity_level": "revenue",
 		"founding_year": 2016,
 		"tech_description": "Miniaturizan instalaciones de bioprocesamiento industrial utilizando microfluídica y manufactura aditiva (impresión 3D), permitiendo una producción continua y descentralizada de productos biológicos.",
@@ -2863,10 +2739,7 @@
 		"city": "Lima",
 		"lat": -12.0464,
 		"lng": -77.0428,
-		"verticals": [
-			"hardware_robotics",
-			"ai_ml"
-		],
+		"verticals": ["hardware_robotics", "ai_ml"],
 		"maturity_level": "pilot",
 		"founding_year": 2016,
 		"tech_description": "Robots terrestres y drones para inspección minera y de infraestructura.",
@@ -2928,9 +2801,7 @@
 		"city": "Lima",
 		"lat": -12.0464,
 		"lng": -77.0428,
-		"verticals": [
-			"ai_ml"
-		],
+		"verticals": ["ai_ml"],
 		"maturity_level": "prototype",
 		"founding_year": 2024,
 		"tech_description": "IA + scrapy + modelo de datos conversacional + whatsapp.",
@@ -2980,9 +2851,7 @@
 		"city": "Lima",
 		"lat": -12.0464,
 		"lng": -77.0428,
-		"verticals": [
-			"ai_ml"
-		],
+		"verticals": ["ai_ml"],
 		"maturity_level": "pilot",
 		"founding_year": 2025,
 		"tech_description": "Agentes de IA para cada sector financiero.",
@@ -3034,10 +2903,7 @@
 		"city": "Arequipa",
 		"lat": -16.409,
 		"lng": -71.5375,
-		"verticals": [
-			"cleantech",
-			"hardware_robotics"
-		],
+		"verticals": ["cleantech", "hardware_robotics"],
 		"maturity_level": "prototype",
 		"founding_year": 2021,
 		"tech_description": "Biofiltros y jardines verticales de fitorremediación que reciclan aguas grises (duchas, lavabos) para riego de áreas verdes, eliminando olores y contaminantes sin químicos.",
@@ -3107,11 +2973,7 @@
 		"city": "Cusco",
 		"lat": -13.532,
 		"lng": -71.9675,
-		"verticals": [
-			"ai_ml",
-			"hardware_robotics",
-			"quantum"
-		],
+		"verticals": ["ai_ml", "hardware_robotics", "quantum"],
 		"maturity_level": "rd",
 		"founding_year": 2025,
 		"tech_description": "Agentes LLM y colaboraciones tecnológicas con empresas/academia.",
