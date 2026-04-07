@@ -14,6 +14,7 @@
 		"check": "biome check .",
 		"check:deps": "knip",
 		"db:generate": "cd packages/database && bun run db:generate",
+		"db:migrate": "cd packages/database && bun run db:migrate",
 		"db:push": "cd packages/database && bun run db:push",
 		"db:studio": "cd packages/database && bun run db:studio",
 		"logo:export": "bun run --filter='@404tf/brand' export",
