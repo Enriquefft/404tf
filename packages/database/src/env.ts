@@ -18,9 +18,16 @@ const neonUrlSchema = z
 	);
 
 export const dbEnv = createEnv({
-	client: {},
+	client: {
+		NEXT_PUBLIC_PROJECT_NAME: z.string().min(1),
+	},
+	clientPrefix: "NEXT_PUBLIC_",
 	emptyStringAsUndefined: true,
-	experimental__runtimeEnv: process.env,
+	runtimeEnv: {
+		DATABASE_URL: process.env.DATABASE_URL,
+		NODE_ENV: process.env.NODE_ENV,
+		NEXT_PUBLIC_PROJECT_NAME: process.env.NEXT_PUBLIC_PROJECT_NAME,
+	},
 	isServer: true,
 	server: {
 		DATABASE_URL: neonUrlSchema,

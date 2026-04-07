@@ -10,13 +10,15 @@
  */
 
 import { writeFileSync } from "node:fs";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { db } from "@404tf/database";
 import type { MapStartup } from "@404tf/database/schema";
 import { mapStartups } from "@404tf/database/schema";
 import type { SeedStartup } from "../src/lib/seed-types";
 
-const OUTPUT_PATH = join(import.meta.dir, "../src/data/seed.json");
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const OUTPUT_PATH = join(__dirname, "../src/data/seed.json");
 
 function toSeedEntry(row: MapStartup): SeedStartup {
 	return {

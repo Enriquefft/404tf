@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { CorporateModal } from "@/components/corporate-modal";
 import type { Locale } from "@/i18n/translations";
 import { COUNTRY_FLAGS } from "@/lib/countries";
+import { directoryResponseSchema } from "@/lib/directory-query-schema";
 import { AMERICAS_POINTS, COUNTRY_LABELS, LATAM_POINTS, projectToSvg } from "@/lib/map-points";
 import { track } from "@/lib/track";
 import {
@@ -13,21 +14,12 @@ import {
 
 // ---- Types ----
 
-type StartupData = {
-	slug: string;
-	name: string;
-	one_liner: string;
-	one_liner_en: string;
-	country: string;
-	country_es: string;
-	city: string;
-	lat: number;
-	lng: number;
-	verticals: VerticalKey[];
-	maturity_level: MaturityKey;
-	founding_year: number;
-	funding_received: string | null;
-};
+// Derived from the Zod response schema (which itself derives enum tuples
+// from the Drizzle pgEnum) so the runtime parse and the compile-time props
+// share a single source of truth.
+import type { DirectoryStartup } from "@/lib/directory-query-schema";
+
+type StartupData = DirectoryStartup;
 
 type MapPoint = {
 	slug: string;
@@ -44,9 +36,7 @@ type DirectoryIslandProps = {
 	locale: Locale;
 	labels: {
 		searchPlaceholder: string;
-		filterCountry: string;
 		filterCountryAll: string;
-		filterMaturity: string;
 		filterMaturityAll: string;
 		clearAll: string;
 		showingOf: string;
@@ -57,7 +47,6 @@ type DirectoryIslandProps = {
 		emptyMessage: string;
 		showMap: string;
 		hideMap: string;
-		mapTooltipIn: string;
 		ctaFindSolution: string;
 	};
 	startupBaseHref: string;
@@ -132,7 +121,12 @@ export function DirectoryIsland({
 	const [total, setTotal] = useState(totalCount);
 	const [page, setPage] = useState(1);
 	const [loading, setLoading] = useState(false);
+	const [fetchError, setFetchError] = useState<string | null>(null);
 	const abortRef = useRef<AbortController | null>(null);
+	// Tracks the previous filter snapshot so the same effect can both reset
+	// page=1 on filter change AND fetch — eliminates the need for a second
+	// effect that would require a biome-ignore for trigger-only deps.
+	const prevFiltersKey = useRef<string>("");
 
 	const searchTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 	const [debouncedSearch, setDebouncedSearch] = useState("");
@@ -150,7 +144,7 @@ export function DirectoryIsland({
 		}, 300);
 	}, []);
 
-	// ---- Fetch from API when filters change ----
+	// ---- Fetch from API when filters or page change ----
 
 	const hasFiltersActive =
 		debouncedSearch !== "" ||
@@ -159,10 +153,29 @@ export function DirectoryIsland({
 		selectedMaturity !== "";
 
 	useEffect(() => {
-		// On initial load with no filters, use the embedded data
+		const filtersKey = JSON.stringify({
+			q: debouncedSearch,
+			v: [...selectedVerticals].sort(),
+			c: selectedCountry,
+			m: selectedMaturity,
+			s: sort,
+		});
+		const filtersChanged = filtersKey !== prevFiltersKey.current;
+		prevFiltersKey.current = filtersKey;
+
+		// When filters change, snap back to page 1 (and skip this effect run; the
+		// state update re-triggers the effect with the correct page).
+		if (filtersChanged && page !== 1) {
+			setPage(1);
+			return;
+		}
+
+		// Default view (no filters, page 1, A-Z): serve from the embedded
+		// build-time data instead of hitting the API.
 		if (!hasFiltersActive && sort === "az" && page === 1) {
 			setStartups(initialStartups);
 			setTotal(totalCount);
+			setFetchError(null);
 			return;
 		}
 
@@ -171,10 +184,13 @@ export function DirectoryIsland({
 		abortRef.current = controller;
 
 		setLoading(true);
+		setFetchError(null);
 
 		const params = new URLSearchParams();
 		if (debouncedSearch) params.set("q", debouncedSearch);
-		if (selectedVerticals.size > 0) params.set("vertical", [...selectedVerticals][0]);
+		if (selectedVerticals.size > 0) {
+			params.set("verticals", [...selectedVerticals].join(","));
+		}
 		if (selectedCountry) params.set("country", selectedCountry);
 		if (selectedMaturity) params.set("maturity", selectedMaturity);
 		params.set("sort", sort);
@@ -183,18 +199,34 @@ export function DirectoryIsland({
 		params.set("locale", locale);
 
 		fetch(`/api/directory?${params}`, { signal: controller.signal })
-			.then((res) => res.json())
-			.then((json: { data: StartupData[]; total: number }) => {
-				if (page === 1) {
-					setStartups(json.data);
-				} else {
-					setStartups((prev) => [...prev, ...json.data]);
+			.then(async (res) => {
+				if (!res.ok) {
+					throw new Error(`API returned ${res.status}`);
 				}
-				setTotal(json.total);
+				const json: unknown = await res.json();
+				const parsed = directoryResponseSchema.safeParse(json);
+				if (!parsed.success) {
+					throw new Error("Malformed API response");
+				}
+				return parsed.data;
+			})
+			.then((response) => {
+				if (page === 1) {
+					setStartups(response.data);
+				} else {
+					setStartups((prev) => [...prev, ...response.data]);
+				}
+				setTotal(response.total);
 				setLoading(false);
 			})
 			.catch((err: unknown) => {
 				if (err instanceof DOMException && err.name === "AbortError") return;
+				console.error("[directory] fetch failed:", err);
+				setFetchError(
+					locale === "es"
+						? "No se pudo cargar el directorio. Intenta de nuevo."
+						: "Failed to load the directory. Please try again.",
+				);
 				setLoading(false);
 			});
 
@@ -211,12 +243,6 @@ export function DirectoryIsland({
 		initialStartups,
 		totalCount,
 	]);
-
-	// Reset to page 1 when filters change — deps are intentional trigger conditions
-	// biome-ignore lint/correctness/useExhaustiveDependencies: filter values are triggers, not consumed
-	useEffect(() => {
-		setPage(1);
-	}, [debouncedSearch, selectedVerticals, selectedCountry, selectedMaturity, sort]);
 
 	// ---- Derived data ----
 
@@ -700,6 +726,22 @@ export function DirectoryIsland({
 				)}
 			</div>
 
+			{/* Fetch error banner */}
+			{fetchError && (
+				<div
+					role="alert"
+					className="mb-4 rounded-lg border px-4 py-3 text-sm"
+					style={{
+						background: "var(--card)",
+						borderColor: "var(--destructive, #ef4444)",
+						color: "var(--destructive, #ef4444)",
+						fontFamily: "var(--font-body)",
+					}}
+				>
+					{fetchError}
+				</div>
+			)}
+
 			{/* Card Grid */}
 			{filtered.length > 0 ? (
 				<div className="grid gap-4 pb-20 sm:grid-cols-2 lg:grid-cols-3">
@@ -727,12 +769,12 @@ export function DirectoryIsland({
 									borderColor: "var(--border-subtle)",
 								}}
 								onMouseEnter={(e) => {
-									(e.currentTarget as HTMLElement).style.borderColor = accentColor;
-									(e.currentTarget as HTMLElement).style.transform = "translateY(-2px)";
+									e.currentTarget.style.borderColor = accentColor;
+									e.currentTarget.style.transform = "translateY(-2px)";
 								}}
 								onMouseLeave={(e) => {
-									(e.currentTarget as HTMLElement).style.borderColor = "var(--border-subtle)";
-									(e.currentTarget as HTMLElement).style.transform = "translateY(0)";
+									e.currentTarget.style.borderColor = "var(--border-subtle)";
+									e.currentTarget.style.transform = "translateY(0)";
 								}}
 							>
 								<div className="flex items-start gap-4">

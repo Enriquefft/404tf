@@ -5,7 +5,7 @@
 		"enabled": false
 	},
 	"files": {
-		"includes": ["src/**", "scripts/**", "!.claude"],
+		"includes": ["src/**", "scripts/**", "!.claude", "!src/data/seed.json"],
 		"ignoreUnknown": true
 	},
 	"overrides": [
