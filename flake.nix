@@ -26,7 +26,6 @@
           lefthook
           commitlint-rs
 
-          nodePackages.vercel
           stdenv.cc.cc.lib
 
         ];
