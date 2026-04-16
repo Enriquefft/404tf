@@ -24,8 +24,8 @@ const VARIANT_STYLES = {
 	},
 	secondary: {
 		background: "transparent",
-		color: "var(--primary)",
-		border: "1px solid var(--primary)",
+		color: "var(--map-secondary)",
+		border: "1px solid var(--map-secondary)",
 	},
 } as const;
 

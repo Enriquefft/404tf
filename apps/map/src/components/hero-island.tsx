@@ -28,7 +28,6 @@ type HeroIslandProps = {
 		statsStartups: string;
 		statsCountries: string;
 		statsVerticals: string;
-		scrollToExplore: string;
 		ctaFindSolution: string;
 		ctaGetOnMap: string;
 	};
@@ -219,44 +218,6 @@ export function HeroIsland({ startups, locale, statsData, labels, startupsHref }
 					</svg>
 				</a>
 			</div>
-
-			{/* Scroll indicator */}
-			<div
-				className="absolute bottom-6 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2"
-				style={{ animation: "hero-bounce 2s ease-in-out infinite" }}
-			>
-				<span
-					className="text-[10px] uppercase"
-					style={{
-						fontFamily: "var(--font-mono)",
-						color: "var(--muted-foreground)",
-						letterSpacing: "0.28em",
-					}}
-				>
-					{labels.scrollToExplore}
-				</span>
-				<svg
-					width="18"
-					height="18"
-					viewBox="0 0 24 24"
-					fill="none"
-					stroke="currentColor"
-					strokeWidth="1.5"
-					strokeLinecap="round"
-					strokeLinejoin="round"
-					style={{ color: "var(--muted-foreground)" }}
-					aria-hidden="true"
-				>
-					<path d="M5 9l7 7 7-7" />
-				</svg>
-			</div>
-
-			<style>{`
-				@keyframes hero-bounce {
-					0%, 100% { transform: translateX(-50%) translateY(0); }
-					50% { transform: translateX(-50%) translateY(6px); }
-				}
-			`}</style>
 		</div>
 	);
 }

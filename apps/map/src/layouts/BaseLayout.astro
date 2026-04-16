@@ -62,8 +62,8 @@ const ogImageUrl = ogImagePath.startsWith("http") ? ogImagePath : `${siteUrl}${o
 		<meta name="twitter:title" content={title} />
 		{description && <meta name="twitter:description" content={description} />}
 
-		<!-- Preload critical font (above fold) -->
-		<link rel="preload" href="/fonts/bricolage-grotesque-var.woff2" as="font" type="font/woff2" crossorigin />
+		<!-- (Bricolage Grotesque loads via the @import in globals.css; Vite emits
+		     the hashed URL with font-display: swap.) -->
 
 		<!-- JSON-LD structured data -->
 		{jsonLd && (

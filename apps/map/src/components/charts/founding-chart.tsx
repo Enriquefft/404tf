@@ -97,13 +97,13 @@ export function FoundingChart({ data, label, peakYear, peakLabel }: FoundingChar
 					/>
 					<ReferenceLine
 						x={peakYear}
-						stroke="var(--secondary)"
+						stroke="var(--map-secondary)"
 						strokeWidth={1}
 						strokeDasharray="4 4"
 						label={{
 							value: peakLabel,
 							position: "top",
-							fill: "var(--secondary)",
+							fill: "var(--map-secondary)",
 							fontFamily: "var(--font-mono)",
 							fontSize: 11,
 							fontWeight: 600,

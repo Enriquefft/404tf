@@ -46,6 +46,7 @@
         "@astrojs/check": "^0.9.7",
         "@astrojs/vercel": "^9.0.5",
         "@fontsource-variable/big-shoulders-display": "^5.2.5",
+        "@fontsource-variable/bricolage-grotesque": "^5.2.10",
         "@fontsource-variable/jetbrains-mono": "^5.2.8",
         "@fontsource/barlow-semi-condensed": "^5.2.7",
         "@resvg/resvg-js": "^2.6.2",
@@ -304,6 +305,8 @@
     "@esbuild/win32-x64": ["@esbuild/win32-x64@0.25.12", "", { "os": "win32", "cpu": "x64" }, "sha512-alJC0uCZpTFrSL0CCDjcgleBXPnCrEAhTBILpeAp7M/OFgoqtAetfBzX0xM00MUsVVPpVjlPuMbREqnZCXaTnA=="],
 
     "@fontsource-variable/big-shoulders-display": ["@fontsource-variable/big-shoulders-display@5.2.5", "", {}, "sha512-ZH2w9u6018xbSf8vPZ42P/KxpQHfIsKnxSnMtLFgwui1zIS05vzlijAWRcaRQoY2pXu4Z3SVa88OANsmq6mkvA=="],
+
+    "@fontsource-variable/bricolage-grotesque": ["@fontsource-variable/bricolage-grotesque@5.2.10", "", {}, "sha512-5EDsCqgGpKVcJWE4sg9ydli+t5WM97mISYw5lla/Ev4z71FwXh1oN0YUU8xjkRW9+wBCGD9R+ntAvI8G4bUFJg=="],
 
     "@fontsource-variable/jetbrains-mono": ["@fontsource-variable/jetbrains-mono@5.2.8", "", {}, "sha512-WBA9elru6Jdp5df2mES55wuOO0WIrn3kpXnI4+W2ek5u3ZgLS9XS4gmIlcQhiZOWEKl95meYdvK7xI+ETLCq/Q=="],
 

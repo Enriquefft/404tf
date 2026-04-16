@@ -1,10 +1,12 @@
 @import "tailwindcss";
 
-/* Self-hosted fonts via fontsource (served from node_modules, no external requests) */
+/* Self-hosted fonts via fontsource (served from node_modules, no external requests).
+   Big Shoulders = poster wordmark only ("404 MAPPED" hero, nav lockup, footer mark).
+   Bricolage Grotesque = editorial heading face (h1/h2/h3 across all general pages).
+   System UI stack = body — signals "tool, not brochure" and reduces font payload.
+   JetBrains Mono = labels, mono numerals, status copy. */
 @import "@fontsource-variable/big-shoulders-display";
-@import "@fontsource/barlow-semi-condensed/400.css";
-@import "@fontsource/barlow-semi-condensed/500.css";
-@import "@fontsource/barlow-semi-condensed/600.css";
+@import "@fontsource-variable/bricolage-grotesque";
 @import "@fontsource-variable/jetbrains-mono";
 
 /* Canonical brand tokens (Foundry direction). Defines :root colors, houses, radius,
@@ -18,9 +20,35 @@
    primary opacity scale, tertiary text, border strengths.
    ───────────────────────────────────────────────────────────────────────────── */
 :root {
-	/* Logical font slots — map uses brand fonts directly. --font-heading aliases
-	   --font-display for legacy code paths that still reference it. */
-	--font-heading: var(--font-display);
+	/* ── Typography slots ───────────────────────────────────────────────────
+	   Brand DNA keeps --font-display = Big Shoulders for the "404 MAPPED"
+	   wordmark and poster kicker bars. Map adds Bricolage Grotesque as the
+	   editorial heading face for h1/h2/h3 across general pages, and overrides
+	   --font-body to a native system stack (institutional/tool register, not
+	   brochure). --font-mono inherits from brand. */
+	--font-heading:
+		"Bricolage Grotesque Variable", "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+	--font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+	/* ── Map secondary — lavender ───────────────────────────────────────────
+	   Brand --secondary (forge amber) is reserved for the literal "404"
+	   wordmark, uppercase mono kickers, and pull-quote rails on the insights
+	   page. Map uses --map-secondary for in-app secondary CTAs, info chips,
+	   link accents, save/share toggles, and tab indicators. Hue 295 (cool
+	   violet) sits a quarter-turn from primary 305 — same family, lower
+	   temperature, no clash. */
+	--map-secondary: oklch(0.78 0.06 295);
+	--map-secondary-foreground: oklch(0.18 0.04 295);
+	--map-secondary-muted: color-mix(in oklch, var(--map-secondary) 12%, transparent);
+	--map-secondary-border: color-mix(in oklch, var(--map-secondary) 40%, transparent);
+
+	/* ── Radius ladder ──────────────────────────────────────────────────────
+	   Brand --radius = 0 stays for poster overlays (hero kicker bars). Map
+	   overrides for institutional directory feel: 2px chips, 4px controls,
+	   6px modals. Hint of curve, never soft. */
+	--radius: 0.25rem; /* 4px — inputs, buttons, cards (was brand 0) */
+	--radius-sm: 0.125rem; /* 2px — chips, badges, tab indicators */
+	--radius-lg: 0.375rem; /* 6px — modals, large surfaces */
 
 	/* Primary opacity scale — derived live from --primary via color-mix so any
 	   brand shift propagates without regeneration. Used for subtle tints,
@@ -64,11 +92,11 @@
 	--v-hardware: var(--house-hardware);
 	--v-aerospace: var(--house-space);
 	--v-space: var(--house-space);
-	--v-cleantech: oklch(0.75 0.14 185);
-	--v-agritech: oklch(0.82 0.18 130);
-	--v-medtech: oklch(0.72 0.18 10);
-	--v-materials: oklch(0.7 0.17 290);
-	--v-quantum: oklch(0.65 0.25 330);
+	--v-cleantech: oklch(0.75 0.12 185);
+	--v-agritech: oklch(0.82 0.155 130);
+	--v-medtech: oklch(0.72 0.155 10);
+	--v-materials: oklch(0.7 0.145 290);
+	--v-quantum: oklch(0.65 0.21 330);
 	--v-other: oklch(0.65 0.015 250);
 }
 
@@ -89,6 +117,25 @@
 	--color-success: var(--success);
 	--color-warning: var(--warning);
 	--color-info: var(--info);
+
+	/* Map-specific lavender bridges for `bg-map-secondary`,
+	   `text-map-secondary`, `border-map-secondary` Tailwind utilities. */
+	--color-map-secondary: var(--map-secondary);
+	--color-map-secondary-foreground: var(--map-secondary-foreground);
+
+	/* Map heading face. Brand bridge already exposes --font-display, --font-body,
+	   --font-mono; we add --font-heading so the `font-heading` Tailwind utility
+	   resolves to Bricolage Grotesque. */
+	--font-heading: var(--font-heading);
+
+	/* Override brand's flat radius bridge with the map ladder. Tailwind
+	   `rounded`, `rounded-md`, `rounded-lg`, `rounded-xl`, `rounded-2xl` all
+	   pick up the new ladder. */
+	--radius-sm: var(--radius-sm);
+	--radius-md: var(--radius);
+	--radius-lg: var(--radius-lg);
+	--radius-xl: var(--radius-lg);
+	--radius-2xl: var(--radius-lg);
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────

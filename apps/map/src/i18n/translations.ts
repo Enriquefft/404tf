@@ -83,7 +83,6 @@ type LandingTranslations = {
 	statsStartups: string;
 	statsCountries: string;
 	statsVerticals: string;
-	scrollToExplore: string;
 	featuredLabel: string;
 	featuredKicker: string;
 	featuredHeadline: string;
@@ -438,7 +437,7 @@ const en = {
 		heroKicker: "LATAM · DEEPTECH · INTELLIGENCE",
 		heroEyebrow: "The LATAM deeptech directory",
 		heroManifesto:
-			"Latin America has been forging deeptech in silence. We dragged the forge into daylight and mapped every sparking anvil.",
+			"Latin America has been building deeptech for years without anyone keeping score. We did the count, then put it on a map.",
 		heroSubtitle: "Deeptech, finally in scope.",
 		heroSecondary: "100+ startups building deep technology across Latin America",
 		heroTrustLine: "For corporates · startups · investors",
@@ -447,13 +446,12 @@ const en = {
 		statsStartups: "Startups",
 		statsCountries: "Countries",
 		statsVerticals: "Verticals",
-		scrollToExplore: "Scroll to explore",
 		featuredLabel: "ON THE MAP",
 		featuredKicker: "CURATED · APRIL 2026",
-		featuredHeadline: "Six forges. Six stories. One map.",
+		featuredHeadline: "Six startups worth knowing.",
 		featuredLink: "Explore the full directory",
 		dataLabel: "KEY FINDINGS",
-		dataHeadline: "The landscape at a glance",
+		dataHeadline: "The numbers at a glance",
 		dataTopCountries: "Top countries",
 		dataLink: "See all insights",
 		dataBiotechOrAi: "Biotech or AI/ML",
@@ -494,7 +492,7 @@ const en = {
 				},
 				{
 					quote:
-						"The deeptech signal in Latin America has been scattered for years. 404 Mapped is the first honest index we've worked with.",
+						"Deeptech signal in Latin America has been scattered for years. 404 Mapped is the first index we trust enough to share with our LPs.",
 					author: "Placeholder Investor",
 					role: "Partner, LATAM VC Fund (TBD)",
 				},
@@ -547,7 +545,7 @@ const en = {
 		mobileCtaKicker: "FOR CORPORATES",
 		emptyKicker: "NO RESULTS",
 		emptyHeadline:
-			"Refine your search or reach out — we may already know a startup that isn't on the map yet.",
+			"Refine your search or reach out. We may already know a startup that isn't on the map yet.",
 		emptyContactCta: "Contact us",
 		quickBookIntro: "Book intro",
 		quickSave: "Save",
@@ -594,16 +592,16 @@ const en = {
 		contactNextLabel: "What happens next",
 		contactNextStep1Title: "We read every word",
 		contactNextStep1Desc:
-			"Your message lands directly with the 404 Tech Found partners — no bot, no triage queue.",
+			"Your message goes straight to the 404 Tech Found partners. No bots, no triage queue.",
 		contactNextStep2Title: "You hear back within 24h",
 		contactNextStep2Desc:
-			"A founder replies with a first read, clarifying questions, or a short list of deeptech startups worth a call.",
+			"A founder replies with a first read, follow-up questions, or a short list of deeptech startups worth a call.",
 		contactNextStep3Title: "We book a 30-minute call",
 		contactNextStep3Desc:
-			"If there's a fit, we align on scope, introduce the relevant builders, and map a pilot path.",
-		contactResponsePromise: "Replies within 24h, Mon–Fri",
+			"If there's a fit, we agree on scope, introduce the relevant builders, and outline a pilot path.",
+		contactResponsePromise: "Replies within 24h, Mon to Fri",
 		contactPrivacyNote:
-			"Only the 404tf partners see this. Never shared, never sold — GDPR-ready handling.",
+			"Only the 404tf partners see this. Not shared, not sold. GDPR-ready handling.",
 		contactEmailHeading: "Prefer email?",
 		contactEmailLead: "Skip the form. Write directly and we'll pick it up the same way.",
 		contactEmailCta: "Write to enriquefft@404tf.com",
@@ -684,7 +682,7 @@ const en = {
 	insights: {
 		title: "The State of Deeptech",
 		subtitle:
-			"Where Latin America is quietly forging its hardest technology — by country, vertical, vintage, and stage. First edition, 2026.",
+			"What Latin America is actually building, broken down by country, vertical, founding year, and stage. First edition, 2026.",
 		byline: "A 404 Mapped report",
 		heroKicker: "STATE · 2026 · MARCH",
 		execStartups: "Startups Mapped",
@@ -697,7 +695,7 @@ const en = {
 		geoLabel: "GEOGRAPHIC DISTRIBUTION",
 		geoKicker: "WHERE DEEPTECH LIVES",
 		geoInsight:
-			"{leader} dominates with {leaderCount} startups — {multiple}× {second}. The map is concentrated, not spread.",
+			"{leader} leads with {leaderCount} startups, {multiple}× {second}. The map is concentrated, not spread.",
 		verticalTitle: "What are they building?",
 		verticalLabel: "VERTICAL BREAKDOWN",
 		verticalKicker: "WHAT THEY'RE BUILDING",
@@ -708,18 +706,18 @@ const en = {
 		foundingLabel: "FOUNDING TIMELINE",
 		foundingKicker: "WHEN THEY STARTED",
 		foundingInsight:
-			"{year} was the peak year — {count} new startups. {pct}% of the cohort was founded in the last five years.",
+			"{year} was the peak year, with {count} new startups. {pct}% of the cohort was founded in the last five years.",
 		foundingPeakAnnotation: "PEAK · {year}",
 		maturityTitle: "How mature are they?",
 		maturityLabel: "MATURITY DISTRIBUTION",
 		maturityKicker: "HOW MATURE",
 		maturityInsight:
-			"{earlyPct}% still in R&D or prototype. The commercial frontier is thin — only {commercialPct}% at pilot or revenue.",
+			"{earlyPct}% still sit in R&D or prototype. The commercial frontier is thin: only {commercialPct}% at pilot or revenue.",
 		fundingTitle: "Follow the money",
 		fundingLabel: "FUNDING LANDSCAPE",
 		fundingKicker: "FOLLOW THE MONEY",
 		fundingInsight:
-			"{total} raised across {count} startups — the top three capture {share}% of disclosed capital.",
+			"{total} raised across {count} startups. The top three capture {share}% of disclosed capital.",
 		fundingTotal: "Total Disclosed",
 		fundingWithData: "With Funding Data",
 		fundingAvg: "Avg. Funded Round",
@@ -809,11 +807,11 @@ const en = {
 	about: {
 		aboutTitle: "About 404 Tech Found",
 		aboutP1:
-			"404 Tech Found is a deeptech ecosystem builder based in Lima, Peru. We exist because Latin America has world-class scientific talent, but the infrastructure to connect it with industry is broken.",
+			"404 Tech Found is a deeptech ecosystem builder based in Lima, Peru. We started this because Latin America has serious scientific talent, but the infrastructure to connect it with industry is broken.",
 		aboutP2:
-			"We map, validate, and connect deeptech startups with corporates, governments, and investors who need next-generation solutions. Our work sits at the intersection of open innovation consulting, ecosystem intelligence, and startup enablement.",
+			"We map and validate deeptech startups, then introduce them to corporates, governments, and investors who need what they're building. Our work covers open innovation consulting, ecosystem intelligence, and startup enablement.",
 		aboutP3:
-			"404 Mapped is our flagship platform: a curated directory of 50+ deeptech startups across Latin America, designed to make the region's most ambitious builders visible and accessible.",
+			"404 Mapped is our flagship platform: a curated directory of 50+ deeptech startups across Latin America, built so the region's most ambitious builders are easy to find and reach.",
 		teamTitle: "The Team",
 		methodologyTitle: "Methodology",
 		methodStep1Title: "Sourced 400+",
@@ -882,7 +880,7 @@ const es = {
 		heroKicker: "LATAM · DEEPTECH · INTELIGENCIA",
 		heroEyebrow: "El directorio deeptech de LATAM",
 		heroManifesto:
-			"América Latina llevaba años forjando deeptech en silencio. Sacamos la forja a la luz y mapeamos cada yunque que echaba chispas.",
+			"América Latina llevaba años construyendo deeptech sin que nadie llevara la cuenta. Hicimos el conteo y lo pusimos en un mapa.",
 		heroSubtitle: "Deeptech, por fin a la vista.",
 		heroSecondary: "100+ startups construyendo tecnología profunda en América Latina",
 		heroTrustLine: "Para corporativos · startups · inversionistas",
@@ -891,13 +889,12 @@ const es = {
 		statsStartups: "Startups",
 		statsCountries: "Países",
 		statsVerticals: "Verticales",
-		scrollToExplore: "Desplázate para explorar",
 		featuredLabel: "EN EL MAPA",
 		featuredKicker: "CURADO · ABRIL 2026",
-		featuredHeadline: "Seis forjas. Seis historias. Un mapa.",
+		featuredHeadline: "Seis startups que vale la pena conocer.",
 		featuredLink: "Explora el directorio completo",
 		dataLabel: "HALLAZGOS CLAVE",
-		dataHeadline: "El panorama de un vistazo",
+		dataHeadline: "Los números de un vistazo",
 		dataTopCountries: "Principales países",
 		dataLink: "Ver todas las perspectivas",
 		dataBiotechOrAi: "Biotech o IA/ML",
@@ -938,7 +935,7 @@ const es = {
 				},
 				{
 					quote:
-						"La señal deeptech en América Latina estuvo dispersa por años. 404 Mapped es el primer índice honesto con el que hemos trabajado.",
+						"La señal deeptech en América Latina estuvo dispersa por años. 404 Mapped es el primer índice en el que confiamos lo suficiente como para compartirlo con nuestros LPs.",
 					author: "Inversionista Pendiente",
 					role: "Partner, Fondo VC LATAM (por confirmar)",
 				},
@@ -991,7 +988,7 @@ const es = {
 		mobileCtaKicker: "PARA CORPORATIVOS",
 		emptyKicker: "SIN RESULTADOS",
 		emptyHeadline:
-			"Afina tu búsqueda o contáctanos — quizás tenemos una startup que aún no está en el mapa.",
+			"Afina tu búsqueda o contáctanos. Quizás ya conocemos una startup que aún no está en el mapa.",
 		emptyContactCta: "Contáctanos",
 		quickBookIntro: "Agendar intro",
 		quickSave: "Guardar",
@@ -1039,16 +1036,16 @@ const es = {
 		contactNextLabel: "Qué sigue",
 		contactNextStep1Title: "Leemos cada palabra",
 		contactNextStep1Desc:
-			"Tu mensaje llega directo a los socios de 404 Tech Found — sin bots, sin colas de triage.",
+			"Tu mensaje llega directo a los socios de 404 Tech Found. Sin bots, sin colas de triage.",
 		contactNextStep2Title: "Respondemos en 24h",
 		contactNextStep2Desc:
-			"Un founder responde con una primera lectura, preguntas clarificadoras o una lista corta de startups deeptech que vale la pena conocer.",
+			"Un founder te responde con una primera lectura, preguntas de seguimiento o una lista corta de startups deeptech que vale la pena conocer.",
 		contactNextStep3Title: "Agendamos una llamada de 30 minutos",
 		contactNextStep3Desc:
-			"Si hay encaje, alineamos alcance, te presentamos a los builders relevantes y trazamos un camino de piloto.",
-		contactResponsePromise: "Respondemos en 24h, lun–vie",
+			"Si hay encaje, acordamos el alcance, te presentamos a los builders relevantes y trazamos un camino de piloto.",
+		contactResponsePromise: "Respondemos en 24h, lun a vie",
 		contactPrivacyNote:
-			"Solo los socios de 404tf ven esto. Nunca compartido, nunca vendido — manejo GDPR-ready.",
+			"Solo los socios de 404tf ven esto. No se comparte, no se vende. Manejo GDPR-ready.",
 		contactEmailHeading: "¿Prefieres email?",
 		contactEmailLead: "Salta el formulario. Escribe directo y lo recibimos igual.",
 		contactEmailCta: "Escribe a enriquefft@404tf.com",
@@ -1130,7 +1127,7 @@ const es = {
 	insights: {
 		title: "El Estado del Deeptech",
 		subtitle:
-			"Donde América Latina forja en silencio su tecnología más dura — por país, vertical, cohorte y etapa. Primera edición, 2026.",
+			"Lo que América Latina realmente está construyendo, desglosado por país, vertical, año de fundación y etapa. Primera edición, 2026.",
 		byline: "Un reporte de 404 Mapped",
 		heroKicker: "ESTADO · 2026 · MARZO",
 		execStartups: "Startups Mapeadas",
@@ -1143,7 +1140,7 @@ const es = {
 		geoLabel: "DISTRIBUCIÓN GEOGRÁFICA",
 		geoKicker: "DÓNDE VIVE EL DEEPTECH",
 		geoInsight:
-			"{leader} domina con {leaderCount} startups — {multiple}× {second}. El mapa está concentrado, no disperso.",
+			"{leader} lidera con {leaderCount} startups, {multiple}× {second}. El mapa está concentrado, no disperso.",
 		verticalTitle: "¿Qué están construyendo?",
 		verticalLabel: "DESGLOSE POR VERTICAL",
 		verticalKicker: "LO QUE CONSTRUYEN",
@@ -1154,18 +1151,18 @@ const es = {
 		foundingLabel: "LÍNEA TEMPORAL DE FUNDACIÓN",
 		foundingKicker: "CUÁNDO EMPEZARON",
 		foundingInsight:
-			"{year} fue el año pico — {count} nuevas startups. El {pct}% del cohorte se fundó en los últimos cinco años.",
+			"{year} fue el año pico, con {count} nuevas startups. El {pct}% del cohorte se fundó en los últimos cinco años.",
 		foundingPeakAnnotation: "PICO · {year}",
 		maturityTitle: "¿Qué tan maduros son?",
 		maturityLabel: "DISTRIBUCIÓN DE MADUREZ",
 		maturityKicker: "QUÉ TAN MADUROS",
 		maturityInsight:
-			"{earlyPct}% aún en I+D o prototipo. La frontera comercial es delgada — solo {commercialPct}% en piloto o ingresos.",
+			"{earlyPct}% aún están en I+D o prototipo. La frontera comercial es delgada: solo {commercialPct}% en piloto o ingresos.",
 		fundingTitle: "Sigue el dinero",
 		fundingLabel: "PANORAMA DE FINANCIAMIENTO",
 		fundingKicker: "SIGUE EL DINERO",
 		fundingInsight:
-			"{total} levantados en {count} startups — las tres principales capturan el {share}% del capital declarado.",
+			"{total} levantados en {count} startups. Las tres principales capturan el {share}% del capital declarado.",
 		fundingTotal: "Total Declarado",
 		fundingWithData: "Con Datos de Financiamiento",
 		fundingAvg: "Ronda Promedio",
@@ -1258,11 +1255,11 @@ const es = {
 	about: {
 		aboutTitle: "Sobre 404 Tech Found",
 		aboutP1:
-			"404 Tech Found es un constructor de ecosistemas deeptech con base en Lima, Perú. Existimos porque América Latina tiene talento científico de clase mundial, pero la infraestructura para conectarlo con la industria está rota.",
+			"404 Tech Found es un constructor de ecosistemas deeptech con base en Lima, Perú. Empezamos esto porque América Latina tiene talento científico serio, pero la infraestructura para conectarlo con la industria está rota.",
 		aboutP2:
-			"Mapeamos, validamos y conectamos startups deeptech con corporativos, gobiernos e inversionistas que necesitan soluciones de siguiente generación. Nuestro trabajo se sitúa en la intersección de consultoría de innovación abierta, inteligencia de ecosistemas y habilitación de startups.",
+			"Mapeamos y validamos startups deeptech, y luego las presentamos a corporativos, gobiernos e inversionistas que necesitan lo que están construyendo. Nuestro trabajo cubre consultoría de innovación abierta, inteligencia de ecosistemas y habilitación de startups.",
 		aboutP3:
-			"404 Mapped es nuestra plataforma insignia: un directorio curado de 50+ startups deeptech en América Latina, diseñado para hacer visibles y accesibles a los constructores más ambiciosos de la región.",
+			"404 Mapped es nuestra plataforma insignia: un directorio curado de 50+ startups deeptech en América Latina, hecho para que los constructores más ambiciosos de la región sean fáciles de encontrar y contactar.",
 		teamTitle: "El Equipo",
 		methodologyTitle: "Metodología",
 		methodStep1Title: "400+ Fuentes",

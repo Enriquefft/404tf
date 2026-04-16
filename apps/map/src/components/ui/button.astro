@@ -18,7 +18,8 @@ const {
 
 const variantStyles: Record<string, string> = {
 	primary: "bg-primary text-primary-foreground hover:bg-[var(--primary-light)]",
-	secondary: "bg-transparent border border-primary text-primary hover:bg-[var(--primary-8)]",
+	secondary:
+		"bg-transparent border border-[var(--map-secondary-border)] text-[var(--map-secondary)] hover:bg-[var(--map-secondary-muted)]",
 	ghost:
 		"bg-transparent text-muted-foreground hover:bg-[var(--border-subtle)] hover:text-foreground",
 };

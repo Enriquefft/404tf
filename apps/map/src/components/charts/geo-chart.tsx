@@ -55,13 +55,13 @@ function LeaderLabel(props: { raw: unknown; leaderIndex: number }) {
 	return (
 		<g>
 			{isLeader ? (
-				<rect x={x + width} y={y} width={2} height={height} fill="var(--secondary)" />
+				<rect x={x + width} y={y} width={2} height={height} fill="var(--primary)" />
 			) : null}
 			<text
 				x={x + width + 10}
 				y={y + height / 2}
 				dy={4}
-				fill={isLeader ? "var(--secondary)" : "var(--muted-foreground)"}
+				fill={isLeader ? "var(--foreground)" : "var(--muted-foreground)"}
 				fontFamily="var(--font-mono)"
 				fontSize={13}
 				fontWeight={isLeader ? 600 : 400}

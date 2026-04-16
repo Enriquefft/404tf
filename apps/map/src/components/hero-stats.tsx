@@ -51,8 +51,8 @@ function StatCounter({ value, suffix, label }: StatItem) {
 			<span
 				className="font-semibold tabular-nums leading-none tracking-tight"
 				style={{
-					fontFamily: "var(--font-display)",
-					color: "var(--secondary)",
+					fontFamily: "var(--font-mono)",
+					color: "var(--foreground)",
 					fontSize: "clamp(1.75rem, 3.2vw, 2.25rem)",
 				}}
 			>

@@ -100,7 +100,7 @@ const tag: EditorialTag | null = editorial_tag ?? derivedTag;
 		<div class="flex-1 min-w-0">
 			<h3
 				class="truncate text-[18px] font-semibold leading-tight text-foreground"
-				style="font-family: var(--font-display);"
+				style="font-family: var(--font-heading);"
 			>
 				{startup.name}
 			</h3>
@@ -149,7 +149,7 @@ const tag: EditorialTag | null = editorial_tag ?? derivedTag;
 				fundingDisplay ? (
 					<div
 						class="truncate text-[13px] tabular-nums"
-						style="font-family: var(--font-mono); color: var(--secondary); font-weight: 600;"
+						style="font-family: var(--font-mono); color: var(--foreground); font-weight: 600;"
 					>
 						{fundingDisplay}{" "}
 						<span
@@ -175,11 +175,11 @@ const tag: EditorialTag | null = editorial_tag ?? derivedTag;
 					class="shrink-0 px-2 py-0.5 text-[10px] uppercase"
 					style={`font-family: var(--font-mono); letter-spacing: 0.1em; font-weight: 600; border: 1px solid ${
 						tag.tone === "accent"
-							? "color-mix(in oklch, var(--secondary) 45%, transparent)"
+							? "color-mix(in oklch, var(--primary) 45%, transparent)"
 							: "var(--border-subtle)"
-					}; color: ${tag.tone === "accent" ? "var(--secondary)" : "var(--text-tertiary)"}; background: ${
+					}; color: ${tag.tone === "accent" ? "var(--primary)" : "var(--text-tertiary)"}; background: ${
 						tag.tone === "accent"
-							? "color-mix(in oklch, var(--secondary) 8%, transparent)"
+							? "color-mix(in oklch, var(--primary) 8%, transparent)"
 							: "transparent"
 					};`}
 				>

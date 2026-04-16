@@ -49,14 +49,12 @@ function TopRankLabel(props: { raw: unknown; topCount: number }) {
 	const isTop = index < topCount;
 	return (
 		<g>
-			{isTop ? (
-				<rect x={x + width} y={y} width={2} height={height} fill="var(--secondary)" />
-			) : null}
+			{isTop ? <rect x={x + width} y={y} width={2} height={height} fill="var(--primary)" /> : null}
 			<text
 				x={x + width + 10}
 				y={y + height / 2}
 				dy={4}
-				fill={isTop ? "var(--secondary)" : "var(--muted-foreground)"}
+				fill={isTop ? "var(--foreground)" : "var(--muted-foreground)"}
 				fontFamily="var(--font-mono)"
 				fontSize={13}
 				fontWeight={isTop ? 600 : 400}

@@ -14,10 +14,10 @@ const isHero = size === "hero";
 	<span
 		class:list={[
 			"font-medium leading-tight",
-			isHero ? "text-5xl font-semibold tracking-tight" : "text-2xl",
+			isHero ? "text-5xl tracking-tight" : "text-2xl",
 		]}
 		style={isHero
-			? "font-family: var(--font-display); letter-spacing: -0.03em; color: var(--secondary);"
+			? "font-family: var(--font-mono); letter-spacing: -0.01em; color: var(--foreground); font-variant-numeric: tabular-nums;"
 			: "font-family: var(--font-mono);"}
 	>
 		{value}

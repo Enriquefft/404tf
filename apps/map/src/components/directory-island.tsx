@@ -552,7 +552,7 @@ export function DirectoryIsland({
 				<h1
 					className="mt-3 text-3xl leading-[1.05] sm:text-5xl lg:text-6xl"
 					style={{
-						fontFamily: "var(--font-display)",
+						fontFamily: "var(--font-heading)",
 						color: "var(--foreground)",
 						fontWeight: 700,
 						letterSpacing: "-0.01em",
@@ -749,7 +749,7 @@ export function DirectoryIsland({
 								fontFamily: "var(--font-mono)",
 								color: active ? "var(--foreground)" : "var(--muted-foreground)",
 								background: "transparent",
-								borderBottom: active ? "2px solid var(--secondary)" : "2px solid transparent",
+								borderBottom: active ? "2px solid var(--map-secondary)" : "2px solid transparent",
 								marginBottom: "-2px",
 							}}
 						>
@@ -957,14 +957,14 @@ export function DirectoryIsland({
 				>
 					<span
 						className="text-base font-semibold"
-						style={{ fontFamily: "var(--font-mono)", color: "var(--secondary)" }}
+						style={{ fontFamily: "var(--font-mono)", color: "var(--foreground)" }}
 					>
 						{filtered.length}
 					</span>{" "}
 					{locale === "es" ? "de" : "of"}{" "}
 					<span
 						className="text-base font-semibold"
-						style={{ fontFamily: "var(--font-mono)", color: "var(--secondary)" }}
+						style={{ fontFamily: "var(--font-mono)", color: "var(--foreground)" }}
 					>
 						{total}
 					</span>{" "}
@@ -1171,9 +1171,9 @@ export function DirectoryIsland({
 										}}
 										className="pointer-events-auto flex h-7 w-7 cursor-pointer items-center justify-center border transition-colors duration-150"
 										style={{
-											background: isSaved ? "var(--secondary)" : "transparent",
-											borderColor: isSaved ? "var(--secondary)" : "var(--border)",
-											color: isSaved ? "var(--secondary-foreground)" : "var(--foreground)",
+											background: isSaved ? "var(--map-secondary)" : "transparent",
+											borderColor: isSaved ? "var(--map-secondary)" : "var(--border)",
+											color: isSaved ? "var(--map-secondary-foreground)" : "var(--foreground)",
 										}}
 									>
 										<svg
@@ -1200,9 +1200,9 @@ export function DirectoryIsland({
 										}}
 										className="pointer-events-auto flex h-7 w-7 cursor-pointer items-center justify-center border transition-colors duration-150"
 										style={{
-											background: isShared ? "var(--secondary)" : "transparent",
-											borderColor: isShared ? "var(--secondary)" : "var(--border)",
-											color: isShared ? "var(--secondary-foreground)" : "var(--foreground)",
+											background: isShared ? "var(--map-secondary)" : "transparent",
+											borderColor: isShared ? "var(--map-secondary)" : "var(--border)",
+											color: isShared ? "var(--map-secondary-foreground)" : "var(--foreground)",
 										}}
 									>
 										<svg
@@ -1258,7 +1258,7 @@ export function DirectoryIsland({
 					<h3
 						className="mt-4 max-w-xl text-2xl leading-tight sm:text-3xl"
 						style={{
-							fontFamily: "var(--font-display)",
+							fontFamily: "var(--font-heading)",
 							color: "var(--foreground)",
 							fontWeight: 700,
 						}}
