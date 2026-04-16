@@ -69,7 +69,7 @@ async function sendClaimNotification(data: {
 
 	await resend.emails.send({
 		from: "404 Mapped <notifications@404tf.com>",
-		to: "hello@404tf.com",
+		to: "enriquefft@404tf.com",
 		subject: `Profile Claim: ${data.startupSlug} — ${data.name}`,
 		html: `
 			<h2>Profile Claim Request</h2>

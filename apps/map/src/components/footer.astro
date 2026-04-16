@@ -35,13 +35,14 @@ const legalLinks = [
 	{ label: t.footer.legalCookies, href: `/${locale}/legal/${legalSlugs.cookies[locale]}` },
 ] as const;
 
-const trustChips = [t.footer.trustGdpr, t.footer.trustDataHandling, t.footer.trustBuiltIn] as const;
+const langLabel = t.common.alternateLanguageName;
+const rights = t.footer.rights;
 ---
 
 <footer class="border-t border-border-subtle bg-card">
-	<div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-		<div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-			<!-- Column 1: Brand -->
+	<div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+		<div class="grid gap-8 sm:grid-cols-3">
+			<!-- Column 1: Brand + email -->
 			<div>
 				<p
 					class="text-lg font-semibold text-foreground"
@@ -49,19 +50,19 @@ const trustChips = [t.footer.trustGdpr, t.footer.trustDataHandling, t.footer.tru
 				>
 					<span style="color: var(--secondary);">404</span> Mapped
 				</p>
-				<p class="mt-1 text-xs text-muted-foreground">{t.footer.byLine}</p>
 				<p
 					class="mt-3 max-w-xs text-sm leading-relaxed text-muted-foreground"
 					style="font-family: var(--font-body);"
 				>
 					{t.footer.description}
 				</p>
-				<p
-					class="mt-4 text-[11px] uppercase tracking-[0.14em] text-muted-foreground"
+				<a
+					href="mailto:enriquefft@404tf.com"
+					class="mt-4 inline-block text-sm text-muted-foreground transition-colors duration-150 hover:text-foreground"
 					style="font-family: var(--font-mono);"
 				>
-					<span style="color: var(--secondary);">404</span>{" "}{t.footer.address}
-				</p>
+					enriquefft@<span style="color: var(--secondary);">404</span>tf.com
+				</a>
 			</div>
 
 			<!-- Column 2: Navigation -->
@@ -89,48 +90,7 @@ const trustChips = [t.footer.trustGdpr, t.footer.trustDataHandling, t.footer.tru
 				</ul>
 			</div>
 
-			<!-- Column 3: Contact -->
-			<div>
-				<p
-					class="text-xs font-semibold uppercase tracking-wider text-muted-foreground"
-					style="font-family: var(--font-mono);"
-				>
-					{t.footer.contactHeading}
-				</p>
-				<ul class="mt-3 space-y-2">
-					<li>
-						<a
-							href="mailto:hello@404tf.com"
-							class="text-sm text-muted-foreground transition-colors duration-150 hover:text-foreground"
-							style="font-family: var(--font-mono);"
-						>
-							hello@<span style="color: var(--secondary);">404</span>tf.com
-						</a>
-					</li>
-					<li
-						class="flex items-center gap-2 text-[11px] uppercase tracking-[0.14em] text-muted-foreground"
-						style="font-family: var(--font-mono);"
-					>
-						<span
-							aria-hidden="true"
-							class="inline-block h-1.5 w-1.5"
-							style="background: var(--secondary);"
-						></span>
-						{t.footer.responseTime}
-					</li>
-					<li>
-						<a
-							href={getRouteHref("contact", locale)}
-							class="text-sm text-primary transition-colors duration-150 hover:text-foreground"
-							style="font-family: var(--font-body);"
-						>
-							{t.footer.talkToUs} &rarr;
-						</a>
-					</li>
-				</ul>
-			</div>
-
-			<!-- Column 4: Legal -->
+			<!-- Column 3: Legal -->
 			<div>
 				<p
 					class="text-xs font-semibold uppercase tracking-wider text-muted-foreground"
@@ -156,101 +116,22 @@ const trustChips = [t.footer.trustGdpr, t.footer.trustDataHandling, t.footer.tru
 			</div>
 		</div>
 
-		<!-- Trust chips row -->
-		<ul
-			class="mt-10 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-border-subtle pt-6"
-		>
-			{
-				trustChips.map((chip) => (
-					<li
-						class="flex items-center gap-2 text-[10px] uppercase tracking-[0.16em] text-muted-foreground"
-						style="font-family: var(--font-mono);"
-					>
-						<span
-							aria-hidden="true"
-							class="inline-block h-1.5 w-1.5"
-							style="background: var(--secondary);"
-						/>
-						<span>{chip}</span>
-					</li>
-				))
-			}
-		</ul>
-
-		<!-- Performance signal strip — muted trust cue above legal bar -->
-		<div
-			class="mt-6 flex flex-col items-center justify-between gap-2 border-t border-border-subtle pt-4 sm:flex-row"
-			style="font-family: var(--font-mono);"
-		>
-			<p
-				class="flex items-center gap-2 text-[10px] uppercase tracking-[0.18em] text-muted-foreground"
-			>
-				<span
-					aria-hidden="true"
-					class="inline-block h-1.5 w-1.5"
-					style="background: var(--secondary);"
-				></span>
-				<span>{t.footer.perfBuiltFast}</span>
-				<span aria-hidden="true" class="opacity-40">·</span>
-				<span>
-					{t.footer.perfRenderedIn}{" "}
-					<span data-perf-marker style="color: var(--secondary);">—</span>
-				</span>
-			</p>
-			<p
-				class="flex items-center gap-2 text-[10px] uppercase tracking-[0.18em] text-muted-foreground"
-			>
-				<span
-					aria-hidden="true"
-					class="inline-block h-1.5 w-1.5"
-					style="background: var(--secondary);"
-				></span>
-				<span>{t.footer.perfAnalytics}</span>
-			</p>
-		</div>
-		<script is:inline>
-			(() => {
-				const write = (text) => {
-					const marker = document.querySelector("[data-perf-marker]");
-					if (marker) marker.textContent = text;
-				};
-				const render = () => {
-					const nav = performance.getEntriesByType("navigation")[0];
-					if (!nav) return;
-					const end = nav.loadEventEnd || nav.domContentLoadedEventEnd;
-					if (!end) return;
-					const seconds = (end - nav.startTime) / 1000;
-					if (!Number.isFinite(seconds) || seconds <= 0) return;
-					write(`${seconds.toFixed(2)}s`);
-				};
-				if (document.readyState === "complete") {
-					render();
-				} else {
-					window.addEventListener("load", () => {
-						// Defer a tick so loadEventEnd is populated.
-						setTimeout(render, 0);
-					});
-				}
-			})();
-		</script>
-
 		<!-- Bottom bar -->
 		<div
-			class="mt-4 flex flex-col items-center justify-between gap-3 border-t border-border-subtle pt-6 sm:flex-row"
+			class="mt-10 flex flex-col items-center justify-between gap-3 border-t border-border-subtle pt-6 sm:flex-row"
 		>
 			<p
 				class="text-xs text-muted-foreground"
 				style="font-family: var(--font-mono);"
 			>
-				&copy; 2026 · <span style="color: var(--secondary);">404</span> Tech Found ·
-				{locale === "es" ? "Todos los derechos reservados" : "All rights reserved"}
+				&copy; 2026 · <span style="color: var(--secondary);">404</span> Tech Found · {rights}
 			</p>
 			<a
 				href={altPath}
-				class="text-xs font-medium uppercase tracking-wider text-muted-foreground transition-colors duration-150 hover:text-foreground"
+				class="text-xs font-medium text-muted-foreground transition-colors duration-150 hover:text-foreground"
 				style="font-family: var(--font-mono);"
 			>
-				{locale === "es" ? "EN — English" : "ES — Español"}
+				{langLabel}
 			</a>
 		</div>
 	</div>

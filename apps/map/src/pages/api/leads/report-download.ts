@@ -61,7 +61,7 @@ async function sendNotificationEmail(data: { name: string; email: string }): Pro
 
 	await resend.emails.send({
 		from: "404 Mapped <notifications@404tf.com>",
-		to: "hello@404tf.com",
+		to: "enriquefft@404tf.com",
 		subject: `Report Download: ${data.name}`,
 		html: `
 			<h2>New Report Download Request</h2>

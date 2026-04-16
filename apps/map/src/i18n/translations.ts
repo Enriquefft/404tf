@@ -360,25 +360,14 @@ type Translations = {
 	};
 	footer: {
 		description: string;
-		byLine: string;
 		navHeading: string;
-		contactHeading: string;
 		talkToUs: string;
-		copyright: string;
-		copyrightFull: string;
+		rights: string;
 		methodology: string;
 		legalHeading: string;
 		legalTerms: string;
 		legalPrivacy: string;
 		legalCookies: string;
-		address: string;
-		responseTime: string;
-		trustGdpr: string;
-		trustDataHandling: string;
-		trustBuiltIn: string;
-		perfBuiltFast: string;
-		perfRenderedIn: string;
-		perfAnalytics: string;
 	};
 	common: {
 		loading: string;
@@ -423,27 +412,15 @@ const en = {
 		closeMenu: "Close menu",
 	},
 	footer: {
-		description:
-			"The LATAM deeptech startup directory. Discover, compare, and connect with the region's most ambitious builders.",
-		byLine: "by 404 Tech Found",
+		description: "LATAM deeptech startup directory.",
 		navHeading: "Navigate",
-		contactHeading: "Contact",
 		talkToUs: "Talk to us",
-		copyright: "2026 404 Tech Found",
-		copyrightFull: "© 2026 · Tech Found · All rights reserved",
+		rights: "All rights reserved",
 		methodology: "About / Methodology",
 		legalHeading: "Legal",
 		legalTerms: "Terms of Service",
 		legalPrivacy: "Privacy Policy",
 		legalCookies: "Cookies Policy",
-		address: "Tech Found · Lima, Perú",
-		responseTime: "Replies within 24h · Mon–Fri",
-		trustGdpr: "GDPR-ready",
-		trustDataHandling: "Secure handling",
-		trustBuiltIn: "Built in Perú",
-		perfBuiltFast: "Built fast",
-		perfRenderedIn: "Rendered in",
-		perfAnalytics: "PostHog analytics · Privacy-first",
 	},
 	common: {
 		loading: "Loading...",
@@ -629,7 +606,7 @@ const en = {
 			"Only the 404tf partners see this. Never shared, never sold — GDPR-ready handling.",
 		contactEmailHeading: "Prefer email?",
 		contactEmailLead: "Skip the form. Write directly and we'll pick it up the same way.",
-		contactEmailCta: "Write to hello@404tf.com",
+		contactEmailCta: "Write to enriquefft@404tf.com",
 		contactOtherHeading: "Other ways to reach us",
 		contactOtherLinkedinSoon: "LinkedIn — coming soon",
 		contactOtherTwitterSoon: "X / Twitter — coming soon",
@@ -854,7 +831,7 @@ const en = {
 		collaboratorsTitle: "Collaborators",
 		collaboratorPlaceholder: "Partner",
 		ctaTitle: "Questions?",
-		ctaEmail: "hello@404tf.com",
+		ctaEmail: "enriquefft@404tf.com",
 	},
 } as const satisfies Translations;
 
@@ -879,27 +856,15 @@ const es = {
 		closeMenu: "Cerrar menú",
 	},
 	footer: {
-		description:
-			"El directorio de startups deeptech de LATAM. Descubre, compara y conecta con los constructores más ambiciosos de la región.",
-		byLine: "por 404 Tech Found",
+		description: "Directorio de startups deeptech de LATAM.",
 		navHeading: "Navegar",
-		contactHeading: "Contacto",
 		talkToUs: "Hablemos",
-		copyright: "2026 404 Tech Found",
-		copyrightFull: "© 2026 · Tech Found · Todos los derechos reservados",
+		rights: "Todos los derechos reservados",
 		methodology: "Nosotros / Metodología",
 		legalHeading: "Legal",
 		legalTerms: "Términos de Servicio",
 		legalPrivacy: "Política de Privacidad",
 		legalCookies: "Política de Cookies",
-		address: "Tech Found · Lima, Perú",
-		responseTime: "Respondemos en 24h · lun–vie",
-		trustGdpr: "GDPR-ready",
-		trustDataHandling: "Manejo seguro",
-		trustBuiltIn: "Hecho en Perú",
-		perfBuiltFast: "Construido rápido",
-		perfRenderedIn: "Renderizado en",
-		perfAnalytics: "PostHog analytics · Privacidad primero",
 	},
 	common: {
 		loading: "Cargando...",
@@ -1086,7 +1051,7 @@ const es = {
 			"Solo los socios de 404tf ven esto. Nunca compartido, nunca vendido — manejo GDPR-ready.",
 		contactEmailHeading: "¿Prefieres email?",
 		contactEmailLead: "Salta el formulario. Escribe directo y lo recibimos igual.",
-		contactEmailCta: "Escribe a hello@404tf.com",
+		contactEmailCta: "Escribe a enriquefft@404tf.com",
 		contactOtherHeading: "Otras formas de contacto",
 		contactOtherLinkedinSoon: "LinkedIn — próximamente",
 		contactOtherTwitterSoon: "X / Twitter — próximamente",
@@ -1315,7 +1280,7 @@ const es = {
 		collaboratorsTitle: "Colaboradores",
 		collaboratorPlaceholder: "Socio",
 		ctaTitle: "¿Preguntas?",
-		ctaEmail: "hello@404tf.com",
+		ctaEmail: "enriquefft@404tf.com",
 	},
 } as const satisfies Translations;
 

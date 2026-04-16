@@ -84,7 +84,7 @@ async function sendNotificationEmail(data: {
 
 	await resend.emails.send({
 		from: "404 Mapped <notifications@404tf.com>",
-		to: "hello@404tf.com",
+		to: "enriquefft@404tf.com",
 		subject: `New Program Inquiry: ${data.startupName} (${data.tierInterest ?? "No tier"})`,
 		html: `
 			<h2>New Startup Program Inquiry</h2>
