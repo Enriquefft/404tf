@@ -1,0 +1,117 @@
+/**
+ * 404 Tech Found — canonical brand tokens (Foundry direction).
+ *
+ * Single source of truth for colors, radius, fonts. Imported by every app
+ * right after `@import "tailwindcss"`. Apps extend this layer with their
+ * own sub-branding (app-specific palettes, utilities, keyframes).
+ *
+ * All color tokens in OKLCH (perceptually uniform, Tailwind v4 native).
+ * `@theme inline` bridges CSS vars to Tailwind utilities so shadcn classes
+ * (bg-primary, text-foreground, ...) resolve to live CSS variables and
+ * respond to any runtime theme override.
+ *
+ * Hex snapshots for non-CSS contexts (Satori OG, logo exports, email
+ * templates) are generated from this file into src/tokens.ts via
+ * `bun run brand:build`.
+ */
+
+:root {
+	/* Surface — warm violet-tinted near-black, card reveals purple with depth */
+	--background: oklch(0.07 0.02 315);
+	--foreground: oklch(0.92 0.008 55);
+	--card: oklch(0.11 0.028 312);
+	--card-foreground: oklch(0.92 0.008 55);
+	--popover: oklch(0.11 0.028 312);
+	--popover-foreground: oklch(0.92 0.008 55);
+
+	/* Primary — Foundry purple, warm red-violet hue 305, lifted to 0.53 for WCAG AA */
+	--primary: oklch(0.53 0.24 305);
+	--primary-foreground: oklch(0.97 0.008 310);
+
+	/* Secondary — forge amber hue 55, the "404" numeral, secondary CTAs */
+	--secondary: oklch(0.72 0.18 55);
+	--secondary-foreground: oklch(0.07 0.02 315);
+
+	--muted: oklch(0.15 0.02 315);
+	--muted-foreground: oklch(0.52 0.018 315);
+
+	/* Accent — purple-shifted elevated surface */
+	--accent: oklch(0.16 0.035 310);
+	--accent-foreground: oklch(0.92 0.008 55);
+
+	--destructive: oklch(0.55 0.22 27);
+	--destructive-foreground: oklch(0.97 0.008 310);
+
+	--border: oklch(1 0.008 310 / 8%);
+	--input: oklch(1 0.008 310 / 11%);
+	--ring: oklch(0.58 0.22 305);
+
+	/* Radius — zero curves. Brutalist foundation. */
+	--radius: 0rem;
+
+	/* Houses — 4 programme colors, well-separated from primary (305) and secondary (55) */
+	--house-ai: oklch(0.68 0.26 358);
+	--house-biotech: oklch(0.73 0.23 150);
+	--house-hardware: oklch(0.68 0.23 30);
+	--house-space: oklch(0.65 0.2 230);
+
+	/* Fonts — apps register the actual @font-face; these are the logical slots */
+	--font-display: "Big Shoulders Display Variable", "Big Shoulders Display", sans-serif;
+	--font-body: "Barlow Semi Condensed Variable", "Barlow Semi Condensed", sans-serif;
+	--font-mono: "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, monospace;
+}
+
+/* Light surface — opt-in via `.light` class or `data-theme="light"` */
+:root.light,
+[data-theme="light"] {
+	--background: oklch(0.975 0.006 85);
+	--foreground: oklch(0.18 0.09 280);
+	--card: oklch(0.94 0.015 275);
+	--card-foreground: oklch(0.18 0.09 280);
+	--popover: oklch(0.94 0.015 275);
+	--popover-foreground: oklch(0.18 0.09 280);
+	--muted: oklch(0.91 0.02 275);
+	--muted-foreground: oklch(0.38 0.07 280);
+	--accent: oklch(0.92 0.035 280);
+	--accent-foreground: oklch(0.18 0.09 280);
+	--border: oklch(0.2 0.06 280 / 14%);
+	--input: oklch(0.2 0.06 280 / 16%);
+}
+
+/* Bridge brand tokens to Tailwind v4 utilities (shadcn-compatible). */
+@theme inline {
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--color-card: var(--card);
+	--color-card-foreground: var(--card-foreground);
+	--color-popover: var(--popover);
+	--color-popover-foreground: var(--popover-foreground);
+	--color-primary: var(--primary);
+	--color-primary-foreground: var(--primary-foreground);
+	--color-secondary: var(--secondary);
+	--color-secondary-foreground: var(--secondary-foreground);
+	--color-muted: var(--muted);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-accent: var(--accent);
+	--color-accent-foreground: var(--accent-foreground);
+	--color-destructive: var(--destructive);
+	--color-destructive-foreground: var(--destructive-foreground);
+	--color-border: var(--border);
+	--color-input: var(--input);
+	--color-ring: var(--ring);
+
+	--color-house-ai: var(--house-ai);
+	--color-house-biotech: var(--house-biotech);
+	--color-house-hardware: var(--house-hardware);
+	--color-house-space: var(--house-space);
+
+	--font-display: var(--font-display);
+	--font-body: var(--font-body);
+	--font-mono: var(--font-mono);
+
+	--radius-sm: var(--radius);
+	--radius-md: var(--radius);
+	--radius-lg: var(--radius);
+	--radius-xl: var(--radius);
+	--radius-2xl: var(--radius);
+}

@@ -7,14 +7,18 @@
 		".": "./src/index.ts",
 		"./tokens": "./src/tokens.ts",
 		"./logo": "./src/logo.ts",
-		"./fonts": "./src/fonts.ts"
+		"./fonts": "./src/fonts.ts",
+		"./theme.css": "./theme.css"
 	},
 	"scripts": {
 		"export": "bun run scripts/export-wordmark.ts",
-		"sync": "bun run scripts/sync.ts"
+		"sync": "bun run scripts/sync.ts",
+		"build": "bun run scripts/build-tokens.ts"
 	},
 	"devDependencies": {
 		"@resvg/resvg-js": "^2.6.2",
+		"@types/culori": "^4.0.1",
+		"culori": "^4.0.2",
 		"satori": "^0.24.1"
 	}
 }
