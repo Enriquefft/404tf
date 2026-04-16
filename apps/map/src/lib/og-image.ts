@@ -7,8 +7,6 @@
  */
 
 import { readFile } from "node:fs/promises";
-import { dirname, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
 import { colors } from "@404tf/brand/tokens";
 import { Resvg } from "@resvg/resvg-js";
 import satori from "satori";
@@ -26,9 +24,16 @@ export type OgParams = {
 
 // ---- Fonts ----------------------------------------------------------------
 
-const HERE = dirname(fileURLToPath(import.meta.url));
-// apps/map/src/lib -> ../../../../packages/brand/assets/fonts
-const FONTS_DIR = resolve(HERE, "../../../../packages/brand/assets/fonts");
+// Static URLs so Vite/Astro trace and bundle the font files into the
+// serverless function. Fonts live in apps/map/src/assets/ so the
+// monorepo boundary is not crossed at runtime (Vercel nft cannot trace
+// dynamic paths into sibling workspace packages).
+const FONT_URLS = {
+	display: new URL("../assets/fonts/BigShouldersDisplay-ExtraBold.ttf", import.meta.url),
+	body: new URL("../assets/fonts/BarlowSemiCondensed-Regular.ttf", import.meta.url),
+	bodyMedium: new URL("../assets/fonts/BarlowSemiCondensed-Medium.ttf", import.meta.url),
+	mono: new URL("../assets/fonts/JetBrainsMono-Regular.ttf", import.meta.url),
+} as const;
 
 type LoadedFonts = {
 	display: Buffer;
@@ -43,10 +48,10 @@ function loadFonts(): Promise<LoadedFonts> {
 	if (fontsPromise) return fontsPromise;
 	fontsPromise = (async () => {
 		const [display, body, bodyMedium, mono] = await Promise.all([
-			readFile(resolve(FONTS_DIR, "BigShouldersDisplay-ExtraBold.ttf")),
-			readFile(resolve(FONTS_DIR, "BarlowSemiCondensed-Regular.ttf")),
-			readFile(resolve(FONTS_DIR, "BarlowSemiCondensed-Medium.ttf")),
-			readFile(resolve(FONTS_DIR, "JetBrainsMono-Regular.ttf")),
+			readFile(FONT_URLS.display),
+			readFile(FONT_URLS.body),
+			readFile(FONT_URLS.bodyMedium),
+			readFile(FONT_URLS.mono),
 		]);
 		return { display, body, bodyMedium, mono };
 	})();
