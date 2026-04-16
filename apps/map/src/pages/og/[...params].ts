@@ -25,7 +25,7 @@ export const GET: APIRoute = async ({ request }) => {
 	}
 
 	try {
-		const png = await renderOgImage(parsed.data);
+		const png = await renderOgImage({ ...parsed.data, origin: url.origin });
 		return new Response(new Uint8Array(png), {
 			status: 200,
 			headers: {

@@ -14,7 +14,7 @@
 		"@404tf/brand": "workspace:*",
 		"@404tf/database": "workspace:*",
 		"@astrojs/check": "^0.9.7",
-		"@astrojs/vercel": "^9.0.5",
+		"@astrojs/vercel": "^10.0.4",
 		"@fontsource-variable/big-shoulders-display": "^5.2.5",
 		"@fontsource-variable/jetbrains-mono": "^5.2.8",
 		"@fontsource/barlow-semi-condensed": "^5.2.7",

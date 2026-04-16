@@ -19,7 +19,7 @@
 		"@neondatabase/serverless": "latest",
 		"@t3-oss/env-nextjs": "latest",
 		"dotenv": "^17.2.4",
-		"drizzle-orm": "latest",
+		"drizzle-orm": "^0.45.2",
 		"zod": "latest"
 	},
 	"devDependencies": {
