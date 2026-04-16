@@ -39,13 +39,10 @@ type IntentCTAProps = {
 };
 
 export function IntentCTA({ locale, translations }: IntentCTAProps) {
-	const [state, formAction, isPending] = useActionState<FormState, FormData>(
-		submitIntent,
+	const [state, formAction, isPending] = useActionState<FormState, FormData>(submitIntent, null);
+	const [selectedIntent, setSelectedIntent] = useState<"build" | "collaborate" | "connect" | null>(
 		null,
 	);
-	const [selectedIntent, setSelectedIntent] = useState<
-		"build" | "collaborate" | "connect" | null
-	>(null);
 
 	// Helper text and submit button text based on selected intent
 	const getHelperText = () => {
@@ -63,10 +60,7 @@ export function IntentCTA({ locale, translations }: IntentCTAProps) {
 	};
 
 	return (
-		<section
-			id="intent-cta"
-			className="py-24 bg-primary relative overflow-hidden"
-		>
+		<section id="intent-cta" className="py-24 bg-primary relative overflow-hidden">
 			{/* Decorative grid */}
 			<div
 				className="absolute inset-0 opacity-[0.06]"
@@ -94,9 +88,7 @@ export function IntentCTA({ locale, translations }: IntentCTAProps) {
 						animate={{ opacity: 1, scale: 1 }}
 						className="text-center mb-12"
 					>
-						<p className="text-xl text-white font-semibold">
-							{translations.success}
-						</p>
+						<p className="text-xl text-white font-semibold">{translations.success}</p>
 					</motion.div>
 				) : (
 					// Form
@@ -154,9 +146,7 @@ export function IntentCTA({ locale, translations }: IntentCTAProps) {
 									className="max-w-md mx-auto space-y-4"
 								>
 									{/* Helper text */}
-									<p className="text-white/70 text-sm text-center mb-6">
-										{getHelperText()}
-									</p>
+									<p className="text-white/70 text-sm text-center mb-6">{getHelperText()}</p>
 
 									{/* Name field */}
 									<div>
@@ -168,9 +158,7 @@ export function IntentCTA({ locale, translations }: IntentCTAProps) {
 											className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-white/30"
 										/>
 										{state?.errors?.name && (
-											<p className="text-red-300 text-sm mt-1">
-												{translations.errorName}
-											</p>
+											<p className="text-red-300 text-sm mt-1">{translations.errorName}</p>
 										)}
 									</div>
 
@@ -184,17 +172,13 @@ export function IntentCTA({ locale, translations }: IntentCTAProps) {
 											className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-white/30"
 										/>
 										{state?.errors?.email && (
-											<p className="text-red-300 text-sm mt-1">
-												{translations.errorEmail}
-											</p>
+											<p className="text-red-300 text-sm mt-1">{translations.errorEmail}</p>
 										)}
 									</div>
 
 									{/* Generic error */}
 									{state?.success === false && !state?.errors && (
-										<p className="text-red-300 text-sm text-center">
-											{translations.errorGeneric}
-										</p>
+										<p className="text-red-300 text-sm text-center">{translations.errorGeneric}</p>
 									)}
 
 									{/* Submit button */}

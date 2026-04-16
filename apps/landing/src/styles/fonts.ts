@@ -1,8 +1,4 @@
-import {
-	Barlow_Semi_Condensed,
-	Big_Shoulders,
-	JetBrains_Mono,
-} from "next/font/google";
+import { Barlow_Semi_Condensed, Big_Shoulders, JetBrains_Mono } from "next/font/google";
 
 export const bigShouldersDisplay = Big_Shoulders({
 	subsets: ["latin"],

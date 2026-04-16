@@ -11,25 +11,17 @@ export const size = {
 // biome-ignore lint/style/useComponentExportOnlyModules: Next.js opengraph-image convention requires exporting metadata
 export const contentType = "image/png";
 
-export default async function Image({
-	params,
-}: {
-	params: Promise<{ locale: string }>;
-}) {
+export default async function Image({ params }: { params: Promise<{ locale: string }> }) {
 	const { locale } = await params;
 	const t = await getTranslations({ locale, namespace: "metadata" });
 
 	// Fetch fonts from Google Fonts (next/font not available in ImageResponse runtime)
 	const bigShouldersBold = await fetch(
-		new URL(
-			"https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700&display=swap",
-		),
+		new URL("https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700&display=swap"),
 	).then((res) => res.arrayBuffer());
 
 	const barlowSemiBold = await fetch(
-		new URL(
-			"https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600&display=swap",
-		),
+		new URL("https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600&display=swap"),
 	).then((res) => res.arrayBuffer());
 
 	return new ImageResponse(

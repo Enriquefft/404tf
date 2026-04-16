@@ -42,9 +42,7 @@ export default function ErrorBoundary({
 				</div>
 
 				{/* Title and description */}
-				<h2 className="mb-4 text-3xl font-bold text-foreground">
-					{t("title")}
-				</h2>
+				<h2 className="mb-4 text-3xl font-bold text-foreground">{t("title")}</h2>
 				<p className="mb-8 text-lg text-muted-foreground">{t("description")}</p>
 
 				{/* Retry button */}

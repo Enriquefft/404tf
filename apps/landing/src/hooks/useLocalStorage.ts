@@ -13,10 +13,7 @@ import { useEffect, useState } from "react";
  * @param initialValue - default value used during SSR and before localStorage is read
  * @returns tuple of [storedValue, setValue]
  */
-export function useLocalStorage<T>(
-	key: string,
-	initialValue: T,
-): [T, (value: T) => void] {
+export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T) => void] {
 	// Initialize with initialValue (same on server and client to avoid hydration mismatch)
 	const [storedValue, setStoredValue] = useState<T>(initialValue);
 

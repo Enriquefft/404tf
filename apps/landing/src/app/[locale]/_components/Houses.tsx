@@ -32,12 +32,8 @@ export async function Houses() {
 		<section id="houses" className="py-24">
 			<div className="container mx-auto px-4">
 				<div className="text-center mb-16">
-					<h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
-						{t("title")}
-					</h2>
-					<p className="text-muted-foreground text-lg max-w-md mx-auto">
-						{t("subtitle")}
-					</p>
+					<h2 className="font-display text-3xl md:text-4xl font-bold mb-4">{t("title")}</h2>
+					<p className="text-muted-foreground text-lg max-w-md mx-auto">{t("subtitle")}</p>
 				</div>
 
 				<div className="grid md:grid-cols-3 gap-6">
@@ -49,9 +45,7 @@ export async function Houses() {
 								className={`rounded-xl border p-8 ${house.colorClass} ${house.bgClass} hover:scale-[1.02] transition-transform`}
 							>
 								<Icon className="h-10 w-10 mb-4" />
-								<p className="font-mono-accent text-sm mb-3 opacity-80">
-									{house.tagline}
-								</p>
+								<p className="font-mono-accent text-sm mb-3 opacity-80">{house.tagline}</p>
 								<p className="text-muted-foreground text-sm leading-relaxed">
 									{t(`${house.key}.desc`)}
 								</p>

@@ -21,10 +21,7 @@ export type FormState = {
 	};
 } | null;
 
-export async function submitIntent(
-	_prevState: FormState,
-	formData: FormData,
-): Promise<FormState> {
+export async function submitIntent(_prevState: FormState, formData: FormData): Promise<FormState> {
 	try {
 		// Parse formData fields
 		const rawData = {

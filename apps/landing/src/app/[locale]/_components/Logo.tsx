@@ -10,14 +10,9 @@ export function Logo({ className }: LogoProps) {
 			// biome-ignore lint/a11y/useValidAnchor: Anchor navigates to top of page via #
 			href="#"
 			aria-label="404 Tech Found - Scroll to top"
-			className={cn(
-				"inline-flex flex-col items-center leading-none",
-				className,
-			)}
+			className={cn("inline-flex flex-col items-center leading-none", className)}
 		>
-			<span className="font-display font-extrabold text-[1.4em] text-foreground">
-				404
-			</span>
+			<span className="font-display font-extrabold text-[1.4em] text-foreground">404</span>
 			<span className="font-display font-medium text-[0.55em] tracking-[0.2em] text-muted-foreground">
 				TECH F<span className="line-through decoration-[0.12em]">O</span>
 				UND

@@ -18,9 +18,7 @@ export async function Partners() {
 		<section className="py-24">
 			<div className="container mx-auto px-4">
 				<div className="text-center mb-16">
-					<h2 className="font-display text-3xl md:text-4xl font-bold">
-						{t("title")}
-					</h2>
+					<h2 className="font-display text-3xl md:text-4xl font-bold">{t("title")}</h2>
 				</div>
 
 				<div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
@@ -29,9 +27,7 @@ export async function Partners() {
 							key={name}
 							className="border border-border rounded-lg p-6 flex items-center justify-center grayscale hover:grayscale-0 opacity-50 hover:opacity-100 transition-all duration-300"
 						>
-							<span className="font-display text-xs text-muted-foreground">
-								{name}
-							</span>
+							<span className="font-display text-xs text-muted-foreground">{name}</span>
 						</div>
 					))}
 				</div>

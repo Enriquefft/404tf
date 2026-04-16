@@ -21,7 +21,6 @@ export const dbEnv = createEnv({
 	client: {
 		NEXT_PUBLIC_PROJECT_NAME: z.string().min(1),
 	},
-	clientPrefix: "NEXT_PUBLIC_",
 	emptyStringAsUndefined: true,
 	runtimeEnv: {
 		DATABASE_URL: process.env.DATABASE_URL,
