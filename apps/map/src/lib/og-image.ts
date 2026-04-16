@@ -19,24 +19,20 @@ export type OgParams = {
 	title?: string;
 	subtitle?: string;
 	metric?: string;
-	/**
-	 * Absolute origin (e.g. `https://map.404tf.com`) used to fetch fonts
-	 * from /public at request time. The /og API route derives this from
-	 * `new URL(request.url).origin` and passes it through.
-	 */
-	origin: string;
 };
 
 // ---- Fonts ----------------------------------------------------------------
 
-// Fonts live under /public/fonts so Vercel always ships them. The OG route
-// fetches them over same-origin HTTPS at request time (cached by the node
-// runtime after first load). This side-steps Vite/nft asset tracing entirely.
-const FONT_PATHS = {
-	display: "/fonts/BigShouldersDisplay-ExtraBold.ttf",
-	body: "/fonts/BarlowSemiCondensed-Regular.ttf",
-	bodyMedium: "/fonts/BarlowSemiCondensed-Medium.ttf",
-	mono: "/fonts/JetBrainsMono-Regular.ttf",
+// Fonts fetched from jsdelivr CDN at request time and cached in-process.
+// This avoids coupling the OG route to Vercel's static asset serving (which
+// gates preview deployments behind auth and uses different internal URLs).
+const FONT_URLS = {
+	display:
+		"https://cdn.jsdelivr.net/fontsource/fonts/big-shoulders-display@latest/latin-800-normal.woff",
+	body: "https://cdn.jsdelivr.net/fontsource/fonts/barlow-semi-condensed@latest/latin-400-normal.woff",
+	bodyMedium:
+		"https://cdn.jsdelivr.net/fontsource/fonts/barlow-semi-condensed@latest/latin-500-normal.woff",
+	mono: "https://cdn.jsdelivr.net/fontsource/fonts/jetbrains-mono@latest/latin-400-normal.woff",
 } as const;
 
 type LoadedFonts = {
@@ -46,28 +42,26 @@ type LoadedFonts = {
 	mono: ArrayBuffer;
 };
 
-const fontsByOrigin = new Map<string, Promise<LoadedFonts>>();
+let fontsPromise: Promise<LoadedFonts> | null = null;
 
-function loadFonts(origin: string): Promise<LoadedFonts> {
-	const cached = fontsByOrigin.get(origin);
-	if (cached) return cached;
-	const promise = (async () => {
+function loadFonts(): Promise<LoadedFonts> {
+	if (fontsPromise) return fontsPromise;
+	fontsPromise = (async () => {
 		const [display, body, bodyMedium, mono] = await Promise.all([
-			fetchFont(origin, FONT_PATHS.display),
-			fetchFont(origin, FONT_PATHS.body),
-			fetchFont(origin, FONT_PATHS.bodyMedium),
-			fetchFont(origin, FONT_PATHS.mono),
+			fetchFont(FONT_URLS.display),
+			fetchFont(FONT_URLS.body),
+			fetchFont(FONT_URLS.bodyMedium),
+			fetchFont(FONT_URLS.mono),
 		]);
 		return { display, body, bodyMedium, mono };
 	})();
-	fontsByOrigin.set(origin, promise);
-	return promise;
+	return fontsPromise;
 }
 
-async function fetchFont(origin: string, path: string): Promise<ArrayBuffer> {
-	const res = await fetch(new URL(path, origin));
+async function fetchFont(url: string): Promise<ArrayBuffer> {
+	const res = await fetch(url);
 	if (!res.ok) {
-		throw new Error(`Font fetch failed (${res.status}): ${path}`);
+		throw new Error(`Font fetch failed (${res.status}): ${url}`);
 	}
 	return res.arrayBuffer();
 }
@@ -464,7 +458,7 @@ function buildStat(value: string, label: string): VNode {
 // ---- Public API -----------------------------------------------------------
 
 export async function renderOgImage(params: OgParams): Promise<Buffer> {
-	const fonts = await loadFonts(params.origin);
+	const fonts = await loadFonts();
 	const scene = buildScene(params);
 
 	// Satori accepts a subset of React VDOM; our plain object matches it.
