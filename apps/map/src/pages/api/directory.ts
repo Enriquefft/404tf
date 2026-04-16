@@ -1,7 +1,6 @@
-import { and, arrayContains, eq, ilike, or, sql } from "@404tf/database";
-import { mapStartups } from "@404tf/database/schema";
 import type { APIRoute } from "astro";
-import { db } from "@/lib/db";
+import { CACHE_TAGS, joinCacheTags } from "@/lib/cache-tags";
+import { getDirectoryPage } from "@/lib/db-queries";
 import { directoryQuerySchema } from "@/lib/directory-query-schema";
 
 export const prerender = false;
@@ -20,68 +19,35 @@ export const GET: APIRoute = async ({ request }) => {
 
 	const { q, verticals, country, maturity, sort, page, limit } = parsed.data;
 
-	const conditions = [];
-
-	if (q) {
-		conditions.push(
-			or(
-				ilike(mapStartups.name, `%${q}%`),
-				ilike(mapStartups.oneLiner, `%${q}%`),
-				ilike(mapStartups.oneLinerEn, `%${q}%`),
-			),
-		);
-	}
-
-	if (verticals.length > 0) {
-		// OR across selected verticals — startup matches if it has ANY of them
-		conditions.push(or(...verticals.map((v) => arrayContains(mapStartups.verticals, [v]))));
-	}
-
-	if (country) {
-		conditions.push(eq(mapStartups.country, country));
-	}
-
-	if (maturity) {
-		// `maturity` is now a typed enum literal from Zod — no cast needed
-		conditions.push(eq(mapStartups.maturityLevel, maturity));
-	}
-
-	const where = conditions.length > 0 ? and(...conditions) : undefined;
-
-	const orderBy =
-		sort === "newest"
-			? sql`${mapStartups.foundingYear} DESC NULLS LAST`
-			: sql`${mapStartups.name} ASC`;
-
-	const offset = (page - 1) * limit;
-
 	try {
-		const [data, countResult] = await Promise.all([
-			db
-				.select({
-					slug: mapStartups.slug,
-					name: mapStartups.name,
-					one_liner: mapStartups.oneLiner,
-					one_liner_en: mapStartups.oneLinerEn,
-					country: mapStartups.country,
-					country_es: mapStartups.countryEs,
-					city: mapStartups.city,
-					lat: mapStartups.lat,
-					lng: mapStartups.lng,
-					verticals: mapStartups.verticals,
-					maturity_level: mapStartups.maturityLevel,
-					founding_year: mapStartups.foundingYear,
-					funding_received: mapStartups.fundingReceived,
-				})
-				.from(mapStartups)
-				.where(where)
-				.orderBy(orderBy)
-				.limit(limit)
-				.offset(offset),
-			db.select({ count: sql<number>`count(*)::int` }).from(mapStartups).where(where),
-		]);
+		const { startups, total } = await getDirectoryPage({
+			page,
+			pageSize: limit,
+			verticals,
+			country: country === "" ? undefined : country,
+			maturity: maturity === "" ? undefined : maturity,
+			search: q === "" ? undefined : q,
+			sort,
+		});
 
-		const total = countResult[0]?.count ?? 0;
+		// Project to the thin response shape the client expects. We intentionally
+		// drop heavy fields (key_results, partner_logos, etc.) to keep the API
+		// payload small — the full record is fetched only on the detail page.
+		const data = startups.map((s) => ({
+			slug: s.slug,
+			name: s.name,
+			one_liner: s.one_liner,
+			one_liner_en: s.one_liner_en,
+			country: s.country,
+			country_es: s.country_es,
+			city: s.city,
+			lat: s.lat,
+			lng: s.lng,
+			verticals: [...s.verticals],
+			maturity_level: s.maturity_level,
+			founding_year: s.founding_year,
+			funding_received: s.funding_received,
+		}));
 
 		return new Response(
 			JSON.stringify({
@@ -95,11 +61,12 @@ export const GET: APIRoute = async ({ request }) => {
 				headers: {
 					"Content-Type": "application/json",
 					// 5min CDN cache covers the time between content updates and the
-					// next deploy-hook rebuild. SWR=1h means stale results are still
+					// next revalidation call. SWR=1h means stale results are still
 					// served (with a background refresh) if the origin has a hiccup,
 					// keeping the directory available during a Neon blip.
 					"CDN-Cache-Control": "public, s-maxage=300, stale-while-revalidate=3600",
 					"Cache-Control": "public, max-age=0, must-revalidate",
+					"Cache-Tag": joinCacheTags([CACHE_TAGS.directory, CACHE_TAGS.startupAll]),
 				},
 			},
 		);

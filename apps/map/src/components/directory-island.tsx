@@ -9,7 +9,7 @@ import {
 	type MaturityKey,
 	VERTICAL_KEYS,
 	type VerticalKey,
-} from "@/lib/seed-schema";
+} from "@/lib/startup-schema";
 import { track } from "@/lib/track";
 import { MATURITY_CONFIG, VERTICAL_CONFIG } from "@/lib/verticals";
 
@@ -30,30 +30,60 @@ type MapPoint = {
 	country: string;
 };
 
+type DirectoryLabels = {
+	searchPlaceholder: string;
+	filterCountryAll: string;
+	filterMaturityAll: string;
+	clearAll: string;
+	showingOf: string;
+	sortLabel: string;
+	sortAZ: string;
+	sortNewest: string;
+	emptyTitle: string;
+	emptyMessage: string;
+	showMap: string;
+	hideMap: string;
+	ctaFindSolution: string;
+	heroKickerPrefix: string;
+	heroKickerStartups: string;
+	heroKickerCountries: string;
+	heroHeadline: string;
+	heroDescriptor: string;
+	tabAll: string;
+	tabPilotReady: string;
+	tabRaising: string;
+	tabNew: string;
+	tabStealth: string;
+	resultShowing: string;
+	resultFilteredBy: string;
+	resultNone: string;
+	loadMore: string;
+	floatingKicker: string;
+	floatingLabel: string;
+	mobileCtaKicker: string;
+	emptyKicker: string;
+	emptyHeadline: string;
+	emptyContactCta: string;
+	quickBookIntro: string;
+	quickSave: string;
+	quickSaved: string;
+	quickShare: string;
+	quickShared: string;
+};
+
 type DirectoryIslandProps = {
 	initialStartups: StartupData[];
 	totalCount: number;
+	countriesCount: number;
 	mapPoints: MapPoint[];
 	locale: Locale;
-	labels: {
-		searchPlaceholder: string;
-		filterCountryAll: string;
-		filterMaturityAll: string;
-		clearAll: string;
-		showingOf: string;
-		sortLabel: string;
-		sortAZ: string;
-		sortNewest: string;
-		emptyTitle: string;
-		emptyMessage: string;
-		showMap: string;
-		hideMap: string;
-		ctaFindSolution: string;
-	};
+	labels: DirectoryLabels;
 	startupBaseHref: string;
+	contactHref: string;
 };
 
 type SortKey = "az" | "newest";
+type TabKey = "all" | "pilot" | "raising" | "new" | "stealth";
 
 // ---- CSS-variable-safe color map ----
 
@@ -96,6 +126,8 @@ function getVMuted(key: string): string {
 const MAP_W = 900;
 const MAP_H = 500;
 
+const SAVED_KEY = "404tf-map-saved";
+
 // ---- Type guards (avoid `as` casts at index sites) ----
 
 function isMaturityKey(k: string): k is MaturityKey {
@@ -107,10 +139,12 @@ function isMaturityKey(k: string): k is MaturityKey {
 export function DirectoryIsland({
 	initialStartups,
 	totalCount,
+	countriesCount,
 	mapPoints,
 	locale,
 	labels,
 	startupBaseHref,
+	contactHref,
 }: DirectoryIslandProps) {
 	// ---- State ----
 	const [search, setSearch] = useState("");
@@ -122,6 +156,10 @@ export function DirectoryIsland({
 	const [hoveredStartup, setHoveredStartup] = useState<string | null>(null);
 	const [tooltipPos, setTooltipPos] = useState<{ x: number; y: number } | null>(null);
 	const [corporateOpen, setCorporateOpen] = useState(false);
+	const [activeTab, setActiveTab] = useState<TabKey>("all");
+	const [savedSlugs, setSavedSlugs] = useState<Set<string>>(new Set());
+	const [sharedSlug, setSharedSlug] = useState<string | null>(null);
+	const [ctaVisible, setCtaVisible] = useState(true);
 
 	// API-driven state
 	const [startups, setStartups] = useState<StartupData[]>(initialStartups);
@@ -130,15 +168,58 @@ export function DirectoryIsland({
 	const [loading, setLoading] = useState(false);
 	const [fetchError, setFetchError] = useState<string | null>(null);
 	const abortRef = useRef<AbortController | null>(null);
-	// Tracks the previous filter snapshot so the same effect can both reset
-	// page=1 on filter change AND fetch — eliminates the need for a second
-	// effect that would require a biome-ignore for trigger-only deps.
 	const prevFiltersKey = useRef<string>("");
 
 	const searchTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 	const [debouncedSearch, setDebouncedSearch] = useState("");
 	const cardRefs = useRef<Map<string, HTMLElement>>(new Map());
 	const mapSvgRef = useRef<SVGSVGElement>(null);
+	const sentinelRef = useRef<HTMLDivElement>(null);
+
+	// ---- Load saved from localStorage ----
+	useEffect(() => {
+		try {
+			const raw = localStorage.getItem(SAVED_KEY);
+			if (raw) {
+				const parsed: unknown = JSON.parse(raw);
+				if (Array.isArray(parsed) && parsed.every((v): v is string => typeof v === "string")) {
+					setSavedSlugs(new Set(parsed));
+				}
+			}
+		} catch {
+			/* localStorage unavailable — non-fatal */
+		}
+	}, []);
+
+	function persistSaved(next: Set<string>) {
+		try {
+			localStorage.setItem(SAVED_KEY, JSON.stringify([...next]));
+		} catch {
+			/* non-fatal */
+		}
+	}
+
+	function toggleSaved(slug: string) {
+		setSavedSlugs((prev) => {
+			const next = new Set(prev);
+			if (next.has(slug)) next.delete(slug);
+			else next.add(slug);
+			persistSaved(next);
+			return next;
+		});
+	}
+
+	async function handleShare(slug: string) {
+		const url = `${window.location.origin}${startupBaseHref}${slug}`;
+		try {
+			await navigator.clipboard.writeText(url);
+			setSharedSlug(slug);
+			setTimeout(() => setSharedSlug((cur) => (cur === slug ? null : cur)), 1500);
+			track("directory_share", { slug });
+		} catch {
+			/* clipboard unavailable — silently fall back */
+		}
+	}
 
 	const handleSearchInput = useCallback((value: string) => {
 		setSearch(value);
@@ -170,15 +251,11 @@ export function DirectoryIsland({
 		const filtersChanged = filtersKey !== prevFiltersKey.current;
 		prevFiltersKey.current = filtersKey;
 
-		// When filters change, snap back to page 1 (and skip this effect run; the
-		// state update re-triggers the effect with the correct page).
 		if (filtersChanged && page !== 1) {
 			setPage(1);
 			return;
 		}
 
-		// Default view (no filters, page 1, A-Z): serve from the embedded
-		// build-time data instead of hitting the API.
 		if (!hasFiltersActive && sort === "az" && page === 1) {
 			setStartups(initialStartups);
 			setTotal(totalCount);
@@ -251,6 +328,23 @@ export function DirectoryIsland({
 		totalCount,
 	]);
 
+	// ---- CTA visibility via IntersectionObserver sentinel ----
+
+	useEffect(() => {
+		const el = sentinelRef.current;
+		if (!el) return;
+		const observer = new IntersectionObserver(
+			(entries) => {
+				for (const entry of entries) {
+					setCtaVisible(!entry.isIntersecting);
+				}
+			},
+			{ threshold: 0 },
+		);
+		observer.observe(el);
+		return () => observer.disconnect();
+	}, []);
+
 	// ---- Derived data ----
 
 	const countries = useMemo(() => {
@@ -261,13 +355,32 @@ export function DirectoryIsland({
 	const verticalKeys: readonly VerticalKey[] = VERTICAL_KEYS;
 	const maturityKeys: readonly MaturityKey[] = MATURITY_KEYS;
 
-	// ---- Filtered results (now comes from API) ----
+	// ---- Tab filtering (client-side post-filter on fetched startups) ----
+	const currentYear = new Date().getFullYear();
 
-	const filtered = startups;
+	const filtered = useMemo(() => {
+		if (activeTab === "all") return startups;
+		return startups.filter((s) => {
+			if (activeTab === "pilot") return s.maturity_level === "pilot";
+			if (activeTab === "raising") {
+				return (
+					!!s.funding_received &&
+					(s.maturity_level === "prototype" ||
+						s.maturity_level === "pilot" ||
+						s.maturity_level === "revenue")
+				);
+			}
+			if (activeTab === "new") {
+				return s.founding_year !== null && s.founding_year >= currentYear - 2;
+			}
+			if (activeTab === "stealth") return !s.funding_received;
+			return true;
+		});
+	}, [startups, activeTab, currentYear]);
 
 	const filteredSlugs = useMemo(() => new Set(filtered.map((s) => s.slug)), [filtered]);
 
-	const hasFilters = hasFiltersActive;
+	const hasFilters = hasFiltersActive || activeTab !== "all";
 
 	function clearAllFilters() {
 		setSearch("");
@@ -275,6 +388,7 @@ export function DirectoryIsland({
 		setSelectedVerticals(new Set());
 		setSelectedCountry("");
 		setSelectedMaturity("");
+		setActiveTab("all");
 	}
 
 	function toggleVertical(key: VerticalKey) {
@@ -288,6 +402,11 @@ export function DirectoryIsland({
 			}
 			return next;
 		});
+	}
+
+	function applyTab(tab: TabKey) {
+		setActiveTab(tab);
+		track("directory_tab", { tab });
 	}
 
 	// ---- Map interaction ----
@@ -367,21 +486,106 @@ export function DirectoryIsland({
 		? (startups.find((s) => s.slug === hoveredStartup) ?? null)
 		: null;
 
+	// ---- Filter summary for result counter ----
+
+	const filterSummary = useMemo(() => {
+		const bits: string[] = [];
+		if (activeTab !== "all") {
+			const tabLabel =
+				activeTab === "pilot"
+					? labels.tabPilotReady
+					: activeTab === "raising"
+						? labels.tabRaising
+						: activeTab === "new"
+							? labels.tabNew
+							: labels.tabStealth;
+			bits.push(tabLabel);
+		}
+		for (const v of selectedVerticals) {
+			bits.push(VERTICAL_CONFIG[v]?.label[locale] ?? v);
+		}
+		if (selectedCountry) bits.push(selectedCountry);
+		if (selectedMaturity && isMaturityKey(selectedMaturity)) {
+			bits.push(MATURITY_CONFIG[selectedMaturity].label[locale]);
+		}
+		if (debouncedSearch) bits.push(`"${debouncedSearch}"`);
+		return bits;
+	}, [
+		activeTab,
+		selectedVerticals,
+		selectedCountry,
+		selectedMaturity,
+		debouncedSearch,
+		locale,
+		labels.tabPilotReady,
+		labels.tabRaising,
+		labels.tabNew,
+		labels.tabStealth,
+	]);
+
+	// ---- Tabs config ----
+
+	const tabs: { key: TabKey; label: string }[] = [
+		{ key: "all", label: labels.tabAll },
+		{ key: "pilot", label: labels.tabPilotReady },
+		{ key: "raising", label: labels.tabRaising },
+		{ key: "new", label: labels.tabNew },
+		{ key: "stealth", label: labels.tabStealth },
+	];
+
 	// ---- Render ----
 
 	return (
 		<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+			{/* ─── Directory Hero Banner ─────────────────────────────── */}
+			<header className="mb-8 pt-2">
+				<p
+					className="text-xs tracking-[0.18em]"
+					style={{
+						fontFamily: "var(--font-mono)",
+						color: "var(--secondary)",
+					}}
+				>
+					{labels.heroKickerPrefix} · {totalCount} {labels.heroKickerStartups} · {countriesCount}{" "}
+					{labels.heroKickerCountries}
+				</p>
+				<h1
+					className="mt-3 text-3xl leading-[1.05] sm:text-5xl lg:text-6xl"
+					style={{
+						fontFamily: "var(--font-display)",
+						color: "var(--foreground)",
+						fontWeight: 700,
+						letterSpacing: "-0.01em",
+					}}
+				>
+					{labels.heroHeadline}
+				</h1>
+				<p
+					className="mt-4 max-w-[48ch] text-base leading-relaxed sm:text-lg"
+					style={{
+						fontFamily: "var(--font-body)",
+						color: "var(--muted-foreground)",
+					}}
+				>
+					{labels.heroDescriptor}
+				</p>
+				<div
+					className="mt-8 w-full"
+					style={{ borderTop: "2px solid var(--border-subtle)" }}
+					aria-hidden="true"
+				/>
+			</header>
+
 			{/* Map Panel */}
 			<div className="mb-4 flex items-center justify-end md:hidden">
 				<button
 					type="button"
 					onClick={() => setShowMap((p) => !p)}
-					className="inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-colors duration-150"
+					className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium transition-colors duration-150"
 					style={{
-						fontFamily: "var(--font-heading)",
+						fontFamily: "var(--font-mono)",
 						color: "var(--muted-foreground)",
 						background: "var(--muted)",
-						borderRadius: "var(--radius-md)",
 					}}
 				>
 					{showMap ? labels.hideMap : labels.showMap}
@@ -390,7 +594,7 @@ export function DirectoryIsland({
 
 			{showMap && (
 				<div
-					className="relative mb-6 overflow-hidden rounded-lg border"
+					className="relative mb-6 overflow-hidden border"
 					style={{
 						background: "var(--card)",
 						borderColor: "var(--border-subtle)",
@@ -407,7 +611,6 @@ export function DirectoryIsland({
 							setTooltipPos(null);
 						}}
 					>
-						{/* Background continent */}
 						<g opacity="0.06">
 							{americasDots.map((d) => (
 								<circle key={d.key} cx={d.x} cy={d.y} r="2" fill="white" />
@@ -419,7 +622,6 @@ export function DirectoryIsland({
 							))}
 						</g>
 
-						{/* Country labels */}
 						<g>
 							{countryLabels.map((cl) => (
 								<a
@@ -444,7 +646,7 @@ export function DirectoryIsland({
 										y={cl.y}
 										fill="rgba(255,255,255,0.25)"
 										fontSize="10"
-										fontFamily="var(--font-heading)"
+										fontFamily="var(--font-mono)"
 										textAnchor="middle"
 										className="select-none"
 										style={{ transition: "fill 0.15s" }}
@@ -455,7 +657,6 @@ export function DirectoryIsland({
 							))}
 						</g>
 
-						{/* Startup dots */}
 						<g>
 							{startupMapDots.map((d) => (
 								<g
@@ -481,10 +682,9 @@ export function DirectoryIsland({
 						</g>
 					</svg>
 
-					{/* Tooltip */}
 					{hoveredData && tooltipPos && (
 						<div
-							className="pointer-events-none fixed z-50 max-w-xs rounded-md border px-3 py-2"
+							className="pointer-events-none fixed z-50 max-w-xs border px-3 py-2"
 							style={{
 								left: `${tooltipPos.x + 12}px`,
 								top: `${tooltipPos.y - 8}px`,
@@ -495,7 +695,7 @@ export function DirectoryIsland({
 						>
 							<p
 								className="text-sm font-semibold"
-								style={{ fontFamily: "var(--font-heading)", color: "var(--foreground)" }}
+								style={{ fontFamily: "var(--font-display)", color: "var(--foreground)" }}
 							>
 								{hoveredData.name}
 							</p>
@@ -503,15 +703,15 @@ export function DirectoryIsland({
 								{hoveredData.verticals.slice(0, 2).map((v) => (
 									<span
 										key={v}
-										className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs"
+										className="inline-flex items-center gap-1 px-2 py-0.5 text-xs"
 										style={{
 											background: getVMuted(v),
 											color: getVColor(v),
-											fontFamily: "var(--font-heading)",
+											fontFamily: "var(--font-mono)",
 										}}
 									>
 										<span
-											className="inline-block h-1.5 w-1.5 rounded-full"
+											className="inline-block h-1.5 w-1.5"
 											style={{ background: getVColor(v) }}
 										/>
 										{VERTICAL_CONFIG[v]?.label[locale] ?? v}
@@ -529,22 +729,50 @@ export function DirectoryIsland({
 				</div>
 			)}
 
-			{/* Filter Bar */}
+			{/* ─── Filter tabs (primary) ─────────────────────────────── */}
 			<div
-				className="sticky top-14 z-10 mb-6 flex flex-col gap-3 rounded-lg border p-4"
+				className="mb-4 flex gap-0 overflow-x-auto border-b"
+				style={{ borderColor: "var(--border-subtle)" }}
+				role="tablist"
+			>
+				{tabs.map((tab) => {
+					const active = activeTab === tab.key;
+					return (
+						<button
+							key={tab.key}
+							type="button"
+							role="tab"
+							aria-selected={active}
+							onClick={() => applyTab(tab.key)}
+							className="shrink-0 cursor-pointer px-4 py-3 text-xs uppercase tracking-wider transition-colors duration-150"
+							style={{
+								fontFamily: "var(--font-mono)",
+								color: active ? "var(--foreground)" : "var(--muted-foreground)",
+								background: "transparent",
+								borderBottom: active ? "2px solid var(--secondary)" : "2px solid transparent",
+								marginBottom: "-2px",
+							}}
+						>
+							{tab.label}
+						</button>
+					);
+				})}
+			</div>
+
+			{/* ─── Filter Bar (secondary filters) ────────────────────── */}
+			<div
+				className="sticky top-14 z-10 mb-6 flex flex-col gap-3 border p-4"
 				style={{
-					background: "rgba(10, 7, 16, 0.85)",
-					backdropFilter: "blur(12px)",
+					background: "color-mix(in oklch, var(--background) 96%, transparent)",
 					borderColor: "var(--border-subtle)",
 				}}
 			>
-				{/* Search */}
 				<input
 					type="text"
 					value={search}
 					onChange={(e) => handleSearchInput(e.target.value)}
 					placeholder={labels.searchPlaceholder}
-					className="h-10 w-full rounded-md border bg-transparent px-3 text-sm outline-none transition-colors duration-150"
+					className="h-10 w-full border bg-transparent px-3 text-sm outline-none transition-colors duration-150"
 					style={{
 						fontFamily: "var(--font-body)",
 						borderColor: "var(--input)",
@@ -552,7 +780,6 @@ export function DirectoryIsland({
 					}}
 				/>
 
-				{/* Vertical chips */}
 				<div className="flex gap-2 overflow-x-auto pb-1">
 					{verticalKeys.map((key) => {
 						const active = selectedVerticals.has(key);
@@ -562,35 +789,31 @@ export function DirectoryIsland({
 								key={key}
 								type="button"
 								onClick={() => toggleVertical(key)}
-								className="inline-flex shrink-0 cursor-pointer items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium transition-all duration-150"
+								className="inline-flex shrink-0 cursor-pointer items-center gap-1.5 px-3 py-1 text-xs font-medium transition-all duration-150"
 								style={{
-									fontFamily: "var(--font-heading)",
+									fontFamily: "var(--font-mono)",
 									background: active ? getVMuted(key) : "var(--muted)",
 									color: active ? getVColor(key) : "var(--muted-foreground)",
 									border: active ? `1px solid ${getVColor(key)}40` : "1px solid transparent",
 								}}
 							>
-								<span
-									className="inline-block h-2 w-2 rounded-full"
-									style={{ background: cfg.color }}
-								/>
+								<span className="inline-block h-2 w-2" style={{ background: cfg.color }} />
 								{cfg.label[locale]}
 							</button>
 						);
 					})}
 				</div>
 
-				{/* Dropdowns + sort + counter */}
 				<div className="flex flex-wrap items-center gap-3">
-					{/* Country dropdown */}
 					<select
 						value={selectedCountry}
 						onChange={(e) => setSelectedCountry(e.target.value)}
-						className="h-8 cursor-pointer rounded-md border bg-transparent px-2 text-xs outline-none"
+						className="h-8 cursor-pointer border bg-transparent px-2 text-xs outline-none"
 						style={{
-							fontFamily: "var(--font-heading)",
+							fontFamily: "var(--font-mono)",
 							borderColor: "var(--input)",
 							color: "var(--foreground)",
+							borderRadius: 0,
 						}}
 					>
 						<option value="" style={{ background: "var(--popover)" }}>
@@ -604,15 +827,15 @@ export function DirectoryIsland({
 						))}
 					</select>
 
-					{/* Maturity dropdown */}
 					<select
 						value={selectedMaturity}
 						onChange={(e) => setSelectedMaturity(e.target.value)}
-						className="h-8 cursor-pointer rounded-md border bg-transparent px-2 text-xs outline-none"
+						className="h-8 cursor-pointer border bg-transparent px-2 text-xs outline-none"
 						style={{
-							fontFamily: "var(--font-heading)",
+							fontFamily: "var(--font-mono)",
 							borderColor: "var(--input)",
 							color: "var(--foreground)",
+							borderRadius: 0,
 						}}
 					>
 						<option value="" style={{ background: "var(--popover)" }}>
@@ -625,11 +848,10 @@ export function DirectoryIsland({
 						))}
 					</select>
 
-					{/* Sort */}
 					<div className="ml-auto flex items-center gap-2">
 						<span
-							className="text-xs"
-							style={{ fontFamily: "var(--font-heading)", color: "var(--muted-foreground)" }}
+							className="text-xs uppercase tracking-wider"
+							style={{ fontFamily: "var(--font-mono)", color: "var(--muted-foreground)" }}
 						>
 							{labels.sortLabel}:
 						</span>
@@ -640,11 +862,12 @@ export function DirectoryIsland({
 									setSort(e.target.value);
 								}
 							}}
-							className="h-8 cursor-pointer rounded-md border bg-transparent px-2 text-xs outline-none"
+							className="h-8 cursor-pointer border bg-transparent px-2 text-xs outline-none"
 							style={{
-								fontFamily: "var(--font-heading)",
+								fontFamily: "var(--font-mono)",
 								borderColor: "var(--input)",
 								color: "var(--foreground)",
+								borderRadius: 0,
 							}}
 						>
 							<option value="az" style={{ background: "var(--popover)" }}>
@@ -657,30 +880,19 @@ export function DirectoryIsland({
 					</div>
 				</div>
 
-				{/* Active filters row */}
 				{hasFilters && (
 					<div className="flex flex-wrap items-center gap-2">
-						<span
-							className="text-xs"
-							style={{ fontFamily: "var(--font-body)", color: "var(--muted-foreground)" }}
-						>
-							{labels.showingOf
-								.replace("{count}", String(filtered.length))
-								.replace("{total}", String(total))}
-						</span>
-
-						{/* Active filter pills */}
 						{selectedVerticals.size > 0 &&
 							Array.from(selectedVerticals).map((v) => (
 								<button
 									key={v}
 									type="button"
 									onClick={() => toggleVertical(v)}
-									className="inline-flex cursor-pointer items-center gap-1 rounded-full px-2 py-0.5 text-xs transition-colors duration-150"
+									className="inline-flex cursor-pointer items-center gap-1 px-2 py-0.5 text-xs transition-colors duration-150"
 									style={{
 										background: getVMuted(v),
 										color: getVColor(v),
-										fontFamily: "var(--font-heading)",
+										fontFamily: "var(--font-mono)",
 									}}
 								>
 									{VERTICAL_CONFIG[v]?.label[locale] ?? v}
@@ -692,11 +904,11 @@ export function DirectoryIsland({
 							<button
 								type="button"
 								onClick={() => setSelectedCountry("")}
-								className="inline-flex cursor-pointer items-center gap-1 rounded-full px-2 py-0.5 text-xs transition-colors duration-150"
+								className="inline-flex cursor-pointer items-center gap-1 px-2 py-0.5 text-xs transition-colors duration-150"
 								style={{
 									background: "var(--muted)",
 									color: "var(--muted-foreground)",
-									fontFamily: "var(--font-heading)",
+									fontFamily: "var(--font-mono)",
 								}}
 							>
 								{selectedCountry}
@@ -708,11 +920,11 @@ export function DirectoryIsland({
 							<button
 								type="button"
 								onClick={() => setSelectedMaturity("")}
-								className="inline-flex cursor-pointer items-center gap-1 rounded-full px-2 py-0.5 text-xs transition-colors duration-150"
+								className="inline-flex cursor-pointer items-center gap-1 px-2 py-0.5 text-xs transition-colors duration-150"
 								style={{
 									background: "var(--muted)",
 									color: "var(--muted-foreground)",
-									fontFamily: "var(--font-heading)",
+									fontFamily: "var(--font-mono)",
 								}}
 							>
 								{isMaturityKey(selectedMaturity)
@@ -725,9 +937,9 @@ export function DirectoryIsland({
 						<button
 							type="button"
 							onClick={clearAllFilters}
-							className="cursor-pointer text-xs font-medium transition-colors duration-150"
+							className="cursor-pointer text-xs font-medium uppercase tracking-wider transition-colors duration-150"
 							style={{
-								fontFamily: "var(--font-heading)",
+								fontFamily: "var(--font-mono)",
 								color: "var(--primary)",
 							}}
 						>
@@ -737,11 +949,43 @@ export function DirectoryIsland({
 				)}
 			</div>
 
+			{/* ─── Result counter sentence ───────────────────────────── */}
+			<div className="mb-4 flex flex-wrap items-baseline gap-x-2 gap-y-1">
+				<span
+					className="text-sm"
+					style={{ fontFamily: "var(--font-body)", color: "var(--muted-foreground)" }}
+				>
+					<span
+						className="text-base font-semibold"
+						style={{ fontFamily: "var(--font-mono)", color: "var(--secondary)" }}
+					>
+						{filtered.length}
+					</span>{" "}
+					{locale === "es" ? "de" : "of"}{" "}
+					<span
+						className="text-base font-semibold"
+						style={{ fontFamily: "var(--font-mono)", color: "var(--secondary)" }}
+					>
+						{total}
+					</span>{" "}
+					{locale === "es" ? "startups" : "startups"}
+				</span>
+				<span
+					className="text-xs uppercase tracking-wider"
+					style={{ fontFamily: "var(--font-mono)", color: "var(--text-tertiary)" }}
+				>
+					·{" "}
+					{filterSummary.length > 0
+						? `${labels.resultFilteredBy}: ${filterSummary.join(" · ")}`
+						: labels.resultNone}
+				</span>
+			</div>
+
 			{/* Fetch error banner */}
 			{fetchError && (
 				<div
 					role="alert"
-					className="mb-4 rounded-lg border px-4 py-3 text-sm"
+					className="mb-4 border px-4 py-3 text-sm"
 					style={{
 						background: "var(--card)",
 						borderColor: "var(--destructive, #ef4444)",
@@ -753,7 +997,7 @@ export function DirectoryIsland({
 				</div>
 			)}
 
-			{/* Card Grid */}
+			{/* ─── Card Grid ─────────────────────────────────────────── */}
 			{filtered.length > 0 ? (
 				<div className="grid gap-4 pb-20 sm:grid-cols-2 lg:grid-cols-3">
 					{filtered.map((s) => {
@@ -764,141 +1008,220 @@ export function DirectoryIsland({
 						const flag = COUNTRY_FLAGS[s.country] ?? "";
 						const displayCountry = locale === "es" ? s.country_es : s.country;
 						const href = `${startupBaseHref}${s.slug}`;
+						const isSaved = savedSlugs.has(s.slug);
+						const isShared = sharedSlug === s.slug;
 
 						return (
-							<a
+							<div
 								key={s.slug}
 								ref={(el) => {
 									if (el) {
 										cardRefs.current.set(s.slug, el);
 									}
 								}}
-								href={href}
-								className="group relative block rounded-lg border p-6 transition-all duration-200"
-								style={{
-									background: "var(--card)",
-									borderColor: "var(--border-subtle)",
-								}}
-								onMouseEnter={(e) => {
-									e.currentTarget.style.borderColor = accentColor;
-									e.currentTarget.style.transform = "translateY(-2px)";
-								}}
-								onMouseLeave={(e) => {
-									e.currentTarget.style.borderColor = "var(--border-subtle)";
-									e.currentTarget.style.transform = "translateY(0)";
-								}}
+								className="directory-card group relative border transition-all duration-200 hover:-translate-y-0.5"
+								style={
+									{
+										background: "var(--card)",
+										borderColor: "var(--border-subtle)",
+										borderRadius: 0,
+										"--card-accent": accentColor,
+									} as React.CSSProperties
+								}
 							>
-								<div className="flex items-start gap-4">
-									{/* Initials circle */}
-									<div
-										className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold text-white"
-										style={{ background: accentColor, fontFamily: "var(--font-heading)" }}
-									>
-										{initial}
-									</div>
-
-									{/* Content */}
-									<div className="min-w-0 flex-1">
-										<h3
-											className="text-base font-semibold leading-tight"
-											style={{ fontFamily: "var(--font-heading)", color: "var(--foreground)" }}
+								<a href={href} className="block p-6">
+									<div className="flex items-start gap-4">
+										<div
+											className="flex h-10 w-10 shrink-0 items-center justify-center text-sm font-semibold text-white"
+											style={{ background: accentColor, fontFamily: "var(--font-display)" }}
 										>
-											{s.name}
-										</h3>
-										<p
-											className="mt-1.5 line-clamp-2 text-sm leading-relaxed"
-											style={{ fontFamily: "var(--font-body)", color: "var(--muted-foreground)" }}
-										>
-											{oneLiner}
-										</p>
+											{initial}
+										</div>
 
-										{/* Metadata */}
-										<div className="mt-3 flex flex-wrap items-center gap-2">
-											<span
-												className="inline-flex items-center gap-1 text-xs"
-												style={{ fontFamily: "var(--font-body)", color: "var(--text-tertiary)" }}
+										<div className="min-w-0 flex-1">
+											<h3
+												className="text-base font-semibold leading-tight"
+												style={{ fontFamily: "var(--font-display)", color: "var(--foreground)" }}
 											>
-												{flag && <span aria-hidden="true">{flag}</span>}
-												{s.city}, {displayCountry}
-											</span>
-
-											<span style={{ color: "var(--border-strong)" }} aria-hidden="true">
-												&middot;
-											</span>
-
-											{s.verticals.slice(0, 2).map((v) => (
-												<span
-													key={v}
-													className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium"
-													style={{
-														fontFamily: "var(--font-heading)",
-														background: getVMuted(v),
-														color: getVColor(v),
-													}}
-												>
-													<span
-														className="inline-block h-1.5 w-1.5 rounded-full"
-														style={{ background: getVColor(v) }}
-													/>
-													{VERTICAL_CONFIG[v]?.label[locale] ?? v}
-												</span>
-											))}
-
-											<span style={{ color: "var(--border-strong)" }} aria-hidden="true">
-												&middot;
-											</span>
-
-											<span
-												className="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium"
+												{s.name}
+											</h3>
+											<p
+												className="mt-1.5 line-clamp-2 text-sm leading-relaxed"
 												style={{
-													fontFamily: "var(--font-heading)",
-													background: "var(--muted)",
+													fontFamily: "var(--font-body)",
 													color: "var(--muted-foreground)",
 												}}
 											>
-												{MATURITY_CONFIG[s.maturity_level]?.label[locale] ?? s.maturity_level}
-											</span>
+												{oneLiner}
+											</p>
 
-											{s.funding_received && (
-												<>
-													<span style={{ color: "var(--border-strong)" }} aria-hidden="true">
-														&middot;
-													</span>
+											<div className="mt-3 flex flex-wrap items-center gap-2">
+												<span
+													className="inline-flex items-center gap-1 text-xs"
+													style={{
+														fontFamily: "var(--font-body)",
+														color: "var(--text-tertiary)",
+													}}
+												>
+													{flag && <span aria-hidden="true">{flag}</span>}
+													{s.city}, {displayCountry}
+												</span>
+
+												<span style={{ color: "var(--border-strong)" }} aria-hidden="true">
+													&middot;
+												</span>
+
+												{s.verticals.slice(0, 2).map((v) => (
 													<span
-														className="text-xs"
+														key={v}
+														className="inline-flex items-center gap-1 px-2 py-0.5 text-xs font-medium"
 														style={{
 															fontFamily: "var(--font-mono)",
-															color: "var(--text-tertiary)",
+															background: getVMuted(v),
+															color: getVColor(v),
 														}}
 													>
-														{s.funding_received}
+														<span
+															className="inline-block h-1.5 w-1.5"
+															style={{ background: getVColor(v) }}
+														/>
+														{VERTICAL_CONFIG[v]?.label[locale] ?? v}
 													</span>
-												</>
-											)}
+												))}
+
+												<span style={{ color: "var(--border-strong)" }} aria-hidden="true">
+													&middot;
+												</span>
+
+												<span
+													className="inline-flex items-center px-2 py-0.5 text-xs font-medium"
+													style={{
+														fontFamily: "var(--font-mono)",
+														background: "var(--muted)",
+														color: "var(--muted-foreground)",
+													}}
+												>
+													{MATURITY_CONFIG[s.maturity_level]?.label[locale] ?? s.maturity_level}
+												</span>
+
+												{s.funding_received && (
+													<>
+														<span style={{ color: "var(--border-strong)" }} aria-hidden="true">
+															&middot;
+														</span>
+														<span
+															className="text-xs"
+															style={{
+																fontFamily: "var(--font-mono)",
+																color: "var(--text-tertiary)",
+															}}
+														>
+															{s.funding_received}
+														</span>
+													</>
+												)}
+											</div>
 										</div>
 									</div>
+								</a>
 
-									{/* Arrow */}
-									<div
-										className="flex shrink-0 items-center self-center transition-colors duration-150"
-										style={{ color: "var(--text-tertiary)" }}
+								{/* Quick actions overlay — desktop hover only */}
+								<div
+									className="directory-card__actions pointer-events-none absolute right-3 top-3 flex gap-1 opacity-0 transition-opacity duration-150"
+									aria-hidden="true"
+								>
+									<a
+										href={`${contactHref}?startup=${s.slug}`}
+										title={labels.quickBookIntro}
+										aria-label={labels.quickBookIntro}
+										className="pointer-events-auto flex h-7 w-7 items-center justify-center transition-colors duration-150"
+										style={{
+											background: "var(--primary)",
+											color: "var(--primary-foreground)",
+											fontFamily: "var(--font-mono)",
+										}}
+										onClick={(e) => {
+											e.stopPropagation();
+											track("directory_book_intro", { slug: s.slug });
+										}}
 									>
+										<span className="sr-only">{labels.quickBookIntro}</span>
 										<svg
-											width="18"
-											height="18"
+											width="14"
+											height="14"
 											viewBox="0 0 24 24"
 											fill="none"
 											stroke="currentColor"
-											strokeWidth="1.5"
+											strokeWidth="2"
 											strokeLinecap="round"
 											strokeLinejoin="round"
 											aria-hidden="true"
 										>
 											<path d="M9 5l6 7-6 7" />
 										</svg>
-									</div>
+									</a>
+									<button
+										type="button"
+										title={isSaved ? labels.quickSaved : labels.quickSave}
+										aria-pressed={isSaved}
+										onClick={(e) => {
+											e.preventDefault();
+											e.stopPropagation();
+											toggleSaved(s.slug);
+										}}
+										className="pointer-events-auto flex h-7 w-7 cursor-pointer items-center justify-center border transition-colors duration-150"
+										style={{
+											background: isSaved ? "var(--secondary)" : "transparent",
+											borderColor: isSaved ? "var(--secondary)" : "var(--border)",
+											color: isSaved ? "var(--secondary-foreground)" : "var(--foreground)",
+										}}
+									>
+										<svg
+											width="14"
+											height="14"
+											viewBox="0 0 24 24"
+											fill={isSaved ? "currentColor" : "none"}
+											stroke="currentColor"
+											strokeWidth="1.8"
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											aria-hidden="true"
+										>
+											<path d="M6 4h12v16l-6-4-6 4z" />
+										</svg>
+									</button>
+									<button
+										type="button"
+										title={isShared ? labels.quickShared : labels.quickShare}
+										onClick={(e) => {
+											e.preventDefault();
+											e.stopPropagation();
+											void handleShare(s.slug);
+										}}
+										className="pointer-events-auto flex h-7 w-7 cursor-pointer items-center justify-center border transition-colors duration-150"
+										style={{
+											background: isShared ? "var(--secondary)" : "transparent",
+											borderColor: isShared ? "var(--secondary)" : "var(--border)",
+											color: isShared ? "var(--secondary-foreground)" : "var(--foreground)",
+										}}
+									>
+										<svg
+											width="14"
+											height="14"
+											viewBox="0 0 24 24"
+											fill="none"
+											stroke="currentColor"
+											strokeWidth="1.8"
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											aria-hidden="true"
+										>
+											<path d="M10 13a3 3 0 0 0 4.24 0l4-4a3 3 0 0 0-4.24-4.24l-1.4 1.4" />
+											<path d="M14 11a3 3 0 0 0-4.24 0l-4 4a3 3 0 0 0 4.24 4.24l1.4-1.4" />
+										</svg>
+									</button>
 								</div>
-							</a>
+							</div>
 						);
 					})}
 					{filtered.length < total && (
@@ -907,113 +1230,168 @@ export function DirectoryIsland({
 								type="button"
 								onClick={() => setPage((p) => p + 1)}
 								disabled={loading}
-								className="cursor-pointer rounded-lg border px-6 py-3 text-sm font-medium transition-colors duration-150 disabled:opacity-50"
+								className="cursor-pointer border px-6 py-3 text-sm font-medium uppercase tracking-wider transition-colors duration-150 disabled:opacity-50"
 								style={{
-									fontFamily: "var(--font-heading)",
+									fontFamily: "var(--font-mono)",
 									color: "var(--foreground)",
 									borderColor: "var(--border-subtle)",
 									background: "var(--card)",
 								}}
 							>
-								{loading ? "..." : `Load more (${filtered.length}/${total})`}
+								{loading ? "..." : `${labels.loadMore} (${filtered.length}/${total})`}
 							</button>
 						</div>
 					)}
 				</div>
 			) : (
-				/* Empty state */
-				<div className="flex flex-col items-center justify-center py-20 text-center">
-					<svg
-						width="48"
-						height="48"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke="currentColor"
-						strokeWidth="1"
-						strokeLinecap="round"
-						strokeLinejoin="round"
-						style={{ color: "var(--text-tertiary)" }}
-						aria-hidden="true"
-					>
-						<circle cx="11" cy="11" r="8" />
-						<path d="M21 21l-4.35-4.35" />
-					</svg>
-					<h3
-						className="mt-4 text-lg font-semibold"
-						style={{ fontFamily: "var(--font-heading)", color: "var(--foreground)" }}
-					>
-						{labels.emptyTitle}
-					</h3>
+				/* ─── Empty state (editorial) ────────────────────── */
+				<div className="flex flex-col items-center justify-center py-24 text-center">
 					<p
-						className="mt-2 max-w-sm text-sm"
-						style={{ fontFamily: "var(--font-body)", color: "var(--muted-foreground)" }}
+						className="text-xs tracking-[0.18em]"
+						style={{
+							fontFamily: "var(--font-mono)",
+							color: "var(--secondary)",
+						}}
 					>
-						{labels.emptyMessage}
+						{labels.emptyKicker}
 					</p>
-					<button
-						type="button"
-						onClick={clearAllFilters}
-						className="mt-4 cursor-pointer text-sm font-medium transition-colors duration-150"
-						style={{ fontFamily: "var(--font-heading)", color: "var(--primary)" }}
+					<h3
+						className="mt-4 max-w-xl text-2xl leading-tight sm:text-3xl"
+						style={{
+							fontFamily: "var(--font-display)",
+							color: "var(--foreground)",
+							fontWeight: 700,
+						}}
 					>
-						{labels.clearAll}
-					</button>
+						{labels.emptyHeadline}
+					</h3>
+					<div className="mt-6 flex flex-wrap justify-center gap-3">
+						<a
+							href={contactHref}
+							className="inline-flex items-center gap-2 px-5 py-3 text-sm font-semibold uppercase tracking-wider transition-colors duration-150"
+							style={{
+								fontFamily: "var(--font-mono)",
+								background: "var(--primary)",
+								color: "var(--primary-foreground)",
+							}}
+						>
+							{labels.emptyContactCta}
+							<svg
+								width="14"
+								height="14"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								strokeWidth="2"
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								aria-hidden="true"
+							>
+								<path d="M9 5l6 7-6 7" />
+							</svg>
+						</a>
+						<button
+							type="button"
+							onClick={clearAllFilters}
+							className="cursor-pointer border px-5 py-3 text-sm font-semibold uppercase tracking-wider transition-colors duration-150"
+							style={{
+								fontFamily: "var(--font-mono)",
+								borderColor: "var(--border)",
+								color: "var(--foreground)",
+								background: "transparent",
+							}}
+						>
+							{labels.clearAll}
+						</button>
+					</div>
 				</div>
 			)}
 
-			{/* Floating corporate CTA */}
-			{/* Desktop: bottom-right button */}
-			<div className="fixed bottom-6 right-6 z-30 hidden md:block">
-				<button
-					type="button"
-					onClick={() => setCorporateOpen(true)}
-					className="inline-flex cursor-pointer items-center gap-2 rounded-lg border px-4 py-2.5 text-sm font-semibold shadow-lg transition-all duration-150"
-					style={{
-						fontFamily: "var(--font-heading)",
-						background: "var(--primary)",
-						color: "var(--primary-foreground)",
-						borderColor: "var(--primary)",
-						borderRadius: "var(--radius-md)",
-					}}
-				>
-					{labels.ctaFindSolution}
-					<svg
-						width="14"
-						height="14"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke="currentColor"
-						strokeWidth="2"
-						strokeLinecap="round"
-						strokeLinejoin="round"
-						aria-hidden="true"
-					>
-						<path d="M9 5l6 7-6 7" />
-					</svg>
-				</button>
-			</div>
+			{/* Sentinel for auto-hiding floating CTA (placed after the grid) */}
+			<div ref={sentinelRef} aria-hidden="true" style={{ height: 1 }} />
 
-			{/* Mobile: bottom bar */}
+			{/* ─── Floating corporate CTA — desktop ───────────────────── */}
 			<div
-				className="fixed bottom-0 left-0 right-0 z-30 border-t p-3 md:hidden"
+				className="fixed bottom-6 right-6 z-30 hidden transition-opacity duration-200 md:block"
 				style={{
-					background: "rgba(10, 7, 16, 0.9)",
-					backdropFilter: "blur(12px)",
-					borderColor: "var(--border-subtle)",
+					opacity: ctaVisible ? 1 : 0,
+					pointerEvents: ctaVisible ? "auto" : "none",
 				}}
 			>
 				<button
 					type="button"
 					onClick={() => setCorporateOpen(true)}
-					className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-md px-4 py-2.5 text-sm font-semibold"
+					className="group inline-flex cursor-pointer flex-col items-stretch border px-6 py-4 text-left transition-colors duration-150"
 					style={{
-						fontFamily: "var(--font-heading)",
 						background: "var(--primary)",
 						color: "var(--primary-foreground)",
-						borderRadius: "var(--radius-md)",
+						borderColor: "var(--primary)",
+						borderRadius: 0,
 					}}
 				>
-					{labels.ctaFindSolution}
+					<span
+						className="text-[10px] uppercase tracking-[0.18em]"
+						style={{
+							fontFamily: "var(--font-mono)",
+							color: "var(--secondary)",
+						}}
+					>
+						{labels.floatingKicker}
+					</span>
+					<span
+						className="mt-1 inline-flex items-center gap-2 text-base font-semibold"
+						style={{ fontFamily: "var(--font-display)" }}
+					>
+						{labels.floatingLabel}
+						<svg
+							width="16"
+							height="16"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							strokeWidth="2"
+							strokeLinecap="round"
+							strokeLinejoin="round"
+							aria-hidden="true"
+						>
+							<path d="M9 5l6 7-6 7" />
+						</svg>
+					</span>
+				</button>
+			</div>
+
+			{/* ─── Mobile: bottom bar ──────────────────────────────────── */}
+			<div
+				className="fixed bottom-0 left-0 right-0 z-30 border-t p-3 transition-opacity duration-200 md:hidden"
+				style={{
+					background: "color-mix(in oklch, var(--background) 96%, transparent)",
+					borderColor: "var(--border-subtle)",
+					opacity: ctaVisible ? 1 : 0,
+					pointerEvents: ctaVisible ? "auto" : "none",
+				}}
+			>
+				<button
+					type="button"
+					onClick={() => setCorporateOpen(true)}
+					className="flex w-full cursor-pointer flex-col items-center justify-center px-4 py-3"
+					style={{
+						background: "var(--primary)",
+						color: "var(--primary-foreground)",
+						borderRadius: 0,
+					}}
+				>
+					<span
+						className="text-[10px] uppercase tracking-[0.18em]"
+						style={{ fontFamily: "var(--font-mono)", color: "var(--secondary)" }}
+					>
+						{labels.mobileCtaKicker}
+					</span>
+					<span
+						className="mt-0.5 text-sm font-semibold"
+						style={{ fontFamily: "var(--font-display)" }}
+					>
+						{labels.floatingLabel}
+					</span>
 				</button>
 			</div>
 
@@ -1023,6 +1401,15 @@ export function DirectoryIsland({
 				onClose={() => setCorporateOpen(false)}
 				locale={locale}
 			/>
+
+			{/* Scoped styles: show quick-actions on hover for hover-capable pointers only */}
+			<style>{`
+				@media (hover: hover) {
+					.directory-card:hover .directory-card__actions {
+						opacity: 1;
+					}
+				}
+			`}</style>
 		</div>
 	);
 }

@@ -1,13 +1,18 @@
 ---
+export const prerender = false;
+
 import { CorporateFormStandalone } from "@/components/corporate-form-standalone";
 import TrustSignal from "@/components/trust-signal.astro";
 import { getTranslations } from "@/i18n/translations";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { startups as allStartups } from "@/lib/seed";
+import { CACHE_TAGS } from "@/lib/cache-tags";
+import { getAllStartups } from "@/lib/db-queries";
 
 const locale = "es" as const;
 const t = getTranslations(locale);
 const c = t.corporate;
+
+const allStartups = await getAllStartups();
 
 // Minimal startup data for context matching via ?startup= query param
 const startups = allStartups.map((s) => ({
@@ -15,6 +20,20 @@ const startups = allStartups.map((s) => ({
 	name: s.name,
 	vertical: s.verticals[0] ?? "other",
 }));
+
+Astro.response.headers.set(
+	"Cache-Control",
+	"public, s-maxage=86400, stale-while-revalidate=604800",
+);
+Astro.response.headers.set("Cache-Tag", CACHE_TAGS.contact);
+
+const nextSteps = [
+	{ step: "01", title: c.contactNextStep1Title, desc: c.contactNextStep1Desc },
+	{ step: "02", title: c.contactNextStep2Title, desc: c.contactNextStep2Desc },
+	{ step: "03", title: c.contactNextStep3Title, desc: c.contactNextStep3Desc },
+] as const;
+
+const otherChannels = [c.contactOtherLinkedinSoon, c.contactOtherTwitterSoon] as const;
 ---
 
 <BaseLayout
@@ -24,7 +43,7 @@ const startups = allStartups.map((s) => ({
 >
 	<section class="ds-section mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
 		{/* Hero */}
-		<div class="mx-auto mb-12 max-w-2xl text-center">
+		<div class="mx-auto mb-10 max-w-2xl text-center">
 			<h1
 				class="text-4xl font-bold tracking-tight sm:text-5xl"
 				style="font-family: var(--font-display); color: var(--foreground);"
@@ -39,6 +58,65 @@ const startups = allStartups.map((s) => ({
 			</p>
 		</div>
 
+		{/* Trust block: "Qué sigue" */}
+		<div
+			class="mx-auto mb-12 max-w-3xl border border-[var(--border-subtle)] bg-card p-6 sm:p-8"
+		>
+			<div class="flex flex-wrap items-center justify-between gap-3">
+				<p
+					class="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground"
+					style="font-family: var(--font-mono);"
+				>
+					{c.contactNextLabel}
+				</p>
+				<p
+					class="flex items-center gap-2 text-[11px] uppercase tracking-[0.14em] text-muted-foreground"
+					style="font-family: var(--font-mono);"
+				>
+					<span
+						aria-hidden="true"
+						class="inline-block h-1.5 w-1.5"
+						style="background: var(--secondary);"
+					></span>
+					{c.contactResponsePromise}
+				</p>
+			</div>
+
+			<ol class="mt-6 grid gap-6 sm:grid-cols-3">
+				{
+					nextSteps.map((item) => (
+						<li class="flex flex-col gap-3">
+							<span
+								class="inline-flex h-9 w-9 items-center justify-center text-xs font-bold"
+								style="background: var(--primary-15); color: var(--primary-light); font-family: var(--font-mono);"
+							>
+								{item.step}
+							</span>
+							<h3
+								class="text-sm font-semibold text-foreground"
+								style="font-family: var(--font-heading);"
+							>
+								{item.title}
+							</h3>
+							<p
+								class="text-sm leading-relaxed text-muted-foreground"
+								style="font-family: var(--font-body);"
+							>
+								{item.desc}
+							</p>
+						</li>
+					))
+				}
+			</ol>
+
+			<p
+				class="mt-6 border-t border-[var(--border-subtle)] pt-4 text-xs text-muted-foreground"
+				style="font-family: var(--font-body);"
+			>
+				{c.contactPrivacyNote}
+			</p>
+		</div>
+
 		{/* Standalone form */}
 		<CorporateFormStandalone
 			client:load
@@ -46,10 +124,67 @@ const startups = allStartups.map((s) => ({
 			startups={startups}
 		/>
 
-		{/* Trust signals */}
-		<div class="mx-auto mt-8 flex max-w-lg flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-6">
+		{/* Trust signals (retained) */}
+		<div
+			class="mx-auto mt-8 flex max-w-lg flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-6"
+		>
 			<TrustSignal label={c.trustStep1} />
 			<TrustSignal label={c.trustStep2} />
+		</div>
+
+		{/* Prefer email + other channels */}
+		<div class="mx-auto mt-16 max-w-3xl border-t border-[var(--border-subtle)] pt-12">
+			<div class="grid gap-10 sm:grid-cols-2">
+				<div>
+					<p
+						class="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground"
+						style="font-family: var(--font-mono);"
+					>
+						{c.contactEmailHeading}
+					</p>
+					<p
+						class="mt-3 text-sm leading-relaxed text-muted-foreground"
+						style="font-family: var(--font-body);"
+					>
+						{c.contactEmailLead}
+					</p>
+					<a
+						href="mailto:hello@404tf.com"
+						class="mt-4 inline-flex items-center gap-2 text-base text-primary transition-colors duration-150 hover:text-foreground"
+						style="font-family: var(--font-mono);"
+					>
+						<span>
+							hello@<span style="color: var(--secondary);">404</span>tf.com
+						</span>
+						<span aria-hidden="true">&rarr;</span>
+					</a>
+				</div>
+				<div>
+					<p
+						class="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground"
+						style="font-family: var(--font-mono);"
+					>
+						{c.contactOtherHeading}
+					</p>
+					<ul class="mt-3 space-y-2">
+						{
+							otherChannels.map((label) => (
+								<li
+									class="flex items-center gap-2 text-sm text-muted-foreground"
+									style="font-family: var(--font-body);"
+								>
+									<span
+										aria-hidden="true"
+										class="inline-block h-1.5 w-1.5"
+										style="background: var(--border-subtle); border: 1px solid var(--muted-foreground);"
+									/>
+									<span>{label}</span>
+								</li>
+							))
+						}
+					</ul>
+				</div>
+			</div>
 		</div>
 	</section>
 </BaseLayout>

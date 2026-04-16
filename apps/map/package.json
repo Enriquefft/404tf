@@ -5,7 +5,7 @@
 	"private": true,
 	"scripts": {
 		"dev": "astro dev",
-		"build": "bun run scripts/generate-seed.ts && astro build",
+		"build": "astro build",
 		"preview": "astro preview",
 		"check": "astro check",
 		"lint": "biome check --fix ."
@@ -15,6 +15,10 @@
 		"@404tf/database": "workspace:*",
 		"@astrojs/check": "^0.9.7",
 		"@astrojs/vercel": "^9.0.5",
+		"@fontsource-variable/big-shoulders-display": "^5.2.5",
+		"@fontsource-variable/jetbrains-mono": "^5.2.8",
+		"@fontsource/barlow-semi-condensed": "^5.2.7",
+		"@resvg/resvg-js": "^2.6.2",
 		"@solar-icons/react": "^1.1.0",
 		"@t3-oss/env-nextjs": "^0.13.11",
 		"astro": "^5",
@@ -23,6 +27,7 @@
 		"react-dom": "^19.2.4",
 		"recharts": "^3.8.1",
 		"resend": "^6.10.0",
+		"satori": "^0.26.0",
 		"zod": "^4.3.6"
 	},
 	"devDependencies": {

@@ -1,10 +1,11 @@
 import { useMemo } from "react";
 import { AMERICAS_POINTS, LATAM_POINTS, projectToSvg } from "@/lib/map-points";
-import type { VerticalKey } from "@/lib/seed-schema";
+import type { VerticalKey } from "@/lib/startup-schema";
 
 type StartupDot = {
 	slug: string;
 	name: string;
+	country: string;
 	lat: number;
 	lng: number;
 	verticals: readonly VerticalKey[];
@@ -14,6 +15,7 @@ type DotGridMapProps = {
 	startups: readonly StartupDot[];
 	width?: number;
 	height?: number;
+	countLabel?: string;
 };
 
 /** CSS-variable-aware color lookup for inline styles */
@@ -41,7 +43,20 @@ const SVG_H = 600;
 // Background grid spacing in SVG units
 const GRID_SPACING = 20;
 
-export function DotGridMap({ startups, width = SVG_W, height = SVG_H }: DotGridMapProps) {
+type CountryCluster = {
+	country: string;
+	count: number;
+	centerX: number;
+	centerY: number;
+	radius: number;
+};
+
+export function DotGridMap({
+	startups,
+	width = SVG_W,
+	height = SVG_H,
+	countLabel = "startup",
+}: DotGridMapProps) {
 	// Background grid dots
 	const gridDots = useMemo(() => {
 		const dots: Array<{ x: number; y: number; key: string }> = [];
@@ -73,16 +88,47 @@ export function DotGridMap({ startups, width = SVG_W, height = SVG_H }: DotGridM
 		[width, height],
 	);
 
-	// Startup dots
+	// Startup dots (projected) with country attached for hover clustering
 	const startupDots = useMemo(
 		() =>
 			startups.map((s) => {
 				const { x, y } = projectToSvg(s.lat, s.lng, width, height);
 				const color = getStartupColor(s.verticals);
-				return { x, y, color, slug: s.slug, name: s.name };
+				return { x, y, color, slug: s.slug, name: s.name, country: s.country };
 			}),
 		[startups, width, height],
 	);
+
+	// Cluster startups by country for the tooltip hover surface. Dots without
+	// a country (e.g. pages still passing the legacy shape) are skipped so the
+	// tooltip only ever surfaces a confirmed country name.
+	const countryClusters = useMemo<CountryCluster[]>(() => {
+		const groups = new Map<string, { xs: number[]; ys: number[] }>();
+		for (const dot of startupDots) {
+			if (!dot.country) continue;
+			const bucket = groups.get(dot.country);
+			if (bucket) {
+				bucket.xs.push(dot.x);
+				bucket.ys.push(dot.y);
+			} else {
+				groups.set(dot.country, { xs: [dot.x], ys: [dot.y] });
+			}
+		}
+		return Array.from(groups.entries()).map(([country, { xs, ys }]) => {
+			const centerX = xs.reduce((a, b) => a + b, 0) / xs.length;
+			const centerY = ys.reduce((a, b) => a + b, 0) / ys.length;
+			// Radius scales with spread so single-dot countries still get a reasonable hit area
+			let maxDist = 0;
+			for (let i = 0; i < xs.length; i++) {
+				const dx = (xs[i] ?? 0) - centerX;
+				const dy = (ys[i] ?? 0) - centerY;
+				const d = Math.sqrt(dx * dx + dy * dy);
+				if (d > maxDist) maxDist = d;
+			}
+			const radius = Math.max(22, maxDist + 18);
+			return { country, count: xs.length, centerX, centerY, radius };
+		});
+	}, [startupDots]);
 
 	return (
 		<svg
@@ -94,7 +140,8 @@ export function DotGridMap({ startups, width = SVG_W, height = SVG_H }: DotGridM
 				position: "absolute",
 				inset: 0,
 			}}
-			aria-hidden="true"
+			role="img"
+			aria-label="LATAM deeptech startup map"
 		>
 			<defs>
 				{/* Glow filter for startup dots */}
@@ -132,7 +179,6 @@ export function DotGridMap({ startups, width = SVG_W, height = SVG_H }: DotGridM
 			<g>
 				{startupDots.map((d) => (
 					<g key={d.slug}>
-						{/* Glow ring */}
 						<circle
 							cx={d.x}
 							cy={d.y}
@@ -141,9 +187,29 @@ export function DotGridMap({ startups, width = SVG_W, height = SVG_H }: DotGridM
 							opacity="0.25"
 							className="startup-glow-ring"
 						/>
-						{/* Core dot */}
 						<circle cx={d.x} cy={d.y} r="3" fill={d.color} className="startup-dot" />
 					</g>
+				))}
+			</g>
+
+			{/* Layer 5: Country hover surfaces — SVG native <title> shows tooltip
+			     on hover without JS state. Invisible circle wraps clustered
+			     startup dots per country; browsers render the title natively. */}
+			<g>
+				{countryClusters.map((cluster) => (
+					<circle
+						key={`hit-${cluster.country}`}
+						cx={cluster.centerX}
+						cy={cluster.centerY}
+						r={cluster.radius}
+						fill="transparent"
+						className="country-hit"
+					>
+						<title>
+							{cluster.country.toUpperCase()} · {cluster.count} {countLabel}
+							{cluster.count === 1 ? "" : "s"}
+						</title>
+					</circle>
 				))}
 			</g>
 
@@ -161,6 +227,10 @@ export function DotGridMap({ startups, width = SVG_W, height = SVG_H }: DotGridM
 				.startup-glow-ring {
 					animation: glow-breathe 3s ease-in-out infinite;
 				}
+				.country-hit {
+					cursor: crosshair;
+					pointer-events: all;
+				}
 				@keyframes dot-pulse {
 					0%, 100% { opacity: 1; }
 					50% { opacity: 0.6; }
@@ -172,6 +242,9 @@ export function DotGridMap({ startups, width = SVG_W, height = SVG_H }: DotGridM
 				@keyframes glow-breathe {
 					0%, 100% { r: 6; opacity: 0.25; }
 					50% { r: 9; opacity: 0.12; }
+				}
+				@media (hover: none) {
+					.country-hit { pointer-events: none; }
 				}
 			`}</style>
 		</svg>

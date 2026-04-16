@@ -1,0 +1,43 @@
+---
+import { getTranslations } from "@/i18n/translations";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const locale = "en" as const;
+const t = getTranslations(locale);
+const title = t.footer.legalTerms;
+---
+
+<BaseLayout
+	title={`${title} — ${t.meta.siteTitle}`}
+	description={title}
+	locale={locale}
+>
+	<section class="ds-section mx-auto max-w-2xl px-4 py-24 sm:px-6 lg:px-8">
+		<p
+			class="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground"
+			style="font-family: var(--font-mono);"
+		>
+			<span style="color: var(--secondary);">404</span> Mapped · {t.footer.legalHeading}
+		</p>
+		<h1
+			class="mt-4 text-3xl font-bold tracking-tight sm:text-4xl"
+			style="font-family: var(--font-display); color: var(--foreground);"
+		>
+			{title}
+		</h1>
+		<p
+			class="mt-8 text-base leading-relaxed text-muted-foreground"
+			style="font-family: var(--font-body);"
+		>
+			Currently drafting. Reach out to
+			<a
+				href="mailto:hello@404tf.com"
+				class="text-primary hover:underline"
+				style="font-family: var(--font-mono);"
+			>
+				hello@<span style="color: var(--secondary);">404</span>tf.com
+			</a>
+			if urgent.
+		</p>
+	</section>
+</BaseLayout>

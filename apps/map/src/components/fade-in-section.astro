@@ -1,4 +1,11 @@
 ---
+/**
+ * Thin wrapper that tags a section for the on-load `ds-sectionIn` animation
+ * defined in `src/styles/globals.css`. Renders visible HTML with no opacity
+ * gate, so SSR, crawlers, print, and full-page screenshots all capture the
+ * real content. The animation plays for every visitor on first paint and is
+ * disabled automatically under `prefers-reduced-motion: reduce`.
+ */
 type Props = {
 	class?: string;
 	tag?: "section" | "div";
@@ -9,36 +16,6 @@ const { class: className = "", tag = "section", style } = Astro.props;
 const Tag = tag;
 ---
 
-<Tag class={`fade-in-section ${className}`} data-fade-in style={style}>
+<Tag class={`ds-section ${className}`.trim()} style={style}>
 	<slot />
 </Tag>
-
-<script>
-	function initFadeIn() {
-		const sections = document.querySelectorAll<HTMLElement>("[data-fade-in]");
-		if (sections.length === 0) return;
-
-		const observer = new IntersectionObserver(
-			(entries) => {
-				for (const entry of entries) {
-					if (entry.isIntersecting) {
-						entry.target.classList.add("ds-section");
-						observer.unobserve(entry.target);
-					}
-				}
-			},
-			{ threshold: 0.1, rootMargin: "0px 0px -40px 0px" },
-		);
-
-		for (const section of sections) {
-			// Start hidden
-			section.style.opacity = "0";
-			observer.observe(section);
-		}
-	}
-
-	// Run on initial load
-	initFadeIn();
-	// Re-run on Astro page transitions (view transitions)
-	document.addEventListener("astro:after-swap", initFadeIn);
-</script>

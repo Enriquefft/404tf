@@ -34,19 +34,58 @@ type CorporateTranslations = {
 	done: string;
 	contactTitle: string;
 	contactSubtitle: string;
+	contactNextLabel: string;
+	contactNextStep1Title: string;
+	contactNextStep1Desc: string;
+	contactNextStep2Title: string;
+	contactNextStep2Desc: string;
+	contactNextStep3Title: string;
+	contactNextStep3Desc: string;
+	contactResponsePromise: string;
+	contactPrivacyNote: string;
+	contactEmailHeading: string;
+	contactEmailLead: string;
+	contactEmailCta: string;
+	contactOtherHeading: string;
+	contactOtherLinkedinSoon: string;
+	contactOtherTwitterSoon: string;
 	roles: Record<string, string>;
 	industries: Record<string, string>;
 	timelines: Record<string, string>;
 };
 
+type SocialProofTestimonial = {
+	quote: string;
+	author: string;
+	role: string;
+};
+
+type SocialProofTranslations = {
+	liveCounterStartups: string;
+	liveCounterCountries: string;
+	liveCounterFundingMapped: string;
+	backedByLabel: string;
+	pressLabel: string;
+	testimonialsLabel: string;
+	testimonialsHeadline: string;
+	testimonials: readonly [SocialProofTestimonial, SocialProofTestimonial, SocialProofTestimonial];
+};
+
 type LandingTranslations = {
+	heroKicker: string;
+	heroEyebrow: string;
+	heroManifesto: string;
 	heroSubtitle: string;
 	heroSecondary: string;
+	heroTrustLine: string;
+	heroGetOnMapLink: string;
+	mapTooltipCount: string;
 	statsStartups: string;
 	statsCountries: string;
 	statsVerticals: string;
 	scrollToExplore: string;
 	featuredLabel: string;
+	featuredKicker: string;
 	featuredHeadline: string;
 	featuredLink: string;
 	dataLabel: string;
@@ -67,6 +106,17 @@ type LandingTranslations = {
 	startupDesc: string;
 	startupStep1: string;
 	startupStep2: string;
+	socialProof: SocialProofTranslations;
+};
+
+type StartupCardTranslations = {
+	raised: string;
+	tagReadyForPilot: string;
+	tagEarlyStage: string;
+	tagInStealth: string;
+	tagRaising: string;
+	tagNew: string;
+	tagHiring: string;
 };
 
 type DirectoryTranslations = {
@@ -86,6 +136,31 @@ type DirectoryTranslations = {
 	showMap: string;
 	hideMap: string;
 	mapTooltipIn: string;
+	heroKickerPrefix: string;
+	heroKickerStartups: string;
+	heroKickerCountries: string;
+	heroHeadline: string;
+	heroDescriptor: string;
+	tabAll: string;
+	tabPilotReady: string;
+	tabRaising: string;
+	tabNew: string;
+	tabStealth: string;
+	resultShowing: string;
+	resultFilteredBy: string;
+	resultNone: string;
+	loadMore: string;
+	floatingKicker: string;
+	floatingLabel: string;
+	mobileCtaKicker: string;
+	emptyKicker: string;
+	emptyHeadline: string;
+	emptyContactCta: string;
+	quickBookIntro: string;
+	quickSave: string;
+	quickSaved: string;
+	quickShare: string;
+	quickShared: string;
 };
 
 type ProfileTranslations = {
@@ -134,22 +209,40 @@ type InsightsTranslations = {
 	title: string;
 	subtitle: string;
 	byline: string;
+	heroKicker: string;
 	execStartups: string;
+	execStartupsCompare: string;
 	execCountries: string;
+	execCountriesCompare: string;
 	execFunding: string;
+	execFundingCompare: string;
 	geoTitle: string;
 	geoLabel: string;
+	geoKicker: string;
+	geoInsight: string;
 	verticalTitle: string;
 	verticalLabel: string;
+	verticalKicker: string;
+	verticalInsight: string;
+	verticalTopThree: string;
 	foundingTitle: string;
 	foundingLabel: string;
+	foundingKicker: string;
+	foundingInsight: string;
+	foundingPeakAnnotation: string;
 	maturityTitle: string;
 	maturityLabel: string;
+	maturityKicker: string;
+	maturityInsight: string;
 	fundingTitle: string;
 	fundingLabel: string;
+	fundingKicker: string;
+	fundingInsight: string;
 	fundingTotal: string;
 	fundingWithData: string;
 	fundingAvg: string;
+	insightTag: string;
+	sourceLine: string;
 	pdfTitle: string;
 	pdfSubtitle: string;
 	pdfTrust: string;
@@ -272,7 +365,20 @@ type Translations = {
 		contactHeading: string;
 		talkToUs: string;
 		copyright: string;
+		copyrightFull: string;
 		methodology: string;
+		legalHeading: string;
+		legalTerms: string;
+		legalPrivacy: string;
+		legalCookies: string;
+		address: string;
+		responseTime: string;
+		trustGdpr: string;
+		trustDataHandling: string;
+		trustBuiltIn: string;
+		perfBuiltFast: string;
+		perfRenderedIn: string;
+		perfAnalytics: string;
 	};
 	common: {
 		loading: string;
@@ -288,6 +394,7 @@ type Translations = {
 	};
 	landing: LandingTranslations;
 	directory: DirectoryTranslations;
+	startupCard: StartupCardTranslations;
 	corporate: CorporateTranslations;
 	profile: ProfileTranslations;
 	insights: InsightsTranslations;
@@ -323,7 +430,20 @@ const en = {
 		contactHeading: "Contact",
 		talkToUs: "Talk to us",
 		copyright: "2026 404 Tech Found",
+		copyrightFull: "© 2026 · Tech Found · All rights reserved",
 		methodology: "About / Methodology",
+		legalHeading: "Legal",
+		legalTerms: "Terms of Service",
+		legalPrivacy: "Privacy Policy",
+		legalCookies: "Cookies Policy",
+		address: "Tech Found · Lima, Perú",
+		responseTime: "Replies within 24h · Mon–Fri",
+		trustGdpr: "GDPR-ready",
+		trustDataHandling: "Secure handling",
+		trustBuiltIn: "Built in Perú",
+		perfBuiltFast: "Built fast",
+		perfRenderedIn: "Rendered in",
+		perfAnalytics: "PostHog analytics · Privacy-first",
 	},
 	common: {
 		loading: "Loading...",
@@ -338,14 +458,22 @@ const en = {
 		ctaTalk: "Talk to 404tf",
 	},
 	landing: {
+		heroKicker: "LATAM · DEEPTECH · INTELLIGENCE",
+		heroEyebrow: "The LATAM deeptech directory",
+		heroManifesto:
+			"Latin America has been forging deeptech in silence. We dragged the forge into daylight and mapped every sparking anvil.",
 		heroSubtitle: "Deeptech, finally in scope.",
 		heroSecondary: "100+ startups building deep technology across Latin America",
+		heroTrustLine: "For corporates · startups · investors",
+		heroGetOnMapLink: "Building deeptech? Get on the map",
+		mapTooltipCount: "startup",
 		statsStartups: "Startups",
 		statsCountries: "Countries",
 		statsVerticals: "Verticals",
 		scrollToExplore: "Scroll to explore",
 		featuredLabel: "ON THE MAP",
-		featuredHeadline: "50+ startups. 7 countries. Every deeptech vertical.",
+		featuredKicker: "CURATED · APRIL 2026",
+		featuredHeadline: "Six forges. Six stories. One map.",
 		featuredLink: "Explore the full directory",
 		dataLabel: "KEY FINDINGS",
 		dataHeadline: "The landscape at a glance",
@@ -366,6 +494,44 @@ const en = {
 			"Join the directory and get discovered by corporates looking for deeptech solutions.",
 		startupStep1: "Submit your startup profile",
 		startupStep2: "Get discovered by corporates",
+		socialProof: {
+			liveCounterStartups: "Startups",
+			liveCounterCountries: "Countries",
+			liveCounterFundingMapped: "Funding mapped",
+			backedByLabel: "Working with",
+			pressLabel: "Press & research",
+			testimonialsLabel: "WHAT THEY SAY",
+			testimonialsHeadline: "Voices from the LATAM deeptech ecosystem",
+			testimonials: [
+				{
+					quote:
+						"404 Mapped gives our innovation team a defensible shortlist in days, not quarters. The rigor behind the directory is what sold us.",
+					author: "Placeholder Name",
+					role: "Head of Innovation, Corporate Partner (TBD)",
+				},
+				{
+					quote:
+						"Being on the map put us in the room with two Fortune 500 procurement teams in the first month. Corporate scouts actually use this.",
+					author: "Placeholder Founder",
+					role: "CEO, Featured Startup (TBD)",
+				},
+				{
+					quote:
+						"The deeptech signal in Latin America has been scattered for years. 404 Mapped is the first honest index we've worked with.",
+					author: "Placeholder Investor",
+					role: "Partner, LATAM VC Fund (TBD)",
+				},
+			],
+		},
+	},
+	startupCard: {
+		raised: "raised",
+		tagReadyForPilot: "READY FOR PILOT",
+		tagEarlyStage: "EARLY STAGE",
+		tagInStealth: "IN STEALTH",
+		tagRaising: "RAISING",
+		tagNew: "NEW",
+		tagHiring: "HIRING",
 	},
 	directory: {
 		searchPlaceholder: "Search startups...",
@@ -384,6 +550,33 @@ const en = {
 		showMap: "View map",
 		hideMap: "Hide map",
 		mapTooltipIn: "in",
+		heroKickerPrefix: "DIRECTORY",
+		heroKickerStartups: "STARTUPS",
+		heroKickerCountries: "COUNTRIES",
+		heroHeadline: "Find the startup moving your industry.",
+		heroDescriptor:
+			"Curated deeptech builders across Latin America. Filter by stage, vertical, and country to find your next pilot partner.",
+		tabAll: "All",
+		tabPilotReady: "Ready for pilot",
+		tabRaising: "Raising",
+		tabNew: "New",
+		tabStealth: "In stealth",
+		resultShowing: "{count} of {total} startups",
+		resultFilteredBy: "Filtered by",
+		resultNone: "No filters active",
+		loadMore: "Load more",
+		floatingKicker: "FOR CORPORATES · FREE",
+		floatingLabel: "Find your deeptech solution",
+		mobileCtaKicker: "FOR CORPORATES",
+		emptyKicker: "NO RESULTS",
+		emptyHeadline:
+			"Refine your search or reach out — we may already know a startup that isn't on the map yet.",
+		emptyContactCta: "Contact us",
+		quickBookIntro: "Book intro",
+		quickSave: "Save",
+		quickSaved: "Saved",
+		quickShare: "Share",
+		quickShared: "Copied",
 	},
 	corporate: {
 		title: "Find Your Deeptech Solution",
@@ -421,6 +614,25 @@ const en = {
 		done: "Done",
 		contactTitle: "Get in Touch",
 		contactSubtitle: "Tell us about your deeptech needs and we'll find the right solutions.",
+		contactNextLabel: "What happens next",
+		contactNextStep1Title: "We read every word",
+		contactNextStep1Desc:
+			"Your message lands directly with the 404 Tech Found partners — no bot, no triage queue.",
+		contactNextStep2Title: "You hear back within 24h",
+		contactNextStep2Desc:
+			"A founder replies with a first read, clarifying questions, or a short list of deeptech startups worth a call.",
+		contactNextStep3Title: "We book a 30-minute call",
+		contactNextStep3Desc:
+			"If there's a fit, we align on scope, introduce the relevant builders, and map a pilot path.",
+		contactResponsePromise: "Replies within 24h, Mon–Fri",
+		contactPrivacyNote:
+			"Only the 404tf partners see this. Never shared, never sold — GDPR-ready handling.",
+		contactEmailHeading: "Prefer email?",
+		contactEmailLead: "Skip the form. Write directly and we'll pick it up the same way.",
+		contactEmailCta: "Write to hello@404tf.com",
+		contactOtherHeading: "Other ways to reach us",
+		contactOtherLinkedinSoon: "LinkedIn — coming soon",
+		contactOtherTwitterSoon: "X / Twitter — coming soon",
 		roles: {
 			innovation_director: "Innovation Director",
 			cto: "CTO / VP Engineering",
@@ -495,24 +707,47 @@ const en = {
 	insights: {
 		title: "The State of Deeptech",
 		subtitle:
-			"An analysis of 50+ startups building deep technology across Latin America. First edition, 2026.",
+			"Where Latin America is quietly forging its hardest technology — by country, vertical, vintage, and stage. First edition, 2026.",
 		byline: "A 404 Mapped report",
+		heroKicker: "STATE · 2026 · MARCH",
 		execStartups: "Startups Mapped",
+		execStartupsCompare: "First edition, 2026",
 		execCountries: "Countries",
+		execCountriesCompare: "Across LATAM",
 		execFunding: "Total Funding Disclosed",
+		execFundingCompare: "From {pct}% of startups with data",
 		geoTitle: "Where is deeptech?",
 		geoLabel: "GEOGRAPHIC DISTRIBUTION",
+		geoKicker: "WHERE DEEPTECH LIVES",
+		geoInsight:
+			"{leader} dominates with {leaderCount} startups — {multiple}× {second}. The map is concentrated, not spread.",
 		verticalTitle: "What are they building?",
 		verticalLabel: "VERTICAL BREAKDOWN",
+		verticalKicker: "WHAT THEY'RE BUILDING",
+		verticalInsight:
+			"{leader} leads with {count} startups. The top three verticals capture {share}% of all tags.",
+		verticalTopThree: "TOP 3",
 		foundingTitle: "When did they start?",
 		foundingLabel: "FOUNDING TIMELINE",
+		foundingKicker: "WHEN THEY STARTED",
+		foundingInsight:
+			"{year} was the peak year — {count} new startups. {pct}% of the cohort was founded in the last five years.",
+		foundingPeakAnnotation: "PEAK · {year}",
 		maturityTitle: "How mature are they?",
 		maturityLabel: "MATURITY DISTRIBUTION",
+		maturityKicker: "HOW MATURE",
+		maturityInsight:
+			"{earlyPct}% still in R&D or prototype. The commercial frontier is thin — only {commercialPct}% at pilot or revenue.",
 		fundingTitle: "Follow the money",
 		fundingLabel: "FUNDING LANDSCAPE",
+		fundingKicker: "FOLLOW THE MONEY",
+		fundingInsight:
+			"{total} raised across {count} startups — the top three capture {share}% of disclosed capital.",
 		fundingTotal: "Total Disclosed",
 		fundingWithData: "With Funding Data",
 		fundingAvg: "Avg. Funded Round",
+		insightTag: "INSIGHT",
+		sourceLine: "Source: 404 Mapped database · April 2026",
 		pdfTitle: "Download the Full Report",
 		pdfSubtitle: "First edition, 2026",
 		pdfTrust: "Free PDF with extended analysis and methodology.",
@@ -651,7 +886,20 @@ const es = {
 		contactHeading: "Contacto",
 		talkToUs: "Hablemos",
 		copyright: "2026 404 Tech Found",
+		copyrightFull: "© 2026 · Tech Found · Todos los derechos reservados",
 		methodology: "Nosotros / Metodología",
+		legalHeading: "Legal",
+		legalTerms: "Términos de Servicio",
+		legalPrivacy: "Política de Privacidad",
+		legalCookies: "Política de Cookies",
+		address: "Tech Found · Lima, Perú",
+		responseTime: "Respondemos en 24h · lun–vie",
+		trustGdpr: "GDPR-ready",
+		trustDataHandling: "Manejo seguro",
+		trustBuiltIn: "Hecho en Perú",
+		perfBuiltFast: "Construido rápido",
+		perfRenderedIn: "Renderizado en",
+		perfAnalytics: "PostHog analytics · Privacidad primero",
 	},
 	common: {
 		loading: "Cargando...",
@@ -666,14 +914,22 @@ const es = {
 		ctaTalk: "Habla con 404tf",
 	},
 	landing: {
+		heroKicker: "LATAM · DEEPTECH · INTELIGENCIA",
+		heroEyebrow: "El directorio deeptech de LATAM",
+		heroManifesto:
+			"América Latina llevaba años forjando deeptech en silencio. Sacamos la forja a la luz y mapeamos cada yunque que echaba chispas.",
 		heroSubtitle: "Deeptech, por fin a la vista.",
 		heroSecondary: "100+ startups construyendo tecnología profunda en América Latina",
+		heroTrustLine: "Para corporativos · startups · inversionistas",
+		heroGetOnMapLink: "¿Construyes deeptech? Aparece en el mapa",
+		mapTooltipCount: "startup",
 		statsStartups: "Startups",
 		statsCountries: "Países",
 		statsVerticals: "Verticales",
 		scrollToExplore: "Desplázate para explorar",
 		featuredLabel: "EN EL MAPA",
-		featuredHeadline: "50+ startups. 7 países. Todas las verticales deeptech.",
+		featuredKicker: "CURADO · ABRIL 2026",
+		featuredHeadline: "Seis forjas. Seis historias. Un mapa.",
 		featuredLink: "Explora el directorio completo",
 		dataLabel: "HALLAZGOS CLAVE",
 		dataHeadline: "El panorama de un vistazo",
@@ -694,6 +950,44 @@ const es = {
 			"Únete al directorio y sé descubierto por corporativos que buscan soluciones deeptech.",
 		startupStep1: "Envía el perfil de tu startup",
 		startupStep2: "Sé descubierto por corporativos",
+		socialProof: {
+			liveCounterStartups: "Startups",
+			liveCounterCountries: "Países",
+			liveCounterFundingMapped: "Financiamiento mapeado",
+			backedByLabel: "Trabajando con",
+			pressLabel: "Prensa e investigación",
+			testimonialsLabel: "LO QUE DICEN",
+			testimonialsHeadline: "Voces del ecosistema deeptech LATAM",
+			testimonials: [
+				{
+					quote:
+						"404 Mapped nos entrega una lista corta defendible en días, no en trimestres. El rigor detrás del directorio fue lo que nos convenció.",
+					author: "Nombre Pendiente",
+					role: "Directora de Innovación, Socio Corporativo (por confirmar)",
+				},
+				{
+					quote:
+						"Estar en el mapa nos puso en reuniones con dos equipos de compras de Fortune 500 en el primer mes. Los exploradores corporativos realmente lo usan.",
+					author: "Fundador Pendiente",
+					role: "CEO, Startup Destacada (por confirmar)",
+				},
+				{
+					quote:
+						"La señal deeptech en América Latina estuvo dispersa por años. 404 Mapped es el primer índice honesto con el que hemos trabajado.",
+					author: "Inversionista Pendiente",
+					role: "Partner, Fondo VC LATAM (por confirmar)",
+				},
+			],
+		},
+	},
+	startupCard: {
+		raised: "levantado",
+		tagReadyForPilot: "LISTA PARA PILOTO",
+		tagEarlyStage: "ETAPA TEMPRANA",
+		tagInStealth: "EN STEALTH",
+		tagRaising: "LEVANTANDO",
+		tagNew: "NUEVA",
+		tagHiring: "CONTRATANDO",
 	},
 	directory: {
 		searchPlaceholder: "Buscar startups...",
@@ -712,6 +1006,33 @@ const es = {
 		showMap: "Ver mapa",
 		hideMap: "Ocultar mapa",
 		mapTooltipIn: "en",
+		heroKickerPrefix: "DIRECTORIO",
+		heroKickerStartups: "STARTUPS",
+		heroKickerCountries: "PAÍSES",
+		heroHeadline: "Encuentra la startup que mueve tu industria.",
+		heroDescriptor:
+			"Builders deeptech curados en América Latina. Filtra por etapa, vertical y país para encontrar tu próximo socio de piloto.",
+		tabAll: "Todos",
+		tabPilotReady: "Listas para piloto",
+		tabRaising: "Recaudando",
+		tabNew: "Nuevas",
+		tabStealth: "En sigilo",
+		resultShowing: "{count} de {total} startups",
+		resultFilteredBy: "Filtrado por",
+		resultNone: "Sin filtros activos",
+		loadMore: "Cargar más",
+		floatingKicker: "PARA CORPORATIVOS · GRATUITO",
+		floatingLabel: "Encuentra tu solución deeptech",
+		mobileCtaKicker: "PARA CORPORATIVOS",
+		emptyKicker: "SIN RESULTADOS",
+		emptyHeadline:
+			"Afina tu búsqueda o contáctanos — quizás tenemos una startup que aún no está en el mapa.",
+		emptyContactCta: "Contáctanos",
+		quickBookIntro: "Agendar intro",
+		quickSave: "Guardar",
+		quickSaved: "Guardado",
+		quickShare: "Compartir",
+		quickShared: "Copiado",
 	},
 	corporate: {
 		title: "Encuentra tu solución deeptech",
@@ -750,6 +1071,25 @@ const es = {
 		contactTitle: "Contáctanos",
 		contactSubtitle:
 			"Cuéntanos sobre tus necesidades deeptech y encontraremos las soluciones adecuadas.",
+		contactNextLabel: "Qué sigue",
+		contactNextStep1Title: "Leemos cada palabra",
+		contactNextStep1Desc:
+			"Tu mensaje llega directo a los socios de 404 Tech Found — sin bots, sin colas de triage.",
+		contactNextStep2Title: "Respondemos en 24h",
+		contactNextStep2Desc:
+			"Un founder responde con una primera lectura, preguntas clarificadoras o una lista corta de startups deeptech que vale la pena conocer.",
+		contactNextStep3Title: "Agendamos una llamada de 30 minutos",
+		contactNextStep3Desc:
+			"Si hay encaje, alineamos alcance, te presentamos a los builders relevantes y trazamos un camino de piloto.",
+		contactResponsePromise: "Respondemos en 24h, lun–vie",
+		contactPrivacyNote:
+			"Solo los socios de 404tf ven esto. Nunca compartido, nunca vendido — manejo GDPR-ready.",
+		contactEmailHeading: "¿Prefieres email?",
+		contactEmailLead: "Salta el formulario. Escribe directo y lo recibimos igual.",
+		contactEmailCta: "Escribe a hello@404tf.com",
+		contactOtherHeading: "Otras formas de contacto",
+		contactOtherLinkedinSoon: "LinkedIn — próximamente",
+		contactOtherTwitterSoon: "X / Twitter — próximamente",
 		roles: {
 			innovation_director: "Director de Innovación",
 			cto: "CTO / VP Ingeniería",
@@ -825,24 +1165,47 @@ const es = {
 	insights: {
 		title: "El Estado del Deeptech",
 		subtitle:
-			"Un análisis de 50+ startups construyendo tecnología profunda en América Latina. Primera edición, 2026.",
+			"Donde América Latina forja en silencio su tecnología más dura — por país, vertical, cohorte y etapa. Primera edición, 2026.",
 		byline: "Un reporte de 404 Mapped",
+		heroKicker: "ESTADO · 2026 · MARZO",
 		execStartups: "Startups Mapeadas",
+		execStartupsCompare: "Primera edición, 2026",
 		execCountries: "Países",
+		execCountriesCompare: "En toda LATAM",
 		execFunding: "Financiamiento Total Declarado",
+		execFundingCompare: "De {pct}% de startups con datos",
 		geoTitle: "¿Dónde está el deeptech?",
 		geoLabel: "DISTRIBUCIÓN GEOGRÁFICA",
+		geoKicker: "DÓNDE VIVE EL DEEPTECH",
+		geoInsight:
+			"{leader} domina con {leaderCount} startups — {multiple}× {second}. El mapa está concentrado, no disperso.",
 		verticalTitle: "¿Qué están construyendo?",
 		verticalLabel: "DESGLOSE POR VERTICAL",
+		verticalKicker: "LO QUE CONSTRUYEN",
+		verticalInsight:
+			"{leader} lidera con {count} startups. Las tres principales verticales capturan el {share}% de todas las etiquetas.",
+		verticalTopThree: "TOP 3",
 		foundingTitle: "¿Cuándo empezaron?",
 		foundingLabel: "LÍNEA TEMPORAL DE FUNDACIÓN",
+		foundingKicker: "CUÁNDO EMPEZARON",
+		foundingInsight:
+			"{year} fue el año pico — {count} nuevas startups. El {pct}% del cohorte se fundó en los últimos cinco años.",
+		foundingPeakAnnotation: "PICO · {year}",
 		maturityTitle: "¿Qué tan maduros son?",
 		maturityLabel: "DISTRIBUCIÓN DE MADUREZ",
+		maturityKicker: "QUÉ TAN MADUROS",
+		maturityInsight:
+			"{earlyPct}% aún en I+D o prototipo. La frontera comercial es delgada — solo {commercialPct}% en piloto o ingresos.",
 		fundingTitle: "Sigue el dinero",
 		fundingLabel: "PANORAMA DE FINANCIAMIENTO",
+		fundingKicker: "SIGUE EL DINERO",
+		fundingInsight:
+			"{total} levantados en {count} startups — las tres principales capturan el {share}% del capital declarado.",
 		fundingTotal: "Total Declarado",
 		fundingWithData: "Con Datos de Financiamiento",
 		fundingAvg: "Ronda Promedio",
+		insightTag: "INSIGHT",
+		sourceLine: "Fuente: base de datos 404 Mapped · abril 2026",
 		pdfTitle: "Descarga el Reporte Completo",
 		pdfSubtitle: "Primera edición, 2026",
 		pdfTrust: "PDF gratuito con análisis extendido y metodología.",

@@ -1,4 +1,6 @@
 ---
+export const prerender = false;
+
 import { ClaimForm } from "@/components/claim-form";
 import CorporateCta from "@/components/corporate-cta.astro";
 import Badge from "@/components/ui/badge.astro";
@@ -7,23 +9,30 @@ import SectionLabel from "@/components/ui/section-label.astro";
 import StartupCard from "@/components/ui/startup-card.astro";
 import { getTranslations } from "@/i18n/translations";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import { CACHE_TAGS, joinCacheTags } from "@/lib/cache-tags";
 import { getCountryFlag } from "@/lib/countries";
-import { startups } from "@/lib/seed";
-import type { SeedStartup } from "@/lib/seed-schema";
+import { getRelatedStartups, getStartupBySlug } from "@/lib/db-queries";
 import { MATURITY_CONFIG, VERTICAL_CONFIG } from "@/lib/verticals";
 
 const locale = "en" as const;
 const t = getTranslations(locale);
 
-export async function getStaticPaths() {
-	return startups.map((s) => ({
-		params: { slug: s.slug },
-		props: { startup: s },
-	}));
-}
+const { slug } = Astro.params;
+if (!slug) return new Response("Not Found", { status: 404 });
 
-type Props = { startup: SeedStartup };
-const { startup } = Astro.props;
+const startup = await getStartupBySlug(slug);
+if (!startup) return new Response("Not Found", { status: 404 });
+
+const firstVerticalKey = startup.verticals[0];
+const related = firstVerticalKey
+	? await getRelatedStartups(startup.slug, [firstVerticalKey], 3)
+	: [];
+
+Astro.response.headers.set("Cache-Control", "public, s-maxage=3600, stale-while-revalidate=86400");
+Astro.response.headers.set(
+	"Cache-Tag",
+	joinCacheTags([CACHE_TAGS.startup(startup.slug), CACHE_TAGS.startupAll]),
+);
 
 // i18n field selection: EN fields with fallback to ES (base)
 const oneLiner = startup.one_liner_en ?? startup.one_liner;
@@ -34,18 +43,13 @@ const businessModel = startup.business_model_en ?? startup.business_model;
 const displayCountry = startup.country;
 
 const flag = getCountryFlag(startup.country);
-const firstVertical = startup.verticals[0];
+const firstVertical = firstVerticalKey;
 const initialsColor = firstVertical
 	? (VERTICAL_CONFIG[firstVertical]?.color ?? "var(--v-other)")
 	: "var(--v-other)";
 const initial = startup.name.charAt(0).toUpperCase();
 
 const maturityLabel = MATURITY_CONFIG[startup.maturity_level]?.label.en ?? startup.maturity_level;
-
-// Related startups: same primary vertical, excluding self
-const related = startups
-	.filter((s) => s.slug !== startup.slug && firstVertical && s.verticals.includes(firstVertical))
-	.slice(0, 3);
 
 const verticalLabel = firstVertical
 	? (VERTICAL_CONFIG[firstVertical]?.label.en ?? firstVertical)
@@ -64,6 +68,16 @@ const RESULT_ICONS: Record<string, string> = {
 	patent: "M9 2v2H7v16h10V4h-2V2H9ZM11 8h2v2h-2V8Zm0 4h2v2h-2v-2Z",
 	publication: "M4 4h16v16H4V4Zm2 4h12M6 12h12M6 16h8",
 };
+
+const ogMetric = startup.funding_received ?? displayCountry;
+const ogQuery = new URLSearchParams({
+	kind: "startup",
+	locale,
+	title: startup.name,
+	...(oneLiner ? { subtitle: oneLiner } : {}),
+	metric: ogMetric,
+});
+const ogImage = `/og/?${ogQuery.toString()}`;
 
 // JSON-LD Organization schema
 const jsonLd = {
@@ -86,6 +100,7 @@ const jsonLd = {
 	description={oneLiner}
 	locale={locale}
 	jsonLd={jsonLd}
+	ogImage={ogImage}
 >
 	<div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
 		<!-- Breadcrumb -->

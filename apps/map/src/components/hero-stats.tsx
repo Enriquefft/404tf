@@ -47,22 +47,24 @@ function StatCounter({ value, suffix, label }: StatItem) {
 	const count = useCountUp(value, 1800);
 
 	return (
-		<div className="flex flex-col items-center gap-1 px-4 py-2">
+		<div className="flex flex-col items-center gap-1.5 px-6 py-3 sm:px-8">
 			<span
-				className="text-2xl font-semibold tabular-nums tracking-tight sm:text-3xl"
+				className="font-semibold tabular-nums leading-none tracking-tight"
 				style={{
 					fontFamily: "var(--font-display)",
-					color: "var(--foreground)",
+					color: "var(--secondary)",
+					fontSize: "clamp(1.75rem, 3.2vw, 2.25rem)",
 				}}
 			>
 				{count}
 				{suffix}
 			</span>
 			<span
-				className="text-xs uppercase tracking-wider"
+				className="text-[10px] uppercase sm:text-[11px]"
 				style={{
-					fontFamily: "var(--font-heading)",
+					fontFamily: "var(--font-mono)",
 					color: "var(--muted-foreground)",
+					letterSpacing: "0.26em",
 				}}
 			>
 				{label}
@@ -74,11 +76,13 @@ function StatCounter({ value, suffix, label }: StatItem) {
 export function HeroStats({ stats }: HeroStatsProps) {
 	return (
 		<div
-			className="flex flex-wrap items-center justify-center gap-2 rounded-lg border px-2 py-1 sm:gap-0"
+			className="flex flex-wrap items-center justify-center gap-0 border px-1 py-1 sm:gap-0"
 			style={{
-				background: "rgba(10, 7, 16, 0.6)",
+				background: "rgba(10, 7, 16, 0.55)",
 				backdropFilter: "blur(12px)",
+				WebkitBackdropFilter: "blur(12px)",
 				borderColor: "var(--border-subtle)",
+				borderRadius: 0,
 			}}
 		>
 			{stats.map((stat, idx) => (
@@ -86,8 +90,9 @@ export function HeroStats({ stats }: HeroStatsProps) {
 					<StatCounter {...stat} />
 					{idx < stats.length - 1 && (
 						<div
-							className="hidden h-8 w-px sm:block"
-							style={{ background: "var(--border-subtle)" }}
+							className="hidden h-10 w-px sm:block"
+							style={{ background: "var(--border-strong)" }}
+							aria-hidden="true"
 						/>
 					)}
 				</div>

@@ -1,0 +1,76 @@
+---
+/**
+ * Live Counter — Bloomberg-style ticker strip
+ *
+ * Thin horizontal strip under the hero. Dark card, display-font numerals in
+ * amber, uppercase-mono micro labels. Values are sourced from the build-time
+ * seed (no runtime calls); treat them as a live snapshot of the directory.
+ */
+import type { Locale } from "@/i18n/translations";
+
+type Metric = {
+	value: string;
+	label: string;
+};
+
+type Props = {
+	locale: Locale;
+	startupsValue: number;
+	countriesValue: number;
+	fundingValue: string;
+	startupsLabel: string;
+	countriesLabel: string;
+	fundingLabel: string;
+};
+
+const { startupsValue, countriesValue, fundingValue, startupsLabel, countriesLabel, fundingLabel } =
+	Astro.props;
+
+const metrics: readonly Metric[] = [
+	{ value: String(startupsValue), label: startupsLabel },
+	{ value: String(countriesValue), label: countriesLabel },
+	{ value: fundingValue, label: fundingLabel },
+];
+---
+
+<section
+	aria-label="Live directory metrics"
+	class="relative z-10 border-y"
+	style="background: var(--card); border-color: var(--border-subtle);"
+>
+	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+		<ul
+			class="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 py-4 sm:justify-between sm:gap-x-10 sm:py-5"
+		>
+			{
+				metrics.map((metric, index) => (
+					<li class="flex items-center gap-6 sm:gap-10">
+						<div class="flex items-baseline gap-3">
+							<span
+								class="text-2xl font-semibold leading-none tracking-tight sm:text-3xl"
+								style="font-family: var(--font-display); color: var(--secondary);"
+							>
+								{metric.value}
+							</span>
+							<span
+								class="text-[10px] font-medium uppercase leading-none text-muted-foreground"
+								style="font-family: var(--font-mono); letter-spacing: 0.14em;"
+							>
+								{metric.label}
+							</span>
+						</div>
+						{index < metrics.length - 1 && (
+							<span
+								aria-hidden="true"
+								class="hidden text-xs leading-none text-muted-foreground sm:inline"
+								style="font-family: var(--font-mono);"
+							>
+								·
+							</span>
+						)}
+					</li>
+				))
+			}
+		</ul>
+	</div>
+</section>

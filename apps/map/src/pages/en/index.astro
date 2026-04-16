@@ -1,16 +1,24 @@
 ---
+export const prerender = false;
+
 import CorporateCTA from "@/components/corporate-cta.astro";
 import DataPreview from "@/components/data-preview.astro";
 import DualConversion from "@/components/dual-conversion.astro";
 import FeaturedStartups from "@/components/featured-startups.astro";
 import { HeroIsland } from "@/components/hero-island";
+import LiveCounter from "@/components/live-counter.astro";
+import SocialProofBar from "@/components/social-proof-bar.astro";
+import TestimonialGrid from "@/components/testimonial-grid.astro";
 import { getTranslations } from "@/i18n/translations";
 import { getRouteHref } from "@/i18n/utils";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { startups } from "@/lib/seed";
+import { CACHE_TAGS, joinCacheTags } from "@/lib/cache-tags";
+import { formatCurrency, getAllStartups, getInsightsData } from "@/lib/db-queries";
 
 const locale = "en" as const;
 const t = getTranslations(locale);
+
+const [startups, insights] = await Promise.all([getAllStartups(), getInsightsData()]);
 
 const uniqueCountries = new Set(startups.map((s) => s.country));
 const uniqueVerticals = new Set(startups.flatMap((s) => s.verticals));
@@ -18,6 +26,7 @@ const uniqueVerticals = new Set(startups.flatMap((s) => s.verticals));
 const heroStartups = startups.map((s) => ({
 	slug: s.slug,
 	name: s.name,
+	country: s.country,
 	lat: s.lat,
 	lng: s.lng,
 	verticals: s.verticals,
@@ -26,9 +35,20 @@ const heroStartups = startups.map((s) => ({
 const directoryHref = getRouteHref("directory", locale);
 const insightsHref = getRouteHref("insights", locale);
 const startupsHref = getRouteHref("startups", locale);
+
+Astro.response.headers.set("Cache-Control", "public, s-maxage=3600, stale-while-revalidate=86400");
+Astro.response.headers.set(
+	"Cache-Tag",
+	joinCacheTags([CACHE_TAGS.home(locale), CACHE_TAGS.directory, CACHE_TAGS.insights]),
+);
 ---
 
-<BaseLayout title={t.meta.siteTitle} description={t.meta.tagline} locale={locale}>
+<BaseLayout
+	title={t.meta.siteTitle}
+	description={t.meta.tagline}
+	locale={locale}
+	ogImage={`/og/?kind=landing&locale=${locale}`}
+>
 	<!-- Hero Section -->
 	<section class="relative">
 		<HeroIsland
@@ -61,6 +81,17 @@ const startupsHref = getRouteHref("startups", locale);
 		</div>
 	</section>
 
+	<!-- Live Counter — Bloomberg-style ticker under hero -->
+	<LiveCounter
+		locale={locale}
+		startupsValue={startups.length}
+		countriesValue={uniqueCountries.size}
+		fundingValue={formatCurrency(insights.fundingStats.totalDisclosed)}
+		startupsLabel={t.landing.socialProof.liveCounterStartups}
+		countriesLabel={t.landing.socialProof.liveCounterCountries}
+		fundingLabel={t.landing.socialProof.liveCounterFundingMapped}
+	/>
+
 	<!-- Featured Startups -->
 	<FeaturedStartups
 		startups={startups}
@@ -69,6 +100,21 @@ const startupsHref = getRouteHref("startups", locale);
 		headline={t.landing.featuredHeadline}
 		linkText={t.landing.featuredLink}
 		directoryHref={directoryHref}
+	/>
+
+	<!-- Social Proof Bar — placeholder partner + press wordmarks -->
+	<SocialProofBar
+		locale={locale}
+		backedByLabel={t.landing.socialProof.backedByLabel}
+		pressLabel={t.landing.socialProof.pressLabel}
+	/>
+
+	<!-- Testimonial Grid — 3 institutional quotes -->
+	<TestimonialGrid
+		locale={locale}
+		label={t.landing.socialProof.testimonialsLabel}
+		headline={t.landing.socialProof.testimonialsHeadline}
+		testimonials={t.landing.socialProof.testimonials}
 	/>
 
 	<!-- Data Preview -->

@@ -35,7 +35,7 @@ function isActive(href: string): boolean {
 			class="font-[var(--font-display)] text-lg font-semibold tracking-tight text-foreground"
 			style="font-family: var(--font-display);"
 		>
-			404 Mapped
+			<span style="color: var(--secondary);">404</span> Mapped
 		</a>
 
 		<!-- Desktop links -->
@@ -96,7 +96,7 @@ function isActive(href: string): boolean {
 			</summary>
 
 			<div
-				class="absolute right-0 top-full mt-2 w-48 rounded-md border border-border-subtle bg-card p-3 shadow-lg"
+				class="absolute right-0 top-full mt-2 w-48 border border-border-subtle bg-card p-3"
 			>
 				{
 					navLinks.map((link) => (

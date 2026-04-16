@@ -1,13 +1,21 @@
 ---
+export const prerender = false;
+
 import { DirectoryIsland } from "@/components/directory-island";
 import { getTranslations } from "@/i18n/translations";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { startups } from "@/lib/seed";
+import { CACHE_TAGS, joinCacheTags } from "@/lib/cache-tags";
+import { getAllStartups, getDirectoryPage } from "@/lib/db-queries";
 
 const locale = "en" as const;
 const t = getTranslations(locale);
 
-const initialStartups = startups.slice(0, 20).map((s) => ({
+const [firstPage, allStartups] = await Promise.all([
+	getDirectoryPage({ page: 1, pageSize: 20, sort: "az" }),
+	getAllStartups(),
+]);
+
+const initialStartups = firstPage.startups.map((s) => ({
 	slug: s.slug,
 	name: s.name,
 	one_liner: s.one_liner,
@@ -17,27 +25,41 @@ const initialStartups = startups.slice(0, 20).map((s) => ({
 	city: s.city,
 	lat: s.lat,
 	lng: s.lng,
-	verticals: s.verticals,
+	verticals: [...s.verticals],
 	maturity_level: s.maturity_level,
 	founding_year: s.founding_year,
 	funding_received: s.funding_received,
 }));
-const totalCount = startups.length;
-const mapPoints = startups.map((s) => ({
+const totalCount = firstPage.total;
+const mapPoints = allStartups.map((s) => ({
 	slug: s.slug,
 	lat: s.lat,
 	lng: s.lng,
-	verticals: s.verticals,
+	verticals: [...s.verticals],
 	country: s.country,
 }));
+const countriesCount = new Set(allStartups.map((s) => s.country)).size;
+const contactHref = `/${locale}/contact`;
+
+Astro.response.headers.set("Cache-Control", "public, s-maxage=3600, stale-while-revalidate=86400");
+Astro.response.headers.set(
+	"Cache-Tag",
+	joinCacheTags([CACHE_TAGS.directory, CACHE_TAGS.startupAll]),
+);
 ---
 
-<BaseLayout title={`${t.nav.directory} — ${t.meta.siteTitle}`} description={t.meta.directoryDesc} locale={locale}>
+<BaseLayout
+	title={`${t.nav.directory} — ${t.meta.siteTitle}`}
+	description={t.meta.directoryDesc}
+	locale={locale}
+	ogImage={`/og/?kind=directorio&locale=${locale}`}
+>
 	<section class="py-8">
 		<DirectoryIsland
 			client:load
 			initialStartups={initialStartups}
 			totalCount={totalCount}
+			countriesCount={countriesCount}
 			mapPoints={mapPoints}
 			locale={locale}
 			labels={{
@@ -54,8 +76,34 @@ const mapPoints = startups.map((s) => ({
 				showMap: t.directory.showMap,
 				hideMap: t.directory.hideMap,
 				ctaFindSolution: t.common.ctaFindSolution,
+				heroKickerPrefix: t.directory.heroKickerPrefix,
+				heroKickerStartups: t.directory.heroKickerStartups,
+				heroKickerCountries: t.directory.heroKickerCountries,
+				heroHeadline: t.directory.heroHeadline,
+				heroDescriptor: t.directory.heroDescriptor,
+				tabAll: t.directory.tabAll,
+				tabPilotReady: t.directory.tabPilotReady,
+				tabRaising: t.directory.tabRaising,
+				tabNew: t.directory.tabNew,
+				tabStealth: t.directory.tabStealth,
+				resultShowing: t.directory.resultShowing,
+				resultFilteredBy: t.directory.resultFilteredBy,
+				resultNone: t.directory.resultNone,
+				loadMore: t.directory.loadMore,
+				floatingKicker: t.directory.floatingKicker,
+				floatingLabel: t.directory.floatingLabel,
+				mobileCtaKicker: t.directory.mobileCtaKicker,
+				emptyKicker: t.directory.emptyKicker,
+				emptyHeadline: t.directory.emptyHeadline,
+				emptyContactCta: t.directory.emptyContactCta,
+				quickBookIntro: t.directory.quickBookIntro,
+				quickSave: t.directory.quickSave,
+				quickSaved: t.directory.quickSaved,
+				quickShare: t.directory.quickShare,
+				quickShared: t.directory.quickShared,
 			}}
 			startupBaseHref={`/${locale}/startup/`}
+			contactHref={contactHref}
 		/>
 	</section>
 </BaseLayout>

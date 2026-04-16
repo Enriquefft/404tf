@@ -1,11 +1,14 @@
 import { DotGridMap } from "@/components/dot-grid-map";
 import { HeroStats } from "@/components/hero-stats";
-import type { Locale } from "@/i18n/translations";
-import type { VerticalKey } from "@/lib/seed-schema";
+import { getTranslations, type Locale } from "@/i18n/translations";
+import type { VerticalKey } from "@/lib/startup-schema";
 
 type StartupDot = {
 	slug: string;
 	name: string;
+	/** Optional until pages are updated to pass it — the dot-grid tooltip
+	 *  falls back gracefully when a country is missing. */
+	country?: string;
 	lat: number;
 	lng: number;
 	verticals: readonly VerticalKey[];
@@ -33,98 +36,188 @@ type HeroIslandProps = {
 	startupsHref: string;
 };
 
-export function HeroIsland({ startups, statsData, labels, startupsHref }: HeroIslandProps) {
+export function HeroIsland({ startups, locale, statsData, labels, startupsHref }: HeroIslandProps) {
+	// New Foundry-voice hero strings are sourced from translations directly so
+	// the legacy `labels` prop stays backward-compatible with existing pages.
+	const t = getTranslations(locale);
+	const {
+		heroKicker,
+		heroEyebrow,
+		heroManifesto,
+		heroTrustLine,
+		heroGetOnMapLink,
+		mapTooltipCount,
+	} = t.landing;
+
 	const stats = [
 		{ value: statsData.startupCount, suffix: "+", label: labels.statsStartups },
 		{ value: statsData.countryCount, suffix: "", label: labels.statsCountries },
 		{ value: statsData.verticalCount, suffix: "", label: labels.statsVerticals },
 	];
 
-	return (
-		<div className="relative flex min-h-[calc(100vh-3.5rem)] items-center justify-center overflow-hidden">
-			{/* Map background */}
-			<DotGridMap startups={startups} />
+	// Dot-grid expects a country per startup; use "" as a safe fallback if the
+	// page hasn't been updated yet. Empty-country dots are still rendered and
+	// cluster together under a single unlabeled hit zone that silently no-ops.
+	const mapStartups = startups.map((s) => ({
+		slug: s.slug,
+		name: s.name,
+		country: s.country ?? "",
+		lat: s.lat,
+		lng: s.lng,
+		verticals: s.verticals,
+	}));
 
-			{/* Gradient overlay for text readability */}
+	return (
+		<div
+			className="relative flex items-center justify-center overflow-hidden"
+			style={{ minHeight: "calc(100vh - 3.5rem)" }}
+		>
+			{/* Map background */}
+			<DotGridMap startups={mapStartups} countLabel={mapTooltipCount} />
+
+			{/* Darkening overlay for text readability — linear fade, no atmospheric glow. */}
 			<div
 				className="pointer-events-none absolute inset-0"
 				style={{
 					background:
-						"radial-gradient(ellipse at 50% 40%, transparent 20%, rgba(10, 7, 16, 0.7) 70%)",
+						"linear-gradient(to bottom, rgba(10, 7, 16, 0.35) 0%, rgba(10, 7, 16, 0.65) 55%, rgba(10, 7, 16, 0.9) 100%)",
 				}}
 			/>
 
 			{/* Text overlay */}
-			<div className="relative z-10 mx-auto flex max-w-4xl flex-col items-center gap-6 px-4 py-16 text-center">
-				{/* Title */}
+			<div className="relative z-10 mx-auto flex w-full max-w-5xl flex-col items-center gap-7 px-4 py-16 text-center">
+				{/* Kicker — mono uppercase, tight letter-spacing, amber */}
+				<span
+					className="inline-flex items-center gap-3 text-[10px] uppercase sm:text-xs"
+					style={{
+						fontFamily: "var(--font-mono)",
+						color: "var(--secondary)",
+						letterSpacing: "0.32em",
+					}}
+				>
+					<span
+						aria-hidden="true"
+						className="inline-block h-px w-6"
+						style={{ background: "var(--secondary)", opacity: 0.6 }}
+					/>
+					{heroKicker}
+					<span
+						aria-hidden="true"
+						className="inline-block h-px w-6"
+						style={{ background: "var(--secondary)", opacity: 0.6 }}
+					/>
+				</span>
+
+				{/* Eyebrow — muted body caption above the monument */}
+				<span
+					className="-mt-3 text-sm sm:text-base"
+					style={{
+						fontFamily: "var(--font-body)",
+						color: "var(--muted-foreground)",
+						letterSpacing: "0.02em",
+					}}
+				>
+					{heroEyebrow}
+				</span>
+
+				{/* Monument title — 404 at display weight, "Mapped" as wordmark beside */}
 				<h1
-					className="text-5xl font-bold leading-none tracking-tight sm:text-7xl md:text-8xl"
+					className="flex flex-col items-center leading-[0.82] tracking-[-0.04em] sm:flex-row sm:items-end sm:gap-6"
 					style={{
 						fontFamily: "var(--font-display)",
 						color: "var(--foreground)",
 					}}
 				>
-					404 Mapped
+					<span
+						style={{
+							color: "var(--secondary)",
+							fontWeight: 800,
+							fontSize: "clamp(7rem, 22vw, 15rem)",
+							lineHeight: 0.82,
+							fontFeatureSettings: "'tnum' 1",
+						}}
+					>
+						404
+					</span>
+					<span
+						style={{
+							color: "var(--foreground)",
+							fontWeight: 600,
+							fontSize: "clamp(2.5rem, 7vw, 5.5rem)",
+							lineHeight: 0.9,
+							letterSpacing: "-0.015em",
+							textTransform: "uppercase",
+							paddingBottom: "0.45em",
+						}}
+					>
+						Mapped
+					</span>
 				</h1>
 
-				{/* Subtitle */}
+				{/* Manifesto — the sentence that stops the scroll */}
 				<p
-					className="text-xl font-medium sm:text-2xl"
-					style={{
-						fontFamily: "var(--font-heading)",
-						color: "var(--primary-light)",
-					}}
-				>
-					{labels.heroSubtitle}
-				</p>
-
-				{/* Secondary */}
-				<p
-					className="max-w-lg text-base sm:text-lg"
+					className="max-w-2xl text-lg sm:text-xl md:text-2xl"
 					style={{
 						fontFamily: "var(--font-body)",
-						color: "var(--muted-foreground)",
+						color: "var(--foreground)",
+						lineHeight: 1.35,
+						fontWeight: 500,
 					}}
 				>
-					{labels.heroSecondary}
+					{heroManifesto}
 				</p>
 
 				{/* Stats bar */}
 				<HeroStats stats={stats} />
 
-				{/* CTAs */}
-				<div className="flex flex-col items-center gap-3 pt-2 sm:flex-row sm:gap-4">
-					{/* Primary CTA — rendered via Astro slot, this is a placeholder for layout */}
-					<div data-hero-cta-primary />
+				{/* CTA slot — single primary purple button (injected as absolute overlay
+				    from the page; this placeholder reserves layout height so the
+				    manifesto and trust line don't collapse onto the CTA). */}
+				<div
+					data-hero-cta-primary
+					aria-hidden="true"
+					className="h-11 w-full"
+					style={{ visibility: "hidden" }}
+				/>
 
-					{/* Secondary CTA */}
-					<a
-						href={startupsHref}
-						className="inline-flex min-h-11 items-center justify-center gap-2 px-5 py-2.5 font-semibold transition-all duration-150 ease-out"
-						style={{
-							fontFamily: "var(--font-heading)",
-							borderRadius: "var(--radius-md)",
-							color: "var(--primary)",
-							border: "1px solid var(--primary)",
-							background: "transparent",
-						}}
+				{/* Trust micro-line — audience clarity in muted mono */}
+				<span
+					className="text-[10px] uppercase sm:text-xs"
+					style={{
+						fontFamily: "var(--font-mono)",
+						color: "var(--muted-foreground)",
+						letterSpacing: "0.22em",
+					}}
+				>
+					{heroTrustLine}
+				</span>
+
+				{/* Secondary — plain text link, not a styled button */}
+				<a
+					href={startupsHref}
+					className="group inline-flex items-center gap-1.5 text-sm underline-offset-4 transition-colors duration-150 ease-out hover:underline"
+					style={{
+						fontFamily: "var(--font-body)",
+						color: "var(--muted-foreground)",
+					}}
+				>
+					{heroGetOnMapLink}
+					<svg
+						width="14"
+						height="14"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						strokeWidth="2"
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						aria-hidden="true"
+						className="transition-transform duration-150 ease-out group-hover:translate-x-0.5"
 					>
-						{labels.ctaGetOnMap}
-						<svg
-							width="16"
-							height="16"
-							viewBox="0 0 24 24"
-							fill="none"
-							stroke="currentColor"
-							strokeWidth="2"
-							strokeLinecap="round"
-							strokeLinejoin="round"
-							aria-hidden="true"
-						>
-							<path d="M9 5l6 7-6 7" />
-						</svg>
-					</a>
-				</div>
+						<path d="M5 12h14" />
+						<path d="M13 5l7 7-7 7" />
+					</svg>
+				</a>
 			</div>
 
 			{/* Scroll indicator */}
@@ -133,24 +226,25 @@ export function HeroIsland({ startups, statsData, labels, startupsHref }: HeroIs
 				style={{ animation: "hero-bounce 2s ease-in-out infinite" }}
 			>
 				<span
-					className="text-xs"
+					className="text-[10px] uppercase"
 					style={{
-						fontFamily: "var(--font-heading)",
-						color: "var(--text-tertiary)",
+						fontFamily: "var(--font-mono)",
+						color: "var(--muted-foreground)",
+						letterSpacing: "0.28em",
 					}}
 				>
 					{labels.scrollToExplore}
 				</span>
 				<svg
-					width="20"
-					height="20"
+					width="18"
+					height="18"
 					viewBox="0 0 24 24"
 					fill="none"
 					stroke="currentColor"
 					strokeWidth="1.5"
 					strokeLinecap="round"
 					strokeLinejoin="round"
-					style={{ color: "var(--text-tertiary)" }}
+					style={{ color: "var(--muted-foreground)" }}
 					aria-hidden="true"
 				>
 					<path d="M5 9l7 7 7-7" />

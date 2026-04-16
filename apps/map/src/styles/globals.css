@@ -1,179 +1,100 @@
 @import "tailwindcss";
 
-/* Self-hosted fonts — WOFF2 only, no external requests */
-@font-face {
-	font-family: "Bricolage Grotesque";
-	src: url("/fonts/bricolage-grotesque-var.woff2") format("woff2");
-	font-weight: 200 800;
-	font-style: normal;
-	font-display: swap;
-	font-optical-sizing: auto;
-}
+/* Self-hosted fonts via fontsource (served from node_modules, no external requests) */
+@import "@fontsource-variable/big-shoulders-display";
+@import "@fontsource/barlow-semi-condensed/400.css";
+@import "@fontsource/barlow-semi-condensed/500.css";
+@import "@fontsource/barlow-semi-condensed/600.css";
+@import "@fontsource-variable/jetbrains-mono";
 
-@font-face {
-	font-family: "JetBrains Mono";
-	src: url("/fonts/jetbrains-mono-400.woff2") format("woff2");
-	font-weight: 400;
-	font-style: normal;
-	font-display: swap;
-}
+/* Canonical brand tokens (Foundry direction). Defines :root colors, houses, radius,
+   font slots, and the @theme inline bridge to Tailwind utilities. */
+@import "@404tf/brand/theme.css";
 
-@font-face {
-	font-family: "JetBrains Mono";
-	src: url("/fonts/jetbrains-mono-600.woff2") format("woff2");
-	font-weight: 600;
-	font-style: normal;
-	font-display: swap;
-}
-
+/* ─────────────────────────────────────────────────────────────────────────────
+   MAP SUB-BRANDING
+   Map's institutional directory voice layered on top of the Foundry brand.
+   Extends (never overrides) brand tokens: 9 verticals, semantic status colors,
+   primary opacity scale, tertiary text, border strengths.
+   ───────────────────────────────────────────────────────────────────────────── */
 :root {
-	/* ---- shadcn core ---- */
-	--background: #0a0710;
-	--foreground: #eceef4;
-	--card: #110e18;
-	--card-foreground: #eceef4;
-	--popover: #1a1622;
-	--popover-foreground: #eceef4;
-	--primary: #7c3aed;
-	--primary-foreground: #eceef4;
-	--secondary: #9b8bca;
-	--secondary-foreground: #eceef4;
-	--muted: #231e2d;
-	--muted-foreground: #928ba8;
-	--accent: #231e2d;
-	--accent-foreground: #eceef4;
-	--destructive: #ef4444;
-	--destructive-foreground: #eceef4;
-	--border: rgba(255, 255, 255, 0.1);
-	--input: rgba(255, 255, 255, 0.15);
-	--ring: #7c3aed;
-	--radius: 0.5rem;
+	/* Logical font slots — map uses brand fonts directly. --font-heading aliases
+	   --font-display for legacy code paths that still reference it. */
+	--font-heading: var(--font-display);
 
-	/* ---- Extended text levels ---- */
-	--text-tertiary: #635c78;
-	--text-disabled: #433d56;
+	/* Primary opacity scale — derived live from --primary via color-mix so any
+	   brand shift propagates without regeneration. Used for subtle tints,
+	   chart washes, hover fills, and focus halos. */
+	--primary-4: color-mix(in oklch, var(--primary) 4%, transparent);
+	--primary-8: color-mix(in oklch, var(--primary) 8%, transparent);
+	--primary-10: color-mix(in oklch, var(--primary) 10%, transparent);
+	--primary-15: color-mix(in oklch, var(--primary) 15%, transparent);
+	--primary-25: color-mix(in oklch, var(--primary) 25%, transparent);
+	--primary-30: color-mix(in oklch, var(--primary) 30%, transparent);
+	--primary-40: color-mix(in oklch, var(--primary) 40%, transparent);
+	--primary-60: color-mix(in oklch, var(--primary) 60%, transparent);
 
-	/* ---- Extended borders ---- */
-	--border-subtle: rgba(255, 255, 255, 0.06);
-	--border-strong: rgba(255, 255, 255, 0.16);
+	/* Lifted primary for chart accents, focused values, emphasis-on-dark */
+	--primary-light: color-mix(in oklch, var(--primary), white 18%);
 
-	/* ---- Primary (purple) shades & opacity scale ---- */
-	--primary-light: #9b5bff;
-	--primary-dark: #5b21b6;
-	--primary-darker: #2e1065;
-	--primary-4: rgba(124, 58, 237, 0.04);
-	--primary-8: rgba(124, 58, 237, 0.08);
-	--primary-10: rgba(124, 58, 237, 0.1);
-	--primary-15: rgba(124, 58, 237, 0.15);
-	--primary-25: rgba(124, 58, 237, 0.25);
-	--primary-30: rgba(124, 58, 237, 0.3);
-	--primary-40: rgba(124, 58, 237, 0.4);
-	--primary-60: rgba(124, 58, 237, 0.6);
+	/* Extended text levels for institutional hierarchy */
+	--text-tertiary: oklch(0.42 0.015 315);
+	--text-disabled: oklch(0.3 0.012 315);
 
-	/* ---- Purple scale (11 steps) ---- */
-	--purple-50: #f5f3ff;
-	--purple-100: #ede9fe;
-	--purple-200: #ddd6fe;
-	--purple-300: #c4b5fd;
-	--purple-400: #a78bfa;
-	--purple-500: #8b5cf6;
-	--purple-600: #7c3aed;
-	--purple-700: #6d28d9;
-	--purple-800: #5b21b6;
-	--purple-900: #4c1d95;
-	--purple-950: #2e1065;
+	/* Extended borders */
+	--border-subtle: oklch(1 0.008 310 / 6%);
+	--border-strong: oklch(1 0.008 310 / 16%);
 
-	/* ---- Lavender scale (11 steps) ---- */
-	--lavender-50: #f8f6fc;
-	--lavender-100: #ede8f5;
-	--lavender-200: #ddd4ed;
-	--lavender-300: #c4b5e0;
-	--lavender-400: #a893d1;
-	--lavender-500: #9b8bca;
-	--lavender-600: #7e6db5;
-	--lavender-700: #6b5a9e;
-	--lavender-800: #574885;
-	--lavender-900: #3d3366;
-	--lavender-950: #1a1530;
+	/* Semantic status colors */
+	--success: oklch(0.72 0.18 150);
+	--success-muted: color-mix(in oklch, var(--success) 12%, transparent);
+	--warning: oklch(0.78 0.16 75);
+	--warning-muted: color-mix(in oklch, var(--warning) 12%, transparent);
+	--error: var(--destructive);
+	--error-muted: color-mix(in oklch, var(--destructive) 12%, transparent);
+	--info: oklch(0.68 0.16 230);
+	--info-muted: color-mix(in oklch, var(--info) 12%, transparent);
 
-	/* ---- Semantic ---- */
-	--success: #22c55e;
-	--success-muted: rgba(34, 197, 94, 0.12);
-	--warning: #f59e0b;
-	--warning-muted: rgba(245, 158, 11, 0.12);
-	--error: #ef4444;
-	--error-muted: rgba(239, 68, 68, 0.12);
-	--info: #9b8bca;
-	--info-muted: rgba(155, 139, 202, 0.12);
-
-	/* ---- Verticals ---- */
-	--v-ai: #ff2898;
-	--v-biotech: #00cd4e;
-	--v-hardware: #ff4834;
-	--v-space: #00a0f0;
-	--v-cleantech: #2dd4bf;
-	--v-agritech: #a3e635;
-	--v-medtech: #f87171;
-	--v-materials: #a78bfa;
-	--v-aerospace: #38bdf8;
-	--v-quantum: #d946ef;
-	--v-other: #94a3b8;
-
-	/* ---- Fonts ---- */
-	--font-display: "Bricolage Grotesque", Georgia, serif;
-	--font-display-style: normal;
-	--font-display-weight: 600;
-	--font-heading: "Bricolage Grotesque", Georgia, serif;
-	--font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-	--font-mono: "JetBrains Mono", ui-monospace, "SF Mono", "Cascadia Mono", Consolas, monospace;
-
-	/* ---- Radii ---- */
-	--radius-sm: 0.25rem;
-	--radius-md: 0.375rem;
-	--radius-lg: 0.75rem;
-	--radius-xl: 1rem;
-	--radius-full: 9999px;
-
-	/* ---- Glows ---- */
-	--glow-primary: 0 0 20px var(--primary-15), 0 0 4px var(--primary-10);
-	--glow-primary-strong: 0 0 32px var(--primary-25), 0 0 8px var(--primary-15);
+	/* ── Verticals (9 deeptech tags + fallback) ─────────────────────────────
+	   First four mirror brand houses so a startup's programme house and its
+	   primary vertical share a colour. The five extras round out the deeptech
+	   spectrum, harmonised with Foundry hue spacing. */
+	--v-ai: var(--house-ai);
+	--v-biotech: var(--house-biotech);
+	--v-hardware: var(--house-hardware);
+	--v-aerospace: var(--house-space);
+	--v-space: var(--house-space);
+	--v-cleantech: oklch(0.75 0.14 185);
+	--v-agritech: oklch(0.82 0.18 130);
+	--v-medtech: oklch(0.72 0.18 10);
+	--v-materials: oklch(0.7 0.17 290);
+	--v-quantum: oklch(0.65 0.25 330);
+	--v-other: oklch(0.65 0.015 250);
 }
 
-/* @theme inline — bridges CSS vars to Tailwind utilities */
+/* Bridge map-specific tokens to Tailwind utilities. Brand bridge lives in
+   @404tf/brand/theme.css; this extends with map-only utilities. */
 @theme inline {
-	--color-background: var(--background);
-	--color-foreground: var(--foreground);
-	--color-card: var(--card);
-	--color-card-foreground: var(--card-foreground);
-	--color-popover: var(--popover);
-	--color-popover-foreground: var(--popover-foreground);
-	--color-primary: var(--primary);
-	--color-primary-foreground: var(--primary-foreground);
-	--color-secondary: var(--secondary);
-	--color-secondary-foreground: var(--secondary-foreground);
-	--color-muted: var(--muted);
-	--color-muted-foreground: var(--muted-foreground);
-	--color-accent: var(--accent);
-	--color-accent-foreground: var(--accent-foreground);
-	--color-destructive: var(--destructive);
-	--color-destructive-foreground: var(--destructive-foreground);
-	--color-border: var(--border);
-	--color-input: var(--input);
-	--color-ring: var(--ring);
 	--color-v-ai: var(--v-ai);
 	--color-v-biotech: var(--v-biotech);
 	--color-v-hardware: var(--v-hardware);
 	--color-v-space: var(--v-space);
+	--color-v-aerospace: var(--v-aerospace);
 	--color-v-cleantech: var(--v-cleantech);
 	--color-v-agritech: var(--v-agritech);
 	--color-v-medtech: var(--v-medtech);
 	--color-v-materials: var(--v-materials);
-	--color-v-aerospace: var(--v-aerospace);
 	--color-v-quantum: var(--v-quantum);
 	--color-v-other: var(--v-other);
+	--color-success: var(--success);
+	--color-warning: var(--warning);
+	--color-info: var(--info);
 }
 
-/* ---- Scoped styles (.ds-root) ---- */
+/* ─────────────────────────────────────────────────────────────────────────────
+   MAP UTILITIES — scoped, opt-in
+   ───────────────────────────────────────────────────────────────────────────── */
+
 .ds-root *::selection {
 	background: var(--primary-30);
 	color: var(--foreground);
@@ -187,7 +108,6 @@
 }
 .ds-root::-webkit-scrollbar-thumb {
 	background: var(--muted);
-	border-radius: 3px;
 }
 
 .ds-root *:focus-visible {
@@ -197,47 +117,7 @@
 		0 0 0 4px var(--ring);
 }
 
-/* ---- Keyframes ---- */
-@keyframes ds-fadeUp {
-	from {
-		opacity: 0;
-		transform: translateY(12px);
-	}
-	to {
-		opacity: 1;
-		transform: translateY(0);
-	}
-}
-
-@keyframes ds-barGrow {
-	from {
-		transform: scaleY(0);
-	}
-	to {
-		transform: scaleY(1);
-	}
-}
-
-@keyframes ds-shimmer {
-	0% {
-		background-position: -200% 0;
-	}
-	100% {
-		background-position: 200% 0;
-	}
-}
-
-@keyframes ds-pulseRing {
-	0% {
-		transform: scale(1);
-		opacity: 0.4;
-	}
-	100% {
-		transform: scale(1.6);
-		opacity: 0;
-	}
-}
-
+/* Section reveal — keeps directory/report feel without bounce */
 @keyframes ds-sectionIn {
 	from {
 		opacity: 0;
@@ -253,30 +133,41 @@
 	animation: ds-sectionIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-/* Grain texture overlay — opt-in via .ds-grain */
+/* Grain texture overlay — opt-in via .ds-grain. Paper-like tooth on deep
+   surfaces, consistent with Foundry's no-glow direction. */
 .ds-grain::before {
 	content: "";
 	position: fixed;
 	inset: 0;
 	z-index: 1;
 	pointer-events: none;
-	opacity: 0.03;
+	opacity: 0.025;
 	background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 	background-repeat: repeat;
 	background-size: 256px 256px;
 }
 
-/* Atmospheric glow — opt-in via .ds-glow */
-.ds-glow::after {
-	content: "";
-	position: absolute;
-	top: -120px;
-	left: 50%;
-	transform: translateX(-50%);
-	width: 800px;
-	height: 400px;
-	border-radius: 50%;
-	background: radial-gradient(ellipse, var(--primary-15) 0%, transparent 70%);
-	pointer-events: none;
-	z-index: 0;
+@media (prefers-reduced-motion: reduce) {
+	.ds-section {
+		animation: none;
+	}
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   RESPONSIVE HARDENING
+   Defensive: guarantee no horizontal scroll on mobile regardless of future
+   wide children, and make long display words (Spanish compounds, brand tokens,
+   condensed-display fallback fonts on environments lacking Big Shoulders)
+   break cleanly inside narrow viewports instead of clipping.
+   ───────────────────────────────────────────────────────────────────────────── */
+html,
+body {
+	overflow-x: clip;
+}
+
+.ds-root h1,
+.ds-root h2,
+.ds-root h3 {
+	overflow-wrap: anywhere;
+	hyphens: auto;
 }

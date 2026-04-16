@@ -27,6 +27,24 @@ const team = [
 		initials: "AV",
 		color: "var(--v-biotech)",
 	},
+	{
+		name: "Piero Beraun",
+		role: "Bioengineering",
+		initials: "PB",
+		color: "var(--v-biotech)",
+	},
+	{
+		name: "Dany Quispe",
+		role: "VC & Ecosystem",
+		initials: "DQ",
+		color: "var(--v-aerospace)",
+	},
+	{
+		name: "Leandro Urbano",
+		role: "Advisor",
+		initials: "LU",
+		color: "var(--v-materials)",
+	},
 ];
 
 const methodology = [
@@ -122,19 +140,11 @@ const methodology = [
 	<!-- Methodology -->
 	<section class="ds-section mx-auto max-w-3xl px-4 pb-20 sm:px-6 lg:px-8">
 		<SectionLabel text={t.about.methodologyTitle} />
-		<div class="mt-6 space-y-0">
-			{methodology.map((item, i) => (
-				<div class="relative flex gap-6 pb-10 last:pb-0">
-					{/* Vertical timeline line */}
-					{i < methodology.length - 1 && (
-						<div
-							class="absolute left-[18px] top-10 bottom-0 w-px"
-							style="background: var(--border-subtle);"
-						/>
-					)}
-					{/* Step number */}
+		<div class="mt-6 grid gap-x-8 gap-y-8 sm:grid-cols-2">
+			{methodology.map((item) => (
+				<div class="flex gap-4">
 					<div
-						class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-xs font-bold"
+						class="flex h-9 w-9 shrink-0 items-center justify-center text-xs font-bold"
 						style="background: var(--primary-15); color: var(--primary-light); font-family: var(--font-mono);"
 					>
 						{item.step}
@@ -153,26 +163,6 @@ const methodology = [
 							{item.desc}
 						</p>
 					</div>
-				</div>
-			))}
-		</div>
-	</section>
-
-	<!-- Collaborators -->
-	<section class="ds-section mx-auto max-w-3xl px-4 pb-20 sm:px-6 lg:px-8">
-		<SectionLabel text={t.about.collaboratorsTitle} />
-		<div class="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-			{Array.from({ length: 8 }).map(() => (
-				<div
-					class="flex h-20 items-center justify-center rounded-[var(--radius-md)] border border-dashed"
-					style="border-color: var(--border-subtle); background: var(--card);"
-				>
-					<span
-						class="text-xs text-[var(--text-tertiary)]"
-						style="font-family: var(--font-heading);"
-					>
-						{t.about.collaboratorPlaceholder}
-					</span>
 				</div>
 			))}
 		</div>

@@ -3,7 +3,7 @@ import {
 	type MaturityKey,
 	VERTICAL_KEYS,
 	type VerticalKey,
-} from "@/lib/seed-schema";
+} from "@/lib/startup-schema";
 
 export type { MaturityKey, VerticalKey };
 // Re-export the DB-derived enum values and types so existing consumers can

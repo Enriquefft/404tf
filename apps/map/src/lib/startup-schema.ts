@@ -1,14 +1,17 @@
 import { mapMaturityEnum, mapVerticalEnum } from "@404tf/database/schema";
 import { z } from "zod";
 
-// Single source of truth for the shape of seed.json. Both the build-time
-// generator (scripts/generate-seed.ts) and the runtime consumers (Astro
-// pages, React islands) parse against this schema, so any drift between
-// the database, the seed file, and the consuming code fails loudly at
-// build time instead of silently at runtime.
+// Single source of truth for the StartupRecord shape consumed by Astro pages,
+// React islands, and API routes. Runtime (Zod) validation enforces the shape;
+// TypeScript types flow from the inferred Zod output.
 //
-// Vertical and maturity literals are derived from the Drizzle pgEnum so
-// they cannot drift from the database.
+// Vertical / Maturity literals come from the pgEnum (`mapVerticalEnum`,
+// `mapMaturityEnum`). Adding a value to the DB enum immediately widens the
+// Zod types here — no manual sync needed.
+//
+// The DB → StartupRecord projection lives in db-queries.ts::toStartupRecord;
+// that function is typed with `mapStartups.$inferSelect` as input so the
+// TS compiler catches any column rename at the mapping layer.
 
 export const verticalKeySchema = z.enum(mapVerticalEnum.enumValues);
 export const maturityKeySchema = z.enum(mapMaturityEnum.enumValues);
@@ -33,7 +36,12 @@ export const founderPhotoSchema = z.object({
 	linkedin_url: z.string().optional(),
 });
 
-export const seedStartupSchema = z.object({
+export const socialLinksSchema = z.record(z.string(), z.string());
+
+// StartupRecord = the public consumer shape (snake_case, bilingual). One row
+// per `map_startups` entry with non-null coerced defaults for fields that the
+// UI requires (country_es, coordinates, maturity, founding_year).
+export const startupRecordSchema = z.object({
 	slug: z.string(),
 	name: z.string(),
 	one_liner: z.string(),
@@ -43,7 +51,7 @@ export const seedStartupSchema = z.object({
 	city: z.string(),
 	lat: z.number(),
 	lng: z.number(),
-	verticals: z.array(verticalKeySchema),
+	verticals: z.array(verticalKeySchema).readonly(),
 	maturity_level: maturityKeySchema,
 	founding_year: z.number().int(),
 	tech_description: z.string().nullable(),
@@ -57,7 +65,7 @@ export const seedStartupSchema = z.object({
 	funding_received: z.string().nullable(),
 	team_size: z.number().int().nullable(),
 	website_url: z.string().nullable(),
-	social_links: z.record(z.string(), z.string()).nullable(),
+	social_links: socialLinksSchema.nullable(),
 	contact_name: z.string().nullable(),
 	contact_role: z.string().nullable(),
 	contact_email: z.string().nullable(),
@@ -72,8 +80,9 @@ export const seedStartupSchema = z.object({
 	video_label: z.string().nullable(),
 });
 
-export type SeedStartup = z.infer<typeof seedStartupSchema>;
+export type StartupRecord = z.infer<typeof startupRecordSchema>;
 export type KeyResult = z.infer<typeof keyResultSchema>;
 export type FounderPhoto = z.infer<typeof founderPhotoSchema>;
+export type SocialLinks = z.infer<typeof socialLinksSchema>;
 
-export const seedFileSchema = z.array(seedStartupSchema);
+export const startupListSchema = z.array(startupRecordSchema);

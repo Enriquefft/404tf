@@ -2,7 +2,7 @@
 
 **"Deeptech, finally in scope."**
 
-This document contains every architectural, behavioral, and UX decision made during the planning phase. It is the single source of truth for **what to build and how it behaves**. The design spec (`design-spec.jsonc`) is the single source of truth for **how it looks** — colors, typography, spacing, animations, and all visual tokens. Read both files fully before writing any code.
+This document contains every architectural, behavioral, and UX decision made during the planning phase. It is the single source of truth for **what to build and how it behaves**. Visual tokens live in `@404tf/brand/theme.css` (shared Foundry tokens) and `src/styles/globals.css` (map sub-branding extensions) — those two files are the single source of truth for **how it looks**. Read all three before writing any code.
 
 ---
 
@@ -19,7 +19,7 @@ A bilingual (ES/EN) web platform by 404 Tech Found (404tf) that serves as:
 
 ## 2. Tech Stack
 
-- **Framework:** Astro (SSR mode on Vercel for API routes)
+- **Framework:** Astro (hybrid on Vercel — pages SSR from Neon at request time, API routes opt-in per-route)
 - **Runtime:** Bun
 - **Monorepo:** Bun workspaces. This app lives alongside other apps. Some shared packages exist.
 - **Database:** Drizzle ORM + Neon Postgres (shared `packages/database`)
@@ -42,12 +42,12 @@ A bilingual (ES/EN) web platform by 404 Tech Found (404tf) that serves as:
 
 | # | Page | Route (EN / ES) | Render Strategy |
 |---|------|-----------------|----------------|
-| 1 | Home / Landing | /en, /es | Static (prerendered) |
-| 2 | Directory | /en/directory, /es/directorio | Static with client-side filtering (React island) |
-| 3 | Startup Profile | /en/startup/[slug], /es/startup/[slug] | Static (prerendered, one per startup) |
-| 4 | Insights | /en/insights, /es/perspectivas | Static (prerendered) |
-| 5 | For Startups | /en/startups, /es/startups | Static with form islands |
-| 6 | About / Methodology | /en/about, /es/nosotros | Static (prerendered) |
+| 1 | Home / Landing | /en, /es | SSR from Neon, CDN-cached by tag |
+| 2 | Directory | /en/directory, /es/directorio | SSR + client-side filtering over embedded JSON |
+| 3 | Startup Profile | /en/startup/[slug], /es/startup/[slug] | SSR per slug, CDN-cached by `startup-<slug>` tag |
+| 4 | Insights | /en/insights, /es/perspectivas | SSR from Neon, CDN-cached by tag |
+| 5 | For Startups | /en/startups, /es/startups | SSR + form islands |
+| 6 | About / Methodology | /en/about, /es/nosotros | SSR, CDN-cached by tag |
 | -- | Corporate Modal | (component, not a page) | React island, triggered from any page |
 
 ### Navigation
@@ -60,23 +60,22 @@ About/Methodology lives in footer nav only, not main nav.
 
 ## 4. Design System
 
-All visual tokens live in `design-spec.jsonc`. That file is the single source of truth for:
-- Colors, backgrounds, text levels, accents, vertical palette, semantic colors, gradients
-- Typography (font families, scale, weights, roles)
-- Spacing, border radius, shadows/elevation
-- Component tokens (cards, inputs, buttons, tags, tooltips, tables, nav, skeletons)
-- Animation (easing, durations, entrance patterns)
-- Map tokens (dot sizes, clustering, zoom, legend)
-- Chart tokens (axes, grids, tooltips, annotations, series colors)
-- Breakpoints and z-index scale
+Brand direction: **Foundry** (see `packages/brand/brand-book.md` for rationale). Visual tokens split between two CSS files — edits to either cascade through Tailwind v4 `@theme inline` to every shadcn utility:
+
+- `@404tf/brand/theme.css` — shared Foundry tokens (colors, houses, radius, font slots). Canonical for the whole monorepo.
+- `apps/map/src/styles/globals.css` — map sub-branding extensions: 9 verticals (first four mirror brand houses), primary opacity scale via `color-mix`, institutional text/border levels, semantic status colors, `.ds-*` utilities and keyframes.
+
+The hex snapshot in `packages/brand/src/tokens.ts` is generated from `theme.css` via `bun run brand:build` for Satori OG images, logo exports, and email templates — never hand-edited.
 
 ### Critical design rules:
-- Dark theme throughout.
-- NEVER use Inter, Roboto, Arial, or system fonts. Use the fonts specified in the design spec.
-- NEVER use purple gradients on white backgrounds. This is the stereotypical AI-generated look we're explicitly avoiding.
-- Data-forward aesthetic: numbers, charts, and visualizations are prominent, not decorative.
+- Dark theme default. Light surface opt-in via `:root.light` / `[data-theme="light"]`.
+- Typography: Big Shoulders Display (display), Barlow Semi Condensed (body), JetBrains Mono (data). Never Inter, Roboto, Arial, or system fonts.
+- Radius is 0 everywhere (brutalist foundation). Never introduce curves.
+- Never use purple gradients on light backgrounds — the generic "AI-generated" look Foundry explicitly rejects.
+- No atmospheric glows, no radial gradient auras, no drop shadows. Elevation comes from colour chroma on cards.
+- Data-forward aesthetic: numbers, charts, and visualisations are prominent, not decorative.
 - The feel splits the difference between a research report and a modern SaaS directory.
-- Use CSS variables for all tokens. Define them in a global stylesheet derived from the design spec.
+- Every visual token is a CSS variable. No hard-coded hex in components.
 
 ### Frontend design skill
 Use `/frontend-design` for every component that produces visual output. This skill forces bold aesthetic choices and avoids generic AI slop.
@@ -170,7 +169,10 @@ For launch, seed profiles with data gathered during the data recopilation phase:
 - Image fields populated in a separate images step after data recopilation
 - Startups can further enrich their profiles via the claim flow
 
-Create a seed file (JSON or SQL) with initial data. At build time, query the database and generate static pages for each startup.
+Initial seed is loaded into Neon once via a one-shot seed script (`scripts/` in
+this app). After that, the DB is the only source of truth: pages SSR from
+Neon at request time with tag-keyed CDN caching, and admin edits invalidate
+only the affected tags via `POST /api/revalidate`.
 
 ---
 
@@ -280,7 +282,7 @@ Create a seed file (JSON or SQL) with initial data. At build time, query the dat
 4. **Floating Corporate CTA** (fixed bottom-right, or slim bottom bar on mobile)
    - "Find Your Deeptech Solution ->" triggers corporate modal
 
-**Implementation note:** All startup data loads at build time into a JSON blob embedded in the page. Filtering is 100% client-side (React island). No API calls for filtering.
+**Implementation note:** The directory page SSRs from Neon on request and embeds the full startup payload into the HTML. Filtering is 100% client-side (React island) over that payload — no follow-up API calls. Vercel CDN holds the rendered HTML behind the `directory` cache tag; admin mutations `POST /api/revalidate` to invalidate that tag.
 
 ---
 
@@ -288,7 +290,7 @@ Create a seed file (JSON or SQL) with initial data. At build time, query the dat
 
 **Purpose:** Deep evaluation page. A corporate user decides here whether to click "Talk to 404tf."
 
-**Route:** /en/startup/[slug], /es/startup/[slug] — prerendered at build time for all startups.
+**Route:** /en/startup/[slug], /es/startup/[slug] — SSR on request, CDN-cached per slug (`startup-<slug>` tag + `startup-all` fan-out tag).
 
 **Layout:**
 
@@ -339,7 +341,7 @@ Create a seed file (JSON or SQL) with initial data. At build time, query the dat
 
 **Purpose:** Establish 404 Mapped credibility + capture leads via gated PDF.
 
-**This is an editorial data story, NOT a dashboard.** Think annual report from a consulting firm meets data journalism. Every chart is deliberately composed. All data is static — computed during the analysis phase and baked into the page at build time.
+**This is an editorial data story, NOT a dashboard.** Think annual report from a consulting firm meets data journalism. Every chart is deliberately composed. The page SSRs aggregate stats from Neon on request and is held in Vercel's CDN behind the `insights` cache tag — admin mutations invalidate it via `/api/revalidate`.
 
 **Sections:**
 
@@ -643,14 +645,14 @@ Build in this exact order. Each step builds on the previous. Do not skip ahead.
 #### Step 7: Directory Page
 - Build the interactive map (reuse/extend the landing map component, add interactivity)
 - Build filter bar + card grid as a React island
-- Load all startup data as JSON at build time, embed in page
+- Load all startup data from Neon at request time, embed as JSON in the SSR'd HTML so client-side filtering has zero follow-up fetches
 - All filtering is client-side
 - Wire card clicks to /startup/[slug]
 - Wire floating CTA to corporate modal
 
 #### Step 8: Startup Profile Page
 - Build [slug] dynamic route
-- Query startup data at build time, prerender all profiles
+- Query startup data from Neon at request time; each profile is CDN-cached under `startup-<slug>` + `startup-all` tags
 - Handle empty fields gracefully (collapse sections, show claim prompt if sparse)
 - Wire sidebar CTA to corporate modal with contextual startup info
 - Build related startups query (same vertical, exclude current)
@@ -817,5 +819,7 @@ These apply globally across every page and component. They are not suggestions. 
 
 ## 14. Files to Reference
 
-- `design-spec.jsonc` — All visual tokens. Single source of truth for how things look.
+- `@404tf/brand/theme.css` — Shared Foundry tokens (colors, houses, radius, fonts). Canonical SSoT for colour + the `@theme inline` Tailwind bridge.
+- `apps/map/src/styles/globals.css` — Map sub-branding extensions (9 verticals, primary opacity scale, semantic status, `.ds-*` utilities).
+- `packages/brand/brand-book.md` — Narrative brand book: Foundry rationale, voice, do's and don'ts.
 - This file (`implementation.md`) — Architecture, behavior, and specs. Single source of truth for what to build.
